@@ -1,0 +1,12 @@
+{
+    "timetable": [
+        {
+            "monday": [
+                {
+                    "venue": "CSC LH1",
+                    "initial_min": "80"
+                }
+            ]
+        }
+    ]
+} 

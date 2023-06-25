@@ -1,0 +1,145 @@
+{
+  "results": [
+    {
+      "id": 1,
+      "department": "Computer Science",
+      "course_title": "CIT512",
+      "level": "500",
+      "students": [
+        {
+          "surname": "Ekwemadu",
+          "name": "George",
+          "id": 1
+        },
+        {
+          "surname": "Sabi",
+          "name": "Andre",
+          "id": 2
+        },
+        {
+          "surname": "Meka",
+          "name": "Tochi",
+          "id": 3
+        },
+        {
+          "surname": "Paul",
+          "name": "Greg",
+          "id": 4
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "department": "Computer Science",
+      "course_title": "CSC412",
+      "level": "400",
+      "students": [
+        {
+          "surname": "Black",
+          "name": "Tony",
+          "reg_no": 20171037288,
+          "test": 12,
+          "exam": 40,
+          "id": 1
+        },
+        {
+          "surname": "Sabi",
+          "name": "Andre",
+          "reg_no": 20171034268,
+          "test": 14,
+          "exam": 50,
+          "id": 2
+        },
+        {
+          "surname": "Meka",
+          "name": "Tochi",
+          "reg_no": 20171037228,
+          "test": 20,
+          "exam": 30,
+          "id": 3
+        },
+        {
+          "surname": "Paul",
+          "name": "Greg",
+          "reg_no": 20171034268,
+          "test": 17,
+          "exam": 60,
+          "id": 4
+        },
+        {
+          "surname": "Kelvin",
+          "name": "James",
+          "reg_no": 20171027248,
+          "test": 19,
+          "exam": 48,
+          "id": 5
+        },
+        {
+          "surname": "Samuel",
+          "name": "Sam",
+          "reg_no": 20171035238,
+          "test": 16,
+          "exam": 62,
+          "id": 6
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "department": "Information Technology",
+      "course_title": "CIT302",
+      "level": "300",
+      "students": [
+        {
+          "surname": "Uncle",
+          "name": "George",
+          "reg_no": 20171035238,
+          "test": 16,
+          "exam": 62,
+          "id": 1
+        },
+        {
+          "surname": "Sabi",
+          "name": "Andre",
+          "reg_no": 20171035238,
+          "test": 16,
+          "exam": 62,
+          "id": 2
+        },
+        {
+          "surname": "Meka",
+          "name": "Tochi",
+          "reg_no": 20171035238,
+          "test": 16,
+          "exam": 62,
+          "id": 3
+        },
+        {
+          "surname": "Paul",
+          "name": "Greg",
+          "reg_no": 20171035238,
+          "test": 16,
+          "exam": 62,
+          "id": 4
+        },
+        {
+          "surname": "Valley",
+          "name": "Blacksmith",
+          "reg_no": 20171035238,
+          "test": 16,
+          "exam": 62,
+          "id": 5
+        }
+      ]
+    },
+    {
+      "department": "Information Technology",
+      "course_title": "LRN202",
+      "level": "200",
+      "students": [
+        {}
+      ],
+      "id": 4
+    }
+  ]
+}
