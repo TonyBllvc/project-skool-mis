@@ -1,4 +1,4 @@
-import React from 'react'
+ import React from 'react'
 import LecDashBoard from '../administrator/pages/LecDashBoard'
 
 const DashBoard = () => {
