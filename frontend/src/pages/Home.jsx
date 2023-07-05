@@ -35,7 +35,7 @@ const Home = () => {
                             Join In
                         </Button>
                     </NavLink>
-                    <NavLink to='/signup' >
+                    <NavLink to='/dashboard' >
                         <Button colorScheme='whatsapp' variant='solid' >
                             Get Started
                         </Button>

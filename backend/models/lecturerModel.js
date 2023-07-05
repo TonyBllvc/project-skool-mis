@@ -5,7 +5,7 @@ const validator = require('validator')
 const Schema = mongoose.Schema;
 
 // Create schema and model
-const teacherSchema = new Schema({
+const lecturerSchema = new Schema({
     title: {
         type: String,
         require: true,
@@ -29,18 +29,21 @@ const teacherSchema = new Schema({
         type: String,
         // unique: true
     },
-    department: {
-        type: String,
-        // unique: true
-    },
-    faculty: {
-        type: String,
+    lecturer_details: {
+        // containing the id to a particular user
+        type: Schema.Types.ObjectId,
+        ref: 'school'
         // unique: true
     },
     phone: {
         type: Number,
         require: true,
         unique: true
+    },
+    exam: {
+        type: String,
+        require: true,
+        // unique: true
     },
     email: {
         type: String,
@@ -59,4 +62,4 @@ const teacherSchema = new Schema({
     },
 })
 
-module.exports = mongoose.model('teacher', teacherSchema);
+module.exports = mongoose.model('lecturer', lecturerSchema);

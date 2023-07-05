@@ -14,23 +14,33 @@ const resultSchema = new Schema({
     },
     test: {
         type: Number,
-        require: true,
-        // unique: true
+        // no trailing spaces before or after
+        trim: true
     },
     exam: {
         type: Number,
-        require: true,
-        // unique: true
+        // no trailing spaces before or after
+        trim: true
+    },
+    practical: {
+        type: Number,
+        // no trailing spaces before or after
+        trim: true
     },
     grade: {
         type: Number,
-        require: true,
-        // unique: true
+        // no trailing spaces before or after
+        trim: true
     },
-    course: {
+    gp: {
         type: Number,
-        require: true
+        // no trailing spaces before or after
+        trim: true
     },
-})
+    result_details: { 
+        type: Schema.Types.ObjectId,
+        ref: 'session'
+    },
+}, { timestamps: true })
 
 module.exports = mongoose.model('result', resultSchema);

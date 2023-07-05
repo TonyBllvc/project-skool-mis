@@ -9,26 +9,35 @@ const courseSchema = new Schema({
     course_code: {
         type: String,
         require: true,
-        // unique: true
+        unique: true
     },
     course_name: {
         type: String,
         require: true,
-        // unique: true
+        unique: true
     },
     course_coordinator: {
-        type: String,
-        require: true,
-        // unique: true
+        // containing the id to a particular user
+        type: Schema.Types.ObjectId,
+        // reference to our user model
+        ref: "lecturer",
+        unique: true
     },
-    session: {
-        type: String,
-        // unique: true
+    // reference to owner of chat
+    course_lecturers: [{
+        // containing the id to a particular user
+        type: Schema.Types.ObjectId,
+        // reference to our user model
+        ref: "lecturer", 
+        require: true
+    }],
+    course_details: {
+        // containing the id to a particular user
+        type: Schema.Types.ObjectId,
+        // reference to our user model
+        ref: "school", 
+        unique: true
     },
-    semester: {
-        type: String,
-        // unique: true
-    },
-})
+}, { timestamps: true})
 
 module.exports = mongoose.model('course', courseSchema);

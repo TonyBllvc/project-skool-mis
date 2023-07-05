@@ -5,31 +5,27 @@ const validator = require('validator')
 const Schema = mongoose.Schema;
 
 // Create schema and model
-const adminSchema = new Schema({
+const schoolSchema = new Schema({
     faculty: {
         type: String,
-        require: true,
-        // unique: true
+        // no trailing spaces before or after
+        trim: true
     },
     department: {
         type: String,
-        require: true,
-        // unique: true
+        // no trailing spaces before or after
+        trim: true
     },
-
     level: {
-        type: String,
-        require: true,
-        // unique: true
-    },
-    session: {
-        type: String,
-        // unique: true
+        type: Number,
+        // no trailing spaces before or after
+        trim: true
     },
     semester: {
         type: String,
-        // unique: true
+        // no trailing spaces before or after
+        trim: true
     },
-})
+}, { timestamps: true})
 
-module.exports = mongoose.model('administration', adminSchema);
+module.exports = mongoose.model('school', schoolSchema);

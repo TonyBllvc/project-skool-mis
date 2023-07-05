@@ -12,15 +12,16 @@ const noticeSchema = new Schema({
         // unique: true
     },
     from: {
-        type: String,
-        require: true,
-        // unique: true
+        // containing the id to a particular user
+        type: Schema.Types.ObjectId,
+        // reference to our user model
+        ref: "lecturer" 
     },
     time: {
         type: String,
         require: true,
         // unique: true
     }
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model('notice', noticeSchema);

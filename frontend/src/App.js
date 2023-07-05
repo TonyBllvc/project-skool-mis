@@ -1,23 +1,38 @@
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import DashBoard from './pages/DashBoard';
+import DashBoardLecturer from './pages/Lecturer/DashBoard';
+import NavBar from './Components/NavBar';
+import DashBox from './pages/Lecturer/DashBox';
+import LecturerList from './pages/Lecturer/LecturerList';
+import DashBoard from './pages/Lecturer/DashBoard';
+// import Master from './pages/master/Master';
+// import HomeMaster from './pages/master/Home';
+// import DashBoard from './pages/lecturer/DashBoard';
+// import LecturersMaster from './pages/master/LecturersMaster';
+// import LecturerMaster from './pages/master/LecturerMaster';
 
-export default function App(){
-  return(
+export default function App() {
+  return (
     <div>
-    <BrowserRouter>
-    <div>
-      <div>
-        <Routes>
-          <Route exact path='/' element={ <Home /> } />
-          <Route path='*' element={<NotFound />} />
-          <Route path='/dashboard' element={<DashBoard />} />
+      <BrowserRouter>
+        <div className="w-full min-h-screen flex flex-row justify-center sm:justify-center p-0 m-0 bg-green-500">
+          <div className='w-1/5 hidden sm:flex h-full relative overflow-y-hidden overscroll-none'>
+            <NavBar />
+          </div>
+          <div className='w-4/5 z-30 sm:mr-5 mr-1 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8'>
+            <div className="rounded-lg overflow-visible overscroll-y-auto mt-4 pt-2 mx-4 px-2 ">
+              <Routes>
+                <Route exact path='/dashboard' element={<DashBoard/>} />
+                <Route exact path='/lecturer_list' element={<LecturerList />} />
 
-        </Routes>
-      </div>
-    </div>
-    </BrowserRouter>
+              </Routes>
+            </div>
+          </div>
+
+
+        </div>
+      </BrowserRouter>
     </div>
   )
 }

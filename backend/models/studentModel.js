@@ -25,9 +25,10 @@ const studentSchema = new Schema({
         type: String,
         // unique: true
     },
-    department: {
+    session: {
         type: String,
-        // unique: true
+        // no trailing spaces before or after
+        trim: true
     },
     reg_no: {
         type: Number,
@@ -49,6 +50,12 @@ const studentSchema = new Schema({
         validate: (val) => {
             return validator.isEmail(val)
         }
+    },
+    student_details: {
+        // containing the id to a particular user
+        type: Schema.Types.ObjectId,
+        ref: 'school'
+        // unique: true
     },
     password: {
         type: String,
