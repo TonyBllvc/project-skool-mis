@@ -40,11 +40,6 @@ const lecturerSchema = new Schema({
         require: true,
         unique: true
     },
-    exam: {
-        type: String,
-        require: true,
-        // unique: true
-    },
     email: {
         type: String,
         required: true,

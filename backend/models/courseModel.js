@@ -1,6 +1,4 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const validator = require('validator')
 
 const Schema = mongoose.Schema;
 
@@ -9,35 +7,33 @@ const courseSchema = new Schema({
     course_code: {
         type: String,
         require: true,
-        unique: true
     },
     course_name: {
         type: String,
         require: true,
-        unique: true
     },
-    course_coordinator: {
-        // containing the id to a particular user
-        type: Schema.Types.ObjectId,
-        // reference to our user model
-        ref: "lecturer",
-        unique: true
+    level: {
+        type: String,
+        trim: true
     },
-    // reference to owner of chat
-    course_lecturers: [{
-        // containing the id to a particular user
-        type: Schema.Types.ObjectId,
-        // reference to our user model
-        ref: "lecturer", 
-        require: true
-    }],
+    // course_coordinator: {
+    //     // containing the id to a particular user
+    //     type: Schema.Types.ObjectId,
+    //     // reference to our user model
+    //     ref: "lecture",
+    // },
+    // course_lecturers: [{
+    //     // containing the id to a particular user
+    //     type: Schema.Types.ObjectId,
+    //     // reference to our user model
+    //     ref: "lecture",
+    // }],
     course_details: {
         // containing the id to a particular user
         type: Schema.Types.ObjectId,
         // reference to our user model
-        ref: "school", 
-        unique: true
+        ref: "school",
     },
-}, { timestamps: true})
+}, { timestamps: true })
 
 module.exports = mongoose.model('course', courseSchema);

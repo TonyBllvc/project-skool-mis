@@ -23,11 +23,12 @@ const create = async (req, res) => {
     }
 
     // check if this level already exists
-    const schoolLevel = await School.findOne({ level })
+    // const schoolLevel = await School.findOne({ level })
+    // const schoolSemester = await School.findOne({ semester })
     
-    if (schoolLevel) {
-        return res.status(400).json({ error: ' Level already exists'})
-    }
+    // if (schoolSemester && schoolLevel) {
+    //     return res.status(400).json({ error: ' Please check that the semester or level is not repeated'})
+    // }
 
     // add doc to db
     try {
@@ -44,8 +45,7 @@ const create = async (req, res) => {
 
 // fetch all schools based on(faculty)
 const gets = async (req, res) => {
-
-    const schoolData = await School.find({}).sort({ createAt: -1 })
+    const schoolData = await School.find({}).sort({ level: 1 }).sort({ semester: 1})
 
 
     res.status(200).json(schoolData)

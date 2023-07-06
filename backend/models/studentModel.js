@@ -19,10 +19,11 @@ const studentSchema = new Schema({
     },
     middle_name: {
         type: String,
-        // unique: true
+        require: true
     },
     student: {
         type: String,
+        require: true
         // unique: true
     },
     session: {
