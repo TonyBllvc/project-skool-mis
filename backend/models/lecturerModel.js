@@ -21,7 +21,7 @@ const lecturerSchema = new Schema({
         require: true,
         // unique: true
     },
-    middle_name: {
+    gender: {
         type: String,
         // unique: true
     },
@@ -34,22 +34,6 @@ const lecturerSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'school'
         // unique: true
-    },
-    phone: {
-        type: Number,
-        require: true,
-        unique: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-
-        // to validate that is is an actual email
-        // note I just added this based on research. It is not in the tutorial
-        validate: (val) => {
-            return validator.isEmail(val)
-        }
     },
     password: {
         type: String,

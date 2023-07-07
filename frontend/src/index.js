@@ -6,16 +6,22 @@ import App from './App';
 // import 'bootstrap/dist/css/bootstrap.min.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import { TimeContextProvider } from './context/TimeContext';
+import { SchoolContextProvider } from './context/SchoolContext';
+import { CourseContextProvider } from './context/CourseContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <TimeContextProvider>
-        <App />
-      </TimeContextProvider>
-    </ChakraProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <ChakraProvider>
+    <SchoolContextProvider>
+      <CourseContextProvider>
+        <TimeContextProvider>
+          <App />
+        </TimeContextProvider>
+      </CourseContextProvider>
+    </SchoolContextProvider>
+  </ChakraProvider>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

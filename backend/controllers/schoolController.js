@@ -51,6 +51,7 @@ const gets = async (req, res) => {
     res.status(200).json(schoolData)
 }
 
+// get one school
 const get = async( req, res) => {
     const { id } = req.params
 
@@ -67,6 +68,23 @@ const get = async( req, res) => {
     res.status(200).json(schoolData)
 
 }
+
+// const search = aync(req, res) => {
+//     const keyword = req.query.search ? {
+//         $or: [
+//             // in the 'options' property, 'i' means case sensitive
+//             { name: { $regex: req.query.search, $options: 'i' } },
+//             { email: { $regex: req.query.search, $options: 'i' } }
+//         ]
+//     } : {
+//         // Do nothing!
+//     }
+
+//     const users = await School.find(keyword).find({ _id: { $ne: req.user._id } })
+
+//     res.send(users)
+    
+// }
 
 const updating = async (req, res) => {
     const { id } = req.params

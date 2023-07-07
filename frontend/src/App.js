@@ -6,11 +6,8 @@ import NavBar from './Components/NavBar';
 import DashBox from './pages/Lecturer/DashBox';
 import LecturerList from './pages/Lecturer/LecturerList';
 import DashBoard from './pages/Lecturer/DashBoard';
-// import Master from './pages/master/Master';
-// import HomeMaster from './pages/master/Home';
-// import DashBoard from './pages/lecturer/DashBoard';
-// import LecturersMaster from './pages/master/LecturersMaster';
-// import LecturerMaster from './pages/master/LecturerMaster';
+import TimeTable from './pages/Student/TimeTable';
+import ViewTimeTable from './pages/component/ViewTimeTable';
 
 export default function App() {
   return (
@@ -23,9 +20,16 @@ export default function App() {
           <div className='w-4/5 z-30 sm:mr-5 mr-1 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8'>
             <div className="rounded-lg overflow-visible overscroll-y-auto mt-4 pt-2 mx-4 px-2 ">
               <Routes>
-                <Route exact path='/dashboard' element={<DashBoard/>} />
+                <Route exact path='/' element={<DashBoard />} />
                 <Route exact path='/lecturer_list' element={<LecturerList />} />
 
+
+                <Route exact path='/timetable' element={<TimeTable />} />
+                <Route exact path='/view_timetable' element={<ViewTimeTable
+                />} />
+
+                {/* Lost page */}
+                <Route exact path='*' element={<NotFound />} />
               </Routes>
             </div>
           </div>

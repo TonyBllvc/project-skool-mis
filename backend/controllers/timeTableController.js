@@ -40,7 +40,7 @@ const sets = async (req, res) => {
         // to pass dat into the entire field
         var course = await Time.create(newTimeTable)
 
-        course = await course.populate("time_details", "course_code course_name")
+        course = await course.populate("time_details", "course_code course_name level")
         course = await course.populate("time_details")
         course = await School.populate(course, {
             path: "time_details.course_details",
@@ -58,18 +58,19 @@ const sets = async (req, res) => {
 const gets = async (req, res) => {
 
     try {
-        
-    const timeTable = await Time.find({}).populate("time_details", "course_code course_name course_details")
 
-    // timeTable = await School.populate(timeTable, {
-    //     path: 'time_details.course_details',
-    //     select: 'faculty department level semester'
-    // })
-    
+        const timeTable = await Time.find({}).sort({ day: 1 }).populate("time_details", "course_code course_name course_details level").sort({ course_name: 1}).sort({ course_code: 1})
 
-    res.status(200).json(timeTable)
+        // unfinished
+        // timeTable = await School.populate(timeTable, {
+        //     path: 'time_details.course_details',
+        //     select: 'faculty department level semester'
+        // })
+
+
+        res.status(200).json(timeTable)
     } catch (error) {
-        return res.status(400).json({ error: 'No such timetable'})
+        return res.status(400).json({ error: 'No such timetable' })
     }
 
 }
@@ -82,7 +83,7 @@ const get = async (req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const result = await Course.findById(id).populate("course_details", "faculty department level semester")
+    const result = await Time.findById(id).populate("course_details", "faculty department level semester")
 
     if (!result) {
         return res.status(404).json({ error: 'No such result' })

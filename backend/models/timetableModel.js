@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 const timetableSchema = new Schema({
     day: {
         type: String,
+        enum: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         // no trailing spaces before or after
         trim: true
     },
@@ -28,13 +29,13 @@ const timetableSchema = new Schema({
         type: String,
         trim: true
     },
-    
+
     // reference to course
     time_details: {
         // containing the id to a particular user
         type: Schema.Types.ObjectId,
         // reference to our user model
-        ref: "course" 
+        ref: "course"
     }
 })
 
