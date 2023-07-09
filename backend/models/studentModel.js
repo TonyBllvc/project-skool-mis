@@ -11,7 +11,7 @@ const studentSchema = new Schema({
         require: true,
         // unique: true
     },
-    
+
     first_name: {
         type: String,
         require: true,
@@ -20,10 +20,6 @@ const studentSchema = new Schema({
     middle_name: {
         type: String,
         require: true
-    },
-    gender: {
-        type: String,
-        // unique: true
     },
     student: {
         type: String,
@@ -40,16 +36,16 @@ const studentSchema = new Schema({
         require: true,
         unique: true
     },
-    student_details: {
-        // containing the id to a particular user
-        type: Schema.Types.ObjectId,
-        ref: 'school'
-        // unique: true
-    },
-    password: {
+    faculty: {
         type: String,
-        require: true
+        // no trailing spaces before or after
+        trim: true
     },
+    department: {
+        type: String,
+        // no trailing spaces before or after
+        trim: true
+    }
 })
 
 

@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { createContext, useEffect, useReducer } from 'react'
 
+// Load welcome dashboard
 export const TimeContext = createContext();
 
 export const timeReducer = (state, action) => {

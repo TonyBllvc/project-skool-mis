@@ -21,11 +21,7 @@ const lecturerSchema = new Schema({
         require: true,
         // unique: true
     },
-    gender: {
-        type: String,
-        // unique: true
-    },
-    teacher: {
+    lecturer: {
         type: String,
         // unique: true
     },
@@ -35,10 +31,10 @@ const lecturerSchema = new Schema({
         ref: 'school'
         // unique: true
     },
-    password: {
-        type: String,
-        require: true
-    },
+    // password: {
+    //     type: String,
+    //     require: true
+    // },
 })
 
 module.exports = mongoose.model('lecturer', lecturerSchema);

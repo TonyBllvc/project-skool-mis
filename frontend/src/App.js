@@ -1,13 +1,12 @@
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import DashBoardLecturer from './pages/Lecturer/DashBoard';
 import NavBar from './Components/NavBar';
 import DashBox from './pages/Lecturer/DashBox';
 import LecturerList from './pages/Lecturer/LecturerList';
-import DashBoard from './pages/Lecturer/DashBoard';
-import TimeTable from './pages/Student/TimeTable';
-import ViewTimeTable from './pages/component/ViewTimeTable';
+import TimeTable from './pages/component/TimeTable';
+import DashBoard from './pages/DashBoard';
+// import ViewTimeTable from './pages/component/ViewTimeTable';
 
 export default function App() {
   return (
@@ -25,8 +24,6 @@ export default function App() {
 
 
                 <Route exact path='/timetable' element={<TimeTable />} />
-                <Route exact path='/view_timetable' element={<ViewTimeTable
-                />} />
 
                 {/* Lost page */}
                 <Route exact path='*' element={<NotFound />} />

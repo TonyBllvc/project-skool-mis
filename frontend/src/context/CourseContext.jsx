@@ -6,7 +6,7 @@ export const courseReducer = (state, action) => {
   switch (action.type) {
       case 'PICK_ID':
         return {
-          idDetail: [...state.idDetail]
+          idDetail: action.payload 
         }
     default:
       return state

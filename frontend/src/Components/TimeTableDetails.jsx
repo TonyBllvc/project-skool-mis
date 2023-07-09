@@ -1,44 +1,57 @@
-import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-// import { useTableContext } from '../hooks/useCourseContext'
+import { Box, Button, useDisclosure } from '@chakra-ui/react'
+import React, { useState } from 'react'
+import { FaTrashAlt } from 'react-icons/fa'
+import { BiPencil } from 'react-icons/bi'
+import { useSchoolContext } from '../hooks/useSchoolContext'
+import TimeUpdateModal from '../model/TimeUpdateModal'
 
 const TimeTableDetails = ({ school }) => {
-    // const { idDetail, dispatch } = useTableContext()
-    const navigate = useNavigate()
-    const [idPick, setIdPick] = useState('')
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const { dispatch } = useSchoolContext()
+    const [toggle, setToggle] = useState(false);
 
-    // const handleClick = async () => {
-    //     // const res = parseInt(school._id)
+    const [ documentData, setDocumentData] = useState('')
 
-    //     // console.log(res)
-    //     const res = await fetch('/api/school/' + school._id)
-    //     const json = await res.json()
+    const handleDelete = async () => {
 
-    //     if (!res.ok) {
-    //         console.log(json.error)
-    //         return json.error
-    //     }
-    //     if (res.ok) {
-    //         setIdPick(json)
-    //         console.log(school)
-    //         console.log('between')
-    //         console.log(json)
-    //         console.log('between')
-    //     }
-    // }
+        const response = await fetch('/api/time/' + school._id, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        const json = await response.json();
 
-    // useEffect(() => {
-    //     dispatch({ type: 'PICK_ID', payload: idPick })
-    //     console.log(idPick)
+        if (response.ok) {
+            dispatch({ type: 'DELETE_DATA', payload: json })
+        }
 
-    // }, [])
+    }
 
-    // if (handleClick) {
-    //     // navigate('/view_timetable')
-    // }
+    const handleUpdate = async() => {
+        // incomplete  ( updating document possessing errors)
+        const response = await fetch("api/time/" + school._id, {
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+        const json = await response.json()
+
+        
+        if (!response.ok) {
+            return console.log(json.error)
+        }
+
+        if (response.ok) {
+            setDocumentData(json)
+            onOpen()
+        }
+
+    }
+
     return (
-        <div>
-            <div className="mt-1 bg-white grid grid-cols-4 w-full py-3 px-1 mb-2">
+        <div className='w-full flex flex-col justify-center items-center '>
+            <div className="mt-1 bg-white grid grid-cols-4 w-full py-2 px-1 mb-2" onClick={() => setToggle(!toggle)}>
                 <div className="mx-1 flex justify-start items-center">
                     {school.day}
                 </div>
@@ -57,6 +70,23 @@ const TimeTableDetails = ({ school }) => {
                     {school.end} {school.am_two}
                 </div>
             </div>
+            {toggle &&
+                <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >
+                    <Box mr={20} >
+                        <Button colorScheme='blue' py={1} px={3} color='white' onClick={handleUpdate} >
+                            <BiPencil className='text-white mr-2 font-medium text-base' />
+                            Update
+                        </Button>
+                    </Box>
+                    <Box ml={20} >
+                        <Button colorScheme='red' py={1} px={3} color='white' onClick={handleDelete} >
+                            <FaTrashAlt className='text-white mr-2 font-medium text-base' />
+                            Delete
+                        </Button>
+                    </Box>
+                    <TimeUpdateModal documentData={documentData} open={isOpen} close={onClose} />
+                </Box>
+            }
         </div>
     )
 }

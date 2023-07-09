@@ -6,7 +6,8 @@ const schoolRoutes = require('./routes/school')
 const courseRoutes = require('./routes/course')
 const resultRoutes = require('./routes/result')
 const timeRoutes = require('./routes/timetable')
-
+const lecturerRoutes = require('./routes/lecturer')
+const studentRoutes = require('./routes/student')
 // express app
 const app = express()
 
@@ -23,8 +24,8 @@ app.use('/api/school', schoolRoutes)
 app.use('/api/course', courseRoutes) // come back to this after creating lecturer and school field
 app.use('/api/result', resultRoutes) // come back to this after creating student field
 app.use('/api/time', timeRoutes )
-// app.use('/api/student', studentRoutes)
-// app.use('/api/timetable', timetableRoutes)
+app.use('/api/student', studentRoutes)
+app.use('/api/lecturer', lecturerRoutes)
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)

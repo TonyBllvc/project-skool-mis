@@ -1,5 +1,5 @@
 const express = require('express')
-const { sets, updates, deletes, gets, get } = require('../controllers/resultController')
+const { sets, updates, deletes, gets, get, getStudent } = require('../controllers/resultController')
 
 
 const router = express.Router()
@@ -10,8 +10,10 @@ router.post('/set_result', sets)
 router.get('/get_results', gets)
 // fetch one course
 router.get('/:id', get)
+// fetch one student
+router.get('/:student_id/result', getStudent)
 // fetch course
-router.patch('/:id', updates)
+// router.patch('/:id', updates)
 // fetch one course
 router.delete('/:id', deletes)
 // fetch one course

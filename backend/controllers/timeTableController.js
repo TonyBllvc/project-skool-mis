@@ -17,7 +17,13 @@ const sets = async (req, res) => {
     if (!start) {
         emptyFields.push('No start time passed')
     }
+    if (!am_one) {
+        emptyFields.push('No stoppage time passed passed')
+    }
     if (!end) {
+        emptyFields.push('No stoppage time passed passed')
+    }
+    if (!am_two) {
         emptyFields.push('No stoppage time passed passed')
     }
     if (!courseId) {
@@ -59,7 +65,7 @@ const gets = async (req, res) => {
 
     try {
 
-        const timeTable = await Time.find({}).sort({ day: 1 }).populate("time_details", "course_code course_name course_details level").sort({ course_name: 1}).sort({ course_code: 1})
+        const timeTable = await Time.find({}).sort({ day: 1 }).populate("time_details", "course_code course_name course_details level").sort({ course_name: 1 }).sort({ course_code: 1 })
 
         // unfinished
         // timeTable = await School.populate(timeTable, {
@@ -75,7 +81,7 @@ const gets = async (req, res) => {
 
 }
 
-
+// find timetable by id
 const get = async (req, res) => {
     const { id } = req.params
 
@@ -83,7 +89,7 @@ const get = async (req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const result = await Time.findById(id).populate("course_details", "faculty department level semester")
+    const result = await Time.findById(id)
 
     if (!result) {
         return res.status(404).json({ error: 'No such result' })
@@ -95,20 +101,25 @@ const get = async (req, res) => {
 
 const updates = async (req, res) => {
     const { id } = req.params
+    const updatesNew = req.body
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const result = await Course.findByIdAndUpdate({ _id: id }, {
-        ...req.body
-    })
+    try {
+        const result = await Time.findByIdAndUpdate({ _id: id }, updatesNew, { new: true })
 
-    if (!result) {
-        return res.status(400).json({ error: 'No such result' })
+        if (!result) {
+            return res.status(404).json({ error: 'No such result' })
+        }
+
+        res.status(200).json(result)
+    } catch (error) {
+        return res.status.json({ error: "An error occurred, sorry!" })
     }
 
-    res.status(200).json(result)
+
 
 }
 
@@ -119,7 +130,7 @@ const deletes = async (req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const result = await Course.findByIdAndDelete({ _id: id })
+    const result = await Time.findByIdAndDelete({ _id: id })
 
     if (!result) {
         return res.status(400).json({ error: 'No such result' })

@@ -5,12 +5,15 @@ import TimeTableDetails from '../../Components/TimeTableDetails';
 import { useSchoolContext } from '../../hooks/useSchoolContext';
 import Loading from '../assets/Loading';
 import TimeTableForm from '../../Components/TimeTableForm';
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
+import { Button } from '@chakra-ui/react';
 
 const TimeTable = () => {
 
     const [toggle, setToggle] = useState(false);
     // const [school, setSchool ] = useState('')
     const { school, dispatch } = useSchoolContext()
+
     useEffect(() => {
         const fetchTimeTable = async () => {
             const res = await fetch('/api/time/get_time_table')
@@ -21,37 +24,13 @@ const TimeTable = () => {
             }
 
             if (res.ok) {
-                // setSchool(json)
                 dispatch({ type: 'SET_DATA', payload: json })
-                console.log('correct')
-
-                // dispatch({ type: 'PICK_ID', payload: id[0]._id })
             }
         }
         fetchTimeTable()
 
     }, [])
 
-    // useEffect(() => {
-    //     const fetchTimeTable = async () => {
-    //         const res = await fetch('/api/school/fetch/')
-    //         const json = await res.json()
-
-    //         if (!res.ok) {
-    //             return console.log(json.error)
-    //         }
-
-    //         if (res.ok) {
-    //             // setSchool(json)
-    //             dispatch({ type: 'SET_DATA', payload: json })
-    //             console.log('correct')
-
-    //             // dispatch({ type: 'PICK_ID', payload: id[0]._id })
-    //         }
-    //     }
-    //     fetchTimeTable()
-
-    // }, [])
 
     return (
         <div className='overscroll-contain'>
@@ -67,26 +46,36 @@ const TimeTable = () => {
                 </div>
 
 
-                <button onClick={() => setToggle(toggle)}> Fill Form </button>
-                {!toggle &&
+                <Button type='button' value='List' variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
+                    Fill Form
+                    {!toggle &&
+                        <FaChevronDown className='ml-2 font-normal text-sm' />
+                    }
+                    {toggle &&
+                        <FaChevronUp className='ml-2 font-normal text-sm' />
+                    }
+                </Button>
+
+                {/* The table for filling */}
+                {toggle &&
                     <div className='mt-7'>
                         <TimeTableForm />
                     </div>
                 }
 
-                <div className="mt-12 ">
-                    {/* This would have model schema created */}
-                    <h2 className="text-green-600 font-mono font-bold text-2xl">
-                        The Time-Table
-                    </h2>
-                </div>
 
 
-                {/* The chat table */}
-                <div className="mt-2">
+                <div className="mt-2 px-14 mb-14">
+
+                    <div className="mt-12 ">
+                        {/* This would have model schema created */}
+                        <h2 className="text-green-600 font-mono font-bold text-2xl">
+                            The Time-Table
+                        </h2>
+                    </div>
 
                     <div className="w-full">
-                        {/* The table for filling */}
+
                         <div className="mt-2">
                             <div className="w-full">
 

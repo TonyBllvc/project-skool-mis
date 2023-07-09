@@ -1,14 +1,16 @@
 const express = require('express')
-const { registerUser, authUser, allUsers } = require('../controllers/userController')
-const { protect } = require('../middleware/authMiddleware')
+// const { protect } = require('../middleware/authMiddleware')
+const { signupUser, getStudents, getStudent } = require('../controllers/studentController')
 
 const router = express.Router()
 
-// router.post('/signup', signupUser)
+router.post('/signup', signupUser)
 // router.post('/login', loginUser)
+router.get('/student_list', getStudents)
+router.get('/:id', getStudent)
 
-router.use(protect)
-router.get('/', allUsers)
+// router.use(protect)
+// router.get('/', allUsers)
 
 
 

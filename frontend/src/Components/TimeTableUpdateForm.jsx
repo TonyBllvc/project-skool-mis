@@ -2,8 +2,8 @@ import { Box, Button, Card, FormControl, FormLabel, Input, InputGroup, InputRigh
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourseContext } from '../hooks/useCourseContext'
-import CourseModel from '../model/CourseModel'
 import { useSchoolContext } from '../hooks/useSchoolContext'
+import CourseUpdateModal from '../model/CourseUpdateModal'
 
 const optionOne = [
     { value: 'Monday', label: 'Monday', key: '1' },
@@ -19,9 +19,10 @@ const optionTwo = [
     { value: 'PM', label: 'PM', key: '2' },
 ]
 
-const TimeTableForm = () => {
+const TimeTableUpdateForm = ({ documentData, close }) => {
     const { idDetail, dispatch } = useCourseContext()
-    const { dispatch: dispatchTime } = useSchoolContext()
+    const {  dispatch: dispatchTime } = useSchoolContext()
+    // incomplete ( updating document possessing errors)
 
     const [day, setDay] = useState('')
     const [start, setStart] = useState('')
@@ -59,8 +60,8 @@ const TimeTableForm = () => {
         const details = { day, start, am_one, am_two, end, courseId }
 
         try {
-            const res = await fetch("api/time/set_time_table", {
-                method: "POST",
+            const res = await fetch("api/time/" + documentData._id, {
+                method: "PATCH",
                 body: JSON.stringify(details),
                 headers: {
                     "Content-Type": "application/json",
@@ -83,13 +84,13 @@ const TimeTableForm = () => {
 
             if (res.ok) {
                 toast({
-                    title: 'Submitted Successfully!',
+                    title: 'Update Successful!',
                     status: 'success',
                     duration: 3000,
                     isClosable: true,
                     position: "top",
                 })
-                dispatchTime({ type: 'CREATE_DATA', payload: json })
+                dispatchTime({ type: 'UPDATE_DATA', payload: json })
                 setLoading(false)
                 console.log('new data added', json)
             }
@@ -101,7 +102,7 @@ const TimeTableForm = () => {
                 isClosable: true,
                 position: "top",
             })
-            setLoading(false)
+            return
         }
 
     }
@@ -126,8 +127,8 @@ const TimeTableForm = () => {
 
 
     return (
-        <form onSubmit={handleSubmit} className='w-full flex justify-center'>
-            <VStack w='70%' spacing='5px' color='black' >
+        <form onSubmit={handleSubmit} className='w-full mb-14 flex justify-center'>
+            <VStack w='85%' spacing='5px' color='black' >
 
                 <FormControl isRequired>
                     <FormLabel color='black'>
@@ -216,15 +217,12 @@ const TimeTableForm = () => {
                     {/* Drop down of all the course*/}
                     {toggle &&
                         <Box overflow='scroll' height={230} px={4} position='relative' zIndex='overlay'>
-
                             {idDetail && idDetail.map((dataPick) => (
-
                                 <Card key={dataPick._id} onClick={() => setToggle(!toggle)}>
-                                
-                                    <CourseModel name={dataPick} handleName={setInfo} handleId={setCourseId} />
+                                {/* Input courseUpdateModel here */}
+                                    <CourseUpdateModal name={dataPick} handleName={setInfo} handleId={setCourseId} />
 
                                 </Card>
-
                             ))}
                         </Box>
                     }
@@ -232,7 +230,7 @@ const TimeTableForm = () => {
                 </FormControl>
 
                 {/* Button for Log in */}
-                <Button color='green.100' colorScheme='whatsapp' width='100%' style={{ marginTop: 15 }} type='submit' isLoading={loading} >
+                <Button color='green.100' colorScheme='whatsapp' width='100%' style={{ marginTop: 15 }} type='submit' onClick={close} isLoading={loading} >
                     Submit
                 </Button>
 
@@ -241,4 +239,4 @@ const TimeTableForm = () => {
     )
 }
 
-export default TimeTableForm
+export default TimeTableUpdateForm

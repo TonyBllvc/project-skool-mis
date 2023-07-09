@@ -6,11 +6,11 @@ const Schema = mongoose.Schema;
 const courseSchema = new Schema({
     course_code: {
         type: String,
-        require: true,
+        trim: true,
     },
     course_name: {
         type: String,
-        require: true,
+        trim: true,
     },
     level: {
         type: String,
