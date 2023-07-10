@@ -1,5 +1,7 @@
 const express = require('express')
-const { create, gets, get, updating, deleting } = require('../controllers/schoolController')
+const { create, gets, get, 
+    // updating, 
+    deleting } = require('../controllers/schoolController')
 
 
 const router = express.Router()
@@ -11,7 +13,7 @@ router.get('/fetch', gets)
 // fetch one school
 router.get('/:id', get)
 // fetch one school
-router.patch('/:id', updating )
+// router.patch('/:id', updating )
 // fetch one school
 router.delete('/:id', deleting )
 

@@ -8,6 +8,7 @@ router.post('/signup', signupUser)
 // router.post('/login', loginUser)
 router.get('/lecturer_list', getLecturers)
 router.get('/:id', getLecturer)
+// router.get('/faculty/:schoolId', getDefinedLecturers)
 
 // router.use(protect)
 // router.get('/', allUsers)

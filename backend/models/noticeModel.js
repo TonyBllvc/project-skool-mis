@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
-const validator = require('validator')
+// const bcrypt = require('bcrypt')
+// const validator = require('validator')
 
 const Schema = mongoose.Schema;
 
@@ -16,8 +16,19 @@ const noticeSchema = new Schema({
         type: Schema.Types.ObjectId,
         // reference to our user model
         ref: "lecturer" 
+    
     },
     time: {
+        type: String,
+        require: true,
+        // unique: true
+    },
+    date: {
+        type: String,
+        require: true,
+        // unique: true
+    },
+    date: {
         type: String,
         require: true,
         // unique: true

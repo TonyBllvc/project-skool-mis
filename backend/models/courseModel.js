@@ -16,18 +16,18 @@ const courseSchema = new Schema({
         type: String,
         trim: true
     },
-    // course_coordinator: {
-    //     // containing the id to a particular user
-    //     type: Schema.Types.ObjectId,
-    //     // reference to our user model
-    //     ref: "lecture",
-    // },
-    // course_lecturers: [{
-    //     // containing the id to a particular user
-    //     type: Schema.Types.ObjectId,
-    //     // reference to our user model
-    //     ref: "lecture",
-    // }],
+    course_coordinator: {
+        // containing the id to a particular user
+        type: Schema.Types.ObjectId,
+        // reference to our user model
+        ref: "lecturer",
+    },
+    course_lecturers: [{
+        // containing the id to a particular user
+        type: Schema.Types.ObjectId,
+        // reference to our user model
+        ref: "lecturer",
+    }],
     course_details: {
         // containing the id to a particular user
         type: Schema.Types.ObjectId,

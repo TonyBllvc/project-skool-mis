@@ -65,18 +65,23 @@ const getStudents = async (req, res) => {
 }
 
 const getStudent = async (req, res) => {
+    // passed id of student
     const { id } = req.params
 
+    // check if valid
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such document' })
     }
 
+    // find everything relating to such user
     const student = await Student.findById(id)
 
+    // check if student actually exists
     if (!student) {
         return res.status(404).json({ error: 'No such student' })
     }
 
+    // pass student's results
     res.status(200).json(student)
 
 }

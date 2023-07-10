@@ -1,19 +1,19 @@
 const express = require('express')
-const { sets, updates, deletes, gets, get, getStudent } = require('../controllers/resultController')
+const { sets, updates, deletes, gets, get, getStudent, searchResult } = require('../controllers/resultController')
 
 
 const router = express.Router()
 
-//create course
+//create result
 router.post('/set_result', sets)
-// fetch courses
+// fetch results
 router.get('/get_results', gets)
-// fetch one course
+// fetch one result
 router.get('/:id', get)
 // fetch one student
 router.get('/:student_id/result', getStudent)
-// fetch course
-// router.patch('/:id', updates)
+// search or results
+// router.get('/', searchResult)
 // fetch one course
 router.delete('/:id', deletes)
 // fetch one course

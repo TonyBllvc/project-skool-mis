@@ -6,7 +6,7 @@ import DashBox from './Lecturer/DashBox'
 
 const DashBoard = () => {
     useEffect(() => {
-        document.title = 'Master Authentication Page'
+        document.title = 'Dashboard page'
     }, [])
 
 

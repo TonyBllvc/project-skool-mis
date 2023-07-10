@@ -11,7 +11,7 @@ router.get('/get_courses', gets)
 // fetch one course
 router.get('/:id', get)
 // fetch course
-router.patch('/:id', updates)
+router.put('/:id', updates)
 // fetch one course
 router.delete('/:id', deletes)
 // fetch one course

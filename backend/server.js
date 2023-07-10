@@ -8,6 +8,7 @@ const resultRoutes = require('./routes/result')
 const timeRoutes = require('./routes/timetable')
 const lecturerRoutes = require('./routes/lecturer')
 const studentRoutes = require('./routes/student')
+const noticeRoutes = require('./routes/notice')
 // express app
 const app = express()
 
@@ -26,6 +27,8 @@ app.use('/api/result', resultRoutes) // come back to this after creating student
 app.use('/api/time', timeRoutes )
 app.use('/api/student', studentRoutes)
 app.use('/api/lecturer', lecturerRoutes)
+app.use('/api/notice', noticeRoutes)
+
 
 // connect to db
 mongoose.connect(process.env.MONGO_URI)
