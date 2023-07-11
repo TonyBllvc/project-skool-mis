@@ -5,7 +5,7 @@ const CourseModel = ({ name, handleId, handleName }) => {
     return (
         // <Box>
             <CardBody display='flex' direction='row' justifyContent='space-between'  onClick={(e) => handleId(name._id)} >
-                <Text onClick={(e) => handleName(name.course_code)}>
+                <Text _hover={{ cursor:'pointer'}} onClick={(e) => handleName(name.course_code)}>
                     {name.course_name}
                 </Text>
                 <Text onClick={(e) => handleName(name.course_code)}>

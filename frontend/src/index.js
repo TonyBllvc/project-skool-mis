@@ -8,6 +8,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { TimeContextProvider } from './context/TimeContext';
 import { SchoolContextProvider } from './context/SchoolContext';
 import { CourseContextProvider } from './context/CourseContext';
+import { StudentContextProvider } from './context/StudentContext';
+import { LecturerContextProvider } from './context/LecturerContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +18,11 @@ root.render(
     <SchoolContextProvider>
       <CourseContextProvider>
         <TimeContextProvider>
-          <App />
+        <LecturerContextProvider>
+          <StudentContextProvider>
+            <App />
+          </StudentContextProvider>
+          </LecturerContextProvider>
         </TimeContextProvider>
       </CourseContextProvider>
     </SchoolContextProvider>

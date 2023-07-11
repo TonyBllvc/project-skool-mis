@@ -84,7 +84,6 @@ const gets = async (req, res) => {
             path: 'course_details',
             model: 'school',
             // select: 'faculty department level semester'
-
         }
     }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).exec()
     // .populate("course_details", "faculty department level semester")

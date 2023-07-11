@@ -18,6 +18,12 @@ const noticeSchema = new Schema({
         ref: "lecturer" 
     
     },
+    form: {
+        // Options: Assignment, Test, Notice, Project
+        type: String,
+        require: true,
+        // unique: true
+    },
     time: {
         type: String,
         require: true,

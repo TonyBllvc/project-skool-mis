@@ -20,7 +20,7 @@ const optionTwo = [
 ]
 
 const TimeTableUpdateForm = ({ documentData, close }) => {
-    const { idDetail, dispatch } = useCourseContext()
+    const { course,dispatch } = useCourseContext()
     const {  dispatch: dispatchTime } = useSchoolContext()
     // incomplete ( updating document possessing errors)
 
@@ -45,23 +45,23 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
         setLoading(true)
 
         // check if every field has been filled
-        if (!day || !start || !am_one || !am_two || !end || !courseId || !passInfo) {
-            toast({
-                title: 'Please fill all the Fields!',
-                status: 'warning',
-                duration: 4000,
-                isClosable: true,
-                position: "bottom",
-            })
-            return
-        }
+        // if (!day || !start || !am_one || !am_two || !end || !courseId || !passInfo) {
+        //     toast({
+        //         title: 'Please fill all the Fields!',
+        //         status: 'warning',
+        //         duration: 4000,
+        //         isClosable: true,
+        //         position: "bottom",
+        //     })
+        //     return
+        // }
 
         // parse every value into  details        
         const details = { day, start, am_one, am_two, end, courseId }
 
         try {
             const res = await fetch("api/time/" + documentData._id, {
-                method: "PATCH",
+                method: "PUT",
                 body: JSON.stringify(details),
                 headers: {
                     "Content-Type": "application/json",
@@ -119,8 +119,8 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
         }
 
         if (res.ok) {
-            dispatch({ type: 'PICK_ID', payload: json })
-            console.log(idDetail)
+            dispatch({ type: 'GET_COURSE', payload: json })
+            console.log(course)
         }
 
     }
@@ -217,7 +217,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
                     {/* Drop down of all the course*/}
                     {toggle &&
                         <Box overflow='scroll' height={230} px={4} position='relative' zIndex='overlay'>
-                            {idDetail && idDetail.map((dataPick) => (
+                            {course && course.map((dataPick) => (
                                 <Card key={dataPick._id} onClick={() => setToggle(!toggle)}>
                                 {/* Input courseUpdateModel here */}
                                     <CourseUpdateModal name={dataPick} handleName={setInfo} handleId={setCourseId} />

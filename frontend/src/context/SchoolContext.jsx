@@ -15,11 +15,11 @@ export const schoolReducer = (state, action) => {
       }
     case 'CREATE_DATA':
       return {
-        school: [action.payload, ...state.school]
+        school: [...state.school, action.payload, ]
       }
     case 'UPDATE_DATA':
       return {
-        school: [action.payload, ...state.school]
+        school: [ action.payload, ...state.school ]
       }
     case 'DELETE_DATA':
       return {

@@ -2,21 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { BiArrowBack, BiArrowToRight, BiRightArrowAlt } from "react-icons/bi";
 import TimeTableDetails from '../../Components/TimeTableDetails';
-import { useSchoolContext } from '../../hooks/useSchoolContext';
 import Loading from '../assets/Loading';
 import TimeTableForm from '../../Components/TimeTableForm';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
+import { useCourseContext } from '../../hooks/useCourseContext';
+import CourseListDetails from '../../Components/CourseListDetails';
 
-const TimeTable = () => {
-
+const CourseList = () => {
     const [toggle, setToggle] = useState(false);
     // const [school, setSchool ] = useState('')
-    const { school, dispatch } = useSchoolContext()
+    const navigate = useNavigate()
+    const { course, dispatch } = useCourseContext()
+    // const { school, dispatch } = useSchoolContext()
 
     useEffect(() => {
         const fetchTimeTable = async () => {
-            const res = await fetch('/api/time/get_time_table')
+            const res = await fetch('/api/course/get_courses')
             const json = await res.json()
 
             if (!res.ok) {
@@ -24,7 +26,7 @@ const TimeTable = () => {
             }
 
             if (res.ok) {
-                dispatch({ type: 'SET_DATA', payload: json })
+                dispatch({ type: 'GET_COURSE', payload: json })
             }
         }
         fetchTimeTable()
@@ -37,29 +39,38 @@ const TimeTable = () => {
             <div className='w-full font-mono font-bold text-lg'>
 
                 {/* the top section */}
-                <div className='w-full mb-9 flex flex-row justify-start align-middle text-center items-center'>
+                <div className='w-full mb-8 flex flex-row justify-start align-middle text-center items-center'>
 
-                    <h1 className="text-gray-500 text-sm sm:text-lg  font-mono font-semibold">
+                    <h1 className="text-gray-500 text-sm sm:text-lg font-mono font-semibold">
                         Computer Science
                     </h1>
+                    <div className="flex items-end mx-2 justify-end">
+                        <BiRightArrowAlt className="text-gray-500  text-sm sm:text-lg font-mono font-semibold" />
+                    </div>
+                    {/* This would have model schema created */}
+                    <h2 className="text-green-600 text-sm sm:text-lg font-mono font-semibold"> 
+                    Courses </h2>
 
                 </div>
+                <div className='mb-8'>
+                    <button onClick={() => { navigate(-1) }} className=' flex flex-row justify-start text-black hover:text-red-700 text-center items-center align-bottom '>
+                        <BiArrowBack className=" mr-1 font-mono text-center text-lg font-semibold" /> Back
+                    </button></div>
 
-
-                <Button type='button' value='List' fontSize={[ '14px', '16px', '18px' ]} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
+                <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
                     Fill Form
                     {!toggle &&
-                        <FaChevronDown className='ml-2 font-normal text-sm' />
+                        <FaChevronDown className='ml-2 font-normal text-xs' />
                     }
                     {toggle &&
-                        <FaChevronUp className='ml-2 font-normal text-sm' />
+                        <FaChevronUp className='ml-2 font-normal text-xs' />
                     }
                 </Button>
 
                 {/* The table for filling */}
                 {toggle &&
                     <div className='mt-7'>
-                        <TimeTableForm />
+                        {/* <TimeTableForm /> */}
                     </div>
                 }
 
@@ -69,8 +80,8 @@ const TimeTable = () => {
 
                     <div className="mt-12 ">
                         {/* This would have model schema created */}
-                        <h2 className="text-green-600 text-base sm:text-2xl font-mono font-bold">
-                            The Time-Table
+                        <h2 className="text-green-600 font-mono font-bold text-2xl">
+                            The Course List
                         </h2>
                     </div>
 
@@ -80,24 +91,23 @@ const TimeTable = () => {
                             <div className="w-full">
 
                                 {/* Table with contents */}
-                                {school ? (
+                                {course ? (
                                     <div className='mt-7'>
                                         <TableContainer>
                                             <Table>
                                                 <Thead w='100%' backgroundColor='blue.400'>
                                                     <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='yellow.200'>
-                                                        <Th w='25%' display='flex' justifyContent='start'> Day </Th>
-                                                        <Th w='50%' display='flex' justifyContent='start'> Course Code </Th>
-                                                        <Th w='50%' display='flex' justifyContent='start'> Start </Th>
-                                                        <Th w='25%' display='flex' justifyContent='start'> End </Th>
+                                                        <Th w='25%' display='flex' justifyContent='start'> Code </Th>
+                                                        <Th w='50%' display='flex' justifyContent='start'> Code </Th>
+                                                        <Th w='25%' display='flex' justifyContent='start'> Code </Th>
                                                     </Tr>
                                                 </Thead>
-
-                                                {school && school.map(school => (
-                                                    <TimeTableDetails school={school} key={school._id} />
+                                                {course && course.map(course => (
+                                                    <CourseListDetails course={course} key={course._id} />
                                                 ))}
                                             </Table>
-                                        </TableContainer>                                    </div>
+                                        </TableContainer>
+                                    </div>
                                 ) : (
                                     <div className='mt-10 bg-white'>
                                         <Loading />
@@ -116,6 +126,7 @@ const TimeTable = () => {
 
 
     )
+
 }
 
-export default TimeTable
+export default CourseList

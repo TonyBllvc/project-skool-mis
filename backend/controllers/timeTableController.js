@@ -49,6 +49,14 @@ const sets = async (req, res) => {
         course = await course.populate("time_details", "course_code course_name level")
         course = await course.populate("time_details")
         course = await School.populate(course, {
+            path: "time_details.course_coordinator",
+            select: " title surname first_name lecturer",
+        })
+        course = await School.populate(course, {
+            path: "time_details.course_lecturers",
+            select: " title surname first_name lecturer",
+        })
+        course = await School.populate(course, {
             path: "time_details.course_details",
             select: "faculty department level semester",
         })
@@ -65,7 +73,7 @@ const gets = async (req, res) => {
 
     try {
 
-        const timeTable = await Time.find({}).sort({ day: 1 }).populate("time_details", "course_code course_name course_details level").sort({ course_name: 1 }).sort({ course_code: 1 })
+        const timeTable = await Time.find({}).populate("time_details", "course_code course_name level course_details").sort({ course_code: 1 })
 
         // a more comprehensive code to fetching every document embedded
         // would require me to first populate everything on every level
@@ -77,9 +85,6 @@ const gets = async (req, res) => {
         //         model: 'school'
         //     }
         // }).sort({ course_name: 1 }).sort({ course_code: 1 })
-
-
-
 
         res.status(200).json(timeTable)
     } catch (error) {
@@ -96,7 +101,7 @@ const get = async (req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const result = await Time.findById(id).populate("time_details", "course_code course_name course_details level").sort({ course_name: 1 }).sort({ course_code: 1 })
+    const result = await Time.findById(id).sort({ day: 1 }).populate("time_details", "course_code course_name course_details level").sort({ course_name: 1 }).sort({ course_code: 1 })
 
     if (!result) {
         return res.status(404).json({ error: 'No such result' })

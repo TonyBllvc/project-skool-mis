@@ -4,9 +4,9 @@ export const CourseContext = createContext();
 
 export const courseReducer = (state, action) => {
   switch (action.type) {
-      case 'PICK_ID':
+      case 'GET_COURSE':
         return {
-          idDetail: action.payload 
+          course: action.payload 
         }
     default:
       return state

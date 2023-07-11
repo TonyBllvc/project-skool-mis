@@ -20,7 +20,7 @@ const optionTwo = [
 ]
 
 const TimeTableForm = () => {
-    const { idDetail, dispatch } = useCourseContext()
+    const { course, dispatch } = useCourseContext()
     const { dispatch: dispatchTime } = useSchoolContext()
 
     const [day, setDay] = useState('')
@@ -118,8 +118,8 @@ const TimeTableForm = () => {
         }
 
         if (res.ok) {
-            dispatch({ type: 'PICK_ID', payload: json })
-            console.log(idDetail)
+            dispatch({ type: 'GET_COURSE', payload: json })
+            console.log(course)
         }
 
     }
@@ -217,7 +217,7 @@ const TimeTableForm = () => {
                     {toggle &&
                         <Box overflow='scroll' height={230} px={4} position='relative' zIndex='overlay'>
 
-                            {idDetail && idDetail.map((dataPick) => (
+                            {course && course.map((dataPick) => (
 
                                 <Card key={dataPick._id} onClick={() => setToggle(!toggle)}>
                                 

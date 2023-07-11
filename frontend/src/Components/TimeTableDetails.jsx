@@ -1,4 +1,4 @@
-import { Box, Button, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Tbody, Th, Tr, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 import { BiPencil } from 'react-icons/bi'
@@ -10,7 +10,7 @@ const TimeTableDetails = ({ school }) => {
     const { dispatch } = useSchoolContext()
     const [toggle, setToggle] = useState(false);
 
-    const [ documentData, setDocumentData] = useState('')
+    const [documentData, setDocumentData] = useState('')
 
     const handleDelete = async () => {
 
@@ -28,7 +28,7 @@ const TimeTableDetails = ({ school }) => {
 
     }
 
-    const handleUpdate = async() => {
+    const handleUpdate = async () => {
         // incomplete  ( updating document possessing errors)
         const response = await fetch("api/time/" + school._id, {
             headers: {
@@ -37,7 +37,7 @@ const TimeTableDetails = ({ school }) => {
         })
         const json = await response.json()
 
-        
+
         if (!response.ok) {
             return console.log(json.error)
         }
@@ -50,26 +50,26 @@ const TimeTableDetails = ({ school }) => {
     }
 
     return (
-        <div className='w-full flex flex-col justify-center items-center '>
-            <div className="mt-1 bg-white grid grid-cols-4 w-full py-2 px-1 mb-2" onClick={() => setToggle(!toggle)}>
-                <div className="mx-1 flex justify-start items-center">
+        <Tbody backgroundColor='blue.400' onClick={() => setToggle(!toggle)}>
+            <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='whiteAlpha.900'>
+                <Th  w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
                     {school.day}
-                </div>
-                <div className="mx-1 flex justify-start items-center">
+                </Th>
+                <Th  w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
                     {/* <Link 
                 // onClick={handleClick}
                     // to='/view_timetable'
                     className=" text-base text-slate-900 " > */}
                     {school.time_details.course_code}
                     {/* </Link> */}
-                </div>
-                <div className="mx-1 flex justify-start items-center">
+                </Th>
+                <Th  w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
                     {school.start} {school.am_one}
-                </div>
-                <div className="mx-1 flex justify-start items-center">
+                </Th>
+                <Th  w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
                     {school.end} {school.am_two}
-                </div>
-            </div>
+                </Th>
+            </Tr>
             {toggle &&
                 <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >
                     <Box mr={20} >
@@ -87,7 +87,7 @@ const TimeTableDetails = ({ school }) => {
                     <TimeUpdateModal documentData={documentData} open={isOpen} close={onClose} />
                 </Box>
             }
-        </div>
+        </Tbody>
     )
 }
 
