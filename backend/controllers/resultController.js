@@ -3,6 +3,12 @@ const School = require('../models/schoolModel')
 const Student = require('../models/studentModel')
 const mongoose = require('mongoose');
 
+// Create another create student's result schema with this
+// const create = async(req, res) => {
+
+// }
+
+// incomplete (work in the frontend(pass algorithm))
 // pass data about schools 
 const sets = async (req, res) => {
     // remember to add the coordinator's user id and lecturer's id ..
@@ -70,6 +76,7 @@ const sets = async (req, res) => {
 }
 
 
+// fully operational
 // fetch all results
 const gets = async (req, res) => {
 
@@ -94,6 +101,8 @@ const gets = async (req, res) => {
 }
 
 
+// fully operational
+// gets result's based on clicked (provided id)
 const get = async (req, res) => {
     const { id } = req.params
 
@@ -125,6 +134,8 @@ const get = async (req, res) => {
 
 }
 
+// fully operational
+// gets specific student result
 const getStudent = async (req, res) => {
     // pass student id
     const { student_id } = req.params

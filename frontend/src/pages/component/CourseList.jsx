@@ -5,7 +5,7 @@ import TimeTableDetails from '../../Components/TimeTableDetails';
 import Loading from '../assets/Loading';
 import TimeTableForm from '../../Components/TimeTableForm';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
-import { Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
+import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
 import { useCourseContext } from '../../hooks/useCourseContext';
 import CourseListDetails from '../../Components/CourseListDetails';
 
@@ -48,8 +48,8 @@ const CourseList = () => {
                         <BiRightArrowAlt className="text-gray-500  text-sm sm:text-lg font-mono font-semibold" />
                     </div>
                     {/* This would have model schema created */}
-                    <h2 className="text-green-600 text-sm sm:text-lg font-mono font-semibold"> 
-                    Courses </h2>
+                    <h2 className="text-green-600 text-sm sm:text-lg font-mono font-semibold">
+                        Courses </h2>
 
                 </div>
                 <div className='mb-8'>
@@ -97,9 +97,22 @@ const CourseList = () => {
                                             <Table>
                                                 <Thead w='100%' backgroundColor='blue.400'>
                                                     <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='yellow.200'>
-                                                        <Th w='25%' display='flex' justifyContent='start'> Code </Th>
-                                                        <Th w='50%' display='flex' justifyContent='start'> Code </Th>
-                                                        <Th w='25%' display='flex' justifyContent='start'> Code </Th>
+                                                        <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                                                            <Box width='100%' whiteSpace='break-spaces' >
+                                                                Code
+                                                            </Box>
+                                                        </Th>
+                                                        <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                                                            <Box width='100%' whiteSpace='break-spaces' >
+                                                                Code
+                                                            </Box>
+
+                                                        </Th>
+                                                        <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                                                            <Box width='100%' whiteSpace='break-spaces' >
+                                                                Code
+                                                            </Box>
+                                                        </Th>
                                                     </Tr>
                                                 </Thead>
                                                 {course && course.map(course => (

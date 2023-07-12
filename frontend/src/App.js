@@ -1,16 +1,15 @@
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
 import { FaList, FaTimes } from 'react-icons/fa'
 import { BsList } from 'react-icons/bs';
-import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import NavBar from './Components/NavBar';
-import DashBox from './pages/Lecturer/DashBox';
-import LecturerList from './pages/Lecturer/LecturerList';
 import TimeTable from './pages/component/TimeTable';
 import DashBoard from './pages/DashBoard';
 import CourseList from './pages/component/CourseList';
 import { useState } from 'react';
-import Lecturer from './pages/component/Lecturer';
+import Lecturer from './pages/component/StudentList'
+import StudentList from './pages/component/StudentList';
+import Student from './pages/component/Student';
 // import ViewTimeTable from './pages/component/ViewTimeTable';
 
 export default function App() {
@@ -37,9 +36,9 @@ export default function App() {
             <div className="rounded-lg overflow-visible overscroll-y-auto mt-4 pt-2 mb-3 mx-2 px-2 sm:p-2 sm:mx-4">
               <Routes>
                 <Route exact path='/' element={<DashBoard />} />
-                <Route path='/lecturer_list' element={<LecturerList />} />
                 <Route path='/courses' element={<CourseList />} />
-                <Route path='/lecturers' element={<Lecturer />} />
+                <Route path='/student/:id' element={<Student />} />
+                <Route path='/students' element={<StudentList />} />
                 
                 <Route path='/timetable' element={<TimeTable />} />
 

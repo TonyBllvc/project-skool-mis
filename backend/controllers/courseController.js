@@ -1,7 +1,7 @@
 const Course = require('../models/courseModel')
 const mongoose = require('mongoose');
 
-// pass data about schools
+// Create courses (only admin will have access to this)
 const sets = async(req, res) => {
     // remember to add the coordinator's user id and lecturer's id ..
     // ... which, in the frontend pass in a drop down through mapping

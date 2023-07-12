@@ -3,6 +3,7 @@ import { AiOutlineFolder } from 'react-icons/ai'
 import { BiBookOpen } from 'react-icons/bi'
 import { NavLink } from 'react-router-dom'
 import { useTimeContext } from '../../hooks/useTimeContext'
+import { Box, Text, Textarea } from '@chakra-ui/react'
 
 const DashBox = () => {
     const { time } = useTimeContext()
@@ -50,7 +51,7 @@ const DashBox = () => {
 
                     {/* card two */}
                     <div className='w-full p-2 bg-white rounded overflow-hidden shadow-lg relative hover:shadow-slate-800'>
-                        <NavLink to='/master_student_page'>
+                        <NavLink to='/students'>
                             <div className='w-full flex flex-row my-2'>
                                 <div className='w-1/2 flex items-start justify-start '>
                                     <BiBookOpen className='text-3xl text-blue-700 ' />
@@ -123,12 +124,11 @@ const DashBox = () => {
                 </div>
             </div>
 
-            <div>
-
-                <div className='w-full bg-white relative top-7 my-5 pt-3'>
-                    Write up goe here
-                </div>
-            </div>
+            <Box backgroundColor='whiteAlpha.200' px={3} py={5}>
+                <Text>
+                Nothing here yet!
+                </Text>
+            </Box>
 
         </div>
     )

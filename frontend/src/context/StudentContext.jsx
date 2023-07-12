@@ -5,7 +5,7 @@ export const StudentContext = createContext();
 // for student timetable
 export const studentReducer = (state, action) => {
   switch (action.type) {
-    case 'SET_DATA':
+    case 'GET_DATA':
       return {
         student: action.payload
       }

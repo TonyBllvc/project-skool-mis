@@ -52,22 +52,28 @@ const TimeTableDetails = ({ school }) => {
     return (
         <Tbody backgroundColor='blue.400' onClick={() => setToggle(!toggle)}>
             <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='whiteAlpha.900'>
-                <Th  w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
-                    {school.day}
+                <Th  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+
+                    <Box width='100%' whiteSpace='break-spaces' >
+                        {school.day}
+                    </Box>
                 </Th>
-                <Th  w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
-                    {/* <Link 
-                // onClick={handleClick}
-                    // to='/view_timetable'
-                    className=" text-base text-slate-900 " > */}
-                    {school.time_details.course_code}
+                <Th width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+
+                    <Box width='100%' whiteSpace='break-spaces' >
+                        {school.time_details.course_code}
+                    </Box>
                     {/* </Link> */}
                 </Th>
-                <Th  w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
-                    {school.start} {school.am_one}
+                <Th  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                    <Box width='100%' whiteSpace='break-spaces' >
+                        {school.start} {school.am_one}
+                    </Box>
                 </Th>
-                <Th  w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
-                    {school.end} {school.am_two}
+                <Th  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                    <Box width='100%' whiteSpace='break-spaces' >
+                        {school.end} {school.am_two}
+                    </Box>
                 </Th>
             </Tr>
             {toggle &&

@@ -1,4 +1,4 @@
-import { Box, Button, Table, Tbody, Th, Tr, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Table, Tbody, Td, Tr, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 import { BiPencil } from 'react-icons/bi'
@@ -26,21 +26,21 @@ const CourseListDetails = ({ course }) => {
     return (
         <Tbody backgroundColor='blue.400' onClick={() => setToggle(!toggle)}>
             <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='whiteAlpha.900'>
-                <Th w='25%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']}>
-                    {course.course_code}
-                </Th>
-                <Th w='50%' display='flex' justifyContent='start' fontSize={[ '9','12', '14']} >
-                    {course.course_name}
-                    {/* <Link 
-            // onClick={handleClick}
-                // to='/view_timetable'
-                className=" text-base text-slate-900 " > */}
-                    {/* {school.time_details.course_code} */}
-                    {/* </Link> */}
-                </Th>
-                <Th w='25%' display='flex' justifyContent='start'>
-                    <Button backgroundColor='whatsapp.300' px={15} py={3} > Hello </Button>
-                </Th>
+                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                    <Box width={['100%', '100%', '100%']} whiteSpace='break-spaces' >
+                        {course.course_code}
+                    </Box>
+                </Td>
+                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} >
+                    <Box width={['100%', '100%', '100%']}  whiteSpace='break-spaces' >
+                        {course.course_name}
+                    </Box>
+                </Td>
+                <Td width={['120px', '100%', '20%']} display='flex' justifyContent='start'>
+                    <Box width={['100%', '100%', '100%']} whiteSpace='break-spaces' >
+                        <Button backgroundColor='whatsapp.300' color='white'  py={['1px', '2px', '3px']} fontSize={['12px', '12px', '14px']}> Hello </Button>
+                    </Box>
+                </Td>
             </Tr>
             {toggle &&
                 <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >
