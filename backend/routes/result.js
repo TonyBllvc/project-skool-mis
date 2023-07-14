@@ -11,11 +11,11 @@ router.get('/get_results', gets)
 // fetch one result
 router.get('/:id', get)
 // fetch one student
-router.get('/:student_id/result', getStudent)
+router.get('/student/:student_id', getStudent)
 // fetch results assigned to specific session
 router.get('/session/:session/:course_id', getResultsForSession)
 
-router.get('/students/:course_id/:student_id',  getResultsForUserForSession)
+router.get('/students/:course_id/:student_id', getResultsForUserForSession)
 // search or results
 // router.get('/', searchResult)
 // fetch one course

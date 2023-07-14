@@ -114,7 +114,8 @@ const TimeTable = () => {
                                                     <TimeTableDetails school={school} key={school._id} />
                                                 ))}
                                             </Table>
-                                        </TableContainer>                                    </div>
+                                        </TableContainer>
+                                    </div>
                                 ) : (
                                     <div className='mt-10 bg-white'>
                                         <Loading />

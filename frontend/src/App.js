@@ -38,7 +38,7 @@ export default function App() {
               <Routes>
                 <Route exact path='/' element={<DashBoard />} />
                 <Route path='/courses' element={<CourseList />} />
-                <Route path='/student/:id' element={<Student />} />
+                <Route path='/student/:id/results' element={<Student />} />
                 <Route path='/students' element={<StudentList />} />
 
                 <Route path='/lecturers' element={<LecturerList />} />

@@ -48,8 +48,7 @@ const StudentList = () => {
         }
 
         if (res.ok) {
-            setPassStudents([])
-            setPassStudents(json)
+            return setPassStudents(json)
         }
     }
 
@@ -68,7 +67,7 @@ const StudentList = () => {
             }
 
             if (res.ok) {
-                dispatch({ type: 'GET_DATA', payload: json })
+               return dispatch({ type: 'GET_DATA', payload: json })
             }
         }
         fetchStudents()
@@ -83,7 +82,7 @@ const StudentList = () => {
                 {/* the top section */}
                 <div className='w-full mb-8 flex flex-row justify-start align-middle text-center items-center'>
 
-                    <h1 className="text-gray-500 text-sm sm:text-lg font-mono font-semibold">
+                    <h1 onClick={() => { navigate('/') }} className="text-gray-500 text-sm sm:text-lg font-mono font-semibold">
                         Computer Science
                     </h1>
                     <div className="flex items-end mx-2 justify-end">
@@ -142,12 +141,12 @@ const StudentList = () => {
                                                 <Table>
                                                     <Thead w='100%' >
                                                         <Tr display='flex' width='100%' justifyContent='space-around' px={6} backgroundColor='yellow.200'>
-                                                            <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
+                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
                                                                 <Box width='100%' whiteSpace='break-spaces' >
                                                                     Name
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
+                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
                                                                 <Box width='100%' whiteSpace='break-spaces' >
                                                                     Reg Number
                                                                 </Box>
