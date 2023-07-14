@@ -10,6 +10,7 @@ import { useState } from 'react';
 import Lecturer from './pages/component/StudentList'
 import StudentList from './pages/component/StudentList';
 import Student from './pages/component/Student';
+import LecturerList from './pages/component/LecturersList';
 // import ViewTimeTable from './pages/component/ViewTimeTable';
 
 export default function App() {
@@ -39,6 +40,8 @@ export default function App() {
                 <Route path='/courses' element={<CourseList />} />
                 <Route path='/student/:id' element={<Student />} />
                 <Route path='/students' element={<StudentList />} />
+
+                <Route path='/lecturers' element={<LecturerList />} />
                 
                 <Route path='/timetable' element={<TimeTable />} />
 

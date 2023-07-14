@@ -40,7 +40,7 @@ const sets = async (req, res) => {
         emptyFields.push('No result id allocated')
     }
     if (emptyFields.length > 0) {
-        return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
+        return res.status(204).json({ error: 'Please fill in all the fields', emptyFields })
     }
 
 
@@ -56,6 +56,12 @@ const sets = async (req, res) => {
     }
 
     try {
+        // const resultStudent = await Result.find({ student_id: student_id })
+        // const resultDetails = await Result.find({ result_details: courseId })
+
+        // if( resultDetails && resultStudent){
+        //     return res.status(400).json({ error: 'Data already exists!'})
+        // }
 
         var result = await Result.create(resultTotal)
 
@@ -157,7 +163,7 @@ const getStudent = async (req, res) => {
             // select: 'faculty department level semester'
 
         }
-    }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).exec()
+    }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({"result_details.level": 1}).exec()
     // .populate("course_details", "faculty department level semester")
 
     if (!result) {
@@ -168,6 +174,77 @@ const getStudent = async (req, res) => {
     res.status(200).json(result)
 
 }
+
+const getResultsForSession = async (req, res) => {
+    const { session, course_id } = req.params
+
+    try {
+        const results = await Result.find({ session: session, result_details: course_id }).populate({
+            path: 'student_id',
+            select: 'surname first_name middle_name student session reg_no faculty department',
+            // option: { sort: { surname: 1 } }
+        }).populate({
+            path: 'result_details',
+            select: 'course_code course_name level course_details',
+            populate: {
+                path: 'course_details',
+                model: 'school',
+                // select: 'faculty department level semester'
+    
+            }
+        }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({ first_name: 1 }).exec()
+        // check if students actually exists
+        if (!results) {
+            return res.status(404).json({ error: 'No such students' })
+        }
+
+        // pass students's results
+        res.status(200).json(results)
+    } catch (error) {
+        res.status(500).json({ error: error.message + " h" })
+
+    }
+}
+
+const getResultsForUserForSession = async (req, res) => {
+    const { course_id, student_id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(course_id)) {
+        return res.status(404).json({ error: 'No such course' })
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(student_id)) {
+        return res.status(404).json({ error: 'No such student' })
+    }
+    try {
+        const results = await Result.find({ course_details: course_id, student_id: student_id }).populate({
+            path: 'student_id',
+            select: 'surname first_name middle_name student session reg_no faculty department',
+            // option: { sort: { surname: 1 } }
+        }).populate({
+            path: 'result_details',
+            select: 'course_code course_name level course_details',
+            populate: {
+                path: 'course_details',
+                model: 'school',
+                // select: 'faculty department level semester'
+    
+            }
+        }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({ first_name: 1 }).exec()
+        // check if students actually exists
+        if (!results) {
+            return res.status(404).json({ error: 'No such students' })
+        }
+
+        // pass students's results
+        res.status(200).json(results)
+    } catch (error) {
+        res.status(500).json({ error: error.message + " h" })
+
+    }
+
+}
+
 
 // function is not functioning
 const searchResult = async (req, res) => {
@@ -268,6 +345,8 @@ module.exports = {
     get,
     getStudent,
     searchResult,
+    getResultsForSession,
+    getResultsForUserForSession,
     updates,
     deletes
 }

@@ -10,6 +10,7 @@ import { SchoolContextProvider } from './context/SchoolContext';
 import { CourseContextProvider } from './context/CourseContext';
 import { StudentContextProvider } from './context/StudentContext';
 import { LecturerContextProvider } from './context/LecturerContext';
+import { StudentDetailsContextProvider } from './context/StudentDetailsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -20,7 +21,9 @@ root.render(
         <TimeContextProvider>
         <LecturerContextProvider>
           <StudentContextProvider>
+          <StudentDetailsContextProvider>
             <App />
+          </StudentDetailsContextProvider>
           </StudentContextProvider>
           </LecturerContextProvider>
         </TimeContextProvider>

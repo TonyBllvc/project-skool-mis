@@ -26,7 +26,7 @@ const DashBox = () => {
 
                     {/* card one */}
                     <div className='w-full p-2 bg-white rounded overflow-hidden shadow-lg relative  hover:shadow-slate-800'>
-                        <NavLink to='/master_view_lecturers'>
+                        <NavLink to='/lecturers'>
                             <div className='w-full flex flex-row my-2'>
                                 <div className='w-1/2 flex items-start justify-start '>
                                     <AiOutlineFolder className='text-3xl text-lime-400 ' />

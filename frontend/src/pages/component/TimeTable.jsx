@@ -91,18 +91,18 @@ const TimeTable = () => {
                                                                 Day
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '26%']} display='flex' justifyContent='center' alignContent='center' fontSize={['9', '12', '14']}>
+                                                        <Th width={['150px', '100%', '26%']} display='flex' justifyContent='center' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
                                                             <Box width='100%' whiteSpace='break-spaces' >
                                                                 Course Code
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']}>
+                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
 
                                                             <Box width='100%' whiteSpace='break-spaces' >
                                                                 Start
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']}>
+                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
                                                             <Box width='100%' whiteSpace='break-spaces' >
                                                                 End
                                                             </Box>

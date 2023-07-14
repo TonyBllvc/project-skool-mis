@@ -1,4 +1,4 @@
-import { Box, Button, Tbody, Th, Tr, useDisclosure } from '@chakra-ui/react'
+import { Box, Button, Tbody, Td, Tr, useDisclosure } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 import { BiPencil } from 'react-icons/bi'
@@ -52,29 +52,29 @@ const TimeTableDetails = ({ school }) => {
     return (
         <Tbody backgroundColor='blue.400' onClick={() => setToggle(!toggle)}>
             <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='whiteAlpha.900'>
-                <Th  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                <Td  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
 
                     <Box width='100%' whiteSpace='break-spaces' >
                         {school.day}
                     </Box>
-                </Th>
-                <Th width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                </Td>
+                <Td width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
 
                     <Box width='100%' whiteSpace='break-spaces' >
                         {school.time_details.course_code}
                     </Box>
                     {/* </Link> */}
-                </Th>
-                <Th  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                </Td>
+                <Td  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
                     <Box width='100%' whiteSpace='break-spaces' >
                         {school.start} {school.am_one}
                     </Box>
-                </Th>
-                <Th  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
+                </Td>
+                <Td  width={['150px', '100%', '20%']}  display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
                     <Box width='100%' whiteSpace='break-spaces' >
                         {school.end} {school.am_two}
                     </Box>
-                </Th>
+                </Td>
             </Tr>
             {toggle &&
                 <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >

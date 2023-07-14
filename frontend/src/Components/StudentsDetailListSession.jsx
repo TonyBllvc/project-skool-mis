@@ -3,7 +3,7 @@ import React, { } from 'react'
 import { Link } from 'react-router-dom'
 
 
-const StudentListDetails = ({ student }) => {
+const StudentsDetailListSession = ({ student }) => {
     return (
         <Tbody backgroundColor='blue.400'>
             <Tr display='flex' width='100%' px={3} justifyContent='space-around' backgroundColor='whiteAlpha.900'>
@@ -37,4 +37,4 @@ const StudentListDetails = ({ student }) => {
     )
 }
 
-export default StudentListDetails
+export default StudentsDetailListSession

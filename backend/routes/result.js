@@ -1,5 +1,5 @@
 const express = require('express')
-const { sets, updates, deletes, gets, get, getStudent, searchResult } = require('../controllers/resultController')
+const { sets, updates, deletes, gets, get, getStudent, searchResult, getResultsForSession, getResultsForUserForSession } = require('../controllers/resultController')
 
 
 const router = express.Router()
@@ -12,6 +12,10 @@ router.get('/get_results', gets)
 router.get('/:id', get)
 // fetch one student
 router.get('/:student_id/result', getStudent)
+// fetch results assigned to specific session
+router.get('/session/:session/:course_id', getResultsForSession)
+
+router.get('/students/:course_id/:student_id',  getResultsForUserForSession)
 // search or results
 // router.get('/', searchResult)
 // fetch one course
