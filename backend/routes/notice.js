@@ -1,7 +1,6 @@
 const express = require('express')
 const { sets, updates, deletes, gets, get, getByLecturer } = require('../controllers/noticeController')
 
-
 const router = express.Router()
 
 //create notice message

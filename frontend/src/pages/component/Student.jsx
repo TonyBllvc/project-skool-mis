@@ -56,6 +56,8 @@ const Student = () => {
     fetchStudents()
 
   }, [])
+
+  
   return (
     <div className='overscroll-contain'>
       <div className='w-full font-mono font-bold text-lg'>
