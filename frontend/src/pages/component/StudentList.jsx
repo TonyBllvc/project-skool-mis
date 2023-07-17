@@ -82,14 +82,14 @@ const StudentList = () => {
                 {/* the top section */}
                 <div className='w-full mb-8 flex flex-row justify-start align-middle text-center items-center'>
 
-                    <h1 onClick={() => { navigate('/') }} className="text-gray-500 text-sm sm:text-lg font-mono font-semibold">
+                    <h1 onClick={() => { navigate('/') }} className="text-gray-500 cursor-pointer text-sm sm:text-lg font-mono font-semibold">
                         Computer Science
                     </h1>
                     <div className="flex items-end mx-2 justify-end">
-                        <BiRightArrowAlt className="text-gray-500  text-sm sm:text-lg font-mono font-semibold" />
+                        <BiRightArrowAlt className="text-gray-500 cursor-pointer  text-sm sm:text-lg font-mono font-semibold" />
                     </div>
                     {/* This would have model schema created */}
-                    <h2 className="text-green-600 text-sm sm:text-lg font-mono font-semibold">
+                    <h2 className="text-green-600 cursor-pointer text-sm sm:text-lg font-mono font-semibold">
                         Students </h2>
 
                 </div>
@@ -110,9 +110,13 @@ const StudentList = () => {
                             value={passSession}
                             onChange={(e) => setPassSession(e.target.value)}
                             placeholder='Select'
-                            multiple={false}>
+                            multiple={false}
+                            h={['29', '30', '37']}
+                            width={[ '44', '36', '17']}
+                            fontSize={['10', '16', '17']}
+                            >
                             {session.map((sessions) => (
-                                <option className='w-1/2' key={sessions._id} value={sessions.session} >
+                                <option className=' sm:w-1/2 w-36 flex flex-col text-center' key={sessions._id} value={sessions.session} >
                                     {sessions.session}
                                 </option>
                             ))}
@@ -138,26 +142,26 @@ const StudentList = () => {
                                     {passStudents ? (
                                         <div className='mt-7'>
                                             <TableContainer>
-                                                <Table>
+                                                <Table whiteSpace='break-spaces'>
                                                     <Thead w='100%' >
                                                         <Tr display='flex' width='100%' justifyContent='space-around' px={6} backgroundColor='yellow.200'>
-                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                                <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  >
                                                                     Name
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                                <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  >
                                                                     Reg Number
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                                <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  >
                                                                     Session
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                                <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  >
                                                                     Profile
                                                                 </Box>
                                                             </Th>
@@ -183,26 +187,26 @@ const StudentList = () => {
                                     {student ? (
                                         <div className='mt-7'>
                                             <TableContainer>
-                                                <Table>
-                                                    <Thead w='100%' backgroundColor='blue.400'>
+                                                <Table whiteSpace='break-spaces'>
+                                                    <Thead w='100%' backgroundColor='blue.400' >
                                                         <Tr display='flex' width='100%' justifyContent='space-around' px={6} backgroundColor='yellow.200'>
-                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                                <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  >
                                                                     Name
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                                <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  >
                                                                     Reg Number
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                                <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  >
                                                                     Session
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                                <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  >
                                                                     Profile
                                                                 </Box>
                                                             </Th>

@@ -1,8 +1,8 @@
-import { Button, Image } from '@chakra-ui/react'
-import React from 'react'
+import { Box, Button, Image, Text } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import logo from '../images/images-71.jpg'
-import bg from '../images/isolBook.jpg'
+import logo from '../images/images_logo.jpg'
+import bg from '../images/isolBook.png'
 import { BsFillArrowRightCircleFill } from 'react-icons/bs'
 
 const Home = () => {
@@ -10,32 +10,32 @@ const Home = () => {
         <div className='w-full h-full '>
 
             {/* avigation system */}
-            <nav className='w-full h-20 relative flex flex-row justify-between px-3 items-center'>
-                <div className='w-1/2 flex pl-5'>
+            <nav className='w-full h-24 relative flex flex-row justify-between px-3 items-center'>
+                <div className='w-1/3 flex pl-5'>
                     <NavLink>
-                        <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' w='70px' h='55px' alt='logo' />
+                        <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' w='150px' h='95px' alt='logo' />
 
                         {/* <img src={} alt='logo/> */}
                     </NavLink>
                 </div>
-                <div className='flex justify-center w-1/2 pr-5'>
-                    <NavLink to='/' className=' text-lg font-serif mr-5 text-green-500 border-green-400 border-solid border-b-2 ' >
+                <div className='flex justify-center w-1/3 pr-5'>
+                    <NavLink to='/' className={({isActive}) => isActive ? ' text-lg font-serif mr-5 text-green-500 border-green-400 border-solid border-b-2 ' : ' text-lg font-serif mr-5 text-green-500'} >
                         Home
                     </NavLink>
-                    <NavLink to='/dashboard' className=' text-lg font-serif mr-5 text-green-500   ' >
+                    <NavLink to='/dashboard'  className={({isActive}) => isActive ? ' text-lg font-serif mr-5 text-green-500 border-green-400 border-solid border-b-2 ' : ' text-lg font-serif mr-5 text-green-500'} >
                         About Us
                     </NavLink>
-                    <NavLink to='/contact' className=' text-lg font-serif mr-5 text-green-500   ' >
+                    <NavLink to='/contact' className={({isActive}) => isActive ? ' text-lg font-serif mr-5 text-green-500 border-green-400 border-solid border-b-2 ' : ' text-lg font-serif mr-5 text-green-500'}>
                         Contact Us
                     </NavLink>
                 </div>
-                <div className='flex justify-end w-1/2 pr-5'>
+                <div className='flex justify-end w-1/3 pr-3'>
                     <NavLink to='/login' >
                         <Button colorScheme='whatsapp' mr={3} variant='outline' >
                             Join In
                         </Button>
                     </NavLink>
-                    <NavLink to='/dashboard' >
+                    <NavLink to='/sign_up' >
                         <Button colorScheme='whatsapp' variant='solid' >
                             Get Started
                         </Button>
@@ -44,38 +44,43 @@ const Home = () => {
             </nav>
 
             {/* Body */}
-            <div className='w-full h-auto flex flex-row '>
-                <div className='w-1/2 ml-12 mt-9'>
-                    <div className='w-full h-full flex flex-col justify-center pl-32 pr-3'>
-                        <div className=' h-1/2 mt-14 flex items-center'>
-                            <h1 className='font-bold font-serif text-7xl'>
-                                Learning Core with beauty
-                            </h1>
-                        </div>
-                        <div className=' h-1/2 flex justify-end items-center'>
-                            <h3 className=' font-serif text-3xl'>
-                                Experience enhanced learning and management in beauty and elegance
-                            </h3>
-                        </div>
-                        <div className=' h-1/3 flex items-start pt-7'>
-                            <NavLink to='/login'>
-                                <Button colorScheme='whatsapp' boxShadow='2xl' rounded='lg' fontSize={21} py={8} px={7} variant='solid' >
-                                    Let's get started
-                                    <BsFillArrowRightCircleFill className='text-4xl text-center font-serif ml-4' />
-                                </Button>
-                            </NavLink>
-                        </div>
-                    </div>
+            <Box width='100%'>
+                <Box width="100%" display='flex' mt={10} flexDirection='row' justifyContent='center'>
+                    {/*  content on left  */}
+                    <Box width='46%' ml={20} zIndex={2} position='relative'>
+                        <Box width='100%' height='100%' display='flex' flexDirection='column' justifyContent='center'>
+                            <Box height='30%' zIndex={2}  whiteSpace='break-spaces'>
+                                <Text fontWeight='bold' lineHeight='70px' wordSpacing='30px' fontFamily='heading' fontSize={['30', '30', '45']} >
+                                    Learn Core with Beauty
+                                </Text>
+                            </Box>
+                            <Box height='30%' mt={1} zIndex={2} whiteSpace='break-spaces'>
+                                <Text fontWeight='semibold' fontFamily='body' fontSize={['15', '20', '26']}>
+                                    Experience enhanced learning and management in beauty and elegance
+                                </Text>
+                            </Box>
+                            <Box height='30%' mt={30}  zIndex={2}  whiteSpace='break-spaces'>
+                                <NavLink to='/login' >
+                                    <Button colorScheme='whatsapp' boxShadow='2xl' rounded='lg' fontSize={21} py={8} px={7} variant='solid' >
+                                        Let's get started
+                                        <BsFillArrowRightCircleFill className='text-4xl text-center font-serif ml-4' />
+                                    </Button>
+                                </NavLink>
+                            </Box>
+                        </Box>
+                    </Box>
 
-                </div>
-                <div className='w-1/2'>
-                    <div className='w-full h-full pr-3'>
-                        <div className='w-full' style={{ backgroundImage: `url(${bg})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', position: 'relative', backgroundPosition: 'center', height: '520px' }}>
-                            {/*  Right hand background image( with books) */}
-                        </div>
-                    </div>
-                </div>
-            </div>
+                    {/* content on right  */}
+                    <Box width='50%' mr={20} zIndex={10} height='100%' position='relative'>
+                        <Box width='100%' height='100%'  zIndex={10} >
+                            <Box  mt={-10} ml={-4} backgroundImage={`url(${bg})`} backgroundRepeat='no-repeat' backgroundSize='contain' backgroundPosition='center' height='490px' width='100%' zIndex={10}>
+                                {/* For background */}
+                            </Box>
+                        </Box>
+
+                    </Box>
+                </Box>
+            </Box>
 
             {/* Second Body */}
 

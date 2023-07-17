@@ -45,7 +45,7 @@ const sets = async (req, res) => {
 
 
     const sum_up = parseFloat(test) + parseFloat(practical) + parseFloat(exam)
-    const sumUp = sum_up.toFixed(2) // for the score in (%)
+    const sumUp = sum_up.toFixed(1) // for the score in (%)
 
     if (sumUp > 100) {
         return res.status(400).json({ error: " Score must be below 100%" })

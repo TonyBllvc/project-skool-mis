@@ -24,20 +24,20 @@ const CourseListDetails = ({ course }) => {
 
 
     return (
-        <Tbody backgroundColor='blue.400' onClick={() => setToggle(!toggle)}>
+        <Tbody onClick={() => setToggle(!toggle)} >
             <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='whiteAlpha.900'>
-                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']}  overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
+                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}  overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
                     <Box width={['100%', '100%', '100%']} whiteSpace='break-spaces' >
                         {course.course_code}
                     </Box>
                 </Td>
-                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all' >
-                    <Box width={['100%', '100%', '100%']}  whiteSpace='break-spaces' >
+                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-word' >
+                    <Box width={['100%', '100%', '100%']} whiteSpace='break-spaces' >
                         {course.course_name}
                     </Box>
                 </Td>
-                <Td width={['120px', '100%', '20%']} display='flex' justifyContent='start'>
-                    <Box width={['100%', '100%', '100%']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all' >
+                <Td width={['120px', '100%', '20%']} display='flex' justifyContent='start' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
+                    <Box width={['100%', '100%', '100%']} overflow='hidden'  whiteSpace='break-spaces' >
                         <Button colorScheme='whatsapp' color='white'  py={['1px', '2px', '3px']} fontSize={['12px', '12px', '14px']}> Hello </Button>
                     </Box>
                 </Td>

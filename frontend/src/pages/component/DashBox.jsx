@@ -4,15 +4,22 @@ import { BiBookOpen } from 'react-icons/bi'
 import { NavLink } from 'react-router-dom'
 import { useTimeContext } from '../../hooks/useTimeContext'
 import { Box, Text, Textarea } from '@chakra-ui/react'
+import { useStudentContext } from '../../hooks/useStudentContext'
+import { useLecturerContext } from '../../hooks/useLecturerContext'
+import { useCourseContext } from '../../hooks/useCourseContext'
 
 const DashBox = () => {
     const { time } = useTimeContext()
+    // get list of students
+    const { student } = useStudentContext()
+    const { lecturer } = useLecturerContext()
+    const { course} = useCourseContext()
 
     return (
         <div>
             {/* the top section */}
             <div className='w-full mb-10'>
-                <h1 className='text-xl sm:text-2xl font-serif font-semibold text-green-500'>
+                <h1 className='text-lg sm:text-2xl cursor-pointer font-serif font-semibold text-green-500'>
                     {time}, Master Admin
                 </h1>
             </div>
@@ -39,7 +46,7 @@ const DashBox = () => {
                             </div>
                             <div >
                                 <div className='py-1' >
-                                    <h2 className='font-mono'> 0 </h2>
+                                    <h2 className='font-mono'> { lecturer && lecturer.length}  </h2>
                                 </div>
                                 <div className='py-1' >
                                     <h6 className='font-sans text-sm font-normal'> Assigned here</h6>
@@ -64,7 +71,7 @@ const DashBox = () => {
                             </div>
                             <div >
                                 <div className='py-1' >
-                                    <h2 className='font-mono'> 0 </h2>
+                                    <h2 className='font-mono'> { student && student.length }  </h2>
                                 </div>
                                 <div className='py-1' >
                                     <h6 className='font-sans text-sm font-normal'> Assigned here</h6>
@@ -88,7 +95,7 @@ const DashBox = () => {
                             </div>
                             <div >
                                 <div className='py-1' >
-                                    <h2 className='font-mono'> 0 </h2>
+                                    <h2 className='font-mono'> { course && course.length} </h2>
                                 </div>
                                 <div className='py-1' >
                                     <h6 className='font-sans text-sm font-normal'> Assigned here</h6>

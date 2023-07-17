@@ -39,7 +39,7 @@ const TimeTable = () => {
                 {/* the top section */}
                 <div className='w-full mb-9 flex flex-row justify-space-around align-middle text-center items-center'>
 
-                    <h1 className="text-gray-500 text-sm sm:text-lg  font-mono font-semibold">
+                    <h1 className="text-gray-500  cursor-pointer text-sm sm:text-lg  font-mono font-semibold">
                         Computer Science
                     </h1>
 
@@ -83,27 +83,27 @@ const TimeTable = () => {
                                 {school ? (
                                     <div className='mt-7'>
                                         <TableContainer>
-                                            <Table>
+                                            <Table whiteSpace='break-spaces'>
                                                 <Thead w='100%' backgroundColor='blue.400'>
                                                     <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='yellow.200'>
                                                         <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']}>
-                                                            <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Box width='100%'  >
                                                                 Day
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '26%']} display='flex' justifyContent='center' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                            <Box width='100%' whiteSpace='break-spaces' >
+                                                        <Th width={['150px', '100%', '26%']} display='flex' justifyContent='center' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                            <Box width='100%'  >
                                                                 Course Code
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
+                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
 
-                                                            <Box width='100%' whiteSpace='break-spaces' >
+                                                            <Box width='100%'  >
                                                                 Start
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                                                            <Box width='100%' whiteSpace='break-spaces' >
+                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                            <Box width='100%'  >
                                                                 End
                                                             </Box>
                                                         </Th>

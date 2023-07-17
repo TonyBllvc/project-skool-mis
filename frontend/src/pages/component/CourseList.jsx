@@ -17,7 +17,7 @@ const CourseList = () => {
     // const { school, dispatch } = useSchoolContext()
 
     useEffect(() => {
-        const fetchTimeTable = async () => {
+        const fetchCourse = async () => {
             const res = await fetch('/api/course/get_courses')
             const json = await res.json()
 
@@ -29,7 +29,7 @@ const CourseList = () => {
                 dispatch({ type: 'GET_COURSE', payload: json })
             }
         }
-        fetchTimeTable()
+        fetchCourse()
 
     }, [])
 
@@ -41,14 +41,14 @@ const CourseList = () => {
                 {/* the top section */}
                 <div className='w-full mb-8 flex flex-row justify-start align-middle text-center items-center'>
 
-                    <h1 className="text-gray-500 text-sm sm:text-lg font-mono font-semibold">
+                    <h1 onClick={() => { navigate('/') }} className="text-gray-500  cursor-pointer text-sm sm:text-lg font-mono font-semibold">
                         Computer Science
                     </h1>
                     <div className="flex items-end mx-2 justify-end">
                         <BiRightArrowAlt className="text-gray-500  text-sm sm:text-lg font-mono font-semibold" />
                     </div>
                     {/* This would have model schema created */}
-                    <h2 className="text-green-600 text-sm sm:text-lg font-mono font-semibold">
+                    <h2 className="text-green-600 cursor-pointer text-sm sm:text-lg font-mono font-semibold">
                         Courses </h2>
 
                 </div>
@@ -94,23 +94,23 @@ const CourseList = () => {
                                 {course ? (
                                     <div className='mt-7'>
                                         <TableContainer>
-                                            <Table>
+                                            <Table whiteSpace='break-spaces'>
                                                 <Thead w='100%' backgroundColor='blue.400'>
                                                     <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='yellow.200'>
-                                                        <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
-                                                            <Box width='100%' whiteSpace='break-spaces' >
-                                                                Code
+                                                        <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
+                                                            <Box width='100%'  >
+                                                                Course Code
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
-                                                            <Box width='100%' whiteSpace='break-spaces' >
-                                                                Code
+                                                        <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
+                                                            <Box width='100%'  >
+                                                                Course Name
                                                             </Box>
 
                                                         </Th>
-                                                        <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']}>
-                                                            <Box width='100%' whiteSpace='break-spaces' >
-                                                                Code
+                                                        <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
+                                                            <Box width='100%'  >
+                                                                
                                                             </Box>
                                                         </Th>
                                                     </Tr>

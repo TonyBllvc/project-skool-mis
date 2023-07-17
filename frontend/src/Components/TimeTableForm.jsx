@@ -59,7 +59,7 @@ const TimeTableForm = () => {
         const details = { day, start, am_one, am_two, end, courseId }
 
         try {
-            const res = await fetch("api/time/set_time_table", {
+            const res = await fetch("/api/time/set_time_table", {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {

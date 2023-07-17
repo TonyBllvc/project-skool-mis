@@ -6,11 +6,18 @@ import NavBar from './Components/NavBar';
 import TimeTable from './pages/component/TimeTable';
 import DashBoard from './pages/DashBoard';
 import CourseList from './pages/component/CourseList';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Lecturer from './pages/component/StudentList'
 import StudentList from './pages/component/StudentList';
 import Student from './pages/component/Student';
 import LecturerList from './pages/component/LecturersList';
+import StudentDetails from './Components/StudentDetails';
+import Home from './pages/Home';
+// import { useStudentContext } from './hooks/useStudentContext';
+// import { useLecturerContext } from './hooks/useLecturerContext';
+// import { useCourseContext } from './hooks/useCourseContext';
+import SignUpModal from './model/SignUpModal';
+import LoginModal from './model/LoginModal';
 // import ViewTimeTable from './pages/component/ViewTimeTable';
 
 export default function App() {
@@ -19,7 +26,13 @@ export default function App() {
   return (
     <div>
       <BrowserRouter>
-        <div className="w-full min-h-screen flex flex-row justify-center sm:justify-center p-0 m-0 bg-green-500">
+        {/* <div className="w-full min-h-screen flex flex-row justify-center sm:justify-center p-0 m-0 "> */}
+        <Routes>
+                <Route exact path='/' element={<Home /> } />
+                <Route path='/sign_up' element={<SignUpModal />} />
+                <Route path='/login' element={<LoginModal />} />
+          
+        </Routes>
           {/* <div className='sm:w-1/5 sm:hidden flex sm:overflow-y-hidden sm:overscroll-none'>
             {!toggle &&
               <BsList onClick={() => setToggle(!toggle)} className='bg-blue-900 w-full absolute mt-2  sm:hidden text-2xl ml-1.5' />
@@ -29,30 +42,32 @@ export default function App() {
             }
           </div> */}
           {/* {toggle && */}
-            <div className='w-1/5 hidden absolute z-50 sm:flex h-full overflow-y-hidden overscroll-none'>
-              <NavBar />
-            </div>
+          {/* <div className='w-1/5 hidden absolute z-50 sm:flex h-full overflow-y-hidden overscroll-none'>
+            <NavBar />
+          </div> */}
           {/* } */}
-          <div className='w-11/12 sm:4/5 z-30 sm:mr-4 mr-1 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8'>
+          {/* <div className='w-11/12 sm:4/5 z-30 sm:mr-4 mr-1 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8'>
             <div className="rounded-lg overflow-visible overscroll-y-auto mt-4 pt-2 mb-3 mx-2 px-2 sm:p-2 sm:mx-4">
-              <Routes>
-                <Route exact path='/' element={<DashBoard />} />
+              <Routes> */}
+                {/* <Route exact path='/' element={<Home /> } /> */}
+                {/* <Route exact path='/' element={<DashBoard />} />
                 <Route path='/courses' element={<CourseList />} />
-                <Route path='/student/:id/results' element={<Student />} />
-                <Route path='/students' element={<StudentList />} />
+                <Route path='/student/:id/results' element={<Student />} /> */}
+                {/* <Route path='/student/:id/results' element={<StudentDetails />} /> */}
+                {/* <Route path='/students' element={<StudentList />} />
 
                 <Route path='/lecturers' element={<LecturerList />} />
-                
-                <Route path='/timetable' element={<TimeTable />} />
+
+                <Route path='/timetable' element={<TimeTable />} /> */}
 
                 {/* Lost page */}
-                <Route path='*' element={<NotFound />} />
+                {/* <Route path='*' element={<NotFound />} />
               </Routes>
             </div>
-          </div>
+          </div> */}
 
 
-        </div>
+        {/* </div> */}
       </BrowserRouter>
     </div>
   )
