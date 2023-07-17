@@ -10,7 +10,7 @@ router.get('/get_time_table', gets)
 // fetch one course
 router.get('/:id', get)// fetch course
 // update course 
-router.put('/:id', updates)
+router.put('/update', updates)
 // fetch one course
 router.delete('/:id', deletes)
 

@@ -1,5 +1,5 @@
 import { Box, Button, Card, FormControl, FormLabel, Input, InputGroup, InputRightElement, Select, VStack, useToast } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourseContext } from '../hooks/useCourseContext'
 import { useSchoolContext } from '../hooks/useSchoolContext'
@@ -20,20 +20,21 @@ const optionTwo = [
 ]
 
 const TimeTableUpdateForm = ({ documentData, close }) => {
-    const { course,dispatch } = useCourseContext()
-    const {  dispatch: dispatchTime } = useSchoolContext()
+    const { course, dispatch } = useCourseContext()
+    const { school, dispatch: dispatchTime } = useSchoolContext()
     // incomplete ( updating document possessing errors)
 
-    const [day, setDay] = useState('')
-    const [start, setStart] = useState('')
-    const [am_one, setAmOne] = useState('')
-    const [end, setEnd] = useState('')
-    const [am_two, setAmTwo] = useState('')
+    const [id, setId] = useState(documentData._id)
+    const [day, setDay] = useState(documentData.day)
+    const [start, setStart] = useState(documentData.start)
+    const [am_one, setAmOne] = useState(documentData.am_one)
+    const [end, setEnd] = useState(documentData.end)
+    const [am_two, setAmTwo] = useState(documentData.am_two)
     // const [ selectedOne, setSelectedOne] = useState('')
 
     const [toggle, setToggle] = useState(false)
     const [passInfo, setInfo] = useState('')
-    const [courseId, setCourseId] = useState('')
+    const [courseId, setCourseId] = useState(documentData.courseId)
     const [loading, setLoading] = useState(false)
 
     const toast = useToast()
@@ -57,10 +58,10 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
         // }
 
         // parse every value into  details        
-        const details = { day, start, am_one, am_two, end, courseId }
+        const details = { id, day, start, am_one, am_two, end, courseId }
 
         try {
-            const res = await fetch("api/time/" + documentData._id, {
+            const res = await fetch("api/time/update", {
                 method: "PUT",
                 body: JSON.stringify(details),
                 headers: {
@@ -106,6 +107,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
         }
 
     }
+
 
     // fetch courses so as to pick the id
     const handleCourses = async (e) => {
@@ -219,7 +221,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
                         <Box overflow='scroll' height={230} px={4} position='relative' zIndex='overlay'>
                             {course && course.map((dataPick) => (
                                 <Card key={dataPick._id} onClick={() => setToggle(!toggle)}>
-                                {/* Input courseUpdateModel here */}
+                                    {/* Input courseUpdateModel here */}
                                     <CourseUpdateModal name={dataPick} handleName={setInfo} handleId={setCourseId} />
 
                                 </Card>

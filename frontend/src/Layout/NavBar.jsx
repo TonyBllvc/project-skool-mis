@@ -39,7 +39,7 @@ const NavBar = () => {
                             <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
                             Time-Table
                         </NavLink>
-                        <NavLink to="/course" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
+                        <NavLink to="/notice" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineFolder className=' text-2xl text-white font-semibold pr-2' /> Notice</NavLink>
                         <NavLink to="/chat" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineInfoCircle className=' text-2xl text-white font-semibold pr-2' />

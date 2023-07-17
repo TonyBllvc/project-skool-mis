@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useEffect, useReducer } from 'react'
 
 export const SchoolContext = createContext();
 
@@ -34,8 +34,12 @@ export const SchoolContextProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(schoolReducer, {
     school: null,
-    document: null
   })
+
+  // useEffect(() => {
+  //   dispatch({ type: 'SET_DATA', payload: state})
+  // }, [])
+
 
   return (
     <SchoolContext.Provider value={{ ...state, dispatch }}>

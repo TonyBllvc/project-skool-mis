@@ -2,15 +2,15 @@ import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, 
 import React from 'react'
 import TimeTableUpdateForm from '../Components/TimeTableUpdateForm'
 
-const TimeUpdateModal = ({ open, close, documentData }) => {
+const TimeUpdateModal = ({ open, close, toggle, setToggle, documentData }) => {
 
     return (
         <>
-            <Modal isOpen={open} onClose={close}>
+            <Modal isOpen={open} onClose={close}   >
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader> Header </ModalHeader>
-                    <ModalCloseButton />
+                    <ModalHeader> Update Form </ModalHeader>
+                    <ModalCloseButton onClick={() => setToggle(!toggle)}/>
                     <ModalBody>
                         <TimeTableUpdateForm close={close} documentData={documentData} />
                     </ModalBody>

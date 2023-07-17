@@ -23,6 +23,7 @@ const lecturerSchema = new Schema({
     },
     lecturer: {
         type: String,
+        enum: 'lecturer',
         // unique: true
     },
     lecturer_details: {

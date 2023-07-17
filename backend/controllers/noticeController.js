@@ -1,4 +1,5 @@
 const Notice = require('../models/noticeModel')
+const School = require('../models/schoolModel')
 const mongoose = require('mongoose');
 
 // pass data about schools
@@ -6,18 +7,21 @@ const sets = async (req, res) => {
     // remember to add the coordinator's user id and lecturer's id ..
     // ... which, in the frontend pass in a drop down through mapping
     // then pick id
-    const { message,lecturerId, time, date, day } = req.body
+    const { message, lecturerId, form, time, date, day } = req.body
 
     let emptyFields = []
 
     if (!message) {
         emptyFields.push('No message passed')
     }
-    if (!lecturerId ){
+    if (!lecturerId) {
         emptyFields.push('No lecturerId passed')
     }
     if (!time) {
         emptyFields.push('No time passed passed')
+    }
+    if (!form) {
+        emptyFields.push('No form passed passed')
     }
     if (!date) {
         emptyFields.push('No date passed passed')
@@ -33,6 +37,7 @@ const sets = async (req, res) => {
         message,
         from: lecturerId,
         time,
+        form,
         date,
         day
     }
@@ -59,26 +64,14 @@ const sets = async (req, res) => {
 const gets = async (req, res) => {
 
     try {
+        const notice = await Notice.find({}).populate({
+            path: "from",
+            select: "title surname first_name "
+        })
 
-        const timeTable = await Notice.find({}).sort({ message: 1 }).populate("lecturer_details", "course_code course_name course_details level").sort({ course_name: 1 }).sort({ course_code: 1 })
-
-        // a more comprehensive code to fetching every document embedded
-        // would require me to first populate everything on every level
-        // const timeTable = await Notice.find({}).sort({ message: 1 }).populate({
-        //     path: "lecturer_details", 
-        //     select: "course_code course_name level course_details",
-        //     populate: {
-        //         path: ' course_details',
-        //         model: 'school'
-        //     }
-        // }).sort({ course_name: 1 }).sort({ course_code: 1 })
-
-
-
-
-        res.status(200).json(timeTable)
+        res.status(200).json(notice)
     } catch (error) {
-        return res.status(400).json({ error: 'No such timetable' })
+        return res.status(400).json({ error: 'No such notice' })
     }
 
 }
@@ -91,37 +84,68 @@ const get = async (req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const result = await Notice.findById(id).populate("lecturer_details", "course_code course_name course_details level").sort({ course_name: 1 }).sort({ course_code: 1 })
+    const notice = await Notice.findById(id).populate({
+        path: "from",
+        select: "title surname first_name "
+    })
+
+    if (!notice) {
+        return res.status(404).json({ error: 'No such notice' })
+    }
+
+    res.status(200).json(notice)
+}
+
+const getByLecturer = async (req, res) => {
+    // pass student id
+    const { lecturer_id } = req.params
+
+    const result = await Notice.find({ from: lecturer_id }).populate({
+        path: 'from',
+        select: 'title surname first_name ',
+        // option: { sort: { surname: 1 } }
+    }).exec()
+    // .populate("course_details", "faculty department level semester")
 
     if (!result) {
         return res.status(404).json({ error: 'No such result' })
     }
+    // const results = result.lecturer_id
 
     res.status(200).json(result)
+
 
 }
 
 const updates = async (req, res) => {
-    const { id } = req.params
-    const updatesNew = req.body
+    const { id, message, lecturerId, form, time, date, day } = req.body
+    // const updatesNew = {  }
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such document' })
     }
 
     try {
-        const result = await Notice.findByIdAndUpdate({ _id: id }, updatesNew, { new: true }).populate("lecturer_details", "course_code course_name course_details level")
+        const notice = await Notice.findByIdAndUpdate(
+            id,
+            {
+                day, message, form, time, date, from: lecturerId
+            },
+            {
+                new: true
+            }).populate({
+                path: "from",
+                select: "title surname first_name "
+            })
 
-        if (!result) {
-            return res.status(404).json({ error: 'No such result' })
+        if (!notice) {
+            return res.status(404).json({ error: 'No such notice' })
         }
 
-        res.status(200).json(result)
+        res.status(200).json(notice)
     } catch (error) {
         return res.status.json({ error: "An error occurred, sorry!" })
     }
-
-
 
 }
 
@@ -132,13 +156,13 @@ const deletes = async (req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const result = await Notice.findByIdAndDelete({ _id: id })
+    const notice = await Notice.findByIdAndDelete({ _id: id })
 
-    if (!result) {
-        return res.status(400).json({ error: 'No such result' })
+    if (!notice) {
+        return res.status(400).json({ error: 'No such notice' })
     }
 
-    res.status(200).json(result)
+    res.status(200).json(notice)
 
 }
 
@@ -146,6 +170,7 @@ module.exports = {
     sets,
     gets,
     get,
+    getByLecturer,
     updates,
     deletes
 }

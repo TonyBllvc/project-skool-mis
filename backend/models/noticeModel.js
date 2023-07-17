@@ -19,8 +19,8 @@ const noticeSchema = new Schema({
     
     },
     form: {
-        // Options: Assignment, Test, Notice, Project
         type: String,
+        enum: [ 'Assignment', 'Test', 'Notice', 'Project'],
         require: true,
         // unique: true
     },
@@ -34,11 +34,11 @@ const noticeSchema = new Schema({
         require: true,
         // unique: true
     },
-    date: {
+    day: {
         type: String,
         require: true,
         // unique: true
-    }
+    },
 }, { timestamps: true })
 
 module.exports = mongoose.model('notice', noticeSchema);

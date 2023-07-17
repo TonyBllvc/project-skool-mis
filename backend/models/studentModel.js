@@ -23,6 +23,7 @@ const studentSchema = new Schema({
     },
     student: {
         type: String,
+        enum: 'student',
         require: true
         // unique: true
     },

@@ -1,5 +1,5 @@
 const express = require('express')
-const { sets, updates, deletes, gets, get } = require('../controllers/noticeController')
+const { sets, updates, deletes, gets, get, getByLecturer } = require('../controllers/noticeController')
 
 
 const router = express.Router()
@@ -10,8 +10,10 @@ router.post('/convey_notice', sets)
 router.get('/get_notice', gets)
 // fetch notice by id
 router.get('/:id', get)
+// fetch notice by lecturer id
+router.get('/from/:lecturer_id', getByLecturer)
 // fetch course (try and create a prevent update after a certain period of time)
-// router.put('/:id', updates)
+router.put('/update_notice', updates)
 // fetch one course
 router.delete('/:id', deletes)
 // fetch one course

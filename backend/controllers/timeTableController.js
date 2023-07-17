@@ -73,7 +73,16 @@ const gets = async (req, res) => {
 
     try {
 
-        const timeTable = await Time.find({}).populate("time_details", "course_code course_name level course_details").sort({ course_code: 1 })
+        // const timeTable = await Time.find({}).populate("time_details", "course_code course_name level course_details").sort({ day: 1}).sort({ course_code: 1 })
+
+
+        const timeTable = await Time.find({}).populate("time_details", "course_code course_name level course_details").sort({ start: 1 }).lean()
+
+        const sortData = timeTable.sort((a, b) => {
+
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+            return days.indexOf(a.day) - days.indexOf(b.day)
+        })
 
         // a more comprehensive code to fetching every document embedded
         // would require me to first populate everything on every level
@@ -86,7 +95,7 @@ const gets = async (req, res) => {
         //     }
         // }).sort({ course_name: 1 }).sort({ course_code: 1 })
 
-        res.status(200).json(timeTable)
+        res.status(200).json(sortData)
     } catch (error) {
         return res.status(400).json({ error: 'No such timetable' })
     }
@@ -112,15 +121,23 @@ const get = async (req, res) => {
 }
 
 const updates = async (req, res) => {
-    const { id } = req.params
-    const updatesNew = req.body
+    // const { id } = req.params
+    const { id, day, start, am_one, am_two, end, courseId } = req.body
+    // const updatesNew = {  }
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
         return res.status(404).json({ error: 'No such document' })
     }
 
     try {
-        const result = await Time.findByIdAndUpdate({ _id: id }, updatesNew, { new: true }).populate("time_details", "course_code course_name course_details level")
+        const result = await Time.findByIdAndUpdate(
+            id,
+            {
+                day, start, am_one, am_two, end, time_details: courseId
+            },
+            {
+                new: true
+            }).populate("time_details", "course_code course_name course_details level")
 
         if (!result) {
             return res.status(404).json({ error: 'No such result' })
@@ -130,9 +147,6 @@ const updates = async (req, res) => {
     } catch (error) {
         return res.status.json({ error: "An error occurred, sorry!" })
     }
-
-
-
 }
 
 const deletes = async (req, res) => {
