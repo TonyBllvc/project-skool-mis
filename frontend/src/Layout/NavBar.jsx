@@ -1,10 +1,10 @@
-import { Image, Text } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import { Image, } from '@chakra-ui/react'
+import React, { } from 'react'
 import { AiOutlineFolder, AiOutlineHome, AiOutlineInfoCircle, AiOutlineLock, AiOutlineUser } from 'react-icons/ai'
 import { BiBookOpen } from 'react-icons/bi'
 import { ImSwitch } from 'react-icons/im'
 import { NavLink } from 'react-router-dom'
-import logo from '../images/images-710.gif'
+import logo from '../images/images_logo.png'
 
 const NavBar = () => {
 
@@ -13,8 +13,8 @@ const NavBar = () => {
             <div className=' pl-2 '>
                 <div className='w-1/2 flex flex-row pl-5 items-center'>
                     {/* <NavLink> */}
-                    <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' w='70px' h='55px' alt='logo' />
-                    <Text fontSize={24} color='white'> FUTO </Text>
+                    <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' w='140px' h='45px' alt='logo' />
+                    {/* <Text fontSize={24} color='white'> FUTO </Text> */}
                     {/* <img src={} alt='logo/> */}
                     {/* </NavLink> */}
                 </div>
