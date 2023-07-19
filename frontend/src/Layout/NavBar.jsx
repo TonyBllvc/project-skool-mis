@@ -26,21 +26,26 @@ const NavBar = () => {
 
                     <div>
                         <NavLink to="/" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <AiOutlineHome className=' text-2xl text-green-100 font-semibold pr-2' /> Dashboard
+                            <AiOutlineHome className=' text-2xl text-green-100 font-semibold pr-2' />
+                            Dashboard
                             {/* <p className='text-white active:text-black hover:text-black h-full '>Dashboard</p> */}
                         </NavLink>
-                        <NavLink to="/lecturer_list" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <AiOutlineFolder className=' text-2xl text-white font-semibold pr-2' /> Lecturers </NavLink>
+                        {/* <NavLink to="/lecturer_list" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
+                            <AiOutlineFolder className=' text-2xl text-white font-semibold pr-2' />
+                            Lecturers
+                        </NavLink>
                         <NavLink to="/student_list" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
                             Student
-                        </NavLink>
+                        </NavLink> */}
                         <NavLink to="/timetable" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
                             Time-Table
                         </NavLink>
                         <NavLink to="/notice" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <AiOutlineFolder className=' text-2xl text-white font-semibold pr-2' /> Notice</NavLink>
+                            <AiOutlineFolder className=' text-2xl text-white font-semibold pr-2' />
+                            Notice
+                        </NavLink>
                         <NavLink to="/chat" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineInfoCircle className=' text-2xl text-white font-semibold pr-2' />
                             Chat
@@ -50,15 +55,21 @@ const NavBar = () => {
                     border-white'/>
 
                         <NavLink to="/my_profile" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <AiOutlineUser className=' text-2xl text-white font-semibold pr-2' /> My Profile</NavLink>
+                            <AiOutlineUser className=' text-2xl text-white font-semibold pr-2' />
+                            My Profile
+                        </NavLink>
                         <NavLink to="/settings" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <AiOutlineLock className=' text-2xl text-white font-semibold pr-2' /> Settings</NavLink>
+                            <AiOutlineLock className=' text-2xl text-white font-semibold pr-2' />
+                            Settings
+                        </NavLink>
                         <hr className='w-11/12 my-4
                     border-white'/>
                         {/* A hr across */}
 
                         <NavLink to="/logout" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <ImSwitch className=' text-2xl text-white font-semibold pr-2' />  Logout </NavLink>
+                            <ImSwitch className=' text-2xl text-white font-semibold pr-2' />
+                            Logout
+                        </NavLink>
                     </div>
 
                 </nav>

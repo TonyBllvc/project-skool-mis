@@ -30,12 +30,12 @@ const StudentResults = ({ studentItem }) => {
                 <Td width={['150px', '100%', '30%']} display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                     <Box width={['100%', '100%', '100%']} display='flex' alignItems='center' >
                         {!toggle &&
-                            <Button colorScheme='whatsapp' px={['11px', '15px', '19px']} h={['28px', '33px', '39px']} fontSize={['9', '12', '14']} onClick={() => setToggle(!toggle)}>
+                            <Button colorScheme='whatsapp' color='white' px={['11px', '15px', '19px']} h={['28px', '33px', '39px']} fontSize={['9', '12', '14']} onClick={() => setToggle(!toggle)}>
                                 More
                             </Button>
                         }
                         {toggle &&
-                            <Button colorScheme='red' px={['11px', '15px', '19px']} h={['28px', '33px', '39px']} fontSize={['9', '12', '14']}  onClick={() => setToggle(!toggle)}>
+                            <Button colorScheme='red' color='white' px={['11px', '15px', '19px']} h={['28px', '33px', '39px']} fontSize={['9', '12', '14']}  onClick={() => setToggle(!toggle)}>
                                 Close
                             </Button>
                         }

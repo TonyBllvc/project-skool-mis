@@ -102,7 +102,7 @@ const CourseList = () => {
                                                                 Course Code
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
+                                                        <Th width={['150px', '100%', '45%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
                                                             <Box width='100%'  >
                                                                 Course Name
                                                             </Box>
@@ -110,7 +110,7 @@ const CourseList = () => {
                                                         </Th>
                                                         <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
                                                             <Box width='100%'  >
-                                                                
+                                                                Details
                                                             </Box>
                                                         </Th>
                                                     </Tr>
