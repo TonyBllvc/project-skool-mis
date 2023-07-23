@@ -44,7 +44,7 @@ const Notice = () => {
 
                 setNewMessage('')
                 const { data } = await axios.post(
-                    "/api/message",
+                    "/api/notice/convey_notice",
                     {
                         content: newMessage,
                         // chatId: selectedChat._id,
@@ -82,7 +82,7 @@ const Notice = () => {
 
             setNewMessage('')
             const { data } = await axios.post(
-                "/api/message",
+                "/api/notice/convey_notice",
                 {
                     content: newMessage,
                     // chatId: selectedChat._id,
@@ -113,26 +113,26 @@ const Notice = () => {
 
 
     return (
-        <Box width='100%' display='flex' flexDirection='column' justifyContent='flex-end' overflowY='hidden' height='100%'  >
-            <Box mb='10px' ml='10px' height='20%' backgroundColor='blue.600' >
+        <Box width='100%' display='flex' flexDirection='column' justifyContent='space-between' backgroundColor='red.400' overflowY='hidden' h='100%'  >
+            <Box ml='5px' height='7%' backgroundColor='blue.400' >
                 <Text fontFamily='heading' color='blackAlpha.700' fontSize={['22px', '25px', '30px']} fontWeight='bold'>
                     Notice Board
                 </Text>
             </Box>
             <hr />
-            <Box mt='10px' height='80%' backgroundColor='green.400'>
-                <Box width='100%' display='flex' flexDirection='column'>
-                    <Box>
-                        {notice && notice.map((notice, index) => (
+            <Box mt='10px' h='80%' backgroundColor='yellow.400' display='flex' flexDirection='column' justifyContent='space-between'  alignItems='center' >
+                <Box width='100%' display='flex'  alignItems='center' flexDirection='column' justifyContent='space-between' height='100%' backgroundColor='blue.500'  >
+                    <Box display='flex' flexDirection='column'  width='100%' height='80%' borderRadius='lg' backgroundColor='green.800' zIndex={2} overflowY='hidden'>
+                        {/* {notice && notice.map((notice, index) => (
                             <NoticeDetails notice={notice} key={index} />
-                        ))}
+                        ))} */}
                     </Box>
-                    <Box display='flex' mt='5px' flexDirection='row' justifyContent='space-around' alignItems='center' alignContent='center' p={3} w='100%' >
+                    <Box display='flex' mt='5px' flexDirection='row'  height='20%' justifyContent='space-around' alignItems='center' alignContent='center' backgroundColor='teal.400' p={3} w='100%' >
                         <FormControl onKeyDown={sendMessage} mr={1} isRequired mt={3} >
                             <Input variant='filled' bg='gray.300' placeholder='Enter a message' onChange={typingHandler} value={newMessage} />
                         </FormControl>
                         <Button onClick={clickMessage} colorScheme='green' p={2} mt={3} ml={2} >
-                            <FaEnvelope className='test-sm text-white ' />
+                            <FaEnvelope className='test-sm text-white' />
                         </Button>
                     </Box>
                 </Box>

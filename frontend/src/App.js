@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes, } from 'react-router-dom';
-import { FaList, FaTimes } from 'react-icons/fa'
+// import { FaList, FaTimes } from 'react-icons/fa'
 import { BsList } from 'react-icons/bs';
 import NotFound from './pages/NotFound';
 import NavBar from './Layout/NavBar';
@@ -19,6 +19,7 @@ import Home from './pages/Home';
 import SignUpModal from './model/SignUpModal';
 import LoginModal from './model/LoginModal';
 import Notice from './pages/component/Notice';
+import Chat from './pages/component/Chat';
 // import ViewTimeTable from './pages/component/ViewTimeTable';
 
 export default function App() {
@@ -36,21 +37,18 @@ export default function App() {
         </Routes> */}
 
         <div className="w-full bg-green-500 min-h-screen flex flex-row justify-center sm:justify-center p-0 m-0 ">
-          {/* <div className='sm:w-1/5 sm:hidden flex sm:overflow-y-hidden sm:overscroll-none'>
-            {!toggle &&
-              <BsList onClick={() => setToggle(!toggle)} className='bg-blue-900 w-full absolute mt-2  sm:hidden text-2xl ml-1.5' />
-            }
-            {toggle &&
-              <FaTimes onClick={() => setToggle(!toggle)} className='sm:hidden sm:ml-2 sm:text-2xl sm:mt-4' />
-            }
-          </div> */}
+          <div className='sm:w-1/5 sm:hidden flex sm:overflow-y-hidden sm:overscroll-none'>
+            {/* {!toggle &&
+              <BsList onClick={() => setToggle(!toggle)} className='w-full flex mt-2 sm:hidden text-neutral-800 font-extrabold font-mono text-2xl ml-0.5' />
+            } */}
+          </div>
           {/* {toggle && */}
-          <div className='w-1/5 hidden absolute z-50 sm:flex h-full overflow-y-hidden overscroll-none'>
-            <NavBar />
+          <div className='w-1/6 -ml-8 sm:ml-0 sm:w-1/5 flex relative z-0 sm:bg-transparent sm:z-0 sm:flex h-full overflow-y-hidden overscroll-none'>
+            <NavBar toggle={toggle} setToggle={setToggle} />
           </div>
           {/* } */}
-          <div className='w-11/12 sm:4/5 z-30 sm:mr-4 mr-1 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8'>
-            <div className="rounded-lg overflow-visible overscroll-y-auto mt-4 pt-2 mb-3 mx-2 px-2 sm:p-2 sm:mx-4">
+          <div className='w-5/6 sm:4/5 z-30 sm:mr-4 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8'>
+            <div className="rounded-lg h-full overflow-visible overscroll-y-auto mt-4 pt-2 mb-3 mx-2 px-2 sm:p-2 sm:mx-4">
               <Routes>
                 {/* <Route exact path='/' element={<Home /> } /> */}
                 <Route exact path='/' element={<DashBoard />} />
@@ -59,7 +57,7 @@ export default function App() {
                 <Route path='/student/:id/results' element={<StudentDetails />} />
                 <Route path='/students' element={<StudentList />} />
 
-                
+                <Route path='/chat' element={<Chat /> } />
                 <Route path='/notice' element={<Notice />} />
 
                 <Route path='/lecturers' element={<LecturerList />} />

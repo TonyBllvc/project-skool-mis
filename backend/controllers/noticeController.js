@@ -7,7 +7,7 @@ const sets = async (req, res) => {
     // remember to add the coordinator's user id and lecturer's id ..
     // ... which, in the frontend pass in a drop down through mapping
     // then pick id
-    const { message, lecturerId, form, time, date, day } = req.body
+    const { message, lecturerId, form } = req.body
 
     let emptyFields = []
 
@@ -17,18 +17,18 @@ const sets = async (req, res) => {
     if (!lecturerId) {
         emptyFields.push('No lecturerId passed')
     }
-    if (!time) {
-        emptyFields.push('No time passed passed')
-    }
+    // if (!time) {
+    //     emptyFields.push('No time passed passed')
+    // }
     if (!form) {
         emptyFields.push('No form passed passed')
     }
-    if (!date) {
-        emptyFields.push('No date passed passed')
-    }
-    if (!day) {
-        emptyFields.push('No date passed passed')
-    }
+    // if (!date) {
+    //     emptyFields.push('No date passed passed')
+    // }
+    // if (!day) {
+    //     emptyFields.push('No date passed passed')
+    // }
     if (emptyFields.length > 0) {
         return res.status(400).json({ error: 'Please fill in all the fields', emptyFields })
     }
@@ -36,10 +36,10 @@ const sets = async (req, res) => {
     var newNotice = {
         message,
         from: lecturerId,
-        time,
+        // time,
         form,
-        date,
-        day
+        // date,
+        // day
     }
 
     try {

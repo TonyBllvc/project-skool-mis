@@ -24,21 +24,21 @@ const noticeSchema = new Schema({
         require: true,
         // unique: true
     },
-    time: {
-        type: String,
-        require: true,
-        // unique: true
-    },
-    date: {
-        type: String,
-        require: true,
-        // unique: true
-    },
-    day: {
-        type: String,
-        require: true,
-        // unique: true
-    },
+    // time: {
+    //     type: String,
+    //     require: true,
+    //     // unique: true
+    // },
+    // date: {
+    //     type: String,
+    //     require: true,
+    //     // unique: true
+    // },
+    // day: {
+    //     type: String,
+    //     require: true,
+    //     // unique: true
+    // },
 }, { timestamps: true })
 
 module.exports = mongoose.model('notice', noticeSchema);

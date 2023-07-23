@@ -11,6 +11,8 @@ const lecturerRoutes = require('./routes/lecturer')
 const studentRoutes = require('./routes/student')
 const noticeRoutes = require('./routes/notice')
 const sessionRoutes = require('./routes/session')
+const chatRoutes = require('./routes/chats')
+const messageRoutes = require('./routes/messages')
 // express app
 const app = express()
 
@@ -40,6 +42,8 @@ app.use('/api/student', studentRoutes)
 app.use('/api/lecturer', lecturerRoutes)
 app.use('/api/notice', noticeRoutes)
 app.use('/api/session', sessionRoutes)
+app.use('/api/chat', chatRoutes)
+app.use('/api/message', messageRoutes)
 
 
 // connect to db

@@ -5,7 +5,7 @@ import React from 'react'
 const NoticeDetails = ({ notice }) => {
     return (
 
-        <Card direction='row' overflow='hidden' variant='outline' width='100%' backgroundColor='whiteAlpha.800' py='4' mt='10px' pl='4' >
+        <Card direction='row' overflow='hidden' zIndex={1} variant='outline' width='100%' backgroundColor='whiteAlpha.800' py='4' mt='10px' pl='4' >
             <Avatar src={notice.picture} name={notice.surname} width={{ base: '32px', sm: '34px' }} size='sm' mr='3' cursor='pointer' />
             <Box width={{ sm: '100%', base: '75%' }} display={{ base: 'flex', sm: 'flex' }} flexDirection={{ sm: 'column', base: 'column' }}>
                 <Box width={{ sm: '100%', base: '100%' }} mr={{ sm: '2' }}  pr={['2', '5', '7']} >
