@@ -7,6 +7,7 @@ import { Box, Text, Textarea } from '@chakra-ui/react'
 import { useStudentContext } from '../../hooks/useStudentContext'
 import { useLecturerContext } from '../../hooks/useLecturerContext'
 import { useCourseContext } from '../../hooks/useCourseContext'
+import { useNoticeContext } from '../../hooks/useNoticeContext'
 
 const DashBox = () => {
     const { time } = useTimeContext()
@@ -14,6 +15,7 @@ const DashBox = () => {
     const { student } = useStudentContext()
     const { lecturer } = useLecturerContext()
     const { course} = useCourseContext()
+    const { notice } = useNoticeContext()
 
     return (
         <div>
@@ -119,7 +121,9 @@ const DashBox = () => {
                             </div>
                             <div >
                                 <div className='py-1' >
-                                    <h2 className='font-mono'> 0 </h2>
+                                    <h2 className='font-mono'> 
+                                    { notice && notice.length }
+                                    </h2>
                                 </div>
                                 <div className='py-1' >
                                     <h6 className='font-sans text-sm font-normal'> Assigned here</h6>

@@ -34,12 +34,15 @@ const NavBar = () => {
                             {/* <p className='text-white active:text-black hover:text-black h-full '>Dashboard</p> */}
                         </NavLink>
                         {/* <NavLink to="/lecturer_list" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <AiOutlineFolder className=' text-2xl text-white font-semibold pr-2' />
+                            <AiOutlineUser className=' text-2xl text-white font-semibold pr-2' />
                             Lecturers
-                        </NavLink>
-                        <NavLink to="/student_list" className={({ isActive }) => isActive ? 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center justify-start  font-bold text-sm w-4/5 pl-6 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
+                        </NavLink> */}
+                        {/* <NavLink to="/student_result_upload" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                            <AiOutlineUser className=' text-2xl text-white font-semibold pr-2' />
+                            
+                            <p className='hidden sm:flex'>
                             Student
+                            </p>
                         </NavLink> */}
                         <NavLink to="/timetable" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
@@ -52,14 +55,14 @@ const NavBar = () => {
                             <BsChatDots className=' text-2xl text-white font-semibold pr-2' />
                             
                             <p className='hidden sm:flex'>
-                            Notice
+                            Chat
                             </p>
                         </NavLink>
                         <NavLink to="/notice" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineInfoCircle className=' text-2xl text-white font-semibold pr-2' />
                             
                             <p className='hidden sm:flex'>
-                            Chat
+                            Notice
                             </p>
                         </NavLink>
                         {/* a hr across */}

@@ -5,20 +5,6 @@ import { useCourseContext } from '../hooks/useCourseContext'
 import CourseModel from '../model/CourseModel'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
 
-const optionOne = [
-    { value: 'Monday', label: 'Monday', key: '1' },
-    { value: 'Tuesday', label: 'Tuesday', key: '2' },
-    { value: 'Wednesday', label: 'Wednesday', key: '3' },
-    { value: 'Thursday', label: 'Thursday', key: '4' },
-    { value: 'Friday', label: 'Friday', key: '5' },
-    { value: 'Saturday', label: 'Saturday', key: '6' }
-]
-
-const optionTwo = [
-    { value: 'AM', label: 'AM', key: '1' },
-    { value: 'PM', label: 'PM', key: '2' },
-]
-
 const UploadStudentResult = () => {
     const { course, dispatch } = useCourseContext()
     const { dispatch: dispatchResults } = useStudentDetailsContext()
@@ -39,7 +25,7 @@ const UploadStudentResult = () => {
     const [loading, setLoading] = useState(false)
 
     const toast = useToast()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     useEffect(() => {
 

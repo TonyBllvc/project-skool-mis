@@ -83,9 +83,13 @@ const MoreCourseInfo = ({ course }) => {
                 <Tr display='flex' width='100%' justifyContent='center' px={1} backgroundColor='whiteAlpha.900'>
                     <Td py={2} width='100%' display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                         <Box width='100%' display='flex' justifyContent='center' alignItems='center' >
-                            {course.course_lecturers[0].surname}
-                            {/* Name */}
-                            {/* { course.first_name } */}
+                        <ul>
+                            {course.course_lecturers.map((lecturers, index) => (
+                                <li key={index}>
+                                {index + 1}. { lecturers.surname } { lecturers.first_name }
+                                </li>
+                            ))}
+                        </ul>
                         </Box>
                     </Td>
                 </Tr>

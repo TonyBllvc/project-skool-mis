@@ -56,6 +56,8 @@ export default function App() {
                 <Route path='/student/:id/results' element={<Student />} />
                 <Route path='/student/:id/results' element={<StudentDetails />} />
                 <Route path='/students' element={<StudentList />} />
+                
+                {/* <Route path='/student_result_upload' element={<StudentListing /> } /> */}
 
                 <Route path='/chat' element={<Chat /> } />
                 <Route path='/notice' element={<Notice />} />

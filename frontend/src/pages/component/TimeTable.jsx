@@ -65,7 +65,7 @@ const TimeTable = () => {
 
 
 
-                <div className="mt-2 px-2 sm:px-14 mb-14">
+                <div className="mt-2 px-2 sm:px-3 mb-14">
 
                     <div className="mt-12 ">
                         {/* This would have model schema created */}
@@ -91,7 +91,7 @@ const TimeTable = () => {
                                                                 Day
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '26%']} display='flex' justifyContent='center' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                        <Th width={['150px', '100%', '29%']} display='flex' justifyContent='center' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                                                             <Box width='100%'  >
                                                                 Course Code
                                                             </Box>

@@ -6,6 +6,7 @@ import DashBox from './component/DashBox'
 import { useStudentContext } from '../hooks/useStudentContext'
 import { useLecturerContext } from '../hooks/useLecturerContext'
 import { useCourseContext } from '../hooks/useCourseContext'
+import { useNoticeContext } from '../hooks/useNoticeContext'
 
 const DashBoard = () => {
 
@@ -17,6 +18,7 @@ const DashBoard = () => {
   const { dispatch: dispatchStudents } = useStudentContext()
   const { dispatch: dispatchLecturers } = useLecturerContext()
   const { dispatch: dispatchCourses } = useCourseContext()
+  const { dispatch: dispatchNotice } = useNoticeContext()
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -69,7 +71,23 @@ const DashBoard = () => {
 
   }, [])
 
-    
+  useEffect(() => {
+    const fetchNotice = async () => {
+        const res = await fetch('api/notice/get_notice')
+        const json = await res.json()
+
+        if (!res.ok) {
+            return console.log(json.error)
+        }
+
+        if (res.ok) {
+            dispatchNotice({ type: 'GET_DATA', payload: json })
+        }
+    }
+    fetchNotice()
+
+}, [])
+
 
     return (
         <div className='overscroll-contain overflow-visible'>

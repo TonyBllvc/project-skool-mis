@@ -54,21 +54,21 @@ const TimeTableDetails = ({ school }) => {
     },[school])
     return (
         <Tbody  >
-            <Tr display='flex' w='100%' justifyContent='space-around' onClick={() => setToggle(!toggle)} backgroundColor='whiteAlpha.900'>
-                <Td width={['150px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+            <Tr display='flex' w='100%' px={-3} justifyContent='space-around' onClick={() => setToggle(!toggle)} backgroundColor='whiteAlpha.900'>
+                <Td width={['150px', '100%', '24%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
 
                     <Box width='100%'  >
                         {school.day}
                     </Box>
                 </Td>
-                <Td width={['150px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
 
                     <Box width='100%'  >
                         {school.time_details.course_code}
                     </Box>
                     {/* </Link> */}
                 </Td>
-                <Td width={['150px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                <Td width={['150px', '100%', '21%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                     <Box width='100%'  >
                         {school.start} {school.am_one}
                     </Box>
