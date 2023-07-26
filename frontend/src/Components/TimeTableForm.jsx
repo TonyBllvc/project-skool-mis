@@ -2,8 +2,9 @@ import { Box, Button, Card, FormControl, FormLabel, Input, InputGroup, InputRigh
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourseContext } from '../hooks/useCourseContext'
-import CourseModel from '../model/CourseModel'
-import { useSchoolContext } from '../hooks/useSchoolContext'
+import CourseModal from '../model/CourseModal'
+import { useSchoolContext } from '../hooks/useTimetableContext'
+import { useTimeContext } from '../hooks/useTimeContext'
 
 const optionOne = [
     { value: 'Monday', label: 'Monday', key: '1' },
@@ -21,7 +22,7 @@ const optionTwo = [
 
 const TimeTableForm = () => {
     const { course, dispatch } = useCourseContext()
-    const { dispatch: dispatchTime } = useSchoolContext()
+    const { dispatch: dispatchTime } = useTimeContext()
 
     const [day, setDay] = useState('')
     const [start, setStart] = useState('')
@@ -38,73 +39,73 @@ const TimeTableForm = () => {
     const toast = useToast()
     const navigate = useNavigate()
 
-    // submit filled form
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        setLoading(true)
+        // submit filled form
+        const handleSubmit = async (e) => {
+            e.preventDefault()
+            setLoading(true)
 
-        // check if every field has been filled
-        if (!day || !start || !am_one || !am_two || !end || !courseId || !passInfo) {
-            toast({
-                title: 'Please fill all the Fields!',
-                status: 'warning',
-                duration: 4000,
-                isClosable: true,
-                position: "bottom",
-            })
-            return
-        }
+            // check if every field has been filled
+            if (!day || !start || !am_one || !am_two || !end || !courseId || !passInfo) {
+                toast({
+                    title: 'Please fill all the Fields!',
+                    status: 'warning',
+                    duration: 4000,
+                    isClosable: true,
+                    position: "bottom",
+                })
+                return
+            }
 
-        // parse every value into  details        
-        const details = { day, start, am_one, am_two, end, courseId }
+            // parse every value into  details        
+            const details = { day, start, am_one, am_two, end, courseId }
 
-        try {
-            const res = await fetch("/api/time/set_time_table", {
-                method: "POST",
-                body: JSON.stringify(details),
-                headers: {
-                    "Content-Type": "application/json",
+            try {
+                const res = await fetch("/api/time/set_time_table", {
+                    method: "POST",
+                    body: JSON.stringify(details),
+                    headers: {
+                        "Content-Type": "application/json",
+                    }
+
+                })
+
+                const json = await res.json()
+
+                if (!res.ok) {
+                    toast({
+                        title: 'Response not okay!',
+                        status: 'error',
+                        duration: 5000,
+                        isClosable: true,
+                        position: "top",
+                    })
+                    return console.log(json.error)
                 }
 
-            })
-
-            const json = await res.json()
-
-            if (!res.ok) {
+                if (res.ok) {
+                    toast({
+                        title: 'Submitted Successfully!',
+                        status: 'success',
+                        duration: 3000,
+                        isClosable: true,
+                        position: "top",
+                    })
+                    dispatchTime({ type: 'CREATE_DATA', payload: json })
+                    setLoading(false)
+                    console.log('new data added', json)
+                }
+            } catch (error) {
                 toast({
-                    title: 'Response not okay!',
-                    status: 'error',
+                    title: 'Error occurred, can not login now!',
+                    status: 'error' + error.message,
                     duration: 5000,
                     isClosable: true,
                     position: "top",
                 })
-                return console.log(json.error)
-            }
-
-            if (res.ok) {
-                toast({
-                    title: 'Submitted Successfully!',
-                    status: 'success',
-                    duration: 3000,
-                    isClosable: true,
-                    position: "top",
-                })
-                dispatchTime({ type: 'CREATE_DATA', payload: json })
                 setLoading(false)
-                console.log('new data added', json)
             }
-        } catch (error) {
-            toast({
-                title: 'Error occurred, can not login now!',
-                status: 'error' + error.message,
-                duration: 5000,
-                isClosable: true,
-                position: "top",
-            })
-            setLoading(false)
-        }
 
-    }
+        }
 
     // fetch courses so as to pick the id
     const handleCourses = async (e) => {
@@ -221,14 +222,13 @@ const TimeTableForm = () => {
 
                                 <Card key={dataPick._id} onClick={() => setToggle(!toggle)}>
                                 
-                                    <CourseModel name={dataPick} handleName={setInfo} handleId={setCourseId} />
+                                    <CourseModal name={dataPick} handleName={setInfo} handleId={setCourseId} />
 
                                 </Card>
 
                             ))}
                         </Box>
                     }
-                    {/* </Box> */}
                 </FormControl>
 
                 {/* Button for Log in */}

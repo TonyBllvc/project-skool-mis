@@ -8,7 +8,7 @@ const LecturersListDetails = ({ lecturer, index }) => {
         <Tbody backgroundColor='blue.400'>
             <Tr display='flex' width='100%' px={3} justifyContent='space-around' backgroundColor='whiteAlpha.900'>
                 <Td width={['120px', '100%', '15%']} display='flex' justifyContent='center' alignItems='center'  overflow='hidden' textOverflow='ellipsis'  wordBreak='break-all' >
-                    <Box width={['100%', '100%', '100%']}  >
+                    <Box width={['100%', '100%', '100%']} fontSize={ ['xs', 'lg', 'xl']}  >
                         {index + 1}
                     </Box>
                 </Td>

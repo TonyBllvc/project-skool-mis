@@ -26,9 +26,10 @@ const adminSchema = new Schema({
         type: String,
         // unique: true
     },
-    adviser: {
+    role: {
         type: String,
-        // unique: true
+        enum: 'Admin',
+        require: true
     },
 
     department: {
@@ -77,11 +78,11 @@ const adminSchema = new Schema({
 
 // static signup method
 // ( while using the 'this' keyword, we can't use  the arrow function)
-adminSchema.statics.signup = async function (title, surname, first_name, middle_name, advisor, department, faculty, phone, email, password) {
+adminSchema.statics.signup = async function (title, surname, first_name, middle_name, role, department, faculty, phone, email, password) {
 
     // validation
     // check if the mail and password both have values
-    if ( !surname || !first_name || !advisor || !department || !faculty || !phone || !email || !password) {
+    if ( !surname || !first_name || !role || !department || !faculty || !phone || !email || !password) {
         throw Error('All fields must be filled')
     }
     // check if email is valid(if the email put in is an actual email)
@@ -116,16 +117,16 @@ adminSchema.statics.signup = async function (title, surname, first_name, middle_
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const admin = await this.create({ title, surname, first_name, middle_name, advisor, department, faculty, phone, email, password: hash })
+    const admin = await this.create({ title, surname, first_name, middle_name, role, department, faculty, phone, email, password: hash })
 
     return admin
 }
 
 // static login method
-adminSchema.statics.login = async function (email, password) {
+adminSchema.statics.login = async function (email, role, password) {
     // validation
     // check if the mail and password both have values
-    if (!email || !password) {
+    if (!email || !role || !password) {
         throw Error('All fields must be filled')
     }
 

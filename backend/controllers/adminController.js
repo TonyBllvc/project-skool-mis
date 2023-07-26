@@ -3,19 +3,19 @@ const jwt = require('jsonwebtoken')
 
 
 // to crease a web token 
-const createToken = (_id) => {
-    
+const createToken = (_id, role) => {
+
     // create a reuseable function
     // ( taking in three arguments. 
     //  1. the payload which is the {_id})
     // 2. the secret for just the server (stored on the '.env' file)
     // 3. any property -- this case, the expires property
-    return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '1d' })
+    return jwt.sign({ _id, role }, process.env.SECRET, { expiresIn: '1d' })
 }
 
 // signup admin
 const signupAdmin = async (req, res) => {
-    const { title, surname, first_name, middle_name, advisor, department, faculty, phone, email, password } = req.body
+    const { title, surname, first_name, middle_name, role, department, faculty, phone, email, password } = req.body
     let emptyFields = []
 
     if (!surname) {
@@ -24,8 +24,8 @@ const signupAdmin = async (req, res) => {
     if (!first_name) {
         emptyFields.push('No first name score passed')
     }
-    if (!advisor) {
-        emptyFields.push('No advisor score passed')
+    if (!role) {
+        emptyFields.push('No role score passed')
     }
     if (!department) {
         emptyFields.push('No department score passed')
@@ -46,12 +46,12 @@ const signupAdmin = async (req, res) => {
 
     try {
         // pick up admin and password(with hash) 
-        const admin = await Admin.signup(title, surname, first_name, middle_name, advisor, department, faculty, phone, email, password)
+        const admin = await Admin.signup(title, surname, first_name, middle_name, role, department, faculty, phone, email, password)
 
         // create a token
-        const token = createToken(admin._id)
+        const token = createToken(admin._id, admin.role)
 
-        res.status(200).json({ title, surname, first_name, middle_name, advisor, department, faculty, phone, email, token })
+        res.status(200).json({ title, surname, first_name, middle_name, role, department, faculty, phone, email, token })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -61,21 +61,37 @@ const signupAdmin = async (req, res) => {
 // login admin
 const loginAdmin = async (req, res) => {
     // for logging in 
-    const { email, password } = req.body
+    const { email, role, password } = req.body
+
+    const admin = await Admin.findOne({ email })
 
     try {
         // pick up admin and password(with hash) 
-        const admin = await Admin.login(email, password)  
+        const admin = await Admin.login(email, role, password)
 
         // create a token for already register admin
         // to login
-        const token = createToken(admin._id)
+        const token = createToken(admin._id, admin.role)
 
-        res.status(200).json({ email, token })
+        res.status(200).json({ email, role, token })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
 
 }
 
-module.exports = { signupAdmin, loginAdmin }
+const getAdminProfile = async (req, res) => {
+    const { email } = req.params
+
+    const admin = await Admin.findOne({ email: email })
+
+    // check if students actually exists
+    if (!admin) {
+        return res.status(404).json({ error: 'No such admin' })
+    }
+
+    res.status(200).json(admin)
+
+}
+
+module.exports = { signupAdmin, loginAdmin, getAdminProfile}

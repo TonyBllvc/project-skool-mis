@@ -1,9 +1,11 @@
 const express = require('express')
 const { sets, updates, deletes, gets, get, getStudent, searchResult, getResultsForSession, getResultsForUserForSession } = require('../controllers/resultController')
+const requireAuth = require('../middleware/authentication')
 
 
 const router = express.Router()
 
+// router.use(requireAuth)
 //create result
 router.post('/set_result', sets)
 // fetch results

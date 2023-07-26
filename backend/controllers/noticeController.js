@@ -46,12 +46,12 @@ const sets = async (req, res) => {
         // to pass dat into the entire field
         var notice = await Notice.create(newNotice)
 
-        notice = await notice.populate("from", " title surname first_name lecturer ")
-        notice = await notice.populate("from")
-        notice = await School.populate(notice, {
-            path: "from.lecturer_details",
-            select: "faculty department level semester",
-        })
+        notice = await notice.populate("from", " title surname first_name middle_name faculty department phone email ")
+        // notice = await notice.populate("from")
+        // notice = await School.populate(notice, {
+        //     path: "from.lecturer_details",
+        //     select: "faculty department level semester",
+        // })
 
 
         res.status(200).json(notice)
@@ -66,7 +66,7 @@ const gets = async (req, res) => {
     try {
         const notice = await Notice.find({}).populate({
             path: "from",
-            select: "title surname first_name "
+            select: "title surname first_name middle_name faculty department phone email "
         })
 
         res.status(200).json(notice)
@@ -86,7 +86,7 @@ const get = async (req, res) => {
 
     const notice = await Notice.findById(id).populate({
         path: "from",
-        select: "title surname first_name "
+        select: "title surname first_name middle_name faculty department phone email "
     })
 
     if (!notice) {
@@ -97,12 +97,12 @@ const get = async (req, res) => {
 }
 
 const getByLecturer = async (req, res) => {
-    // pass student id
+    // pass lecturer id
     const { lecturer_id } = req.params
 
     const result = await Notice.find({ from: lecturer_id }).populate({
         path: 'from',
-        select: 'title surname first_name ',
+        select: 'title surname first_name middle_name faculty department phone email ',
         // option: { sort: { surname: 1 } }
     }).exec()
     // .populate("course_details", "faculty department level semester")
@@ -118,7 +118,7 @@ const getByLecturer = async (req, res) => {
 }
 
 const updates = async (req, res) => {
-    const { id, message, lecturerId, form, time, date, day } = req.body
+    const { id, message, lecturerId, form} = req.body
     // const updatesNew = {  }
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -129,13 +129,13 @@ const updates = async (req, res) => {
         const notice = await Notice.findByIdAndUpdate(
             id,
             {
-                day, message, form, time, date, from: lecturerId
+                message, form, from: lecturerId
             },
             {
                 new: true
             }).populate({
                 path: "from",
-                select: "title surname first_name "
+                select: "title surname first_name middle_name faculty department phone email "
             })
 
         if (!notice) {

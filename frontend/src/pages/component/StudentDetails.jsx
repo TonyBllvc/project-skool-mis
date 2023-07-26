@@ -5,7 +5,6 @@ const StudentDetails = ({ studentInfo }) => {
 
   return (
     <Tbody width={['65%', '75%', '75%' ]}>
-      {studentInfo && (
         <Tr display='flex' width='100%' flexDirection='column' backgroundColor='whiteAlpha.900'   >
           <Td width='100%' py={2.5} display='flex' justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
             <Box width={['100%', '100%', '100%']} >
@@ -31,7 +30,6 @@ const StudentDetails = ({ studentInfo }) => {
             </Box>
           </Td>
         </Tr>
-      )}
     </Tbody>
   )
 }

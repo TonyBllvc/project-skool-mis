@@ -108,6 +108,7 @@ const LectureSignUp = () => {
   return (
     <form onSubmit={handleSubmit} >
       <VStack spacing='5px' color='black' >
+      
         <FormControl id='first-name' isRequired>
           <FormLabel color='black'>
             Name:

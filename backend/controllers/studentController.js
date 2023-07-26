@@ -5,19 +5,19 @@ const jwt = require('jsonwebtoken')
 
 
 // to crease a web token 
-const createToken = (_id) => {
+const createToken = (_id, role) => {
 
     // create a reuseable function
     // ( taking in three arguments. 
     //  1. the payload which is the {_id})
     // 2. the secret for just the server (stored on the '.env' file)
     // 3. any property -- this case, the expires property
-    return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '1d' })
+    return jwt.sign({ _id, role }, process.env.SECRET, { expiresIn: '1d' })
 }
 
 // signup student
 const signupStudent = async (req, res) => {
-    const { surname, first_name, middle_name, student_status, session, reg_no, department, faculty, phone, email, password } = req.body
+    const { surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, password } = req.body
 
     let emptyFields = []
 
@@ -27,7 +27,7 @@ const signupStudent = async (req, res) => {
     if (!first_name) {
         emptyFields.push('No first name passed')
     }
-    if (!student_status) {
+    if (!role) {
         emptyFields.push('No student status passed')
     }
     if (!reg_no) {
@@ -52,23 +52,23 @@ const signupStudent = async (req, res) => {
 
     const regExists = await Student.findOne({ reg_no })
     if (regExists) {
-        return res.status(404).json({ error: 'Reg no already exits' })
+        return res.status(404).json({ error: 'Reg number already exits' })
     }
 
     try {
         // pick up student and password(with hash) 
         const student = await Student.signup(
-            surname, first_name, middle_name, student_status, session, reg_no, department, faculty, phone, email, password
+            surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, password
         )
 
 
         // create a token
-        const token = createToken(student._id)
+        const token = createToken(student._id, student.role)
 
-        res.status(200).json({ surname, first_name, middle_name, student_status, session, reg_no, department, faculty, phone, email, token })
+        res.status(200).json({ surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, token })
 
     } catch (error) {
-       return  res.status(400).json({ error: error.message })
+        return res.status(400).json({ error: error.message })
     }
 
     // to create session
@@ -92,17 +92,17 @@ const signupStudent = async (req, res) => {
 // login student
 const loginStudent = async (req, res) => {
     // for logging in 
-    const { reg_no, password } = req.body
+    const { reg_no, role, password } = req.body
 
     try {
         // pick up student and password(with hash) 
-        const student = await Student.login(reg_no, password)
+        const student = await Student.login(reg_no, role, password)
 
         // create a token for already register student
         // to login
-        const token = createToken(student._id)
+        const token = createToken(student._id, student.role)
 
-        res.status(200).json({ reg_no, token })
+        res.status(200).json({ reg_no, role, token })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -119,6 +119,7 @@ const getStudents = async (req, res) => {
 
 const getStudent = async (req, res) => {
     // passed id of students
+    // const { reg_no } = req.params
     const { id } = req.params
 
     // check if valid
@@ -127,6 +128,8 @@ const getStudent = async (req, res) => {
     }
 
     // find everything relating to such student
+    // const students = await Student.findOne({ reg_no: reg_no})
+
     const students = await Student.findById(id)
 
     // check if students actually exists
@@ -153,7 +156,7 @@ const getStudentBySession = async (req, res) => {
         // pass students's results
         res.status(200).json(students)
     } catch (error) {
-        res.status(500).json({ error: error.message + " h" })
+        res.status(500).json({ error: error.message })
 
     }
 }

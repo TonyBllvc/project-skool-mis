@@ -50,11 +50,11 @@ const sets = async (req, res) => {
         course = await course.populate("time_details")
         course = await School.populate(course, {
             path: "time_details.course_coordinator",
-            select: " title surname first_name lecturer",
+            select: " title surname first_name middle_name faculty department phone email",
         })
         course = await School.populate(course, {
             path: "time_details.course_lecturers",
-            select: " title surname first_name lecturer",
+            select: " title surname first_name middle_name faculty department phone email",
         })
         course = await School.populate(course, {
             path: "time_details.course_details",

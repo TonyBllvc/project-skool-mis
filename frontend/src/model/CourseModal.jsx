@@ -1,7 +1,7 @@
 import { Box, CardBody, Text } from '@chakra-ui/react'
 import React from 'react'
 
-const CourseModel = ({ name, handleId, handleName }) => {
+const CourseModal = ({ name, handleId, handleName }) => {
     return (
         // <Box>
             <CardBody display='flex' direction='row' justifyContent='space-between'  onClick={(e) => handleId(name._id)} >
@@ -16,4 +16,4 @@ const CourseModel = ({ name, handleId, handleName }) => {
     )
 }
 
-export default CourseModel
+export default CourseModal

@@ -7,20 +7,6 @@ import Student from '../pages/component/Student'
 const StudentsDetailListSession = ({ student }) => {
     const [ toggle, setToggle ] = useState(false)
 
-    // const navigate = useNavigate()
-
-    // // const handleRoute = () => {
-
-    // // }
-
-    // useEffect(() => {
-    // const handleNavigate= () => {
-    //     navigate(`/student/${student._id}/results`)
-    // }
-
-    // handleNavigate()
-    // }, [toggle])
-
     return (
         <Tbody backgroundColor='blue.400'>
             <Tr display='flex' width='100%' px={3} justifyContent='space-around' backgroundColor='whiteAlpha.900'>

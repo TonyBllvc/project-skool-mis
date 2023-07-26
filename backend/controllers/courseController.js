@@ -61,8 +61,8 @@ const sets = async(req, res) => {
         var course = await Course.create(newCourse)
 
         course = await course.populate("course_details", "faculty department level semester")
-        course = await course.populate("course_coordinator", "title surname first_name lecturer")
-        course = await course.populate("course_lecturers", "title surname first_name lecturer")
+        course = await course.populate("course_coordinator", "title surname first_name middle_name faculty department phone email")
+        course = await course.populate("course_lecturers", "title surname first_name middle_name faculty department phone email")
 
         res.status(200).json(course)
     } catch (error) {
@@ -74,7 +74,7 @@ const sets = async(req, res) => {
 // fetch all schools
 const gets = async(req, res) => {
 
-    const courseData = await Course.find({}).populate("course_details", "faculty department level semester").sort({course_code: 1}).sort({course_name: 1}).populate("course_coordinator", "title surname first_name lecturer").sort({ title: 1}).sort({ surname: 1}).populate("course_lecturers", "title surname first_name lecturer").sort({ title: 1}).sort({ surname: 1})
+    const courseData = await Course.find({}).populate("course_details", "faculty department level semester").sort({course_code: 1}).sort({course_name: 1}).populate("course_coordinator", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1}).populate("course_lecturers", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1})
 
 
     res.status(200).json(courseData)
@@ -89,7 +89,7 @@ const get = async(req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const course = await Course.findById(id).populate("course_details", "faculty department level semester").populate("course_coordinator", "title surname first_name lecturer").sort({ title: 1}).sort({ surname: 1}).populate("course_lecturers", "title surname first_name lecturer").sort({ title: 1}).sort({ surname: 1})
+    const course = await Course.findById(id).populate("course_details", "faculty department level semester").populate("course_coordinator", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1}).populate("course_lecturers", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1})
 
     if (!course) {
         return res.status(404).json({ error: 'No such course' })
@@ -107,7 +107,7 @@ const updates = async(req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const course = await Course.findByIdAndUpdate({ _id: id }, updatesNew, { new: false }).populate("course_details", " faculty department level semester").populate("course_coordinator", "title surname first_name lecturer").sort({ title: 1}).sort({ surname: 1}).populate("course_lecturers", "title surname first_name lecturer").sort({ title: 1}).sort({ surname: 1})
+    const course = await Course.findByIdAndUpdate({ _id: id }, updatesNew, { new: false }).populate("course_details", " faculty department level semester").populate("course_coordinator", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1}).populate("course_lecturers", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1})
 
     if (!course) {
         return res.status(400).json({ error: 'No such course' })

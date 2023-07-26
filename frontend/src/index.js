@@ -2,11 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-// import './css.css'
-// import 'bootstrap/dist/css/bootstrap.min.css'
 import { ChakraProvider } from '@chakra-ui/react'
 import { TimeContextProvider } from './context/TimeContext';
-import { SchoolContextProvider } from './context/SchoolContext';
+import { TimetableContextProvider } from './context/TimetableContext';
 import { CourseContextProvider } from './context/CourseContext';
 import { StudentContextProvider } from './context/StudentContext';
 import { LecturerContextProvider } from './context/LecturerContext';
@@ -18,7 +16,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <ChakraProvider>
-    <SchoolContextProvider>
+    <TimetableContextProvider>
       <CourseContextProvider>
         <TimeContextProvider>
           <LecturerContextProvider>
@@ -34,7 +32,7 @@ root.render(
           </LecturerContextProvider>
         </TimeContextProvider>
       </CourseContextProvider>
-    </SchoolContextProvider>
+    </TimetableContextProvider>
   </ChakraProvider>
   // </React.StrictMode>
 );

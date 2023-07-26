@@ -1,8 +1,11 @@
 const express = require('express')
 const { sets, updates, deletes, gets, get, getByLecturer } = require('../controllers/noticeController')
+const requireAuth = require('../middleware/authentication')
 
 const router = express.Router()
 
+
+// router.use(requireAuth)
 //create notice message
 router.post('/convey_notice', sets)
 // fetch all notice

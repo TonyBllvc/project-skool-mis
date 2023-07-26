@@ -1,9 +1,11 @@
 const express = require('express')
 const { sets, updates, deletes, gets, get } = require('../controllers/courseController')
+const requireAuth = require('../middleware/authentication')
 
 
 const router = express.Router()
 
+// router.use(requireAuth)
 //create course
 router.post('/set_course', sets)
 // fetch courses

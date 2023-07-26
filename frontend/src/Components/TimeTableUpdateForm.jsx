@@ -2,7 +2,7 @@ import { Box, Button, Card, FormControl, FormLabel, Input, InputGroup, InputRigh
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourseContext } from '../hooks/useCourseContext'
-import { useSchoolContext } from '../hooks/useSchoolContext'
+import { useSchoolContext, useTimetableContext } from '../hooks/useTimetableContext'
 import CourseUpdateModal from '../model/CourseUpdateModal'
 
 const optionOne = [
@@ -21,7 +21,7 @@ const optionTwo = [
 
 const TimeTableUpdateForm = ({ documentData, close }) => {
     const { course, dispatch } = useCourseContext()
-    const { school, dispatch: dispatchTime } = useSchoolContext()
+    const { timetable, dispatch: dispatchTime } = useTimetableContext()
     // incomplete ( updating document possessing errors)
 
     const [id, setId] = useState(documentData._id)

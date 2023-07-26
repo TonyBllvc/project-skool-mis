@@ -19,7 +19,7 @@ const Home = () => {
                     </NavLink>
                 </div>
                 <div className='flex justify-center w-1/3 pr-5'>
-                    <NavLink to='/' className={({isActive}) => isActive ? ' text-lg font-serif mr-5 text-green-500 border-green-400 border-solid border-b-2 ' : ' text-lg font-serif mr-5 text-green-500'} >
+                    <NavLink to='/jj' className={({isActive}) => isActive ? ' text-lg font-serif mr-5 text-green-500 border-green-400 border-solid border-b-2 ' : ' text-lg font-serif mr-5 text-green-500'} >
                         Home
                     </NavLink>
                     <NavLink to='/dashboard'  className={({isActive}) => isActive ? ' text-lg font-serif mr-5 text-green-500 border-green-400 border-solid border-b-2 ' : ' text-lg font-serif mr-5 text-green-500'} >

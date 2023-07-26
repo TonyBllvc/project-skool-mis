@@ -1,8 +1,10 @@
 const express = require('express')
 const { sets, gets, get, updates, deletes } = require('../controllers/timeTableController')
+const requireAuth = require('../middleware/authentication')
 
 const router = express.Router()
 
+// router.use(requireAuth)
 //create course
 router.post('/set_time_table', sets)
 // fetch courses

@@ -21,7 +21,7 @@ const studentSchema = new Schema({
         type: String,
         require: true
     },
-    student_status: {
+    role: {
         type: String,
         enum: 'Student',
         require: true
@@ -85,11 +85,11 @@ const studentSchema = new Schema({
 
 // static signup method
 // ( while using the 'this' keyword, we can't use  the arrow function)
-studentSchema.statics.signup = async function (surname, first_name, middle_name, student_status, session, reg_no, department, faculty, phone, email, password) {
+studentSchema.statics.signup = async function (surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, password) {
 
     // validation
     // check if the mail and password both have values
-    // if (!surname || !first_name || !student_status || !session || !reg_no || !faculty || !department || !phone || !email || !password) {
+    // if (!surname || !first_name || !role || !session || !reg_no || !faculty || !department || !phone || !email || !password) {
     //     throw Error('All fields must be filled')
     // }
     // check if email is valid(if the email put in is an actual email)
@@ -118,22 +118,28 @@ studentSchema.statics.signup = async function (surname, first_name, middle_name,
     if (exist) {
         throw Error('Phone number already in use')
     }
+    
+    const regExist = await this.findOne({ reg_no })
+
+    if (regExist) {
+        throw Error('Reg number already in use')
+    }
 
     // for two different users use the same password
     // the salt creates a different hash
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const student = await this.create({ surname, first_name, middle_name, student_status, session, reg_no, department, faculty, phone, email, password: hash })
+    const student = await this.create({ surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, password: hash })
 
     return student
 }
 
 // static login method
-studentSchema.statics.login = async function (reg_no, password) {
+studentSchema.statics.login = async function (reg_no, role, password) {
     // validation
     // check if the mail and password both have values
-    if (!reg_no || !password) {
+    if (!reg_no || !role || !password) {
         throw Error('All fields must be filled')
     }
 

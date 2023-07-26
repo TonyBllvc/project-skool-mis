@@ -8,6 +8,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
 import { useCourseContext } from '../../hooks/useCourseContext';
 import CourseListDetails from '../../Components/CourseListDetails';
+import CourseForm from '../../Components/CourseForm';
 
 const CourseList = () => {
     const [toggle, setToggle] = useState(false);
@@ -70,7 +71,7 @@ const CourseList = () => {
                 {/* The table for filling */}
                 {toggle &&
                     <div className='mt-7'>
-                        {/* <TimeTableForm /> */}
+                        <CourseForm />
                     </div>
                 }
 
@@ -97,19 +98,19 @@ const CourseList = () => {
                                             <Table whiteSpace='break-spaces'>
                                                 <Thead w='100%' backgroundColor='blue.400'>
                                                     <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='yellow.200'>
-                                                        <Th width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
-                                                            <Box width='100%'  >
+                                                        <Th width={['150px', '100%', '33%']} display='flex' justifyContent='start'>
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 Course Code
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '45%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
-                                                            <Box width='100%'  >
+                                                        <Th width={['150px', '100%', '43%']} display='flex' justifyContent='start'>
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']}  >
                                                                 Course Name
                                                             </Box>
 
                                                         </Th>
-                                                        <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}>
-                                                            <Box width='100%'  >
+                                                        <Th width={['120px', '100%', '23%']} display='flex' justifyContent='start'>
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 Details
                                                             </Box>
                                                         </Th>

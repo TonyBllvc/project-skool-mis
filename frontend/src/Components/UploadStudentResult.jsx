@@ -2,7 +2,7 @@ import { Box, Button, Card, FormControl, FormLabel, Input, InputGroup, InputRigh
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useCourseContext } from '../hooks/useCourseContext'
-import CourseModel from '../model/CourseModel'
+import CourseModel from '../model/CourseModal'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
 
 const UploadStudentResult = () => {

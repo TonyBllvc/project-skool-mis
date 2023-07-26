@@ -11,25 +11,25 @@ const CourseListDetails = ({ course }) => {
     return (
         <Tbody>
             <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='whiteAlpha.900' alignItems='center'>
-                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']}  overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
-                    <Box width={['100%', '100%', '100%']} whiteSpace='break-spaces' >
+                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
+                    <Box width={['100%', '100%', '100%']} whiteSpace='break-spaces' fontSize={['10', '11', '13', '16']}  >
                         {course.course_code}
                     </Box>
                 </Td>
-                <Td width={['150px', '100%', '45%']} display='flex' justifyContent='start' fontSize={['11', '13', '14']} overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-word' >
-                    <Box width={['100%', '100%', '100%']} whiteSpace='break-spaces' >
+                <Td width={['150px', '100%', '45%']} display='flex' justifyContent='start' overflow='hidden' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-word' >
+                    <Box width={['100%', '100%', '100%']} whiteSpace='break-spaces' fontSize={['10', '11', '13', '16']} >
                         {course.course_name}
                     </Box>
                 </Td>
                 <Td width={['120px', '100%', '20%']} display='flex' justifyContent='start' textOverflow='ellipsis' whiteSpace='nowrap' wordBreak='break-all'>
                     <Box width={['100%', '100%', '100%']} display='flex' alignItems='center' >
                         {!toggle &&
-                            <Button colorScheme='whatsapp' color='white' px={['11px', '15px', '19px']} h={['28px', '33px', '39px']} fontSize={['9', '12', '14']} onClick={() => setToggle(!toggle)}>
+                            <Button colorScheme='whatsapp' color='white' px={['11px', '15px', '19px']} h={['28px', '33px', '35px', '39px']} fontSize={['10', '11', '13', '16']} onClick={() => setToggle(!toggle)}>
                                 More
                             </Button>
                         }
                         {toggle &&
-                            <Button colorScheme='red' color='white' px={['11px', '15px', '19px']} h={['28px', '33px', '39px']} fontSize={['9', '12', '14']}  onClick={() => setToggle(!toggle)}>
+                            <Button colorScheme='red' color='white' px={['11px', '15px', '19px']} h={['28px', '33px', '35px', '39px']} fontSize={['10', '11', '13', '16']} onClick={() => setToggle(!toggle)}>
                                 Close
                             </Button>
                         }
@@ -42,9 +42,9 @@ const CourseListDetails = ({ course }) => {
             {toggle &&
                 <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center'>
                     <TableContainer width='100%' whiteSpace='break-spaces'>
-                    { course && 
-                    <MoreCourseInfo course={course} />
-                    }
+                        {course &&
+                            <MoreCourseInfo course={course} />
+                        }
                     </TableContainer>
                 </Box>
             }
@@ -65,8 +65,8 @@ const CourseListDetails = ({ course }) => {
                         </Button>
                     </Box>
                     {/* <TimeUpdateModal documentData={documentData} open={isOpen} close={onClose} /> */}
-                {/* </Box> */}
-            {/* } */} 
+            {/* </Box> */}
+            {/* } */}
         </Tbody>
 
     )

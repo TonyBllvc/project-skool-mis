@@ -65,7 +65,7 @@ const sets = async (req, res) => {
 
         var result = await Result.create(resultTotal)
 
-        result = await result.populate("student_id", "surname first_name middle_name student session reg_no faculty department ")
+        result = await result.populate("student_id", "surname first_name middle_name role session reg_no faculty department phone email")
 
         result = await result.populate("result_details", "course_code course_name level")
         result = await result.populate("result_details")
@@ -88,7 +88,7 @@ const gets = async (req, res) => {
 
     const courseData = await Result.find({}).populate({
         path: 'student_id',
-        select: 'surname first_name middle_name student session reg_no faculty department',
+        select: 'surname first_name middle_name role session reg_no faculty department phone email',
         // option: { sort: { surname: 1 } }
     }).populate({
         path: 'result_details',
@@ -118,7 +118,7 @@ const get = async (req, res) => {
 
     const result = await Result.findById(id).populate({
         path: 'student_id',
-        select: 'surname first_name middle_name student session reg_no faculty department',
+        select: 'surname first_name middle_name role session reg_no faculty department phone email',
         // option: { sort: { surname: 1 } }
     }).populate({
         path: 'result_details',
@@ -152,7 +152,7 @@ const getStudent = async (req, res) => {
 
     const result = await Result.find({ student_id }).populate({
         path: 'student_id',
-        select: 'surname first_name middle_name student session reg_no faculty department',
+        select: 'surname first_name middle_name role session reg_no faculty department phone email',
         // option: { sort: { surname: 1 } }
     }).populate({
         path: 'result_details',
@@ -163,7 +163,7 @@ const getStudent = async (req, res) => {
             // select: 'faculty department level semester'
 
         }
-    }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({"result_details.level": 1}).exec()
+    }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({ "result_details.level": 1 }).exec()
     // .populate("course_details", "faculty department level semester")
 
     if (!result) {
@@ -181,7 +181,7 @@ const getResultsForSession = async (req, res) => {
     try {
         const results = await Result.find({ session: session, result_details: course_id }).populate({
             path: 'student_id',
-            select: 'surname first_name middle_name student session reg_no faculty department',
+            select: 'surname first_name middle_name role session reg_no faculty department phone email',
             // option: { sort: { surname: 1 } }
         }).populate({
             path: 'result_details',
@@ -190,7 +190,7 @@ const getResultsForSession = async (req, res) => {
                 path: 'course_details',
                 model: 'school',
                 // select: 'faculty department level semester'
-    
+
             }
         }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({ first_name: 1 }).exec()
         // check if students actually exists
@@ -219,7 +219,7 @@ const getResultsForUserForSession = async (req, res) => {
     try {
         const results = await Result.find({ course_details: course_id, student_id: student_id }).populate({
             path: 'student_id',
-            select: 'surname first_name middle_name student session reg_no faculty department',
+            select: 'surname first_name middle_name role session reg_no faculty department phone email',
             // option: { sort: { surname: 1 } }
         }).populate({
             path: 'result_details',
@@ -228,7 +228,7 @@ const getResultsForUserForSession = async (req, res) => {
                 path: 'course_details',
                 model: 'school',
                 // select: 'faculty department level semester'
-    
+
             }
         }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({ first_name: 1 }).exec()
         // check if students actually exists

@@ -25,10 +25,10 @@ const lecturerSchema = new Schema({
         type: String,
         // unique: true
     },
-    lecturer_status: {
+    role: {
         type: String,
         enum: 'Lecturer',
-        // unique: true
+        require: true
     },
     faculty: {
         type: String,
@@ -78,11 +78,11 @@ const lecturerSchema = new Schema({
 
 // static signup method
 // ( while using the 'this' keyword, we can't use  the arrow function)
-lecturerSchema.statics.signup = async function (title, surname, first_name, middle_name, lecturer_status, faculty, department, phone, email, password) {
+lecturerSchema.statics.signup = async function (title, surname, first_name, middle_name, role, faculty, department, phone, email, password) {
 
     // validation
     // check if the mail and password both have values
-    if (!surname || !first_name || !lecturer_status || !faculty || !department || !phone || !email || !password) {
+    if (!surname || !first_name || !role || !faculty || !department || !phone || !email || !password) {
         throw Error('All fields must be filled')
     }
     // check if email is valid(if the email put in is an actual email)
@@ -119,16 +119,16 @@ lecturerSchema.statics.signup = async function (title, surname, first_name, midd
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const lecturer = await this.create({ title, surname, first_name, middle_name, lecturer_status,faculty, department, phone, email, password: hash })
+    const lecturer = await this.create({ title, surname, first_name, middle_name, role,faculty, department, phone, email, password: hash })
 
     return lecturer
 }
 
 // static login method
-lecturerSchema.statics.login = async function (email, password) {
+lecturerSchema.statics.login = async function (email, role, password) {
     // validation
     // check if the mail and password both have values
-    if (!email || !password) {
+    if (!email || !role || !password) {
         throw Error('All fields must be filled')
     }
 

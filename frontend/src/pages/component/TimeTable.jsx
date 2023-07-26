@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { BiArrowBack, BiArrowToRight, BiRightArrowAlt } from "react-icons/bi";
 import TimeTableDetails from '../../Components/TimeTableDetails';
-import { useSchoolContext } from '../../hooks/useSchoolContext';
+import { useTimetableContext } from '../../hooks/useTimetableContext';
 import Loading from '../assets/Loading';
 import TimeTableForm from '../../Components/TimeTableForm';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
@@ -11,8 +11,9 @@ import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/re
 const TimeTable = () => {
 
     const [toggle, setToggle] = useState(false);
-    // const [school, setSchool ] = useState('')
-    const { school, dispatch } = useSchoolContext()
+    // const [timetable, setSchool ] = useState('')
+    const { timetable, dispatch } = useTimetableContext()
+// const [ timetable, setTimetable] = useState([])
 
     useEffect(() => {
         const fetchTimeTable = async () => {
@@ -25,6 +26,8 @@ const TimeTable = () => {
 
             if (res.ok) {
                 dispatch({ type: 'SET_DATA', payload: json })
+                // setTimetable(json)
+                // console.log(te)
             }
         }
         fetchTimeTable()
@@ -46,7 +49,7 @@ const TimeTable = () => {
                 </div>
 
 
-                <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
+                <Button type='button' value='List' fontSize={['11', '13', '15', '18']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
                     Fill Form
                     {!toggle &&
                         <FaChevronDown className='ml-2 font-normal text-sm' />
@@ -80,38 +83,38 @@ const TimeTable = () => {
                             <div className="w-full">
 
                                 {/* Table with contents */}
-                                {school ? (
+                                {timetable ? (
                                     <div className='mt-7'>
                                         <TableContainer>
                                             <Table whiteSpace='break-spaces'>
                                                 <Thead w='100%' backgroundColor='blue.400'>
                                                     <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='yellow.200'>
                                                         <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']}>
-                                                            <Box width='100%'  >
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 Day
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '29%']} display='flex' justifyContent='center' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                            <Box width='100%'  >
+                                                        <Th width={['150px', '100%', '29%']} display='flex' justifyContent='center' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 Course Code
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
 
-                                                            <Box width='100%'  >
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 Start
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                            <Box width='100%'  >
+                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 End
                                                             </Box>
                                                         </Th>
                                                     </Tr>
                                                 </Thead>
 
-                                                {school && school.map(school => (
-                                                    <TimeTableDetails school={school} key={school._id} />
+                                                { timetable && timetable.map(timetable => (
+                                                    <TimeTableDetails timetable={timetable} key={timetable._id} />
                                                 ))}
                                             </Table>
                                         </TableContainer>

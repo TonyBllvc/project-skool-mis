@@ -85,6 +85,7 @@ const LecturerList = () => {
                     <div className="w-full">
 
                         <div className="mt-2">
+                        { lecturer ? (
                             <div className="w-full">
 
                                 {/* Table with contents */}
@@ -118,6 +119,11 @@ const LecturerList = () => {
                                     </div>
                                 )}
                             </div>
+                            ) : (
+                                <div  className="w-full mt-7">
+                                    Nothing to display
+                                </div>
+                            )}
                         </div>
 
                     </div>

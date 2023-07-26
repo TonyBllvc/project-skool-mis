@@ -5,7 +5,7 @@ import { Box, Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@c
 import { useStudentDetailsContext } from '../../hooks/useStudentDetailsContext'
 import Loading from '../assets/Loading';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
-import StudentDetails from '../../Components/StudentDetails';
+import StudentDetails from './StudentDetails';
 import { useStudentContext } from '../../hooks/useStudentContext';
 import StudentResults from '../../Components/StudentResults';
 import { useStudentInfoContext } from '../../hooks/useStudentInfoContext';
@@ -57,7 +57,7 @@ const Student = () => {
 
   }, [])
 
-  
+
   return (
     <div className='overscroll-contain'>
       <div className='w-full font-mono font-bold text-lg'>
@@ -107,44 +107,53 @@ const Student = () => {
           {/* The table for filling */}
           {toggle &&
             <div className='mt-7'>
-              <UploadStudentResult/>
+              <UploadStudentResult />
             </div>
           }
         </Box>
 
         <Box mt={8} ml={2} display='flex' width='100%'>
-          <TableContainer width="100%" whiteSpace='break-spaces'>
-            <Table width='100%' display='flex' flexDirection='row'>
-              <Thead width={['35%', '25%', '25%']}>
-                <Tr display='flex' width='100%' flexDirection='column' backgroundColor='yellow.200'>
-                  <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                    <Box width='100%'>
-                      Name:
-                    </Box>
-                  </Th>
-                  <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                    <Box width='100%' >
-                      Faculty:
-                    </Box>
-                  </Th>
-                  <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                    <Box width='100%' >
-                      Department:
-                    </Box>
-                  </Th>
-                  <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                    <Box width='100%' >
-                      Reg Number:
-                    </Box>
-                  </Th>
-                </Tr>
-              </Thead>
-              {/* <StudentDetails/> */}
-              <StudentDetails studentInfo={result} />
-              {/* ) */}
-              {/* )} */}
-            </Table>
-          </TableContainer>
+          {/* {result ? ( */}
+            <TableContainer width="100%" whiteSpace='break-spaces'>
+              <Table width='100%' display='flex' flexDirection='row'>
+                <Thead width={['35%', '25%', '25%']}>
+                  <Tr display='flex' width='100%' flexDirection='column' backgroundColor='yellow.200'>
+                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                      <Box width='100%'>
+                        Name:
+                      </Box>
+                    </Th>
+                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                      <Box width='100%' >
+                        Faculty:
+                      </Box>
+                    </Th>
+                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                      <Box width='100%' >
+                        Department:
+                      </Box>
+                    </Th>
+                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                      <Box width='100%' >
+                        Reg Number:
+                      </Box>
+                    </Th>
+                  </Tr>
+                </Thead>
+                {/* <StudentDetails/> */}
+                {result &&
+                  <StudentDetails studentInfo={result} />
+                }
+                {/* ) */}
+                {/* )} */}
+              </Table>
+            </TableContainer>
+          {/* ) : (
+            <div className='mt-10 bg-white'>
+              Nothing to display
+            </div>
+
+          )} */}
         </Box>
 
         {/* Drop Results */}

@@ -11,15 +11,22 @@ import Home from './Home'
 
 const DashBoard = () => {
 
+  const [ reload, setReload ] = useState(false)
 
     useEffect(() => {
         document.title = 'Dashboard page'
     }, [])
     
-  const { dispatch: dispatchStudents } = useStudentContext()
+
+
+  const {  dispatch: dispatchStudents } = useStudentContext()
   const { dispatch: dispatchLecturers } = useLecturerContext()
   const { dispatch: dispatchCourses } = useCourseContext()
   const { dispatch: dispatchNotice } = useNoticeContext()
+
+  setTimeout(() => {
+    
+  }, 10000);
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -93,8 +100,8 @@ const DashBoard = () => {
     return (
         <div className='overscroll-contain overflow-visible'>
             <div className='w-full font-mono font-bold text-lg mb-14 '>
-                {/* <DashBox /> */}
-                <Home />
+                <DashBox />
+                {/* <Home /> */}
                 {/* Pass a logic here for both students and lecturers */}
             </div>
         </div>

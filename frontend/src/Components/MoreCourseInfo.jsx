@@ -26,8 +26,8 @@ const MoreCourseInfo = ({ course }) => {
 
             <Thead width='100%'>
                 <Tr display='flex' width='100%' justifyContent='center' px={1} backgroundColor='blue.100'>
-                    <Th py={1} px={4} width='100%' display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                        <Box width='100%' display='flex' justifyContent='center'>
+                    <Th py={1} px={4} width='100%' display='flex' justifyContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                        <Box width='100%' display='flex' justifyContent='center' fontSize={['10', '11', '13', '16']}>
                             Semester
                         </Box>
                     </Th>
@@ -36,8 +36,8 @@ const MoreCourseInfo = ({ course }) => {
             </Thead>
             <Tbody width='100%' >
                 <Tr display='flex' width='100%' justifyContent='center' px={1} backgroundColor='whiteAlpha.900'>
-                    <Td py={2} width='100%' display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                        <Box width='100%' display='flex' justifyContent='center' alignItems='center' >
+                    <Td py={2} width='100%' display='flex' justifyContent='center'  overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                        <Box width='100%' display='flex' justifyContent='center' alignItems='center' fontSize={['10', '11', '13', '16']}  >
                             {course.course_details.semester}
                             {/* Name */}
                             {/* { course.first_name } */}
@@ -48,8 +48,8 @@ const MoreCourseInfo = ({ course }) => {
 
             <Thead width='100%'>
                 <Tr display='flex' width='100%' justifyContent='center' px={1} backgroundColor='blue.100'>
-                    <Th py={1} px={4} width='100%' display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                        <Box width='100%' display='flex' justifyContent='center'>
+                    <Th py={1} px={4} width='100%' display='flex' justifyContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                        <Box width='100%' display='flex' justifyContent='center' fontSize={['10', '11', '13', '16']}>
                             Course Coordinator
                         </Box>
                     </Th>
@@ -58,8 +58,8 @@ const MoreCourseInfo = ({ course }) => {
             </Thead>
             <Tbody width='100%' >
                 <Tr display='flex' width='100%' justifyContent='center' px={1} backgroundColor='whiteAlpha.900'>
-                    <Td py={2} width='100%' display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                        <Box width='100%' display='flex' justifyContent='center' alignItems='center' >
+                    <Td py={2} width='100%' display='flex' justifyContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                        <Box width='100%' display='flex' justifyContent='center' alignItems='center' fontSize={['10', '11', '13', '16']} >
                             {course.course_coordinator.title} {course.course_coordinator.surname} {course.course_coordinator.first_name}
                             {/* Name */}
                             {/* { course.first_name } */}
@@ -71,8 +71,8 @@ const MoreCourseInfo = ({ course }) => {
 
             <Thead width='100%'>
                 <Tr display='flex' width='100%' justifyContent='center' px={1} backgroundColor='blue.100'>
-                    <Th py={1} px={4} width='100%' display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                        <Box width='100%' display='flex' justifyContent='center'>
+                    <Th py={1} px={4} width='100%' display='flex' justifyContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                        <Box width='100%' display='flex' justifyContent='center' fontSize={['10', '11', '13', '16']}>
                             Course Lecturers
                         </Box>
                     </Th>
@@ -81,12 +81,12 @@ const MoreCourseInfo = ({ course }) => {
             </Thead>
             <Tbody width='100%' >
                 <Tr display='flex' width='100%' justifyContent='center' px={1} backgroundColor='whiteAlpha.900'>
-                    <Td py={2} width='100%' display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                        <Box width='100%' display='flex' justifyContent='center' alignItems='center' >
+                    <Td py={2} width='100%' display='flex' justifyContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                        <Box width='100%' display='flex' justifyContent='center' alignItems='center' fontSize={['10', '11', '13', '16']} >
                         <ul>
                             {course.course_lecturers.map((lecturers, index) => (
                                 <li key={index}>
-                                {index + 1}. { lecturers.surname } { lecturers.first_name }
+                                {index + 1}. {lecturers.title}{ lecturers.surname } { lecturers.first_name }
                                 </li>
                             ))}
                         </ul>
