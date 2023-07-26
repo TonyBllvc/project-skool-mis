@@ -13,6 +13,7 @@ const noticeRoutes = require('./routes/notice')
 const sessionRoutes = require('./routes/session')
 const chatRoutes = require('./routes/chats')
 const messageRoutes = require('./routes/messages')
+const adminRoutes = require('./routes/admin')
 // express app
 const app = express()
 
@@ -44,6 +45,7 @@ app.use('/api/notice', noticeRoutes)
 app.use('/api/session', sessionRoutes)
 app.use('/api/chat', chatRoutes)
 app.use('/api/message', messageRoutes)
+app.use('/api/admin', adminRoutes)
 
 
 // connect to db

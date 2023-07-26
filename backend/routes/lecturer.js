@@ -1,11 +1,11 @@
 const express = require('express')
 // const { protect } = require('../middleware/authMiddleware')
-const { signupUser, getLecturers, getLecturer } = require('../controllers/lecturerController')
+const { signupLecturer, getLecturers, getLecturer, loginLecturer } = require('../controllers/lecturerController')
 
 const router = express.Router()
 
-router.post('/signup', signupUser)
-// router.post('/login', loginUser)
+router.post('/signup', signupLecturer)
+router.post('/login', loginLecturer)
 router.get('/lecturer_list', getLecturers)
 router.get('/:id', getLecturer)
 // router.get('/faculty/:schoolId', getDefinedLecturers)

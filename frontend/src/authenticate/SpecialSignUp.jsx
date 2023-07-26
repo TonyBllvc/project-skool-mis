@@ -1,5 +1,6 @@
 import {
-  Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast
+  Box,
+  Button, FormControl, FormLabel, Input, InputGroup, InputLeftElement, InputRightElement, VStack, useToast
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -16,6 +17,20 @@ const SpecialSignUp = () => {
   const navigate = useNavigate()
 
   const toast = useToast()
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setPhoneNumber(value);
+    setIsValidPhoneNumber(isValidNigerianPhoneNumber(value));
+  };
+
+  const isValidNigerianPhoneNumber = (phoneNumber) => {
+    const nigerianPhoneRegex = /^(?:\+234|234)?[0-9]{10}$/;
+    return nigerianPhoneRegex.test(phoneNumber);
+  };
+
 
   const handleShowHide = () => {
     setShow(!show)
@@ -55,7 +70,7 @@ const SpecialSignUp = () => {
 
     // alert(" Correct filling " + JSON.stringify(details) )
 
-    
+
     // setLoading(false)
     // try {
     //   const res = await fetch("api/user", {
@@ -121,7 +136,26 @@ const SpecialSignUp = () => {
           </FormLabel>
           <Input type='text' bg='green.100' placeholder='Enter your master id' value={master} onChange={(e) => setMaster(e.target.value)} />
         </FormControl>
-
+        <FormControl id="phone">
+          <FormLabel>Phone Number</FormLabel>
+          <InputGroup>
+            <InputLeftElement pointerEvents="none" bg='gray.400' color="gray.700" fontSize="1.2em" children="+234" />
+            <Input
+              type="tel"
+              ml={5}
+              placeholder="Enter your phone number"
+              value={phoneNumber}
+              bg='green.100'
+              onChange={handleChange}
+              isInvalid={!isValidPhoneNumber}
+            />
+          </InputGroup>
+        </FormControl>
+        {!isValidPhoneNumber && (
+          <Box color="red" mt={2}>
+            Please enter a valid Nigerian phone number.
+          </Box>
+        )}
         <FormControl id='signup-password' isRequired>
           <FormLabel color='black'>
             Password:

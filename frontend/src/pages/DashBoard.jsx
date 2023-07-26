@@ -7,6 +7,7 @@ import { useStudentContext } from '../hooks/useStudentContext'
 import { useLecturerContext } from '../hooks/useLecturerContext'
 import { useCourseContext } from '../hooks/useCourseContext'
 import { useNoticeContext } from '../hooks/useNoticeContext'
+import Home from './Home'
 
 const DashBoard = () => {
 
@@ -92,7 +93,8 @@ const DashBoard = () => {
     return (
         <div className='overscroll-contain overflow-visible'>
             <div className='w-full font-mono font-bold text-lg mb-14 '>
-                <DashBox />
+                {/* <DashBox /> */}
+                <Home />
                 {/* Pass a logic here for both students and lecturers */}
             </div>
         </div>

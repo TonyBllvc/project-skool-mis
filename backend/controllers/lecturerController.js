@@ -3,10 +3,9 @@ const School = require('../models/schoolModel')
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken')
 
-
 // to crease a web token 
 const createToken = (_id) => {
-
+    
     // create a reuseable function
     // ( taking in three arguments. 
     //  1. the payload which is the {_id})
@@ -15,18 +14,81 @@ const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '1d' })
 }
 
-// login user
-const loginUser = async (req, res) => {
+// signup lecturer
+const signupLecturer = async (req, res) => {
+    const { title, surname, first_name, middle_name, lecturer_status, faculty, department, phone, email, password  } = req.body
+
+    let emptyFields = []
+
+    if (!surname) {
+        emptyFields.push('No surname allocated')
+    }
+    if (!first_name) {
+        emptyFields.push('No first name score passed')
+    }
+    if (!lecturer_status) {
+        emptyFields.push('No lecturer score passed')
+    }
+    if (!faculty) {
+        emptyFields.push('No schoolId score passed')
+    }
+    if (!department) {
+        emptyFields.push('No schoolId score passed')
+    }
+    if (!phone) {
+        emptyFields.push('No phone number allocated')
+    }
+    if (!email) {
+        emptyFields.push('No email allocated')
+    }
+    if (!phone) {
+        emptyFields.push('No phone number allocated')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(204).json({ error: 'Please fill in all the fields', emptyFields })
+    }
+
+    // var newData = {
+    //     title,
+    //     surname,
+    //     first_name,
+    //     middle_name,
+    //     lecturer,
+    //     lecturer_details: schoolId,
+    //     phone,
+    //     email,
+    //     password
+    // }
+
+    try {
+        // pick up lecturer and password(with hash) 
+        var lecturer = await Lecturer.signup( title, surname, first_name, middle_name, lecturer_status, faculty, department, phone, email, password)
+        // .populate("lecturer_details", "phone schoolId")
+
+        // lecturer = await lecturer.populate("lecturer_details", "phone schoolId")
+
+        // create a token
+        const token = createToken(lecturer._id)
+
+        res.status(200).json({title, surname, first_name, middle_name, lecturer_status, faculty, department, phone, email, token})
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+    }
+
+}
+
+// login lecturer
+const loginLecturer = async (req, res) => {
     // for logging in 
     const { email, password } = req.body
 
     try {
-        // pick up user and password(with hash) 
-        const user = await Lecturer.login(email, password)
+        // pick up lecturer and password(with hash) 
+        const lecturer = await Lecturer.login(email, password)
 
-        // create a token for already register user
+        // create a token for already register lecturer
         // to login
-        const token = createToken(user._id)
+        const token = createToken(lecturer._id)
 
         res.status(200).json({ email, token })
     } catch (error) {
@@ -35,38 +97,11 @@ const loginUser = async (req, res) => {
 
 }
 
-// signup user
-const signupUser = async (req, res) => {
-    const { title, surname, first_name, lecturer, schoolId } = req.body
-
-    var newData = {
-        title,
-        surname,
-        first_name,
-        lecturer,
-        lecturer_details: schoolId
-    }
-
-    try {
-        // pick up user and password(with hash) 
-        var user = await Lecturer.create(newData)
-
-        user = await user.populate("lecturer_details", "faculty department")
-
-        // create a token
-        // const token = createToken(user._id)
-
-        res.status(200).json(user)
-    } catch (error) {
-        res.status(400).json({ error: error.message })
-    }
-
-}
 
 // get all lecturers 
 const getLecturers = async (req, res) => {
-    const lecturer = await Lecturer.find({}).populate("lecturer_details", "faculty department").sort({ title: 1 }).sort({ surname: 1 })
-    // .populate("user_details", "faculty department level semester")
+    const lecturer = await Lecturer.find({}).populate("lecturer_details", "phone schoolId").sort({ title: 1 }).sort({ surname: 1 })
+    // .populate("user_details", "phone schoolId level semester")
 
 
     res.status(200).json(lecturer)
@@ -80,7 +115,7 @@ const getLecturer = async (req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const lecturer = await Lecturer.findById(schoolId).populate("lecturer_details", "faculty department").sort({ title: 1 }).sort({ surname: 1 })
+    const lecturer = await Lecturer.findById(schoolId).populate("lecturer_details", "phone schoolId").sort({ title: 1 }).sort({ surname: 1 })
 
     if (!lecturer) {
         return res.status(404).json({ error: 'No such lecturer' })
@@ -106,11 +141,11 @@ const getLecturer = async (req, res) => {
 //             return res.status(404).json({ error: 'No such school' })
 //         }
 
-//         const { faculty } = school
+//         const { phone } = school
 
 //         const lecturers = await Lecturer.find({
-//             "lecturer_details": faculty
-//         }).populate("lecturer_details", "faculty department").sort({ title: 1 }).sort({ surname: 1 })
+//             "lecturer_details": phone
+//         }).populate("lecturer_details", "phone schoolId").sort({ title: 1 }).sort({ surname: 1 })
 
 //         res.status(200).json({ lecturers })
 //     } catch (error) {
@@ -119,6 +154,6 @@ const getLecturer = async (req, res) => {
 
 
 // }
-module.exports = { signupUser, loginUser, getLecturers, getLecturer,
+module.exports = { signupLecturer, loginLecturer, getLecturers, getLecturer,
     //  getDefinedLecturers
  }

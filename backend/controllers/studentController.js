@@ -15,55 +15,68 @@ const createToken = (_id) => {
     return jwt.sign({ _id }, process.env.SECRET, { expiresIn: '1d' })
 }
 
-// login user
-const loginUser = async (req, res) => {
-    // for logging in 
-    const { email, password } = req.body
+// signup student
+const signupStudent = async (req, res) => {
+    const { surname, first_name, middle_name, student_status, session, reg_no, department, faculty, phone, email, password } = req.body
 
-    try {
-        // pick up user and password(with hash) 
-        const user = await Student.login(email, password)
+    let emptyFields = []
 
-        // create a token for already register user
-        // to login
-        const token = createToken(user._id)
-
-        res.status(200).json({ email, token })
-    } catch (error) {
-        res.status(400).json({ error: error.message })
+    if (!surname) {
+        emptyFields.push('No surname allocated')
+    }
+    if (!first_name) {
+        emptyFields.push('No first name passed')
+    }
+    if (!student_status) {
+        emptyFields.push('No student status passed')
+    }
+    if (!reg_no) {
+        emptyFields.push('No reg no passed')
+    }
+    if (!department) {
+        emptyFields.push('No department passed')
+    }
+    if (!faculty) {
+        emptyFields.push('No faculty id allocated')
+    }
+    if (!email) {
+        emptyFields.push('No email allocated')
+    }
+    if (!phone) {
+        emptyFields.push('No phone number allocated')
+    }
+    if (emptyFields.length > 0) {
+        return res.status(204).json({ error: 'Please fill in all the fields', emptyFields })
     }
 
-}
-
-// signup user
-const signupUser = async (req, res) => {
-    const { surname, first_name, middle_name, students, session, reg_no, faculty, department } = req.body
 
     const regExists = await Student.findOne({ reg_no })
     if (regExists) {
-        return res.status(404).json({ error: 'Reg already exits' })
+        return res.status(404).json({ error: 'Reg no already exits' })
     }
 
     try {
-        // pick up user and password(with hash) 
-        const user = await Student.create({
-            surname, first_name, middle_name, students, session, reg_no, faculty, department
-        })
+        // pick up student and password(with hash) 
+        const student = await Student.signup(
+            surname, first_name, middle_name, student_status, session, reg_no, department, faculty, phone, email, password
+        )
 
 
         // create a token
-        // const token = createToken(user._id)
+        const token = createToken(student._id)
 
-        res.status(200).json(user)
+        res.status(200).json({ surname, first_name, middle_name, student_status, session, reg_no, department, faculty, phone, email, token })
 
     } catch (error) {
-        res.status(400).json({ error: error.message })
+       return  res.status(400).json({ error: error.message })
     }
 
+    // to create session
     const sessionExists = await Session.findOne({ session })
     if (sessionExists) {
         return
     }
+
     try {
 
         await Session.create({
@@ -72,6 +85,26 @@ const signupUser = async (req, res) => {
     } catch (error) {
         return res.status(404).json({ error: error.message })
 
+    }
+
+}
+
+// login student
+const loginStudent = async (req, res) => {
+    // for logging in 
+    const { reg_no, password } = req.body
+
+    try {
+        // pick up student and password(with hash) 
+        const student = await Student.login(reg_no, password)
+
+        // create a token for already register student
+        // to login
+        const token = createToken(student._id)
+
+        res.status(200).json({ reg_no, token })
+    } catch (error) {
+        res.status(400).json({ error: error.message })
     }
 
 }
@@ -93,7 +126,7 @@ const getStudent = async (req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    // find everything relating to such user
+    // find everything relating to such student
     const students = await Student.findById(id)
 
     // check if students actually exists
@@ -125,4 +158,4 @@ const getStudentBySession = async (req, res) => {
     }
 }
 
-module.exports = { signupUser, loginUser, getStudents, getStudent, getStudentBySession }
+module.exports = { signupStudent, loginStudent, getStudents, getStudent, getStudentBySession }
