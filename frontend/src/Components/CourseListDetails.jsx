@@ -45,11 +45,12 @@ const CourseListDetails = ({ course }) => {
                         {course &&
                             <MoreCourseInfo course={course} />
                         }
+
                     </TableContainer>
                 </Box>
             }
-            {/* {toggle &&
-                <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >
+            {/* {toggle && */}
+                {/* <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >
                     <Box mr={20}  >
                         <Button colorScheme='blue' py={1} px={3} color='white'
                         // onClick={handleUpdate} 
@@ -59,14 +60,15 @@ const CourseListDetails = ({ course }) => {
                         </Button>
                     </Box>
                     <Box ml={20} >
-                        <Button colorScheme='red' py={1} px={3} color='white' onClick={handleDelete} >
+                        <Button colorScheme='red' py={1} px={3} color='white'  >
                             <FaTrashAlt className='text-white mr-2 font-medium text-base' />
                             Delete
                         </Button>
-                    </Box>
-                    {/* <TimeUpdateModal documentData={documentData} open={isOpen} close={onClose} /> */}
-            {/* </Box> */}
+                    </Box> */}
+                    {/* {/* <TimeUpdateModal documentData={documentData} open={isOpen} close={onClose} /> */}
+                {/* </Box> */}
             {/* } */}
+
         </Tbody>
 
     )

@@ -45,6 +45,13 @@ const sets = async(req, res) => {
         return res.status(400).json({ error: ' Course Name already exists'})
     }
 
+    // parse user details as "lecturers"(because this is an array)..
+    // .. we parse
+    // const lect = JSON.parse(lecturers_id)
+
+    // now parse coordinator's details
+    // lect.push(lecturer_id)
+
     // pass in values
     var newCourse = {
         course_code, 

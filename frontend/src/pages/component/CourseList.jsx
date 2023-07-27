@@ -71,7 +71,7 @@ const CourseList = () => {
                 {/* The table for filling */}
                 {toggle &&
                     <div className='mt-7'>
-                        <CourseForm />
+                        <CourseForm setToggling={setToggle} toggling={toggle} />
                     </div>
                 }
 

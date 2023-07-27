@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useEffect, useReducer } from 'react'
 
 export const CourseContext = createContext();
 
@@ -6,7 +6,8 @@ export const courseReducer = (state, action) => {
   switch (action.type) {
     case 'CREATE_DATA':
       return {
-        course: [...state.notice, action.payload,]
+        course: [...state.course, action.payload],
+        // ...state
       }
     case 'GET_COURSE':
       return {
@@ -14,7 +15,7 @@ export const courseReducer = (state, action) => {
       }
     case 'DELETE_DATA':
       return {
-        course: state.notice.filter((data) => data._id !== action.payload._id)
+        course: state.course.filter((data) => data._id !== action.payload._id)
       }
     default:
       return state
@@ -27,6 +28,14 @@ export const CourseContextProvider = ({ children }) => {
     course: null
   })
 
+  // useEffect(() => {
+
+    // setTimeout(() => {
+      
+    //   // dispatch({ type: 'GET_COURSE', payload: state })
+    // }, 1000);
+
+  // }, [dispatch])
   return (
     <CourseContext.Provider value={{ ...state, dispatch }}>
       {children}

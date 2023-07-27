@@ -1,21 +1,23 @@
 import { Box, Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import React from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
+import { useCourseContext } from '../hooks/useCourseContext'
 
 const MoreCourseInfo = ({ course }) => {
+    const { dispatch } = useCourseContext()
 
     const handleDelete = async () => {
 
-        const response = await fetch('/api/course/' + course.id, {
+        const response = await fetch('/api/course/' + course._id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
             }
         })
-        // const json = await response.json();
+        const json = await response.json();
 
         if (response.ok) {
-            // dispatch({ type: 'DELETE_DATA', payload: json })
+            dispatch({ type: 'DELETE_DATA', payload: json })
         }
 
     }
@@ -82,7 +84,7 @@ const MoreCourseInfo = ({ course }) => {
             <Tbody width='100%' >
                 <Tr display='flex' width='100%' justifyContent='center' px={1} backgroundColor='whiteAlpha.900'>
                     <Td py={2} width='100%' display='flex' justifyContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                        <Box width='100%' display='flex' justifyContent='center' alignItems='center' fontSize={['10', '11', '13', '16']} >
+                        <Box width='100%' display='flex' flexDirection='column' justifyContent='center' alignItems='center' fontSize={['10', '11', '13', '16']} >
                         <ul>
                             {course.course_lecturers.map((lecturers, index) => (
                                 <li key={index}>
@@ -90,6 +92,11 @@ const MoreCourseInfo = ({ course }) => {
                                 </li>
                             ))}
                         </ul>
+                        
+                        <Button onClick={handleDelete} colorScheme='red' mt={5} py={1} px={3} size={19} color='white'  >
+                            <FaTrashAlt  className='text-white mr-2 font-medium text-xs' />
+                            Delete
+                        </Button>
                         </Box>
                     </Td>
                 </Tr>

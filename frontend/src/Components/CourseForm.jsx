@@ -1,4 +1,4 @@
-import { Box, Button, Card, FormControl, FormLabel, Input, InputGroup, InputRightElement, Select, Spinner, VStack, useToast } from '@chakra-ui/react'
+import { Box, Button, Card, FormControl, FormLabel, Input, InputGroup, InputRightElement, Select, Spinner, Text, VStack, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { useLecturerContext } from '../hooks/useLecturerContext'
 import { useCourseContext } from '../hooks/useCourseContext'
@@ -18,38 +18,55 @@ const optionOne = [
     { value: '800', label: '800', key: '8' }
 ]
 
-const CourseForm = () => {
+const CourseForm = ({ setToggling, toggling }) => {
     const { lecturer, dispatch: dispatchLecturers } = useLecturerContext()
     const { dispatch } = useCourseContext()
 
-    const [ school, setSchool ] = useState([])
+    const [school, setSchool] = useState([])
 
-    const [ schoolInfo, setSchoolInfo ] = useState([])
-    const [ schoolId, setSchoolId] = useState('')
-    const [level, setLevel] = useState('')
-    const [course_code, setCourseCode] = useState('')
-    const [course_name, setCourseName] = useState('')
+    const [schoolInfo, setSchoolInfo] = useState('') // ... 5.1
+    const [schoolId, setSchoolId] = useState('') // ... 5.0
+    const [level, setLevel] = useState('') // ....2
+    const [course_code, setCourseCode] = useState('') // ....1
+    const [course_name, setCourseName] = useState('') // .... 3
 
     const [selectedUsers, setSelectedUsers] = useState([])
+    // to hold and set the value inside the query box
     const [search, setSearch] = useState('')
+    // pass the list o lecturers selected
     const [searchResult, setSearchResult] = useState([])
-    const [password, setPassword] = useState('')
-    // const [ selectedOne, setSelectedOne] = useState('')
 
+    const [lecturer_id, setLecturerId] = useState('')
     const [toggle, setToggle] = useState(false)
     const [secondToggle, setSecondToggle] = useState(false)
-    const [passInfo, setInfo] = useState('')
-    const [lecturerId, setLecturerId] = useState('')
+    const [passInfo, setInfo] = useState('') // ....4 course coordinator id
     const [loading, setLoading] = useState(false)
 
+    const [error, setError] = useState('')
+
     const toast = useToast()
+
+    const handleChanges = (e) => {
+        e.preventDefault()
+        const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')
+        setCourseCode(value)
+        
+    if (value.length !== 6) {
+        setError('6 characters only')
+    }else if(/\s/.test(value)){
+        setError('No spacing allowed')
+    }else{
+        setError('')
+    }
+    }
+
     // submit filled form
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
 
         // check if every field has been filled
-        if (!level || !course_name || !course_code || !selectedUsers || !lecturerId || !passInfo) {
+        if (!level || !course_name || !course_code || !lecturer_id || !selectedUsers || !schoolId || !passInfo) {
             toast({
                 title: 'Please fill all the Fields!',
                 status: 'warning',
@@ -58,10 +75,13 @@ const CourseForm = () => {
                 position: "bottom",
             })
             return
-        }
 
+        }
         // parse every value into  details        
-        const details = { level, course_name, course_code, lecturers_id: selectedUsers, lecturer_id: lecturerId }
+        const details = {
+            level, schoolId, course_name, course_code, lecturer_id, lecturers_id: selectedUsers,
+            // lecturer_id: lecturerId 
+        }
 
         try {
             const res = await fetch("/api/course/set_course", {
@@ -77,12 +97,13 @@ const CourseForm = () => {
 
             if (!res.ok) {
                 toast({
-                    title: 'Response not okay!',
+                    title: json.error + "!",
                     status: 'error',
                     duration: 5000,
                     isClosable: true,
                     position: "top",
                 })
+                setLoading(false)
                 return console.log(json.error)
             }
 
@@ -96,6 +117,14 @@ const CourseForm = () => {
                 })
                 dispatch({ type: 'CREATE_DATA', payload: json })
                 setLoading(false)
+                setLevel('')
+                setCourseName('')
+                setCourseCode('')
+                setLecturerId('')
+                setSelectedUsers([])
+                setSchoolId('')
+                setInfo('')
+                setToggling(!toggling)
                 console.log('new data added', json)
             }
         } catch (error) {
@@ -130,7 +159,7 @@ const CourseForm = () => {
 
     }
 
-    const handleSchool = async() => {
+    const handleSchool = async () => {
         const res = await fetch('/api/school/fetch')
         const json = await res.json()
 
@@ -207,6 +236,8 @@ const CourseForm = () => {
         }
 
         setSelectedUsers([...selectedUsers, userToAdd])
+        // console.log(userToAdd)
+        // console.log(...selectedUsers)
     }
     return (
         <form onSubmit={handleSubmit} className='w-full flex justify-center'>
@@ -215,14 +246,17 @@ const CourseForm = () => {
 
                 <Box w='100%' display='flex' flexDirection='row' justifyContent='space-between' >
 
-                    <FormControl w='50%' id='first-course_code' isRequired>
+                    <FormControl w='45%' id='first-course_code' isRequired>
                         <FormLabel color='black'>
                             Course Code:
                         </FormLabel>
-                        <Input type='text' bg='green.100' placeholder='Enter course code' value={course_code} onChange={(e) => setCourseCode(e.target.value)} />
+                        <Input type='text' bg='green.100' pattern='[A-Z0-9]*' maxLength={6} placeholder='Enter course code' value={course_code} onChange={handleChanges} />
+                        {error ? <Text fontSize={['xs', 'sm', 'md','lg']} color='red.700'>
+                            {error}
+                        </Text> : <> </>}
                     </FormControl>
 
-                    <FormControl w='50%' isRequired>
+                    <FormControl w='45%' isRequired>
                         <FormLabel color='black'>
                             Level:
                         </FormLabel>
@@ -284,33 +318,33 @@ const CourseForm = () => {
 
                 <FormControl isRequired>
                     <FormLabel color='black'>
-                        Level:
+                        School Semester:
                     </FormLabel>
 
-                <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between'>
+                    <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between'>
 
-                    <Input w='76%' type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px' fontSize={15} fontFamily='cursive' mb={1} value={schoolInfo} isDisabled />
+                        <Input w='76%' type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px' fontSize={15} fontFamily='cursive' mb={1} value={schoolInfo} isDisabled />
 
-                    <Box w='20%' border={4} borderColor='green.600' color='green.600' onClick={() => setSecondToggle(!secondToggle)}>
-                        <Input w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleSchool} />
-                    </Box>
-                </FormControl>
+                        <Box w='20%' border={4} borderColor='green.600' color='green.600' onClick={() => setSecondToggle(!secondToggle)}>
+                            <Input w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleSchool} />
+                        </Box>
+                    </FormControl>
 
-                {/* Drop down of all the course*/}
-                {secondToggle &&
-                    <Box overflow='scroll' height={230} px={4} position='relative' zIndex='overlay'>
+                    {/* Drop down of all the course*/}
+                    {secondToggle &&
+                        <Box overflow='scroll' height={230} px={4} position='relative' zIndex='overlay'>
 
-                        {school && school.map((dataPick) => (
+                            {school && school.map((dataPick) => (
 
-                            <Card key={dataPick._id} onClick={() => setSecondToggle(!secondToggle)}>
+                                <Card key={dataPick._id} onClick={() => setSecondToggle(!secondToggle)}>
 
-                                <SchoolModal name={dataPick} handleName={setSchoolInfo} handleId={setSchoolId} />
+                                    <SchoolModal name={dataPick} handleName={setSchoolInfo} handleId={setSchoolId} />
 
-                            </Card>
+                                </Card>
 
-                        ))}
-                    </Box>
-                }
+                            ))}
+                        </Box>
+                    }
                 </FormControl>
 
 
