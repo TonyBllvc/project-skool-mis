@@ -7,7 +7,7 @@ const router = express.Router()
 router.post('/signup', signupLecturer)
 router.post('/login', loginLecturer)
 
-// router.use(requireAuth)
+router.use(requireAuth)
 router.get('/lecturer_list', getLecturers)
 router.get('/:email', getLecturerProfile)
 router.get('/', searchLecturer)

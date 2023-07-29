@@ -4,6 +4,7 @@ import axios from 'axios'
 import { FaEnvelope } from 'react-icons/fa'
 import NoticeDetails from '../../Components/NoticeDetails'
 import { useNoticeContext } from "../../hooks/useNoticeContext.jsx"
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const optionOne = [
     { value: 'Assignment', label: 'Assignment', key: '1' },
@@ -22,9 +23,19 @@ const Notice = () => {
     const [form, setForm] = useState('')
     const [newMessage, setNewMessage] = useState('')
 
+    const { user } = useAuthContext()
+
     useEffect(() => {
         const fetchNotice = async () => {
-            const res = await fetch('api/notice/get_notice')
+            const res = await fetch('api/notice/get_notice', {
+                // we need to send authorization headers(required for authorization)
+                headers: {
+                    // to output the bearer token 
+                    // by user the ${user.token}
+                    // this is then picked by the middleware in the backend that protects our routes
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await res.json()
 
             if (!res.ok) {
@@ -65,6 +76,7 @@ const Notice = () => {
                 body: JSON.stringify(details),
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user.token}`
                 }
 
             })

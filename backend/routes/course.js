@@ -5,7 +5,7 @@ const requireAuth = require('../middleware/authentication')
 
 const router = express.Router()
 
-// router.use(requireAuth)
+router.use(requireAuth)
 //create course
 router.post('/set_course', sets)
 // fetch courses

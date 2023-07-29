@@ -5,6 +5,7 @@ import { useCourseContext } from '../hooks/useCourseContext'
 import CourseModal from '../model/CourseModal'
 import { useSchoolContext } from '../hooks/useTimetableContext'
 import { useTimeContext } from '../hooks/useTimeContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const optionOne = [
     { value: 'Monday', label: 'Monday', key: '1' },
@@ -23,6 +24,7 @@ const optionTwo = [
 const TimeTableForm = () => {
     const { course, dispatch } = useCourseContext()
     const { dispatch: dispatchTime } = useTimeContext()
+    const {user } = useAuthContext()
 
     const [day, setDay] = useState('')
     const [start, setStart] = useState('')
@@ -65,6 +67,7 @@ const TimeTableForm = () => {
                     body: JSON.stringify(details),
                     headers: {
                         "Content-Type": "application/json",
+                        'Authorization': `Bearer ${user.token}`
                     }
 
                 })
@@ -111,7 +114,15 @@ const TimeTableForm = () => {
     const handleCourses = async (e) => {
         // e.preventDefault()
 
-        const res = await fetch('/api/course/get_courses')
+        const res = await fetch('/api/course/get_courses', {
+            // we need to send authorization headers(required for authorization)
+            headers: {
+                // to output the bearer token 
+                // by user the ${user.token}
+                // this is then picked by the middleware in the backend that protects our routes
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         const json = await res.json()
 
         if (!res.ok) {

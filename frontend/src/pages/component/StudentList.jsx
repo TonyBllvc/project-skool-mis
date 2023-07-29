@@ -7,6 +7,7 @@ import { Box, Button, FormControl, FormLabel, Select, Table, TableContainer, Th,
 import Loading from '../assets/Loading';
 import StudentListDetails from '../../Components/StudentListDetails';
 import StudentsDetailListSession from '../../Components/StudentsDetailListSession';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const StudentList = () => {
     const [toggle, setToggle] = useState(false);
@@ -16,10 +17,19 @@ const StudentList = () => {
     const [session, setSession] = useState([])
     const [passSession, setPassSession] = useState('')
     const [passStudents, setPassStudents] = useState([])
+    const { user } = useAuthContext()
 
     useEffect(() => {
         const fetchSession = async () => {
-            const res = await fetch('/api/session/')
+            const res = await fetch('/api/session/', {
+                // we need to send authorization headers(required for authorization)
+                headers: {
+                    // to output the bearer token 
+                    // by user the ${user.token}
+                    // this is then picked by the middleware in the backend that protects our routes
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await res.json()
 
             if (!res.ok) {
@@ -40,7 +50,15 @@ const StudentList = () => {
             return
         }
 
-        const res = await fetch('/api/student/session/' + passSession)
+        const res = await fetch('/api/student/session/' + passSession, {
+            // we need to send authorization headers(required for authorization)
+            headers: {
+                // to output the bearer token 
+                // by user the ${user.token}
+                // this is then picked by the middleware in the backend that protects our routes
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         const json = await res.json()
 
         if (!res.ok) {
@@ -59,7 +77,15 @@ const StudentList = () => {
 
     useEffect(() => {
         const fetchStudents = async () => {
-            const res = await fetch('/api/student/student_list')
+            const res = await fetch('/api/student/student_list', {
+                // we need to send authorization headers(required for authorization)
+                headers: {
+                    // to output the bearer token 
+                    // by user the ${user.token}
+                    // this is then picked by the middleware in the backend that protects our routes
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await res.json()
 
             if (!res.ok) {

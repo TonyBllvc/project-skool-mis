@@ -5,9 +5,11 @@ export const CourseContext = createContext();
 export const courseReducer = (state, action) => {
   switch (action.type) {
     case 'CREATE_DATA':
+        const updated =  [...state.course, action.payload]
+        const sorted = updated.sort((a, b) => a.course_code.localeCompare(b.course_code, 'en', { sensitivity: 'base' }))
       return {
-        course: [...state.course, action.payload],
-        // ...state
+          ...state, 
+        course: sorted 
       }
     case 'GET_COURSE':
       return {
@@ -25,7 +27,7 @@ export const courseReducer = (state, action) => {
 export const CourseContextProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(courseReducer, {
-    course: null
+    course: []
   })
 
   // useEffect(() => {

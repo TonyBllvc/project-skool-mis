@@ -9,7 +9,7 @@ const router = express.Router()
 router.post('/signup', signupAdmin)
 router.post('/login', loginAdmin)
 
-// router.use(requireAuth)
+router.use(requireAuth)
 router.get('/profile/:email', getAdminProfile)
 
 module.exports = router

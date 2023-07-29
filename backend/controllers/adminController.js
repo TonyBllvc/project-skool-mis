@@ -63,8 +63,6 @@ const loginAdmin = async (req, res) => {
     // for logging in 
     const { email, role, password } = req.body
 
-    const admin = await Admin.findOne({ email })
-
     try {
         // pick up admin and password(with hash) 
         const admin = await Admin.login(email, role, password)
@@ -73,7 +71,16 @@ const loginAdmin = async (req, res) => {
         // to login
         const token = createToken(admin._id, admin.role)
 
-        res.status(200).json({ email, role, token })
+
+        const userData = {
+            email,
+            role,
+            token,
+            surname: admin.surname,
+            first_name: admin.first_name,
+            middle_name: admin.middle_name,
+        }
+        res.status(200).json(userData)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -94,4 +101,4 @@ const getAdminProfile = async (req, res) => {
 
 }
 
-module.exports = { signupAdmin, loginAdmin, getAdminProfile}
+module.exports = { signupAdmin, loginAdmin, getAdminProfile }

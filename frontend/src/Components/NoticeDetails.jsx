@@ -3,9 +3,11 @@ import { FaTrashAlt } from 'react-icons/fa'
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 import React from 'react'
 import { useNoticeContext } from '../hooks/useNoticeContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const NoticeDetails = ({ notice }) => {
     const { dispatch } = useNoticeContext()
+    const { user } = useAuthContext()
     
     const handleDelete = async () => {
 
@@ -13,6 +15,7 @@ const NoticeDetails = ({ notice }) => {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const json = await response.json();

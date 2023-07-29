@@ -1,4 +1,6 @@
 const Course = require('../models/courseModel')
+const Result = require('../models/resultModel')
+const Time = require('../models/timetableModel')
 const mongoose = require('mongoose');
 
 // Create courses (only admin will have access to this)
@@ -136,6 +138,10 @@ const deletes = async(req, res) => {
     if (!course) {
         return res.status(400).json({ error: 'No such course' })
     }
+
+    await Time.deleteMany({time_details: id})
+
+    await Result.deleteMany({result_details: id})
 
     res.status(200).json(course)
 

@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 
 // to crease a web token 
 const createToken = (_id, role) => {
-    
+
     // create a reuseable function
     // ( taking in three arguments. 
     //  1. the payload which is the {_id})
@@ -16,7 +16,7 @@ const createToken = (_id, role) => {
 
 // signup lecturer
 const signupLecturer = async (req, res) => {
-    const { title, surname, first_name, middle_name, role, faculty, department, phone, email, password  } = req.body
+    const { title, surname, first_name, middle_name, role, faculty, department, phone, email, password } = req.body
 
     let emptyFields = []
 
@@ -62,7 +62,7 @@ const signupLecturer = async (req, res) => {
 
     try {
         // pick up lecturer and password(with hash) 
-        var lecturer = await Lecturer.signup( title, surname, first_name, middle_name, role, faculty, department, phone, email, password)
+        var lecturer = await Lecturer.signup(title, surname, first_name, middle_name, role, faculty, department, phone, email, password)
         // .populate("lecturer_details", "phone schoolId")
 
         // lecturer = await lecturer.populate("lecturer_details", "phone schoolId")
@@ -70,7 +70,7 @@ const signupLecturer = async (req, res) => {
         // create a token
         const token = createToken(lecturer._id, lecturer.role)
 
-        res.status(200).json({title, surname, first_name, middle_name, role, faculty, department, phone, email, token})
+        res.status(200).json({ title, surname, first_name, middle_name, role, faculty, department, phone, email, token })
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -90,7 +90,16 @@ const loginLecturer = async (req, res) => {
         // to login
         const token = createToken(lecturer._id, lecturer.role)
 
-        res.status(200).json({ email, role, token })
+        const userData = {
+            email,
+            role,
+            token,
+            surname: lecturer.surname,
+            first_name: lecturer.first_name,
+            middle_name: lecturer.middle_name,
+        }
+
+        res.status(200).json(userData)
     } catch (error) {
         res.status(400).json({ error: error.message })
     }
@@ -114,7 +123,7 @@ const getLecturerProfile = async (req, res) => {
     // if (!mongoose.Types.ObjectId.isValid(schoolId)) {
     //     return res.status(404).json({ error: 'No such document' })
     // }
-    
+
     const { email } = req.params
 
     const lecturer = await Lecturer.findOne({ email: email })
@@ -128,24 +137,24 @@ const getLecturerProfile = async (req, res) => {
 
 }
 
-const searchLecturer = async(req, res) => {
+const searchLecturer = async (req, res) => {
     try {
-        
-    const keyword = req.query.search ? {
-        $or: [
-            // in the 'options' property, 'i' means case sensitive
-            { surname: { $regex: req.query.search, $options: 'i' } },
-            { title: { $regex: req.query.search, $options: 'i' } },
-            { first_name: { $regex: req.query.search, $options: 'i' } },
-            { middle_name: { $regex: req.query.search, $options: 'i' } }
-        ]
-    } : {
-        // Do nothing!
-    }
 
-    const users = await Lecturer.find(keyword)
+        const keyword = req.query.search ? {
+            $or: [
+                // in the 'options' property, 'i' means case sensitive
+                { surname: { $regex: req.query.search, $options: 'i' } },
+                { title: { $regex: req.query.search, $options: 'i' } },
+                { first_name: { $regex: req.query.search, $options: 'i' } },
+                { middle_name: { $regex: req.query.search, $options: 'i' } }
+            ]
+        } : {
+            // Do nothing!
+        }
 
-    res.status(200).json(users)
+        const users = await Lecturer.find(keyword)
+
+        res.status(200).json(users)
 
     } catch (error) {
         res.status(400).json({ error: error.message })
@@ -182,6 +191,7 @@ const searchLecturer = async(req, res) => {
 
 
 // }
-module.exports = { signupLecturer, loginLecturer, getLecturers, getLecturerProfile, searchLecturer
+module.exports = {
+    signupLecturer, loginLecturer, getLecturers, getLecturerProfile, searchLecturer
     //  getDefinedLecturers
- }
+}

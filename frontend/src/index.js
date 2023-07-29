@@ -11,28 +11,31 @@ import { LecturerContextProvider } from './context/LecturerContext';
 import { StudentDetailsContextProvider } from './context/StudentDetailsContext';
 import { StudentInfoContextProvider } from './context/StudentInfoContext';
 import { NoticeContextProvider } from './context/NoticeContext';
+import { AuthContextProvider } from './context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   <ChakraProvider>
-    <TimetableContextProvider>
-      <CourseContextProvider>
-        <TimeContextProvider>
-          <LecturerContextProvider>
-            <StudentContextProvider>
-              <StudentDetailsContextProvider>
-                <StudentInfoContextProvider>
-                  <NoticeContextProvider>
-                    <App />
-                  </NoticeContextProvider>
-                </StudentInfoContextProvider>
-              </StudentDetailsContextProvider>
-            </StudentContextProvider>
-          </LecturerContextProvider>
-        </TimeContextProvider>
-      </CourseContextProvider>
-    </TimetableContextProvider>
+    <AuthContextProvider>
+      <TimetableContextProvider>
+        <CourseContextProvider>
+          <TimeContextProvider>
+            <LecturerContextProvider>
+              <StudentContextProvider>
+                <StudentDetailsContextProvider>
+                  <StudentInfoContextProvider>
+                    <NoticeContextProvider>
+                      <App />
+                    </NoticeContextProvider>
+                  </StudentInfoContextProvider>
+                </StudentDetailsContextProvider>
+              </StudentContextProvider>
+            </LecturerContextProvider>
+          </TimeContextProvider>
+        </CourseContextProvider>
+      </TimetableContextProvider>
+    </AuthContextProvider>
   </ChakraProvider>
   // </React.StrictMode>
 );

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useCourseContext } from '../hooks/useCourseContext'
 import { useSchoolContext, useTimetableContext } from '../hooks/useTimetableContext'
 import CourseUpdateModal from '../model/CourseUpdateModal'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const optionOne = [
     { value: 'Monday', label: 'Monday', key: '1' },
@@ -22,6 +23,7 @@ const optionTwo = [
 const TimeTableUpdateForm = ({ documentData, close }) => {
     const { course, dispatch } = useCourseContext()
     const { timetable, dispatch: dispatchTime } = useTimetableContext()
+    const { user } = useAuthContext()
     // incomplete ( updating document possessing errors)
 
     const [id, setId] = useState(documentData._id)
@@ -66,6 +68,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
                 body: JSON.stringify(details),
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user.token}`
                 }
 
             })
@@ -113,7 +116,15 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
     const handleCourses = async (e) => {
         // e.preventDefault()
 
-        const res = await fetch('/api/course/get_courses')
+        const res = await fetch('/api/course/get_courses', {
+            // we need to send authorization headers(required for authorization)
+            headers: {
+                // to output the bearer token 
+                // by user the ${user.token}
+                // this is then picked by the middleware in the backend that protects our routes
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         const json = await res.json()
 
         if (!res.ok) {

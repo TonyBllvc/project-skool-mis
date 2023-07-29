@@ -8,6 +8,7 @@ import { useStudentContext } from '../../hooks/useStudentContext'
 import { useLecturerContext } from '../../hooks/useLecturerContext'
 import { useCourseContext } from '../../hooks/useCourseContext'
 import { useNoticeContext } from '../../hooks/useNoticeContext'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
 const DashBox = () => {
     const { time } = useTimeContext()
@@ -16,13 +17,14 @@ const DashBox = () => {
     const { lecturer } = useLecturerContext()
     const { course} = useCourseContext()
     const { notice } = useNoticeContext()
+    const { user } = useAuthContext()
 
     return (
         <div>
             {/* the top section */}
             <div className='w-full mb-10'>
                 <h1 className='text-lg sm:text-2xl cursor-pointer font-serif font-semibold text-green-500'>
-                    {time}, Master Admin
+                    {time}, {user.surname} {user.first_name }
                 </h1>
             </div>
 

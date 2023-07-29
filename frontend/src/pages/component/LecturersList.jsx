@@ -6,16 +6,26 @@ import { useLecturerContext } from '../../hooks/useLecturerContext';
 import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
 import Loading from '../assets/Loading';
 import LecturersListDetails from '../../Components/LecturersListDetails';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const LecturerList = () => {
     const [toggle, setToggle] = useState(false);
     // const [school, setSchool ] = useState('')
     const { lecturer, dispatch } = useLecturerContext()
     const navigate = useNavigate()
+    const { user } = useAuthContext()
 
     useEffect(() => {
         const fetchLecturer = async () => {
-            const res = await fetch('/api/lecturer/lecturer_list')
+            const res = await fetch('/api/lecturer/lecturer_list', {
+                // we need to send authorization headers(required for authorization)
+                headers: {
+                    // to output the bearer token 
+                    // by user the ${user.token}
+                    // this is then picked by the middleware in the backend that protects our routes
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await res.json()
 
             if (!res.ok) {

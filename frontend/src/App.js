@@ -11,7 +11,6 @@ import Lecturer from './pages/component/StudentList'
 import StudentList from './pages/component/StudentList';
 import Student from './pages/component/Student';
 import LecturerList from './pages/component/LecturersList';
-import StudentDetails from './pages/component/StudentDetails';
 import Home from './pages/Home';
 // import { useStudentContext } from './hooks/useStudentContext';
 // import { useLecturerContext } from './hooks/useLecturerContext';
@@ -20,63 +19,82 @@ import SignUpModal from './model/SignUpModal';
 import LoginModal from './model/LoginModal';
 import Notice from './pages/component/Notice';
 import Chat from './pages/component/Chat';
+import { useAuthContext } from './hooks/useAuthContext';
+import StudentDetails from './Components/StudentDetails';
 // import ViewTimeTable from './pages/component/ViewTimeTable';
 
 export default function App() {
   const [toggle, setToggle] = useState(false)
+  const { user } = useAuthContext()
 
   return (
     <div>
       <BrowserRouter>
 
         {/* Before authentication */}
-        {/* <Routes>
-                <Route exact path='/' element={<Home /> } />
-                <Route path='/sign_up' element={<SignUpModal />} />
-                <Route path='/login' element={<LoginModal />} />
-          
-        </Routes> */}
+        {user ?
+          (
+            <div className="w-full bg-green-500 min-h-screen flex flex-row justify-center sm:justify-center p-0 m-0 ">
+              {/* ------ */}
 
-        <div className="w-full bg-green-500 min-h-screen flex flex-row justify-center sm:justify-center p-0 m-0 ">
-          {/* <div className='sm:w-1/5 sm:hidden flex sm:overflow-y-hidden sm:overscroll-none'> */}
+              {/* <div className='sm:w-1/5 sm:hidden flex sm:overflow-y-hidden sm:overscroll-none'> */}
 
-          {/* {!toggle &&
+              {/* {!toggle &&
               <BsList onClick={() => setToggle(!toggle)} className='w-full flex mt-2 sm:hidden text-neutral-800 font-extrabold font-mono text-2xl ml-0.5' />
             } */}
-          {/* </div> */}
-          {/* {toggle && */}
+              {/* </div> */}
+              {/* {toggle && */}
 
-          <div className='w-1/6 -ml-8 sm:ml-0 sm:w-1/5 flex relative z-0 sm:bg-transparent sm:z-0 sm:flex h-full overflow-y-hidden overscroll-none'>
-            <NavBar />
-          </div>
-          {/* } */}
-          <div className='w-5/6 sm:4/5 z-30 sm:mr-4 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8'>
-            <div className="rounded-lg h-full overflow-visible overscroll-y-auto mt-4 pt-2 mb-3 mx-2 px-2 sm:p-2 sm:mx-4">
+              {/* ---- */}
+              <div className='w-1/6 -ml-8 sm:ml-0 sm:w-1/5 flex relative z-0 sm:bg-transparent sm:z-0 sm:flex h-full overflow-y-hidden overscroll-none'>
+                <NavBar />
+              </div>
+              {/* ------- */}
+              {/* } */}
+              {/* ------ */}
+              <div className='w-5/6 sm:4/5 z-30 sm:mr-4 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8'>
+                <div className="rounded-lg h-full overflow-visible overscroll-y-auto mt-4 pt-2 mb-3 mx-2 px-2 sm:p-2 sm:mx-4">
+                  <Routes>
+                    {/*  ------ */}
+
+                    {/* <Route exact path='/' element={<Home /> } />  */}
+                    <Route exact path='/' element={<DashBoard />} />
+                    <Route path='/courses' element={<CourseList />} />
+                    <Route path='/student/:id/results' element={<Student />} />
+                    {/*  ---- */}
+                    <Route path='/student/:id/results' element={<StudentDetails />} />
+                    {/*  ---- */}
+                    <Route path='/students' element={<StudentList />} />
+                    {/* ----- */}
+                    {/* <Route path='/student_result_upload' element={<StudentListing /> } /> */}
+                    {/* ---- */}
+                    <Route path='/sign_up' element={<SignUpModal />} />
+                    <Route path='/notice' element={<Notice />} />
+
+                    <Route path='/lecturers' element={<LecturerList />} />
+
+                    <Route path='/timetable' element={<TimeTable />} />
+                    {/*  ------ */}
+                    {/* Lost page */}
+                    <Route path='*' element={<NotFound />} />
+                    {/* --- */}
+                  </Routes>
+                </div>
+              </div >
+            </div >
+          ) : (
+            <div>
               <Routes>
-                {/* <Route exact path='/' element={<Home /> } />  */}
-                <Route exact path='/' element={<DashBoard />} />
-                <Route path='/courses' element={<CourseList />} />
-                <Route path='/student/:id/results' element={<Student />} />
-                {/* <Route path='/student/:id/results' element={<StudentDetails />} /> */}
-                <Route path='/students' element={<StudentList />} />
-
-                {/* <Route path='/student_result_upload' element={<StudentListing /> } /> */}
-
+                {/* <Route path='/' element={<Home />} /> */}
                 <Route path='/sign_up' element={<SignUpModal />} />
-                <Route path='/notice' element={<Notice />} />
+                <Route  path='/login' element={ !user ? <LoginModal /> : <DashBoard />} />
 
-                <Route path='/lecturers' element={<LecturerList />} />
-
-                <Route path='/timetable' element={<TimeTable />} />
-                {/* Lost page */}
-                {/* <Route path='*' element={<NotFound />} /> */}
               </Routes>
             </div>
-          </div>
-        </div>
+          )}
 
-      </BrowserRouter>
-    </div>
+      </BrowserRouter >
+    </div >
   )
 }
 

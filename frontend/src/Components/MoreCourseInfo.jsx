@@ -2,9 +2,11 @@ import { Box, Button, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import React from 'react'
 import { FaTrashAlt } from 'react-icons/fa'
 import { useCourseContext } from '../hooks/useCourseContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const MoreCourseInfo = ({ course }) => {
     const { dispatch } = useCourseContext()
+    const { user } = useAuthContext()
 
     const handleDelete = async () => {
 
@@ -12,6 +14,7 @@ const MoreCourseInfo = ({ course }) => {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const json = await response.json();

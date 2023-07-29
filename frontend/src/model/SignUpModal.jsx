@@ -1,9 +1,9 @@
 import { Box, Button, Container, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import logo from '../images/images_logo.png'
-import SpecialSignUp from '../authenticate/SpecialSignUp'
-import LectureSignUp from '../authenticate/LecturerSignUp'
-import StudentSignUp from '../authenticate/StudentSignUp'
+import SpecialSignUp from '../pages/authenticate/SpecialSignUp'
+import LectureSignUp from '../pages/authenticate/LecturerSignUp'
+import StudentSignUp from '../pages/authenticate/StudentSignUp'
 import { NavLink } from 'react-router-dom'
 // A sign up and login page
 const SignUpModal = () => {
@@ -13,7 +13,7 @@ const SignUpModal = () => {
   }, [])
 
   return (
-    <Container maxW='xl' centerContent >
+    <Container maxW='2xl' centerContent >
       <Box display='flex'  flexDirection='column' justifyContent='center' alignItems='center' textAlign='center' p={4} bg='white' w='100%' m='40px 0 15px 0' borderRadius='lg' borderWidth='1px' >
         <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' w='250px' h='90px' alt='logo' />
         <Box bg='whatsapp.300' w='100%' mt='20px' p={4} color='black' borderRadius="lg" borderWidth="1px" >

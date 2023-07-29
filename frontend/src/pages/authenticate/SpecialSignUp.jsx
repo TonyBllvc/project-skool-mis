@@ -5,19 +5,25 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
+import { useSignUp } from '../../hooks/auth/useSignup';
 
 const SpecialSignUp = () => {
   const [show, setShow] = useState(false)
-  const [name, setName] = useState('')
-  const [master, setMaster] = useState('')
+  const [title, setTitle] = useState('')
+  const [surname, setSurname] = useState('')
+  const [first_name, setFirstName] = useState('')
+  const [middle_name, setMiddleName] = useState('')
+  const [department, setDepartment] = useState('')
+  const [email, setEmail] = useState('')
+  const [faculty, setFaculty] = useState('')
+  const [role, setRole] = useState('Admin')
   const [password, setPassword] = useState('')
   const [confirm_password, setConfirmPassword] = useState('')
-  // const [picture, setPicture] = useState('')
-  const [loading, setLoading] = useState(false)
-  const navigate = useNavigate()
+  
+  const {signup, pending, error, } = useSignUp('/api/lecturer/login')
 
   const toast = useToast()
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phone, setPhoneNumber] = useState('');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
 
   const handleChange = (event) => {
@@ -26,9 +32,9 @@ const SpecialSignUp = () => {
     setIsValidPhoneNumber(isValidNigerianPhoneNumber(value));
   };
 
-  const isValidNigerianPhoneNumber = (phoneNumber) => {
+  const isValidNigerianPhoneNumber = (phone) => {
     const nigerianPhoneRegex = /^(?:\+234|234)?[0-9]{10}$/;
-    return nigerianPhoneRegex.test(phoneNumber);
+    return nigerianPhoneRegex.test(phone);
   };
 
 
@@ -38,104 +44,69 @@ const SpecialSignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    setLoading(true)
 
-    // add picture later 
-    if (!name || !master || !password || !confirm_password) {
-      toast({
-        title: 'Please fill all the Fields!',
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      })
-      setLoading(false)
-      return
-    }
-
-    if (password !== confirm_password) {
-      toast({
-        title: 'Passwords Do Not Match',
-        status: 'warning',
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      })
-      setLoading(false)
-      return
-    }
-
-    // add picture later 
-    const details = { name, master, password, confirm_password }
-
-    // alert(" Correct filling " + JSON.stringify(details) )
-
-
-    // setLoading(false)
-    // try {
-    //   const res = await fetch("api/user", {
-    //     method: "POST",
-    //     body: JSON.stringify(details),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     }
-
-    //   })
-    //   const json = await res.json()
-
-    //   if (!res.ok) {
-    //     toast({
-    //       title: 'Response not okay!',
-    //       status: 'error',
-    //       duration: 5000,
-    //       isClosable: true,
-    //       position: "top",
-    //     })
-    //     console.log(json.error)
-
-    //   }
-
-    //   if (res.ok) {
-    //     toast({
-    //       title: 'Login Successful!',
-    //       description: master + ' logged in successfully',
-    //       status: 'success',
-    //       duration: 3000,
-    //       isClosable: true,
-    //       position: "top",
-    //     })
-    //     localStorage.setItem('userInfo', JSON.stringify(json))
-    //     setLoading(false)
-    //     navigate('/chats')
-    //   }
-    // } catch (error) {
-    //   toast({
-    //     title: 'An Error Occurred!',
-    //     status: 'error',
-    //     duration: 5000,
-    //     isClosable: true,
-    //     position: "top",
-    //   })
-    //   setLoading(false)
-    // }
-
+    await signup(title, surname, first_name, middle_name, role, department, faculty, phone, email, password)
   }
   return (
     <form onSubmit={handleSubmit} >
       <VStack spacing='5px' color='black' >
-        <FormControl id='first-name' isRequired>
+
+        <FormControl id='' isRequired>
           <FormLabel color='black'>
-            Name:
+            Title:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your name' value={name} onChange={(e) => setName(e.target.value)} />
+          <Input type='text' bg='green.100' placeholder='Enter your role id' value={title} onChange={(e) => setTitle(e.target.value)} />
         </FormControl>
 
-        <FormControl id='master' isRequired>
+        <FormControl id='' isRequired>
           <FormLabel color='black'>
-            Master:
+            Surname:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your master id' value={master} onChange={(e) => setMaster(e.target.value)} />
+          <Input type='text' bg='green.100' placeholder='Enter your surname' value={surname} onChange={(e) => setSurname(e.target.value)} />
         </FormControl>
+
+        <FormControl id='' isRequired>
+          <FormLabel color='black'>
+            First Name:
+          </FormLabel>
+          <Input type='text' bg='green.100' placeholder='Enter your role id' value={first_name} onChange={(e) => setFirstName(e.target.value)} />
+        </FormControl>
+
+        <FormControl id='' isRequired>
+          <FormLabel color='black'>
+            Middle Name:
+          </FormLabel>
+          <Input type='text' bg='green.100' placeholder='Enter your role id' value={middle_name} onChange={(e) => setMiddleName(e.target.value)} />
+        </FormControl>
+
+        <FormControl id='' isRequired>
+          <FormLabel color='black'>
+            Faculty:
+          </FormLabel>
+          <Input type='text' bg='green.100' placeholder='Enter your role id' value={faculty} onChange={(e) => setFaculty(e.target.value)} />
+        </FormControl>
+
+        <FormControl id='' isRequired>
+          <FormLabel color='black'>
+            Department:
+          </FormLabel>
+          <Input type='text' bg='green.100' placeholder='Enter your role id' value={department} onChange={(e) => setDepartment(e.target.value)} />
+        </FormControl>
+
+        <FormControl id='' isRequired>
+          <FormLabel color='black'>
+            Role:
+          </FormLabel>
+          <Input type='text' bg='green.100' placeholder='Enter your role id' value={role} onChange={(e) => setRole(e.target.value)} />
+        </FormControl>
+
+        <FormControl id='' isRequired>
+          <FormLabel color='black'>
+            Email:
+          </FormLabel>
+          <Input type='text' bg='green.100' placeholder='Enter your role id' value={email} onChange={(e) => setEmail(e.target.value)} />
+        </FormControl>
+
         <FormControl id="phone">
           <FormLabel>Phone Number</FormLabel>
           <InputGroup>
@@ -144,7 +115,7 @@ const SpecialSignUp = () => {
               type="tel"
               ml={5}
               placeholder="Enter your phone number"
-              value={phoneNumber}
+              value={phone}
               bg='green.100'
               onChange={handleChange}
               isInvalid={!isValidPhoneNumber}
@@ -193,7 +164,7 @@ const SpecialSignUp = () => {
             <Input type='file' bg='green.100' placeholder='Profile picture' onChange={(e) => postDetails(e.target.files[0])} />
         </FormControl> */}
 
-        <Button color='green.100' colorScheme='whatsapp' width='100%' style={{ marginTop: 15 }} type='submit' isLoading={loading} >
+        <Button color='green.100' colorScheme='whatsapp' width='100%' style={{ marginTop: 15 }} type='submit' isLoading={pending} >
           Sign Up
         </Button>
 

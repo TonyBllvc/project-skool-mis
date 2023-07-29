@@ -9,17 +9,27 @@ import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/re
 import { useCourseContext } from '../../hooks/useCourseContext';
 import CourseListDetails from '../../Components/CourseListDetails';
 import CourseForm from '../../Components/CourseForm';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const CourseList = () => {
     const [toggle, setToggle] = useState(false);
     // const [school, setSchool ] = useState('')
     const navigate = useNavigate()
     const { course, dispatch } = useCourseContext()
+    const { user } = useAuthContext()
     // const { school, dispatch } = useSchoolContext()
 
     useEffect(() => {
         const fetchCourse = async () => {
-            const res = await fetch('/api/course/get_courses')
+            const res = await fetch('/api/course/get_courses', {
+                // we need to send authorization headers(required for authorization)
+                headers: {
+                    // to output the bearer token 
+                    // by user the ${user.token}
+                    // this is then picked by the middleware in the backend that protects our routes
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await res.json()
 
             if (!res.ok) {

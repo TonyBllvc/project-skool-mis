@@ -8,7 +8,7 @@ const router = express.Router()
 router.post('/signup', signupStudent)
 router.post('/login', loginStudent)
 
-// router.use(requireAuth)
+router.use(requireAuth)
 router.get('/student_list', getStudents)
 router.get('/:id', getStudent)
 

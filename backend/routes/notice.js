@@ -5,7 +5,7 @@ const requireAuth = require('../middleware/authentication')
 const router = express.Router()
 
 
-// router.use(requireAuth)
+router.use(requireAuth)
 //create notice message
 router.post('/convey_notice', sets)
 // fetch all notice

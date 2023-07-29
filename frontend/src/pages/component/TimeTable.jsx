@@ -7,6 +7,7 @@ import Loading from '../assets/Loading';
 import TimeTableForm from '../../Components/TimeTableForm';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const TimeTable = () => {
 
@@ -14,10 +15,19 @@ const TimeTable = () => {
     // const [timetable, setSchool ] = useState('')
     const { timetable, dispatch } = useTimetableContext()
 // const [ timetable, setTimetable] = useState([])
+const { user } = useAuthContext()
 
     useEffect(() => {
         const fetchTimeTable = async () => {
-            const res = await fetch('/api/time/get_time_table')
+            const res = await fetch('/api/time/get_time_table', {
+                // we need to send authorization headers(required for authorization)
+                headers: {
+                    // to output the bearer token 
+                    // by user the ${user.token}
+                    // this is then picked by the middleware in the backend that protects our routes
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
             const json = await res.json()
 
             if (!res.ok) {

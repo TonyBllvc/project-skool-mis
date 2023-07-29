@@ -4,10 +4,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useCourseContext } from '../hooks/useCourseContext'
 import CourseModel from '../model/CourseModal'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const UploadStudentResult = () => {
     const { course, dispatch } = useCourseContext()
     const { dispatch: dispatchResults } = useStudentDetailsContext()
+    const { user } = useAuthContext()
     const { id } = useParams()
 
     const [student_id, setStudent_id] = useState(id)
@@ -97,6 +99,7 @@ const UploadStudentResult = () => {
                 body: JSON.stringify(details),
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user.token}`
                 }
 
             })
@@ -150,7 +153,15 @@ const UploadStudentResult = () => {
     const handleCourses = async (e) => {
         e.preventDefault()
 
-        const res = await fetch('/api/course/get_courses')
+        const res = await fetch('/api/course/get_courses', {
+            // we need to send authorization headers(required for authorization)
+            headers: {
+                // to output the bearer token 
+                // by user the ${user.token}
+                // this is then picked by the middleware in the backend that protects our routes
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         const json = await res.json()
 
         if (!res.ok) {

@@ -4,13 +4,22 @@ import { AiOutlineWeChat, AiOutlineHome, AiOutlineInfoCircle, AiOutlineLock, AiO
 import { BsChatDots } from 'react-icons/bs'
 import { BiBookOpen } from 'react-icons/bi'
 import { ImSwitch } from 'react-icons/im'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import logo from '../images/images_logo.png'
+import useLogout from '../hooks/auth/useLogout'
 
 const NavBar = () => {
+    const { logout } = useLogout()
+    const navigate = useNavigate()
+
+    const handleClick = () => {
+        logout()
+
+        navigate('/login')
+    }
 
     return (
-        <nav className="bg w-full sm:w-full h-full flex flex-col top-12 relative overflow-hidden overscroll-none ">
+        <nav className="bg w-full sm:w-full flex flex-col top-12 relative overflow-hidden overscroll-none ">
             <div className=' w-full sm:pl-2 h-full flex flex-col justify-center'>
                 <div className=' w-full sm:w-1/2 flex flex-row pl-5 items-center'>
                     {/* <NavLink> */}
@@ -84,7 +93,7 @@ const NavBar = () => {
                             </p>
                         </NavLink>
                         
-                        <NavLink to="/logout" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                        <NavLink to='/login' onClick={handleClick} className='flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'>
                             <ImSwitch className=' text-2xl text-white font-semibold pr-2' />
                             <p className='hidden sm:flex'>
                             Logout

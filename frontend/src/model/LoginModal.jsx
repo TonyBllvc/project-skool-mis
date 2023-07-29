@@ -1,16 +1,16 @@
 import { Box, Button, Container, Image, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import logo from '../images/images_logo.png'
-import LecturerLogin from '../authenticate/LecturerLogin'
-import StudentLogin from '../authenticate/StudentLogin'
-import SpecialLogin from '../authenticate/SpecialLogin'
+import LecturerLogin from '../pages/authenticate/LecturerLogin'
+import StudentLogin from '../pages/authenticate/StudentLogin'
+import SpecialLogin from '../pages/authenticate/SpecialLogin'
 import { NavLink } from 'react-router-dom'
 
 // A sign up and login page
 const LoginModal = () => {
 
   useEffect(() => {
-    document.title = 'Login Page'
+    document.title = 'Login'
   }, [])
 
   return (

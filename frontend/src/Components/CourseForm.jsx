@@ -6,6 +6,7 @@ import LecturerModal from '../model/LecturerModal'
 import SelectedLecturer from '../assests/SelectedLecturer'
 import UserLecturer from '../assests/UserLecturer'
 import SchoolModal from '../model/SchoolModal'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const optionOne = [
     { value: '100', label: '100', key: '1' },
@@ -21,6 +22,8 @@ const optionOne = [
 const CourseForm = ({ setToggling, toggling }) => {
     const { lecturer, dispatch: dispatchLecturers } = useLecturerContext()
     const { dispatch } = useCourseContext()
+
+    const { user } = useAuthContext()
 
     const [school, setSchool] = useState([])
 
@@ -89,6 +92,7 @@ const CourseForm = ({ setToggling, toggling }) => {
                 body: JSON.stringify(details),
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user.token}`
                 }
 
             })
@@ -146,7 +150,15 @@ const CourseForm = ({ setToggling, toggling }) => {
         // e.preventDefault()
 
         // console.log(lecturer)
-        const res = await fetch('/api/lecturer/lecturer_list')
+        const res = await fetch('/api/lecturer/lecturer_list', {
+            // we need to send authorization headers(required for authorization)
+            headers: {
+                // to output the bearer token 
+                // by user the ${user.token}
+                // this is then picked by the middleware in the backend that protects our routes
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         const json = await res.json()
 
         if (!res.ok) {
@@ -160,7 +172,15 @@ const CourseForm = ({ setToggling, toggling }) => {
     }
 
     const handleSchool = async () => {
-        const res = await fetch('/api/school/fetch')
+        const res = await fetch('/api/school/fetch', {
+            // we need to send authorization headers(required for authorization)
+            headers: {
+                // to output the bearer token 
+                // by user the ${user.token}
+                // this is then picked by the middleware in the backend that protects our routes
+                'Authorization': `Bearer ${user.token}`
+            }
+        })
         const json = await res.json()
 
         if (!res.ok) {
@@ -193,9 +213,9 @@ const CourseForm = ({ setToggling, toggling }) => {
                 setLoading(true)
 
                 const data = await fetch(`/api/lecturer/?search=${search}`, {
-                    //   headers: {
-                    //     Authorization: `Bearer ${user.token}`,
-                    //   }
+                      headers: {
+                        Authorization: `Bearer ${user.token}`,
+                      }
                 }
                 )
                 const json = await data.json()

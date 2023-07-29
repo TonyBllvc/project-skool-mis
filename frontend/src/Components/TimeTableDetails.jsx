@@ -4,11 +4,13 @@ import { FaTrashAlt } from 'react-icons/fa'
 import { BiPencil } from 'react-icons/bi'
 import { useTimetableContext } from '../hooks/useTimetableContext'
 import TimeUpdateModal from '../model/TimeUpdateModal'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const TimeTableDetails = ({ timetable }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { dispatch } = useTimetableContext()
     const [toggle, setToggle] = useState(false);
+    const { user } = useAuthContext()
 
     const [documentData, setDocumentData] = useState('')
 
@@ -18,6 +20,7 @@ const TimeTableDetails = ({ timetable }) => {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
+                'Authorization': `Bearer ${user.token}`
             }
         })
         const json = await response.json();
@@ -35,6 +38,7 @@ const TimeTableDetails = ({ timetable }) => {
             const response = await fetch("api/time/" + timetable._id, {
                 headers: {
                     "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user.token}`
                 }
             })
             const json = await response.json()

@@ -8,14 +8,15 @@ import { useLecturerContext } from '../hooks/useLecturerContext'
 import { useCourseContext } from '../hooks/useCourseContext'
 import { useNoticeContext } from '../hooks/useNoticeContext'
 import Home from './Home'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const DashBoard = () => {
 
-  const [ reload, setReload ] = useState(false)
-
     useEffect(() => {
-        document.title = 'Dashboard page'
+        document.title = 'Dashboard'
     }, [])
+
+    const { user } = useAuthContext()
     
 
 
@@ -30,7 +31,15 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('/api/student/student_list')
+      const res = await fetch('/api/student/student_list', {
+        // we need to send authorization headers(required for authorization)
+        headers: {
+            // to output the bearer token 
+            // by user the ${user.token}
+            // this is then picked by the middleware in the backend that protects our routes
+            'Authorization': `Bearer ${user.token}`
+        }
+    })
       const json = await res.json()
 
       if (!res.ok) {
@@ -47,7 +56,15 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchLecturer = async () => {
-      const res = await fetch('/api/lecturer/lecturer_list')
+      const res = await fetch('/api/lecturer/lecturer_list', {
+        // we need to send authorization headers(required for authorization)
+        headers: {
+            // to output the bearer token 
+            // by user the ${user.token}
+            // this is then picked by the middleware in the backend that protects our routes
+            'Authorization': `Bearer ${user.token}`
+        }
+    })
       const json = await res.json()
 
       if (!res.ok) {
@@ -64,7 +81,15 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchCourse = async () => {
-      const res = await fetch('/api/course/get_courses')
+      const res = await fetch('/api/course/get_courses', {
+        // we need to send authorization headers(required for authorization)
+        headers: {
+            // to output the bearer token 
+            // by user the ${user.token}
+            // this is then picked by the middleware in the backend that protects our routes
+            'Authorization': `Bearer ${user.token}`
+        }
+    })
       const json = await res.json()
 
       if (!res.ok) {
@@ -81,7 +106,15 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchNotice = async () => {
-        const res = await fetch('api/notice/get_notice')
+        const res = await fetch('api/notice/get_notice', {
+          // we need to send authorization headers(required for authorization)
+          headers: {
+              // to output the bearer token 
+              // by user the ${user.token}
+              // this is then picked by the middleware in the backend that protects our routes
+              'Authorization': `Bearer ${user.token}`
+          }
+      })
         const json = await res.json()
 
         if (!res.ok) {

@@ -5,11 +5,12 @@ import { Box, Button, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@c
 import { useStudentDetailsContext } from '../../hooks/useStudentDetailsContext'
 import Loading from '../assets/Loading';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
-import StudentDetails from './StudentDetails';
+import StudentDetails from '../../Components/StudentDetails';
 import { useStudentContext } from '../../hooks/useStudentContext';
 import StudentResults from '../../Components/StudentResults';
 import { useStudentInfoContext } from '../../hooks/useStudentInfoContext';
 import UploadStudentResult from '../../Components/UploadStudentResult';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 // this for the admin 
 const Student = () => {
@@ -19,10 +20,19 @@ const Student = () => {
   const [result, setResult] = useState('')
   const { studentDetails, dispatch } = useStudentDetailsContext()
   // const { dispatch: dispatchInfo  } = useStudentInfoContext()
+  const { user } = useAuthContext()
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('/api/result/student/' + id)
+      const res = await fetch('/api/result/student/' + id, {
+        // we need to send authorization headers(required for authorization)
+        headers: {
+            // to output the bearer token 
+            // by user the ${user.token}
+            // this is then picked by the middleware in the backend that protects our routes
+            'Authorization': `Bearer ${user.token}`
+        }
+    })
       const json = await res.json()
 
       if (!res.ok) {
@@ -40,7 +50,15 @@ const Student = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('/api/student/' + id)
+      const res = await fetch('/api/student/' + id, {
+        // we need to send authorization headers(required for authorization)
+        headers: {
+            // to output the bearer token 
+            // by user the ${user.token}
+            // this is then picked by the middleware in the backend that protects our routes
+            'Authorization': `Bearer ${user.token}`
+        }
+    })
       const json = await res.json()
 
       if (!res.ok) {
