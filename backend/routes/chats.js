@@ -9,10 +9,10 @@ const router = express.Router()
 
 // // access various chats routes
 router.post('/', accessChat) //single user chat
-router.get('/', fetchChats) // fetch user chats
-// router.post('/group', createGroupChat) // create group chat
-// router.put('/rename', renameGroupChat) // rename group chats
-// router.put('/add_user', addUserToGroup) // add user 
-// router.put('/remove_user', removeUserFromGroup) // remove user from group
+router.get('/:id', fetchChats) // fetch user chats
+router.post('/group', createGroupChat) // create group chat
+router.put('/rename', renameGroupChat) // rename group chats
+router.put('/add_user', addUserToGroup) // add user 
+router.put('/remove_user', removeUserFromGroup) // remove user from group
 
 module.exports = router

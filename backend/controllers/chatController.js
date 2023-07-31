@@ -1,16 +1,14 @@
 const Chat = require('../models/chatModel')
-const User = require('../models/lecturerModel')
-const Student = require('../models/studentModel')
-const Lecturer = require('../models/lecturerModel')
+const User = require('../models/userModel')
 
 const accessChat = async (req, res) => {
-    // chat if chat with user id does exists
-    const { userId } = req.body
+    // chat if chat with user id(from the user) does exists
+    const { userId, userID } = req.body
 
     // if not user check 
     if (!userId) {
         console.log('UserId param not sent with request')
-        return res.sendStatus(400)
+        return res.status(400).json(error.message)
     }
 
     // if exists, pass this function
@@ -19,7 +17,7 @@ const accessChat = async (req, res) => {
         isGroupChat: false,
         $and: [
             // current user id logged
-            { users: { $elemMatch: { $eq: req.user._id } } },
+            { users: { $elemMatch: { $eq: userID } } },
             // current user id called
             { users: { $elemMatch: { $eq: userId } } }
         ]
@@ -29,7 +27,7 @@ const accessChat = async (req, res) => {
         path: 'latestMessage.sender',
         // add 'picture' here later
         // ******************** go back here ******************
-        select: 'name, email',
+        select: 'title, surname, first_name, reg_no, middle_name, role, email',
     })
 
     // to ensure that is only one chat per user that exists
@@ -41,7 +39,7 @@ const accessChat = async (req, res) => {
         var chatData = {
             chat_name: 'sender',
             isGroupChat: false,
-            users: [req.user._id, userId],
+            users: [userID, userId],
         }
 
         try {
@@ -57,20 +55,24 @@ const accessChat = async (req, res) => {
             res.status(200).send(fullChat)
         } catch (error) {
             res.status(400)
-            throw new Error(error.message)
+            res.status(202).json(error.message)
         }
     }
 }
 
 const fetchChats = async (req, res) => {
+    const { id } = req.params
+
     try {
         // find every chat the user has, then populate it 
 
 
         // Chat.find({users: {$elemMatch: { $eq: req.user._id}}}).then((result) => res.send(result)) // to pass data 
-        Chat.find({ 
-            users: { $elemMatch: { $eq: req.user._id } 
-        } }).populate("users", "-password").populate("groupAdmin", "-password").populate("latestMessage").sort({ updatedAt: -1 }).then(async (results) => {
+        Chat.find({
+            users: {
+                $elemMatch: { $eq: id }
+            }
+        }).populate("users", "-password").populate("groupAdmin", "-password").populate("latestMessage").sort({ updatedAt: -1 }).then(async (results) => {
             results = await User.populate(results, {
                 path: 'latestMessage.sender',
                 // add 'picture' here later
@@ -81,36 +83,36 @@ const fetchChats = async (req, res) => {
         })
     } catch (error) {
         res.status(400)
-        throw new Error(error.message)
+        return res.status(400).json(error.message)
 
     }
 }
 
 const createGroupChat = async (req, res) => {
     // pass in name of group chat(name) and members(users)
-    if (!req.body.users || !req.body.name) {
+    if (!req.body.users || !req.body.name || !req.body.admin ) {
         return res.status(400).send({ message: "Please fill all the fields" })
     }
 
     // parse user details as "users"(because this is an array)..
     // .. we parse
-    var users = JSON.parse(req.body.users)
+    // var users = JSON.parse(req.body.users)
 
     // ensure that it is 2 or more users before proceeding
-    if (users.length < 2) {
+    if (req.body.users.length < 2) {
         return res.status(400).send("More than 2 users are required to form a group chat")
     }
 
     // now parse this curent user's details after check
-    users.push(req.user)
+    req.body.users.push(req.body.admin)
 
     try {
         // create a group, by parse these details into the schema
         const groupChat = await Chat.create({
             chat_name: req.body.name,
-            users: users,
+            users: req.body.users,
             isGroupChat: true,
-            groupAdmin: req.user
+            groupAdmin: req.body.admin
         })
 
         // then fill the sub schema (users, and group admin) and give the group chat and id
@@ -121,7 +123,7 @@ const createGroupChat = async (req, res) => {
     } catch (error) {
         // check if error
         res.status(400)
-        throw new Error(error.message)
+        res.status(400).json( error.maessage )
     }
 }
 
@@ -163,10 +165,9 @@ const addUserToGroup = async (req, res) => {
     ).populate("users", "-password").populate("groupAdmin", "-password")
 
     if (!added) {
-        res.status(400)
-        throw new Error("Chat Not Found")
+        res.status(400).json("Chat Not Found")
     } else {
-        res.json(added)
+        res.status(200).json(added)
     }
 
 }
@@ -195,8 +196,8 @@ const removeUserFromGroup = async (req, res) => {
 module.exports = {
     accessChat,
     fetchChats,
-    // createGroupChat,
-    // renameGroupChat,
-    // addUserToGroup,
-    // removeUserFromGroup
+    createGroupChat,
+    renameGroupChat,
+    addUserToGroup,
+    removeUserFromGroup
 } 

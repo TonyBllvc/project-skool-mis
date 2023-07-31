@@ -8,7 +8,7 @@ const messageSchema = mongoose.Schema({
         // containing the id to a particular user
         type: Schema.Types.ObjectId,
         // reference to our message model
-        ref: "user"
+        ref: "using"
     }, 
     //  content of message
     content: {
@@ -21,8 +21,8 @@ const messageSchema = mongoose.Schema({
         // containing the id to a particular user
         type: Schema.Types.ObjectId,
         // reference to our user model
-        ref: "chat" 
+        ref: "chatting" 
     }
 }, { timestamps: true})
 
-module.exports = mongoose.model('message', messageSchema);
+module.exports = mongoose.model('messaging', messageSchema);

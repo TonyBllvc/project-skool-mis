@@ -20,22 +20,21 @@ const chatSchema = new Schema({
         // reference to our user model
         ref: "using"
     }],
-
     // to keep track of latest messages
     latestMessage: {
         // containing the id to a particular user
         type: Schema.Types.ObjectId,
         // reference to our message model
-        ref: "message"
+        ref: "messaging"
     },
     groupAdmin: {
         // containing the id to a particular user
         type: Schema.Types.ObjectId,
         // reference to our message model
-        ref: "lecturer"
+        ref: "using"
 
     }
 }, { timestamps: true })
 
 
-module.exports = mongoose.model("chat", chatSchema);
+module.exports = mongoose.model("chatting", chatSchema);

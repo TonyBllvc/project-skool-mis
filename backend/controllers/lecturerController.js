@@ -78,14 +78,15 @@ const signupLecturer = async (req, res) => {
 
     const emailExists = await User.findOne({ email })
 
-    if(emailExists){
+    if (emailExists) {
         return
     }
 
-    try{
-        await User.create({ title, surname, first_name, middle_name, role, department, faculty, phone, email
-        })
-    }catch( error){
+    try {
+        await User.create({ _id: lecturer._id, title, surname, first_name, middle_name, role, department, faculty, phone, email })
+
+
+    } catch (error) {
         return res.status(404).json({ error: error.message })
     }
 

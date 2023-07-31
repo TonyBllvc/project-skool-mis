@@ -61,6 +61,7 @@ const lecturerSchema = new Schema({
             message: (props) => `${props.value} is not a valid email address`
         }
     },
+
     password: {
         type: String,
         require: true,
@@ -117,7 +118,7 @@ lecturerSchema.statics.signup = async function (title, surname, first_name, midd
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const lecturer = await this.create({ title, surname, first_name, middle_name, role,faculty, department, phone, email, password: hash })
+    const lecturer = await this.create({ title, surname, first_name, middle_name, role, faculty, department, phone, email, password: hash })
 
     return lecturer
 }

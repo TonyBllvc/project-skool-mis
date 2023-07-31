@@ -6,10 +6,11 @@ const Schema = mongoose.Schema;
 
 // Create schema and model
 const usingSchema = new Schema({
+    _id: {
+        type: Schema.Types.ObjectId
+    },
     title: {
         type: String,
-        // require: true,
-        // unique: true
     },
     surname: {
         type: String,
@@ -27,15 +28,17 @@ const usingSchema = new Schema({
     },
     role: {
         type: String,
+        require: true
+    },
+    reg_no: {
+        type: Number,
+        require: true,
+        unique: true
     },
     faculty: {
         type: String,
         // no trailing spaces before or after
         trim: true
-    },
-    reg_no: {
-        type: Number,
-        unique: true
     },
     department: {
         type: String,
@@ -51,7 +54,19 @@ const usingSchema = new Schema({
         type: String,
         required: true,
         unique: true,
+    },
+    password: {
+        type: String,
     }
+    // lecturer_field: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "lecturer"
+    // },
+    // student_field: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "lecturer"
+    // },
+
 })
 
 module.exports = mongoose.model('using', usingSchema);

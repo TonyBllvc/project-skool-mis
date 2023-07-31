@@ -116,7 +116,7 @@ const updates = async(req, res) => {
         return res.status(404).json({ error: 'No such document' })
     }
 
-    const course = await Course.findByIdAndUpdate({ _id: id }, updatesNew, { new: false }).populate("course_details", " faculty department level semester").populate("course_coordinator", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1}).populate("course_lecturers", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1})
+    const course = await Course.findByIdAndUpdate({ _id: id }, updatesNew, { new: true }).populate("course_details", " faculty department level semester").populate("course_coordinator", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1}).populate("course_lecturers", "title surname first_name middle_name faculty department phone email").sort({ title: 1}).sort({ surname: 1})
 
     if (!course) {
         return res.status(400).json({ error: 'No such course' })

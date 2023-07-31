@@ -57,13 +57,13 @@ const signupStudent = async (req, res) => {
     }
 
     const emailExists = await User.findOne({ email })
-    if(emailExists){
-        return  res.status(404).json({ error: 'Email already exits' })
+    if (emailExists) {
+        return res.status(404).json({ error: 'Email already exits' })
     }
 
     try {
         // pick up student and password(with hash) 
-        const student = await Student.signup(
+        var student = await Student.signup(
             surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, password
         )
 
@@ -77,10 +77,11 @@ const signupStudent = async (req, res) => {
         return res.status(400).json({ error: error.message })
     }
 
-    try{
-        await User.create({ surname, first_name, middle_name, role, department, reg_no, faculty, phone, email
-        })
-    }catch( error){
+
+    try {
+        await User.create({ _id: student._id, surname, first_name, middle_name, role, department, reg_no, faculty, phone, email })
+
+    } catch (error) {
         return res.status(404).json({ error: error.message })
     }
 
@@ -164,7 +165,7 @@ const getStudent = async (req, res) => {
 
 }
 
-const searchStudent = async (req, res ) => {
+const searchStudent = async (req, res) => {
     try {
 
         const keyword = req.query.search ? {
@@ -209,4 +210,4 @@ const getStudentBySession = async (req, res) => {
     }
 }
 
-module.exports = { signupStudent, loginStudent, getStudents, getStudent,searchStudent, getStudentBySession }
+module.exports = { signupStudent, loginStudent, getStudents, getStudent, searchStudent, getStudentBySession }

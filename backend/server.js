@@ -14,6 +14,7 @@ const sessionRoutes = require('./routes/session')
 const chatRoutes = require('./routes/chats')
 const messageRoutes = require('./routes/messages')
 const adminRoutes = require('./routes/admin')
+const userRoutes = require('./routes/user')
 // express app
 const app = express()
 
@@ -38,7 +39,7 @@ app.use((req, res, next) => {
 app.use('/api/school', schoolRoutes)
 app.use('/api/course', courseRoutes) // come back to this after creating lecturer and school field
 app.use('/api/result', resultRoutes) // come back to this after creating student field
-app.use('/api/time', timeRoutes )
+app.use('/api/time', timeRoutes)
 app.use('/api/student', studentRoutes)
 app.use('/api/lecturer', lecturerRoutes)
 app.use('/api/notice', noticeRoutes)
@@ -46,6 +47,7 @@ app.use('/api/session', sessionRoutes)
 app.use('/api/chat', chatRoutes)
 app.use('/api/message', messageRoutes)
 app.use('/api/admin', adminRoutes)
+app.use('/api/user', userRoutes)
 
 
 // connect to db
