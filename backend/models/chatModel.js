@@ -9,7 +9,7 @@ const chatSchema = new Schema({
         trim: true
     },
     // if the chat is a group chat or not
-    isGroupChat: { 
+    isGroupChat: {
         type: Boolean,
         default: false
     },
@@ -18,8 +18,9 @@ const chatSchema = new Schema({
         // containing the id to a particular user
         type: Schema.Types.ObjectId,
         // reference to our user model
-        ref: "user"
+        ref: "using"
     }],
+
     // to keep track of latest messages
     latestMessage: {
         // containing the id to a particular user
@@ -31,7 +32,7 @@ const chatSchema = new Schema({
         // containing the id to a particular user
         type: Schema.Types.ObjectId,
         // reference to our message model
-        ref: "user"
+        ref: "lecturer"
 
     }
 }, { timestamps: true })

@@ -137,7 +137,7 @@ const DashBox = () => {
 
                     {/* card four */}
                     <div className='w-full p-2 bg-white rounded overflow-hidden shadow-lg relative hover:shadow-slate-800'>
-                        <NavLink to='/master_student_page'>
+                        <NavLink>
                             <div className='w-full flex flex-row my-2'>
                                 <div className='w-1/2 flex items-start justify-start '>
                                     <BiBookOpen className='text-3xl text-blue-400 ' />
@@ -172,7 +172,7 @@ const DashBox = () => {
                 </Box>
                 <hr />
                 <Box mt='1px' mb={['5px', '5px', '5px']} height='90%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center' >
-                    <Box width='100%' display='flex' alignItems='center' flexDirection='column' justifyContent='space-around' height={['250px', '250px', '300px', '400px']}  >
+                    <Box width='100%' display='flex' alignItems='center' flexDirection='column' justifyContent='space-around' height={['350px', '40px', '450px', '500px']}  >
                         <Box display='flex' flexDirection='column' width='100%' height='80%' borderRadius='lg' overflowY='scroll' position='relative'>
                             <Box>
                                 {notice && notice.map((notice, index) => (

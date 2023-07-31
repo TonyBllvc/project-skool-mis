@@ -1,5 +1,7 @@
 const Message = require("../models/messageModel")
 const User = require("../models/lecturerModel")
+const Student = require('../models/studentModel')
+const Lecturer = require('../models/lecturerModel')
 const Chat = require("../models/chatModel")
 
 const sendMessage = async (req, res) => {

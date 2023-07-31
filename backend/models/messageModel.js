@@ -16,7 +16,7 @@ const messageSchema = mongoose.Schema({
         // no trailing spaces before or after
         trim: true
     },
-    // reference to owner of chat
+    // reference to which of the chats
     chat_owner: {
         // containing the id to a particular user
         type: Schema.Types.ObjectId,

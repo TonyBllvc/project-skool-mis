@@ -12,6 +12,7 @@ import { StudentDetailsContextProvider } from './context/StudentDetailsContext';
 import { StudentInfoContextProvider } from './context/StudentInfoContext';
 import { NoticeContextProvider } from './context/NoticeContext';
 import { AuthContextProvider } from './context/AuthContext';
+import { ChatContextProvider } from './context/ChatProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,7 +27,9 @@ root.render(
                 <StudentDetailsContextProvider>
                   <StudentInfoContextProvider>
                     <NoticeContextProvider>
-                      <App />
+                      <ChatContextProvider>
+                        <App />
+                      </ChatContextProvider>
                     </NoticeContextProvider>
                   </StudentInfoContextProvider>
                 </StudentDetailsContextProvider>

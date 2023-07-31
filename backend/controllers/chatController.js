@@ -1,8 +1,10 @@
 const Chat = require('../models/chatModel')
 const User = require('../models/lecturerModel')
+const Student = require('../models/studentModel')
+const Lecturer = require('../models/lecturerModel')
 
 const accessChat = async (req, res) => {
-    // chat if chat with user does exists
+    // chat if chat with user id does exists
     const { userId } = req.body
 
     // if not user check 

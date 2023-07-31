@@ -8,8 +8,6 @@ const Schema = mongoose.Schema;
 const lecturerSchema = new Schema({
     title: {
         type: String,
-        require: true,
-        // unique: true
     },
     surname: {
         type: String,

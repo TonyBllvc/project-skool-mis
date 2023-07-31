@@ -1,5 +1,6 @@
 const Student = require('../models/studentModel')
 const Session = require('../models/sessionModel')
+const User = require('../models/userModel')
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken')
 
@@ -55,6 +56,11 @@ const signupStudent = async (req, res) => {
         return res.status(404).json({ error: 'Reg number already exits' })
     }
 
+    const emailExists = await User.findOne({ email })
+    if(emailExists){
+        return  res.status(404).json({ error: 'Email already exits' })
+    }
+
     try {
         // pick up student and password(with hash) 
         const student = await Student.signup(
@@ -69,6 +75,13 @@ const signupStudent = async (req, res) => {
 
     } catch (error) {
         return res.status(400).json({ error: error.message })
+    }
+
+    try{
+        await User.create({ surname, first_name, middle_name, role, department, reg_no, faculty, phone, email
+        })
+    }catch( error){
+        return res.status(404).json({ error: error.message })
     }
 
     // to create session
@@ -151,6 +164,32 @@ const getStudent = async (req, res) => {
 
 }
 
+const searchStudent = async (req, res ) => {
+    try {
+
+        const keyword = req.query.search ? {
+            $or: [
+                // in the 'options' property, 'i' means case sensitive
+                { surname: { $regex: req.query.search, $options: 'i' } },
+                { title: { $regex: req.query.search, $options: 'i' } },
+                { first_name: { $regex: req.query.search, $options: 'i' } },
+                { middle_name: { $regex: req.query.search, $options: 'i' } }
+            ]
+        } : {
+            // Do nothing!
+        }
+
+        const users = await Student.find(keyword)
+
+        res.status(200).json(users)
+
+    } catch (error) {
+        res.status(400).json({ error: error.message })
+
+    }
+
+}
+
 const getStudentBySession = async (req, res) => {
     const { session } = req.params
 
@@ -170,4 +209,4 @@ const getStudentBySession = async (req, res) => {
     }
 }
 
-module.exports = { signupStudent, loginStudent, getStudents, getStudent, getStudentBySession }
+module.exports = { signupStudent, loginStudent, getStudents, getStudent,searchStudent, getStudentBySession }

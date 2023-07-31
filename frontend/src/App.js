@@ -64,6 +64,7 @@ export default function App() {
                                     <Route path="/students" element={user ? <StudentList /> : <Navigate to={'/login'} />} />
                                     <Route path="/sign_up" element={user ? <SignUpModal /> : <Navigate to={'/login'} />} />
                                     <Route path="/notice" element={user.role === 'Lecturer' ? <Notice /> : <Navigate to={'/'} />} />
+                                    <Route path="/chat" element={user ? <Chat /> : <Navigate to={'/'} />} />
 
                                     <Route path="/lecturers" element={user ? <LecturerList /> : <Navigate to={'/login'} />} />
 

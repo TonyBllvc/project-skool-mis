@@ -19,7 +19,7 @@ const StudentList = () => {
     const [passStudents, setPassStudents] = useState([])
     const { user } = useAuthContext()
 
-    useEffect(() => {
+    // useEffect(() => {
         const fetchSession = async () => {
             const res = await fetch('/api/session/', {
                 // we need to send authorization headers(required for authorization)
@@ -40,9 +40,9 @@ const StudentList = () => {
                 return setSession(json)
             }
         }
-        fetchSession()
+        // fetchSession()
 
-    }, [])
+    // }, [])
 
     // useEffect(() => {
     const fetchStudent = async () => {
@@ -134,6 +134,7 @@ const StudentList = () => {
                         </FormLabel>
                         <Select variant='filled' color='gray.700'
                             value={passSession}
+                            onClick={fetchSession}
                             onChange={(e) => setPassSession(e.target.value)}
                             placeholder='Select'
                             multiple={false}

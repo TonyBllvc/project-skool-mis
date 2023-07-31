@@ -28,6 +28,10 @@ const Notice = () => {
 
     useEffect(() => {
         const fetchNotice = async () => {
+
+            // if(!user._id){
+            //     return
+            // }
             const res = await fetch('api/notice/from/' + user._id, {
                 // we need to send authorization headers(required for authorization)
                 headers: {
@@ -115,11 +119,13 @@ const Notice = () => {
             <Box mt='10px' mb={['24px', '17px', '10px']} height='93%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center' >
                 <Box width='100%' display='flex' alignItems='center' flexDirection='column' justifyContent='space-around' height={['550px', '630px', '710px']}  >
                     <Box display='flex' flexDirection='column' width='100%' height='80%' borderRadius='lg' overflowY='scroll' position='relative'>
+                    { user && 
                         <Box>
                             {notice && notice.map((notice, index) => (
                                 <NoticeDetails notice={notice} key={index} />
                             ))}
                         </Box>
+                        }
 
                     </Box>
                     <Box width='100%' height='20%'>
