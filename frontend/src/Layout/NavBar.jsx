@@ -7,12 +7,14 @@ import { ImSwitch } from 'react-icons/im'
 import { NavLink, useNavigate } from 'react-router-dom'
 import logo from '../images/images_logo.png'
 import useLogout from '../hooks/auth/useLogout'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 const NavBar = () => {
     const { logout } = useLogout()
     const navigate = useNavigate()
+    const { user } = useAuthContext()
 
-    const handleClick = () => {
+    const handleLogout = () => {
         logout()
 
         navigate('/login')
@@ -23,7 +25,7 @@ const NavBar = () => {
             <div className=' w-full sm:pl-2 h-full flex flex-col justify-center'>
                 <div className=' w-full sm:w-1/2 flex flex-row pl-5 items-center'>
                     {/* <NavLink> */}
-                    <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' display={[ 'none', 'flex', 'flex' ]} w={['70%', '75%', '140px']} h={['40px', '42px', '45px']} alt='logo' />
+                    <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' display={['none', 'flex', 'flex']} w={['70%', '75%', '140px']} h={['40px', '42px', '45px']} alt='logo' />
                     {/* <Text fontSize={24} color='white'> FUTO </Text> */}
                     {/* <img src={} alt='logo/> */}
                     {/* </NavLink> */}
@@ -35,10 +37,10 @@ const NavBar = () => {
                 <nav>
 
                     <div>
-                        <NavLink to="/" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                        <NavLink to="/dashboard" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineHome className=' text-2xl text-green-100 font-semibold pr-2' />
                             <p className='hidden sm:flex w-full'>
-                            Dashboard
+                                Dashboard
                             </p>
                             {/* <p className='text-white active:text-black hover:text-black h-full '>Dashboard</p> */}
                         </NavLink>
@@ -55,48 +57,54 @@ const NavBar = () => {
                         </NavLink> */}
                         <NavLink to="/timetable" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
-                            
+
                             <p className='hidden sm:flex'>
-                            Time-Table
+                                Time-Table
                             </p>
                         </NavLink>
                         <NavLink to="/chat" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <BsChatDots className=' text-2xl text-white font-semibold pr-2' />
-                            
+
                             <p className='hidden sm:flex'>
-                            Chat
+                                Chat
                             </p>
                         </NavLink>
+                        { user.role === 'Lecturer' ? (
                         <NavLink to="/notice" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineInfoCircle className=' text-2xl text-white font-semibold pr-2' />
-                            
+
                             <p className='hidden sm:flex'>
-                            Notice
+                                Notice
                             </p>
                         </NavLink>
+                        ) : (
+                            <>
+                                
+                            </>
+                        )}
                         {/* a hr across */}
                         <hr className='w-11/12 my-4
                     border-white'/>
 
                         <NavLink to="/my_profile" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineUser className=' text-2xl text-white font-semibold pr-2' />
-                            
+
                             <p className='hidden sm:flex'>
-                            My Profile
+                                My Profile
                             </p>
                         </NavLink>
                         <NavLink to="/settings" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineLock className=' text-2xl text-white font-semibold pr-2' />
-                            
+
                             <p className='hidden sm:flex'>
-                            Settings
+                                Settings
                             </p>
                         </NavLink>
-                        
-                        <NavLink to='/login' onClick={handleClick} className='flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'>
+
+                        <NavLink to='/login' onClick={handleLogout} className='flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'>
                             <ImSwitch className=' text-2xl text-white font-semibold pr-2' />
                             <p className='hidden sm:flex'>
-                            Logout
+                                Logout
                             </p>
                         </NavLink>
                         <hr className='w-11/12 my-4

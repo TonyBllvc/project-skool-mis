@@ -3,28 +3,55 @@ import { AiOutlineFolder } from 'react-icons/ai'
 import { BiBookOpen } from 'react-icons/bi'
 import { NavLink } from 'react-router-dom'
 import { useTimeContext } from '../../hooks/useTimeContext'
-import { Box, Text, Textarea } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import { useStudentContext } from '../../hooks/useStudentContext'
 import { useLecturerContext } from '../../hooks/useLecturerContext'
 import { useCourseContext } from '../../hooks/useCourseContext'
 import { useNoticeContext } from '../../hooks/useNoticeContext'
 import { useAuthContext } from '../../hooks/useAuthContext'
+import NoticeBoard from '../../Components/NoticeBoard'
 
 const DashBox = () => {
     const { time } = useTimeContext()
     // get list of students
     const { student } = useStudentContext()
     const { lecturer } = useLecturerContext()
-    const { course} = useCourseContext()
-    const { notice } = useNoticeContext()
+    const { course } = useCourseContext()
+    const { notice, dispatch } = useNoticeContext()
     const { user } = useAuthContext()
+
+    useEffect(() => {
+        const fetchNotice = async () => {
+            const res = await fetch('api/notice/get_notice', {
+                // we need to send authorization headers(required for authorization)
+                headers: {
+                    // to output the bearer token 
+                    // by user the ${user.token}
+                    // this is then picked by the middleware in the backend that protects our routes
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+            const json = await res.json()
+
+            if (!res.ok) {
+                return console.log(json.error)
+            }
+
+            if (res.ok) {
+                dispatch({ type: 'GET_DATA', payload: json })
+            }
+        }
+        fetchNotice()
+
+    }, [])
+
 
     return (
         <div>
             {/* the top section */}
             <div className='w-full mb-10'>
                 <h1 className='text-lg sm:text-2xl cursor-pointer font-serif font-semibold text-green-500'>
-                    {time}, {user.surname} {user.first_name }
+                    {time}, {user.surname} {user.first_name}
                 </h1>
             </div>
 
@@ -50,7 +77,7 @@ const DashBox = () => {
                             </div>
                             <div >
                                 <div className='py-1' >
-                                    <h2 className='font-mono'> { lecturer && lecturer.length}  </h2>
+                                    <h2 className='font-mono'> {lecturer && lecturer.length}  </h2>
                                 </div>
                                 <div className='py-1' >
                                     <h6 className='font-sans text-sm font-normal'> Assigned here</h6>
@@ -75,7 +102,7 @@ const DashBox = () => {
                             </div>
                             <div >
                                 <div className='py-1' >
-                                    <h2 className='font-mono'> { student && student.length }  </h2>
+                                    <h2 className='font-mono'> {student && student.length}  </h2>
                                 </div>
                                 <div className='py-1' >
                                     <h6 className='font-sans text-sm font-normal'> Assigned here</h6>
@@ -99,7 +126,7 @@ const DashBox = () => {
                             </div>
                             <div >
                                 <div className='py-1' >
-                                    <h2 className='font-mono'> { course && course.length} </h2>
+                                    <h2 className='font-mono'> {course && course.length} </h2>
                                 </div>
                                 <div className='py-1' >
                                     <h6 className='font-sans text-sm font-normal'> Assigned here</h6>
@@ -123,8 +150,8 @@ const DashBox = () => {
                             </div>
                             <div >
                                 <div className='py-1' >
-                                    <h2 className='font-mono'> 
-                                    { notice && notice.length }
+                                    <h2 className='font-mono'>
+                                        {notice && notice.length}
                                     </h2>
                                 </div>
                                 <div className='py-1' >
@@ -137,12 +164,26 @@ const DashBox = () => {
                 </div>
             </div>
 
-            <Box backgroundColor='whiteAlpha.200' px={3} py={5}>
-                <Text>
-                Nothing here yet!
-                </Text>
-            </Box>
+            <Box width='100%' mt='55px' display='flex' flexDirection='column' justifyContent='space-between' overflowY='hidden' h='100%'  >
+                <Box ml='5px' height='7%' >
+                    <Text fontFamily='heading' color='blackAlpha.700' fontSize={['22px', '25px', '30px']} fontWeight='bold'>
+                        Notice Board
+                    </Text>
+                </Box>
+                <hr />
+                <Box mt='1px' mb={['5px', '5px', '5px']} height='90%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center' >
+                    <Box width='100%' display='flex' alignItems='center' flexDirection='column' justifyContent='space-around' height={['250px', '250px', '300px', '400px']}  >
+                        <Box display='flex' flexDirection='column' width='100%' height='80%' borderRadius='lg' overflowY='scroll' position='relative'>
+                            <Box>
+                                {notice && notice.map((notice, index) => (
+                                    <NoticeBoard notice={notice} key={index} />
+                                ))}
+                            </Box>
 
+                        </Box>
+                    </Box>
+                </Box>
+            </Box>
         </div>
     )
 }

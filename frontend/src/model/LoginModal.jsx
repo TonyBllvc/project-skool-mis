@@ -4,7 +4,8 @@ import logo from '../images/images_logo.png'
 import LecturerLogin from '../pages/authenticate/LecturerLogin'
 import StudentLogin from '../pages/authenticate/StudentLogin'
 import SpecialLogin from '../pages/authenticate/SpecialLogin'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuthContext } from '../hooks/useAuthContext'
 
 // A sign up and login page
 const LoginModal = () => {
@@ -12,6 +13,22 @@ const LoginModal = () => {
   useEffect(() => {
     document.title = 'Login'
   }, [])
+  
+  // const { user, dispatch } = useAuthContext()
+  // const navigate = useNavigate()
+
+  
+//   useEffect(() => {
+//     const user = JSON.parse(localStorage.getItem('user'))
+
+//     if (user) {
+//         dispatch({ type: 'LOGIN', payload: user })
+//         navigate('/dashboard')
+//     } else {
+//         dispatch({ type: 'LOGOUT' })
+//         navigate('/login')
+//     }
+// }, [navigate])
 
   return (
     <Container maxW='xl' centerContent >

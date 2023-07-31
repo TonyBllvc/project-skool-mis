@@ -67,7 +67,7 @@ const gets = async (req, res) => {
         const notice = await Notice.find({}).populate({
             path: "from",
             select: "title surname first_name middle_name faculty department phone email "
-        })
+        }).sort({createdAt: -1})
 
         res.status(200).json(notice)
     } catch (error) {
@@ -87,7 +87,7 @@ const get = async (req, res) => {
     const notice = await Notice.findById(id).populate({
         path: "from",
         select: "title surname first_name middle_name faculty department phone email "
-    })
+    }).sort({createdAt: -1})
 
     if (!notice) {
         return res.status(404).json({ error: 'No such notice' })
@@ -104,7 +104,7 @@ const getByLecturer = async (req, res) => {
         path: 'from',
         select: 'title surname first_name middle_name faculty department phone email ',
         // option: { sort: { surname: 1 } }
-    }).exec()
+    }).sort({createdAt: -1}).exec()
     // .populate("course_details", "faculty department level semester")
 
     if (!result) {

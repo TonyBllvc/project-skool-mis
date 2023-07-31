@@ -19,15 +19,16 @@ const Notice = () => {
     const toast = useToast()
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false)
-    const [lecturerId, setLecturerId] = useState('64aaec93d8f2999669af02e4')
     const [form, setForm] = useState('')
     const [newMessage, setNewMessage] = useState('')
 
     const { user } = useAuthContext()
+    const [lecturerId, setLecturerId] = useState(user._id)
+    // setLecturerId(user._id)
 
     useEffect(() => {
         const fetchNotice = async () => {
-            const res = await fetch('api/notice/get_notice', {
+            const res = await fetch('api/notice/from/' + user._id, {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 

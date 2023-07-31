@@ -4,10 +4,13 @@ import { useCourseContext } from '../useCourseContext'
 import { useLecturerContext } from '../useLecturerContext'
 import { useStudentContext } from '../useStudentContext'
 import { useAuthContext } from '../useAuthContext'
+import { useToast } from '@chakra-ui/react'
 
 const useLogout = () => {
 
     const { dispatch } = useAuthContext()
+
+    const toast = useToast()
 
     const { dispatch: dispatchStudents } = useStudentContext()
     const { dispatch: dispatchLecturers } = useLecturerContext()
@@ -17,6 +20,13 @@ const useLogout = () => {
     const logout = () => {
         // remove user from storage
         localStorage.removeItem('user')
+                toast({
+                    title: 'Logout Successful!',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                    position: "top",
+                })
 
         dispatch({ type: 'LOGOUT' })
         // so as to clear previous data after logout

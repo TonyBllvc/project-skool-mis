@@ -6,9 +6,9 @@ import { useLogin } from '../../hooks/auth/useLogin'
 const SpecialLogin = () => {
   const [show, setShow] = useState(false)
   // to disable input / and
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('george.ekwemadu@gmail.com')
   const [role, setRole] = useState('Admin')
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState('PandaWan.102')
 
   // const { user } = ChatState()
 

@@ -106,6 +106,7 @@ const loginStudent = async (req, res) => {
             reg_no,
             role,
             token,
+            _id: student._id,
             surname: student.surname,
             first_name: student.first_name,
             middle_name: student.middle_name,

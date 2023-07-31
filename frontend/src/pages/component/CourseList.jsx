@@ -68,15 +68,21 @@ const CourseList = () => {
                         <BiArrowBack className=" mr-1 font-mono text-center text-lg font-semibold" /> Back
                     </button></div>
 
-                <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
-                    Fill Form
-                    {!toggle &&
-                        <FaChevronDown className='ml-2 font-normal text-xs' />
-                    }
-                    {toggle &&
-                        <FaChevronUp className='ml-2 font-normal text-xs' />
-                    }
-                </Button>
+                {user.role === 'Admin' ? (
+                    <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
+                        Fill Form
+                        {!toggle &&
+                            <FaChevronDown className='ml-2 font-normal text-xs' />
+                        }
+                        {toggle &&
+                            <FaChevronUp className='ml-2 font-normal text-xs' />
+                        }
+                    </Button>
+                ) : (
+                    <>
+
+                    </>
+                )}
 
                 {/* The table for filling */}
                 {toggle &&

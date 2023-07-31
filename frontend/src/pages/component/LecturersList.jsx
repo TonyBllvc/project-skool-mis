@@ -105,13 +105,13 @@ const LecturerList = () => {
                                             <Table whiteSpace='break-spaces'>
                                                 <Thead w='100%' backgroundColor='blue.400'>
                                                     <Tr display='flex' width='100%' justifyContent='space-around' px={6} backgroundColor='yellow.200'>
-                                                        <Th width={['120px', '100%', '15%']} display='flex' justifyContent='center' fontSize={['9', '12', '14']}  overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                            <Box width={['100%', '100%', '100%']}  >
+                                                        <Th width={['120px', '100%', '20%']} display='flex' justifyContent='center'  overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']}   >
                                                                 S/N
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '85%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                            <Box width={['100%', '100%', '100%']}  display='flex' justifyContent='start' >
+                                                        <Th width={['150px', '100%', '80%']} display='flex' justifyContent='start' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']}   display='flex' justifyContent='start' >
                                                                 Name
                                                             </Box>
                                                         </Th>

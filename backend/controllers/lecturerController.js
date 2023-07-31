@@ -94,6 +94,7 @@ const loginLecturer = async (req, res) => {
             email,
             role,
             token,
+            _id: lecturer._id,
             surname: lecturer.surname,
             first_name: lecturer.first_name,
             middle_name: lecturer.middle_name,

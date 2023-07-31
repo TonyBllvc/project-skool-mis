@@ -58,7 +58,7 @@ export const useLogin = (url) => {
             if (res.ok) {
                 toast({
                     title: 'Login Successful!',
-                    description: email + ' logged in successfully',
+                    description: json.surname + " " + json.first_name + ' logged in successfully',
                     status: 'success',
                     duration: 3000,
                     isClosable: true,

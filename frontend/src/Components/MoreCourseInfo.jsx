@@ -79,6 +79,7 @@ const MoreCourseInfo = ({ course }) => {
                     <Th py={1} px={4} width='100%' display='flex' justifyContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                         <Box width='100%' display='flex' justifyContent='center' fontSize={['10', '11', '13', '16']}>
                             Course Lecturers
+                        { user.role }
                         </Box>
                     </Th>
 
@@ -92,14 +93,23 @@ const MoreCourseInfo = ({ course }) => {
                             {course.course_lecturers.map((lecturers, index) => (
                                 <li key={index}>
                                 {index + 1}. {lecturers.title}{ lecturers.surname } { lecturers.first_name }
+                                
                                 </li>
                             ))}
                         </ul>
-                        
+                        { 
+                            user.role === 'Admin' ? (
+                                
                         <Button onClick={handleDelete} colorScheme='red' mt={5} py={1} px={3} size={19} color='white'  >
                             <FaTrashAlt  className='text-white mr-2 font-medium text-xs' />
                             Delete
                         </Button>
+                            ) : (
+                                <>
+
+                                </>
+                            )
+                        }
                         </Box>
                     </Td>
                 </Tr>

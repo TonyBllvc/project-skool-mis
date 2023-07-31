@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { AiOutlineFolder } from 'react-icons/ai'
 import { BiBookOpen } from 'react-icons/bi'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import DashBox from './component/DashBox'
 import { useStudentContext } from '../hooks/useStudentContext'
 import { useLecturerContext } from '../hooks/useLecturerContext'
@@ -16,8 +16,20 @@ const DashBoard = () => {
         document.title = 'Dashboard'
     }, [])
 
-    const { user } = useAuthContext()
-    
+    const { user, dispatch } = useAuthContext()
+  //   const navigate = useNavigate()
+
+  //   useEffect(() => {
+  //     const user = JSON.parse(localStorage.getItem('user'))
+
+  //     if (user) {
+  //         dispatch({ type: 'LOGIN', payload: user })
+  //         navigate('/dashboard')
+  //     } else {
+  //         dispatch({ type: 'LOGOUT' })
+  //         navigate('/login')
+  //     }
+  // }, [navigate])
 
 
   const {  dispatch: dispatchStudents } = useStudentContext()
