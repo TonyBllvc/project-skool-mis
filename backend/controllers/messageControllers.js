@@ -5,16 +5,16 @@ const Lecturer = require('../models/lecturerModel')
 const Chat = require("../models/chatModel")
 
 const sendMessage = async (req, res) => {
-    const { content, chatId } = req.body
+    const { content, chatId, userId } = req.body
 
-    if (!content || !chatId) {
+    if (!content || !chatId || !userId ) {
         console.log("Invalid data passed into request")
-        return res.sendStatus(400)
+        return res.status(400).json({ error: "  Invalid data passed "})
     }
 
     // take in data
     var newMessage = {
-        sender: req.user._id,
+        sender: userId,
         content: content,
         chat_owner: chatId
     }
@@ -24,7 +24,7 @@ const sendMessage = async (req, res) => {
 
         // add "picture" after directly name
         // i.e. ("sender", "name picture")
-        message = await message.populate("sender", "name")
+        message = await message.populate("sender", "surname first_name reg_no middle_name role email")
         message = await message.populate("chat_owner")
         // populate every user on the chat
         message = await User.populate(message, {
@@ -32,7 +32,14 @@ const sendMessage = async (req, res) => {
 
             // add "picture" after directly name
             // i.e. ("name picture email")
-            select: "name email",
+            select: "surname first_name middle_name reg_no role email",
+        })
+        message = await User.populate(message, {
+            path: "chat_owner.groupAdmin",
+
+            // add "picture" after directly name
+            // i.e. ("name picture email")
+            select: "surname first_name middle_name reg_no role email",
         })
 
         await Chat.findByIdAndUpdate(req.body.chatId, {
@@ -41,8 +48,7 @@ const sendMessage = async (req, res) => {
 
         res.status(200).json(message)
     } catch (error) {
-        res.status(400)
-        throw new Error(error.message)
+        res.status(400).json(error.message)
     }
 }
 
@@ -54,13 +60,12 @@ const allMessages = async (req, res) => {
             chat_owner: req.params.chatId
         }).populate(
             "sender",
-            "name email"
+            "surname first_name middle_name role email"
         ).populate("chat_owner")
 
         res.status(200).json(messages)
     } catch (error) {
-        res.status(400)
-        throw new Error(error.message)    
+        res.status(400).json(error.message)    
 
     }
 }

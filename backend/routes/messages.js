@@ -1,10 +1,11 @@
 const express = require('express')
 // const { protect } = require('../middleware/authMiddleware')
 const { sendMessage, allMessages } = require('../controllers/messageControllers')
+const requireAuth = require('../middleware/authentication')
 
 const router = express.Router()
 
-// router.use(protect)
+router.use(requireAuth)
 
 // to send message
 router.post('/', sendMessage)

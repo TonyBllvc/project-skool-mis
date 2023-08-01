@@ -76,7 +76,7 @@ const fetchChats = async (req, res) => {
             results = await User.populate(results, {
                 path: 'latestMessage.sender',
                 // add 'picture' here later
-                select: 'name, email',
+                select: ' surname, first_name, reg_no, middle_name, role, email',
             })
 
             res.status(200).send(results)
@@ -90,7 +90,7 @@ const fetchChats = async (req, res) => {
 
 const createGroupChat = async (req, res) => {
     // pass in name of group chat(name) and members(users)
-    if (!req.body.users || !req.body.name || !req.body.admin ) {
+    if (!req.body.users || !req.body.name || !req.body.admin) {
         return res.status(400).send({ message: "Please fill all the fields" })
     }
 
@@ -123,72 +123,84 @@ const createGroupChat = async (req, res) => {
     } catch (error) {
         // check if error
         res.status(400)
-        res.status(400).json( error.maessage )
+        res.status(400).json(error.maessage)
     }
 }
 
 const renameGroupChat = async (req, res) => {
     const { chatId, chat_name } = req.body
 
-    const updatedChat = await Chat.findByIdAndUpdate(
-        // chat id
-        chatId,
-        {
-            // new chat name
-            chat_name
-        },
-        {
-            // to indicate that it is new, and return updated value
-            new: true
+    try {
+
+        const updatedChat = await Chat.findByIdAndUpdate(
+            // chat id
+            chatId,
+            {
+                // new chat name
+                chat_name
+            },
+            {
+                // to indicate that it is new, and return updated value
+                new: true
+            }
+        ).populate("users", "-password").populate("groupAdmin", "-password")
+
+        if (!updatedChat) {
+            res.status(400).json("Chat Not Found")
+        } else {
+            res.status(400).json(updatedChat)
         }
-    ).populate("users", "-password").populate("groupAdmin", "-password")
 
-    if (!updatedChat) {
-        res.status(400)
-        throw new Error("Chat Not Found")
-    } else {
-        res.json(updatedChat)
+    } catch (error) {
+        res.status(400).json(error.message)
     }
-
 }
 
 const addUserToGroup = async (req, res) => {
     const { chatId, userId } = req.body
 
-    const added = await Chat.findByIdAndUpdate(
-        chatId,
-        {
-            // updates the users array
-            $push: { users: userId }
-        },
-        { new: true }
-    ).populate("users", "-password").populate("groupAdmin", "-password")
+    try {
 
-    if (!added) {
-        res.status(400).json("Chat Not Found")
-    } else {
-        res.status(200).json(added)
+        const added = await Chat.findByIdAndUpdate(
+            chatId,
+            {
+                // updates the users array
+                $push: { users: userId }
+            },
+            { new: true }
+        ).populate("users", "-password").populate("groupAdmin", "-password")
+
+        if (!added) {
+            res.status(400).json("Chat Not Found")
+        } else {
+            res.status(200).json(added)
+        }
+
+    } catch (error) {
+        res.status(400).json(error.message)
     }
-
 }
 
 const removeUserFromGroup = async (req, res) => {
     const { chatId, userId } = req.body
+    try {
 
-    const removed = await Chat.findByIdAndUpdate(
-        chatId,
-        {
-            // updates the users array
-            $pull: { users: userId }
-        },
-        { new: true }
-    ).populate("users", "-password").populate("groupAdmin", "-password")
+        const removed = await Chat.findByIdAndUpdate(
+            chatId,
+            {
+                // updates the users array
+                $pull: { users: userId }
+            },
+            { new: true }
+        ).populate("users", "-password").populate("groupAdmin", "-password")
 
-    if (!removed) {
-        res.status(400)
-        throw new Error("Chat Not Found")
-    } else {
-        res.json(removed)
+        if (!removed) {
+            res.status(400).json("Chat Not Found")
+        } else {
+            res.status(400).json(removed)
+        }
+    } catch (error) {
+        res.status(400).json(error.message)
     }
 
 }
