@@ -5,7 +5,7 @@ export const getSender = (loggedUser, users) => {
   // for every users' array, if the first user in the array is ...
   // .. the logged in user id, parse the name o the second user...
   // .. else, return first user
-  return users[0]._id === loggedUser._id ? (users[1].surname, users[1].first_name)  : users[0].surname
+  return users[0]._id === loggedUser._id ? (users[1].surname + " " + users[1].first_name)  : (users[0].surname + " " + users[0].first_name)
 }
 
 export const getSenderFull = (loggedUser, users) => {
@@ -41,6 +41,10 @@ export const isLastMessage = (messages, i, userId) => {
     i === messages.length - 1 && messages[messages.length - 1].sender._id !== userId && messages[messages.length - 1].sender._id
   )
 }
+
+export const lastMesage = (messages, m, i, userId  ) => {
+  
+} 
 
 export const isSameSenderMargin = (messages, m, i, userId) => {
   if (

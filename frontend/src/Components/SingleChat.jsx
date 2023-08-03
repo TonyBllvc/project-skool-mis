@@ -237,7 +237,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
             {
                 selectedChat ? (
                     <>
-                        <Text fontSize={{ base: '28px', md: '30px' }} pb={3} px={2} w='100%' fontFamily='Work sans' display='flex' justifyContent={{ base: 'space-between' }} alignItems='center' >
+                        <Text fontSize={{ base: '22px', md: '24px' }} pb={3} px={2} w='100%' fontFamily='Work sans' display='flex' justifyContent={{ base: 'space-between' }} alignItems='center' >
                             <FaArrowLeft size='24px' className='text-lg text-black'
                             onClick={() => setSelectedChat('')}
                             //  onClick={() => dispatchSelectedChat({ type: 'EMPTY_DATA'}) }

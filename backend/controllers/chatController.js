@@ -54,8 +54,7 @@ const accessChat = async (req, res) => {
 
             res.status(200).send(fullChat)
         } catch (error) {
-            res.status(400)
-            res.status(202).json(error.message)
+            res.status(400).json(error.message)
         }
     }
 }
@@ -79,10 +78,9 @@ const fetchChats = async (req, res) => {
                 select: ' surname, first_name, reg_no, middle_name, role, email',
             })
 
-            res.status(200).send(results)
+            res.status(200).json(results)
         })
     } catch (error) {
-        res.status(400)
         return res.status(400).json(error.message)
 
     }
@@ -122,8 +120,7 @@ const createGroupChat = async (req, res) => {
 
     } catch (error) {
         // check if error
-        res.status(400)
-        res.status(400).json(error.maessage)
+        res.status(400).json(error.message)
     }
 }
 
@@ -148,7 +145,7 @@ const renameGroupChat = async (req, res) => {
         if (!updatedChat) {
             res.status(400).json("Chat Not Found")
         } else {
-            res.status(400).json(updatedChat)
+            res.status(200).json(updatedChat)
         }
 
     } catch (error) {
@@ -197,7 +194,7 @@ const removeUserFromGroup = async (req, res) => {
         if (!removed) {
             res.status(400).json("Chat Not Found")
         } else {
-            res.status(400).json(removed)
+            res.status(200).json(removed)
         }
     } catch (error) {
         res.status(400).json(error.message)

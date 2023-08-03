@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, Stack, Text, useDisclosure, useToast } from '@chakra-ui/react'
+import { Box, Button, Stack, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, useDisclosure, useToast } from '@chakra-ui/react'
 import axios from 'axios'
-import { FaPlus } from 'react-icons/fa'
+import { HiOutlineDotsVertical } from 'react-icons/hi'
 import { useAuthContext } from '../hooks/useAuthContext'
 import GroupChatsModel from '../model/GroupChatsModel'
 import Loading from '../pages/assets/Loading'
@@ -70,45 +70,62 @@ const MyChats = ({ fetchAgain }) => {
 
     return (
         <Box display={{ base: selectedChat ? 'none' : 'flex', md: 'flex' }} flexDirection='column' alignItems='center' p={2.5} bg='white' w={{ base: '100%', md: '35%' }} borderRadius='lg' borderWidth='1px' >
-            <Box pb={3} px={3} fontSize={{ base: '17px', md: '24px' }} fontFamily='Work sans' display='flex' w='100%' justifyContent='space-between' alignItems='center' >
-                My Chats
-                <Button display='flex' w={{ base: '50%', md: '55%', lg: '45%' }} fontSize={{ base: '13px', md: '13px', lg: '15px' }} px={{ base: '10px', md: '10px', lg: '10px' }} rightIcon={<FaPlus />} onClick={onOpen} >
-                    New Group Chat
-                </Button>
+            <Box pb={3} px={3} display='flex' flexDirection='row' fontSize={{ base: '17px', md: '25px', lg: '28px' }} fontFamily='Work sans' w='100%' justifyContent='space-between' alignItems='center' >
+                <Text>
+                    My Chats
+                </Text>
+
+                <Menu display='flex' alignItems='center' justifyContent='center'  >
+                <MenuButton display='flex' w={{ base: '10%', md: '10%', lg: '10%' }} fontSize={{ base: '13px', md: '13px', lg: '15px' }} px={{ base: '10px', md: '10px', lg: '10px' }}  >
+                    <HiOutlineDotsVertical className='text-2xl font-semibold ' />
+                </MenuButton> 
+                <MenuList as={Button}onClick={onOpen}>
+                    Create Group Chat
+                </MenuList>
+                
+                </Menu>
+
                 {/* ************************* */}
-                <GroupChatsModel user={user}  setChats={setChats} chats={chats} open={isOpen} close={onClose} />
+                <GroupChatsModel user={user} setChats={setChats} chats={chats} open={isOpen} close={onClose} />
                 {/* *************************** */}
             </Box>
 
             <Box display='flex' flexDirection='column' p={3} bg='#f8f8f8' w='100%' h='100%' borderRadius='lg' overflowY='hidden' >
                 {chats ? (
-                    <Stack overflowY='scroll'>
+                    <Stack overflowY='hidden'>
                         {chats.map((chat) => (
-                            <Box
-                             onClick={() => setSelectedChat(chat)}
-                            // onClick={() => dispatchSelectedChat({ type: 'GET_DATA', payload: chat}) } 
-                            cursor='pointer' bg={selectedChat === chat ? '#38b2ac' : '#e8e8e8'} color={selectedChat === chat ? 'white' : 'black '} px={3} py={4} borderRadius='lg' key={chat._id} >
+                            <Box fontSize={{ base: '10.5px', md: '12px', lg: '16px' }}
+                                onClick={() => setSelectedChat(chat)}
+                                // onClick={() => dispatchSelectedChat({ type: 'GET_DATA', payload: chat}) } 
+                                cursor='pointer' bg={selectedChat === chat ? '#38b2ac' : '#e8e8e8'} color={selectedChat === chat ? 'white' : 'black '} px={3} py={3} borderRadius='lg' key={chat._id} >
 
                                 <Text>
 
                                     {/* If chat is not a group chat */}
                                     {!chat.isGroupChat ? (
-                                        <div 
+                                        <div
                                         // onClick={
                                         //     dispatchNotification({ type: "PASS_DATA", payload: notification})
                                         //     // setNotification(notification.filter((n) => n !== notification._id))
                                         // }
                                         >
                                             {getSender(loggedUser, chat.users)}
+                                            <Text fontSize='12px' color={selectedChat === chat ? 'teal.800' : 'blue.500'} fontWeight='semibold' >
+                                            Private Chat
+                                            </Text>
                                         </div>
                                     ) : (
-                                        <div 
+                                        <div
                                         // onClick={
                                         //     dispatchNotification({ type: "PASS_DATA", payload: notification})
                                         //     // setNotification(notification.filter((n) => n !== notification._id))
                                         // }
+                                        className=' flex flex-col p-0 '
                                         >
                                             {chat.chat_name}
+                                            <Text fontSize='12px'  color={selectedChat === chat ? 'seagreen' : 'green.400'} fontWeight='semibold'>
+                                            Group Chat
+                                            </Text>
                                         </div>
                                     )
                                     }

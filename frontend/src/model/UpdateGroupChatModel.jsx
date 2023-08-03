@@ -49,7 +49,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
             // if user left group chat 
             // return empty chat
             // user1._id === user._id ? dispatch({ type: 'SET', payload: null}) : setSelectedChat(data)
-            user1._id === user._id ? setSelectedChat('')  :  setSelectedChat(data) 
+            user1._id === user._id ? setSelectedChat('') : setSelectedChat(data)
             setFetchAgain(!fetchAgain)
             // ************** prop passed  ******************
             fetchMessages()
@@ -93,22 +93,29 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
             }, config
             )
 
+            toast({
+                title: 'Updated!',
+                status: 'success',
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            })
             // setSelectedChat(data)
             setSelectedChat(data)
             setFetchAgain(!fetchAgain)
             setRenameLoading(false)
-
+            return
         } catch (error) {
             toast({
                 title: 'Error Occurred',
-                description: error.response.data.message,
+                description: error.message,
                 status: 'error',
                 duration: 5000,
                 isClosable: true,
                 position: "top",
             })
             setRenameLoading(false)
-
+            return
         }
         setGroupChatName('')
     }
@@ -203,7 +210,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
         } catch (error) {
             toast({
                 title: 'Error Occurred',
-                description: error.response.data.message,
+                description: error.message,
                 status: 'error',
                 duration: 5000,
                 isClosable: true,
@@ -220,19 +227,23 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
         <>
             <FaEye type='button' className=' sm:flex text-red-600 text-lg m-1 font-thin' onClick={onOpen} />
 
-            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+            <Modal size={['xs', 'sm', 'md', 'lg']} isOpen={isOpen} onClose={onClose} isCentered>
                 <ModalOverlay />
                 <ModalContent>
-                    <ModalHeader fontSize='35px' fontFamily='Work sans' display='flex' justifyContent='center' > {selectedChat.chat_name} </ModalHeader>
+                    <ModalHeader fontSize={['23', '28', '30', '34']} fontFamily='Work sans' display='flex' justifyContent='center' >
+                        {selectedChat.chat_name}
+                    </ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
 
                         {/* User information */}
-                        <Box w='100%' display='flex' flexWrap='wrap' pb={3} >
-                            {selectedChat.users.map(u => (
-                                <Selected key={u._id} user={u} handleFunction={() => handleRemove(u)} />
+                        <Box overflow='scroll' height='100px' px={4} position='relative' >
+                            <Box w='100%' display='flex' flexWrap='wrap' pb={3} >
+                                {selectedChat.users.map(u => (
+                                    <Selected key={u._id} user={u} handleFunction={() => handleRemove(u)} />
 
-                            ))}
+                                ))}
+                            </Box>
                         </Box>
 
                         <FormControl display='flex'>
@@ -254,7 +265,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button colorScheme='red' mr={3} onClick={() => handleRemove(user)}>
+                        <Button colorScheme='red' fontSize={['12.5', '13', '16', '17']} h={8} px={3} mr={3} onClick={() => handleRemove(user)}>
                             Leave Group
                         </Button>
                     </ModalFooter>

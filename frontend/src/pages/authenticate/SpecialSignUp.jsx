@@ -7,23 +7,36 @@ import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import { useSignUp } from '../../hooks/auth/useSignup';
 
+
+// const optionOne = [
+//   { value: 'SICT', label: 'SICT', key: '1' },
+//   { value: 'SEET', label: 'SEET', key: '2' },
+//   { value: 'SOPS', label: 'SOPS', key: '3' },
+//   { value: 'SAAT', label: 'SAAT', key: '4' },
+// ]
+
+// const optionTwo = [
+//   { value: 'Computer Science', label: 'Computer Science', key: '1' },
+//   { value: 'Computer Engineering', label: 'Computer Engineering', key: '2' },
+// ]
+
 const SpecialSignUp = () => {
   const [show, setShow] = useState(false)
-  const [title, setTitle] = useState('')
-  const [surname, setSurname] = useState('')
-  const [first_name, setFirstName] = useState('')
-  const [middle_name, setMiddleName] = useState('')
-  const [department, setDepartment] = useState('')
-  const [email, setEmail] = useState('')
-  const [faculty, setFaculty] = useState('')
+  const [title, setTitle] = useState('Engr')
+  const [surname, setSurname] = useState('Chikeluba')
+  const [first_name, setFirstName] = useState('Jude')
+  const [middle_name, setMiddleName] = useState('Justin')
+  const [department, setDepartment] = useState('Computer Science')
+  const [email, setEmail] = useState('mankin@gmail.com')
+  const [faculty, setFaculty] = useState('SICT')
   const [role, setRole] = useState('Admin')
-  const [password, setPassword] = useState('')
-  const [confirm_password, setConfirmPassword] = useState('')
+  const [password, setPassword] = useState('Jankinman10.')
+  const [confirm_password, setConfirmPassword] = useState('jankinman10')
   
-  const {signup, pending, error, } = useSignUp('/api/lecturer/login')
+  const {signup, pending, error, } = useSignUp('/api/admin/signup')
 
   const toast = useToast()
-  const [phone, setPhoneNumber] = useState('');
+  const [phone, setPhoneNumber] = useState('09050150933');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
 
   const handleChange = (event) => {
@@ -33,7 +46,7 @@ const SpecialSignUp = () => {
   };
 
   const isValidNigerianPhoneNumber = (phone) => {
-    const nigerianPhoneRegex = /^(?:\+234|234)?[0-9]{10}$/;
+    const nigerianPhoneRegex = /^(?:\+234|234)?[0-9]{11}$/;
     return nigerianPhoneRegex.test(phone);
   };
 
@@ -45,6 +58,16 @@ const SpecialSignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    if( password !== confirm_password){
+      toast({
+          title: 'Confirm password properly',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+      })
+      return
+    }
     await signup(title, surname, first_name, middle_name, role, department, faculty, phone, email, password)
   }
   return (
@@ -52,88 +75,92 @@ const SpecialSignUp = () => {
       <VStack spacing='5px' color='black' >
 
         <FormControl id='' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Title:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your role id' value={title} onChange={(e) => setTitle(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='i.e. Engr.' value={title} onChange={(e) => setTitle(e.target.value)} />
         </FormControl>
 
         <FormControl id='' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Surname:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your surname' value={surname} onChange={(e) => setSurname(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='Enter your surname' value={surname} onChange={(e) => setSurname(e.target.value)} />
         </FormControl>
 
         <FormControl id='' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             First Name:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your role id' value={first_name} onChange={(e) => setFirstName(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='Enter your first name' value={first_name} onChange={(e) => setFirstName(e.target.value)} />
         </FormControl>
 
         <FormControl id='' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Middle Name:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your role id' value={middle_name} onChange={(e) => setMiddleName(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='Enter your middle name' value={middle_name} onChange={(e) => setMiddleName(e.target.value)} />
         </FormControl>
 
         <FormControl id='' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Faculty:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your role id' value={faculty} onChange={(e) => setFaculty(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='i.e. SICT' maxLength='4' value={faculty} onChange={(e) => setFaculty(e.target.value)} isDisabled />
         </FormControl>
 
         <FormControl id='' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Department:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your role id' value={department} onChange={(e) => setDepartment(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='i.e. Computer Science' value={department} onChange={(e) => setDepartment(e.target.value)} isDisabled/>
         </FormControl>
 
         <FormControl id='' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Role:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your role id' value={role} onChange={(e) => setRole(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='Enter your role id' value={role} onChange={(e) => setRole(e.target.value)} isDisabled/>
         </FormControl>
 
         <FormControl id='' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Email:
           </FormLabel>
-          <Input type='text' bg='green.100' placeholder='Enter your role id' value={email} onChange={(e) => setEmail(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='email' bg='green.100' placeholder='Enter your e-mail' value={email} onChange={(e) => setEmail(e.target.value)} />
         </FormControl>
 
-        <FormControl id="phone">
-          <FormLabel>Phone Number</FormLabel>
-          <InputGroup>
-            <InputLeftElement pointerEvents="none" bg='gray.400' color="gray.700" fontSize="1.2em" children="+234" />
+        <FormControl id="phone" 
+              isRequired>
+          <FormLabel fontSize={['12.5', '13', '15', '16']}>Phone Number</FormLabel>
+          <InputGroup  width='100%'>
+            {/* <InputLeftElement  height={['35px', '35px', '40px', '40px']} width={['25%', '', '','13%']} pointerEvents="none" bg='gray.400' color="gray.700" fontSize="1.2em" children="+234" /> */}
             <Input
-              type="tel"
-              ml={5}
+             height={['35px', '35px', '40px', '40px']}
+              type='number'
+              // ml={['14px', '', '', '30px']}
+              width='100%'
               placeholder="Enter your phone number"
               value={phone}
               bg='green.100'
               onChange={handleChange}
+              maxLength='11'
               isInvalid={!isValidPhoneNumber}
             />
           </InputGroup>
         </FormControl>
         {!isValidPhoneNumber && (
-          <Box color="red" mt={2}>
-            Please enter a valid Nigerian phone number.
+          <Box color="red" mt={2} fontSize={['12.5', '13', '15', '16']}>
+            Should contain 11 digits only
           </Box>
         )}
         <FormControl id='signup-password' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Password:
           </FormLabel>
           <InputGroup>
 
-            <Input type={show ? 'text' : 'password'} bg='green.100' placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
+            <Input  height={['35px', '35px', '40px', '40px']} type={show ? 'text' : 'password'} bg='green.100' placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
             <InputRightElement width='4.5rem'>
               <Button h='1.75rem' size='sm' onClick={handleShowHide}>
                 {show ? 'Hide' : 'Show'}
@@ -143,14 +170,14 @@ const SpecialSignUp = () => {
         </FormControl>
 
         <FormControl id='confirm-password' isRequired>
-          <FormLabel color='black'>
+          <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Confirm Password:
           </FormLabel>
           <InputGroup>
 
-            <Input type={show ? 'text' : 'password'} bg='green.100' placeholder='Confirm your password' value={confirm_password} onChange={(e) => setConfirmPassword(e.target.value)} />
+            <Input height={['35px', '35px', '40px', '40px']} type={show ? 'text' : 'password'} bg='green.100' placeholder='Confirm your password' value={confirm_password} onChange={(e) => setConfirmPassword(e.target.value)} />
             <InputRightElement width='4.5rem'>
-              <Button h='1.75rem' size='sm' onClick={handleShowHide}>
+              <Button h='1.75rem' size='sm' fontSize={['12.5', '13', '15', '16']}  onClick={handleShowHide}>
                 {show ? 'Hide' : 'Show'}
               </Button>
             </InputRightElement>
@@ -164,9 +191,10 @@ const SpecialSignUp = () => {
             <Input type='file' bg='green.100' placeholder='Profile picture' onChange={(e) => postDetails(e.target.files[0])} />
         </FormControl> */}
 
-        <Button color='green.100' colorScheme='whatsapp' width='100%' style={{ marginTop: 15 }} type='submit' isLoading={pending} >
+        <Button  height={['35px', '35px', '40px', '40px']} color='green.100' colorScheme='whatsapp' width='100%' style={{ marginTop: 15 }} type='submit' isLoading={pending} >
           Sign Up
         </Button>
+        {error && <div className="text-red-700 font-bold mt-3 text-center border-red-700 border-solid border-2"> {error} </div>}
 
       </VStack>
     </form>

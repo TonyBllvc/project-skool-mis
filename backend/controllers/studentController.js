@@ -79,7 +79,7 @@ const signupStudent = async (req, res) => {
 
 
     try {
-        await User.create({ _id: student._id, surname, first_name, middle_name, role, department, reg_no, faculty, phone, email })
+        await User.create({ _id: student._id, surname, first_name, middle_name, role, department, reg_no, faculty, session, phone, email })
 
     } catch (error) {
         return res.status(404).json({ error: error.message })

@@ -1,6 +1,4 @@
 import { BrowserRouter, Navigate, Route, Routes, } from "react-router-dom";
-// import { FaList, FaTimes } from "react-icons/fa"
-import { BsList } from "react-icons/bs";
 import NotFound from "./pages/NotFound";
 import NavBar from "./Layout/NavBar";
 import TimeTable from "./pages/component/TimeTable";
@@ -11,10 +9,6 @@ import Lecturer from "./pages/component/StudentList"
 import StudentList from "./pages/component/StudentList";
 import Student from "./pages/component/Student";
 import LecturerList from "./pages/component/LecturersList";
-import Home from "./pages/Home";
-// import { useStudentContext } from "./hooks/useStudentContext";
-// import { useLecturerContext } from "./hooks/useLecturerContext";
-// import { useCourseContext } from "./hooks/useCourseContext";
 import SignUpModal from "./model/SignUpModal";
 import LoginModal from "./model/LoginModal";
 import Notice from "./pages/component/Notice";
@@ -79,6 +73,7 @@ export default function App() {
                     <Routes>
                         <Route path="/" element={ !user ? <Navigate to={'/login'} /> : <Navigate to={'/dashboard'} />}  />
                         <Route path="/login" element={!user ? <LoginModal /> : <Navigate to={'/'} />} />
+                        <Route path="/sign_up" element={!user ? <SignUpModal /> : <Navigate to={'/'} />} />
                     </Routes>
                 }
 

@@ -25,7 +25,7 @@ const NavBar = () => {
             <div className=' w-full sm:pl-2 h-full flex flex-col justify-center'>
                 <div className=' w-full sm:w-1/2 flex flex-row pl-5 items-center'>
                     {/* <NavLink> */}
-                    <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' display={['none', 'flex', 'flex']} w={['70%', '75%', '140px']} h={['40px', '42px', '45px']} alt='logo' />
+                    {/* <Image src={logo} borderRadius='none' bgPosition='center' boxSize='65px' display={['none', 'flex', 'flex']} w={['70%', '75%', '140px']} h={['40px', '42px', '45px']} alt='logo' /> */}
                     {/* <Text fontSize={24} color='white'> FUTO </Text> */}
                     {/* <img src={} alt='logo/> */}
                     {/* </NavLink> */}

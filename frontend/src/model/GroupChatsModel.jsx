@@ -4,7 +4,7 @@ import axios from 'axios'
 import UserList from '../assets/UserList'
 import Selected from '../assets/Selected'
 
-const GroupChatsModel = ({ user,setChats, chats, open, close }) => {
+const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
   const [groupChatName, setGroupChatName] = useState('')
   const [selectedUsers, setSelectedUsers] = useState([])
   const [search, setSearch] = useState('')
@@ -151,10 +151,10 @@ const GroupChatsModel = ({ user,setChats, chats, open, close }) => {
 
   return (
     <>
-      <Modal size='lg' isCentered isOpen={open} onClose={close}  >
+      <Modal size={['xs', 'sm', 'md', 'lg']} isCentered isOpen={open} onClose={close}  >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize='40px' fontFamily='Work sans' display='flex' justifyContent='center'>
+          <ModalHeader fontSize={['23', '28', '30', '34']} fontFamily='Work sans' display='flex' justifyContent='center'>
             Create Group Chat
           </ModalHeader>
           <ModalCloseButton onClick={clearValue} />
@@ -167,11 +167,12 @@ const GroupChatsModel = ({ user,setChats, chats, open, close }) => {
             <FormControl>
               <Input placeholder='Add Users eg: John, Mag' mb={1} onChange={(e) => handleSearch(e.target.value)} />
             </FormControl>
-
-            <Box w='100%' display='flex' flexWrap='wrap' >
-              {selectedUsers.map((u) => (
-                <Selected key={u._id} user={u} handleFunction={() => handleDelete(u)} />
-              ))}
+            <Box overflow='scroll' height='100px' px={4} position='relative' >
+              <Box w='100%' display='flex' flexWrap='wrap' >
+                {selectedUsers.map((u) => (
+                  <Selected key={u._id} user={u} handleFunction={() => handleDelete(u)} />
+                ))}
+              </Box>
             </Box>
 
             {loading ? (
@@ -186,7 +187,7 @@ const GroupChatsModel = ({ user,setChats, chats, open, close }) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' onClick={handleSubmit}>
+            <Button fontSize={['12.5', '13', '16', '17']} h={8} px={3} colorScheme='blue' onClick={handleSubmit}>
               Create Chat
             </Button>
           </ModalFooter>

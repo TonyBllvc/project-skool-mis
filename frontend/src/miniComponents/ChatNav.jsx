@@ -95,7 +95,7 @@ const ChatNav = () => {
                 </Tooltip>
 
                 <Text fontSize='2xl' fontFamily='work sans'>
-                    Talk App
+                    Chat
                 </Text>
 
                 <div className=' flex align-middle justify-center'>

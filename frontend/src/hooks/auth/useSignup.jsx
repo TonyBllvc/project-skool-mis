@@ -26,44 +26,56 @@ export const useSignUp = (url) => {
         }
 
         const details = { title, surname, first_name, middle_name, role, department, faculty, phone, email, password }
+        try {
 
-        const res = await fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(details),
-            headers: {
-                'Content-Type': 'application/json'
+            const res = await fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(details),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            const json = await res.json()
+
+            if (!res.ok) {
+                setPending(false)
+                setError(json.error)
+                toast({
+                    title: json.error,
+                    status: 'warning',
+                    duration: 4000,
+                    isClosable: true,
+                    position: "top",
+                })
+                return
             }
-        })
+            if (res.ok) {
+                toast({
+                    title: 'Login Successful!',
+                    description: email + 'Has signed up successfully',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                    position: "top",
+                })
+                // save user to local storage
+                navigate('/login')
+            }
 
-        const json = await res.json()
-
-        if (!res.ok) {
             setPending(false)
-            setError(json.error)
+
+        } catch (error) {
             toast({
-                title: json.error,
-                status: 'warning',
-                duration: 4000,
+                title: error.message,
+                status: 'error',
+                duration: 5000,
                 isClosable: true,
                 position: "top",
             })
-            return
-        }
-        if (res.ok) {
-            toast({
-                title: 'Login Successful!',
-                description: email + ' logged in successfully',
-                status: 'success',
-                duration: 3000,
-                isClosable: true,
-                position: "top",
-            })
-            // save user to local storage
-            navigate('/login')
-        }
+            setPending(false)
 
-        setPending(true)
-
+        }
     }
 
     return { signup, pending, error, setPending }

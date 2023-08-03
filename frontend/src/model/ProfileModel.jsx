@@ -8,18 +8,30 @@ const ProfileModel = ({ user, open, close }) => {
 
   return (
     <>
-      <Modal size='lg' isCentered isOpen={open} onClose={close} >
+      <Modal size={['xs', 'sm', 'md', 'lg']} isCentered isOpen={open} onClose={close} >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader fontSize='40px' fontFamily='Work sans' display='flex' justifyContent='center'>
+          <ModalHeader fontSize={['23', '28', '30', '34']} fontFamily='Work sans' display='flex' justifyContent='center'>
             {user.surname} {user.first_name}
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody fontSize='40px' fontFamily='work sans' display='flex' justifyContent='space-between' flexDirection='column' alignItems='center'>
-            <Image borderRadius='full' boxSize='100px' display='flex' textAlign='start' bg='blackAlpha.300' src={user.picture} alt={user.surname} />
+          <ModalBody fontSize='40px' fontFamily='work sans' display='flex' justifyContent='flex-start' flexDirection='column' alignItems='flex-start'>
+            {user.role === 'Student' ? (
+              <Text fontSize={['15', '16', '18', '21']} fontFamily='work sans' >
+                <b> Reg number:</b> {user.reg_no}
+              </Text>) : (
+              <>
 
-            <Text fontSize={{ base: '28px', md: '30px' }} fontFamily='work sans' >
-              Email: {user.email}
+              </>
+            )}
+            <Text fontSize={['15', '16', '18', '21']} fontFamily='work sans' >
+              <b> Role:</b> {user.role}
+            </Text>
+            <Text fontSize={['15', '16', '18', '21']} fontFamily='work sans' >
+              <b> Email:</b> {user.email}
+            </Text>
+            <Text fontSize={['15', '16', '18', '21']} fontFamily='work sans' >
+              <b> Phone:</b> 0{user.phone}
             </Text>
           </ModalBody>
 

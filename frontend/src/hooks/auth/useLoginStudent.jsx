@@ -75,7 +75,7 @@ export const useLoginStudent = (url) => {
             navigate('/')
         } catch (error) {
             toast({
-                title: 'Error occurred, can not login now!',
+                title: error.message,
                 status: 'error',
                 duration: 5000,
                 isClosable: true,
