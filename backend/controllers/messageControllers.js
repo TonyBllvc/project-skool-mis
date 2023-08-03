@@ -7,9 +7,9 @@ const Chat = require("../models/chatModel")
 const sendMessage = async (req, res) => {
     const { content, chatId, userId } = req.body
 
-    if (!content || !chatId || !userId ) {
+    if (!content || !chatId || !userId) {
         console.log("Invalid data passed into request")
-        return res.status(400).json({ error: "  Invalid data passed "})
+        return res.status(400).json({ error: "  Invalid data passed " })
     }
 
     // take in data
@@ -61,11 +61,28 @@ const allMessages = async (req, res) => {
         }).populate(
             "sender",
             "surname first_name middle_name role email"
-        ).populate("chat_owner")
+        ).populate({
+            path: "chat_owner",
+            model: 'chatting',
+            populate: {
+                path: "users",
+                model: "using",
+                select: "surname first_name middle_name role email"
+            }
+        }).populate({
+            path: "chat_owner",
+            model: 'chatting',
+            populate: {
+                path: "groupAdmin",
+                model: "using",
+                select: "surname first_name middle_name role email"
+            }
+        })
+
 
         res.status(200).json(messages)
     } catch (error) {
-        res.status(400).json(error.message)    
+        res.status(400).json(error.message)
 
     }
 }

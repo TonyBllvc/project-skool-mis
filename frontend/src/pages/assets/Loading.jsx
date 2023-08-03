@@ -17,10 +17,6 @@ const Loading = () => {
       <Skeleton height='30px' my='15px' />
       <Skeleton height='30px' my='15px' />
       <Skeleton height='30px' my='15px' />
-      <Skeleton height='30px' my='15px' />
-      <Skeleton height='30px' my='15px' />
-      <Skeleton height='30px' my='15px' />
-      <Skeleton height='30px' my='15px' />
     </Stack>
   )
 }

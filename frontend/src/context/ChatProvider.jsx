@@ -1,35 +1,29 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
+// import { useNavigate } from 'react-router-dom'
 
 export const ChatContext = createContext()
 
 export const ChatContextProvider = ({ children }) => {
-  const [ selectedChat, setSelectedChat ] = useState('')
   const [ chats, setChats ] = useState([])
-  const [ notification, setNotification ] = useState([])
+  // const navigate = useNavigate()
   // made use of useNavigation, but can not function
   // because it does not work inside a useContext 
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   const userInfo = JSON.parse(localStorage.getItem("user"))
 
-    // if (!userInfo) {
-    //   // navigate("/")
-    // }
-  }, [])
+  //   setUser(userInfo)
+
+  //   if (!userInfo) {
+  //     // navigate("/")
+  //   }
+  // }, [])
   return (
-    <ChatContext.Provider value={{ selectedChat, setSelectedChat, chats, setChats, notification, setNotification  }}>
+    <ChatContext.Provider value={{chats, setChats  }}>
       {children}
     </ChatContext.Provider>
 
   )
 }
 
-export const ChatState = () => {
-  const context = useContext(ChatContext)
-
-  if(!context){
-    throw Error('not assigned')
-  }
-
-  return context;
-}
 // export default ContextProvider

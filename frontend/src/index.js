@@ -12,7 +12,12 @@ import { StudentDetailsContextProvider } from './context/StudentDetailsContext';
 import { StudentInfoContextProvider } from './context/StudentInfoContext';
 import { NoticeContextProvider } from './context/NoticeContext';
 import { AuthContextProvider } from './context/AuthContext';
+// import { SelectedChatContextProvider } from './context/SelectedChatContext';
+// import { ChatsContextProvider } from './context/ChatsContext';
+// import { NotificationContextProvider } from './context/NotificationContext';
 import { ChatContextProvider } from './context/ChatProvider';
+import { SelectedChatContextProvider } from './context/SelectedChatProvider';
+import { NotifyContextProvider } from './context/NotificationProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,7 +33,17 @@ root.render(
                   <StudentInfoContextProvider>
                     <NoticeContextProvider>
                       <ChatContextProvider>
-                        <App />
+                        <SelectedChatContextProvider>
+                          <NotifyContextProvider>
+                            <SelectedChatContextProvider>
+                              {/* <ChatsContextProvider> */}
+                              {/* <NotificationContextProvider> */}
+                              <App />
+                              {/* </NotificationContextProvider> */}
+                              {/* </ChatsContextProvider> */}
+                            </SelectedChatContextProvider>
+                          </NotifyContextProvider>
+                        </SelectedChatContextProvider>
                       </ChatContextProvider>
                     </NoticeContextProvider>
                   </StudentInfoContextProvider>
