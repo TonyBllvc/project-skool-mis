@@ -55,7 +55,7 @@ const TimeTableDetails = ({ timetable }) => {
         }
 
         handleUpdate()
-    },[])
+    }, [])
 
     return (
         <Tbody  >
@@ -84,27 +84,36 @@ const TimeTableDetails = ({ timetable }) => {
                     </Box>
                 </Td>
             </Tr>
-            {toggle &&
-                <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >
-                    <Box mr={20} onClick={onOpen} >
-                        <Box>
-                            <Button colorScheme='blue' py={2} px={3} color='white' size={9} fontSize={['10', '11', '13', '16']}>
-                                <BiPencil className='text-white mr-2 font-medium text-sm sm:text-base' />
-                                Update
-                            </Button>
+
+            {user.role === 'Admin' ? (
+                <div>
+                    {toggle &&
+                        <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >
+                            <Box mr={20} onClick={onOpen} >
+                                <Box>
+                                    <Button colorScheme='blue' py={2} px={3} color='white' size={9} fontSize={['10', '11', '13', '16']}>
+                                        <BiPencil className='text-white mr-2 font-medium text-sm sm:text-base' />
+                                        Update
+                                    </Button>
+                                </Box>
+                            </Box>
+                            <Box ml={20} >
+                                <Box onClick={handleDelete}>
+                                    <Button colorScheme='red' py={2} px={3} color='white' size={9} onClick={() => setToggle(!toggle)} fontSize={['10', '11', '13', '16']} >
+                                        <FaTrashAlt className='text-white mr-2 font-medium text-xs sm:text-base' />
+                                        Delete
+                                    </Button>
+                                </Box>
+                            </Box>
+                            <TimeUpdateModal documentData={documentData} setToggle={setToggle} toggle={toggle} open={isOpen} close={onClose} />
                         </Box>
-                    </Box>
-                    <Box ml={20} >
-                        <Box onClick={handleDelete}>
-                            <Button colorScheme='red' py={2} px={3} color='white' size={9} onClick={() => setToggle(!toggle)} fontSize={['10', '11', '13', '16']} >
-                                <FaTrashAlt className='text-white mr-2 font-medium text-xs sm:text-base' />
-                                Delete
-                            </Button>
-                        </Box>
-                    </Box>
-                    <TimeUpdateModal documentData={documentData} setToggle={setToggle} toggle={toggle} open={isOpen} close={onClose} />
-                </Box>
-            }
+                    }
+                </div>
+            ) : (
+                <>
+
+                </>
+            )}
         </Tbody>
     )
 }

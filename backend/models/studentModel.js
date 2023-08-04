@@ -33,7 +33,7 @@ const studentSchema = new Schema({
         trim: true
     },
     reg_no: {
-        type: Number,
+        type: String,
         require: true,
         unique: true
     },
@@ -93,18 +93,18 @@ studentSchema.statics.signup = async function (surname, first_name, middle_name,
     //     throw Error('All fields must be filled')
     // }
     // check if email is valid(if the email put in is an actual email)
-    if (!validator.isEmail(email)) {
-        throw Error('Email is not valid')
-    }
+    // if (!validator.isEmail(email)) {
+    //     throw Error('Email is not valid')
+    // }
     // check for if strong password
-    if (!validator.isStrongPassword(password)) {
-        throw Error('Password not strong enough')
-    }
+    // if (!validator.isStrongPassword(password)) {
+    //     throw Error('Password not strong enough')
+    // }
 
-    if (phone.length > 11 || phone.length < 11) {
-        throw Error('Digits is incorrect')
+    // if (phone.length > 11 || phone.length < 11) {
+    //     throw Error('Digits is incorrect')
 
-    }
+    // }
 
     // to check for replicated emails
     const exists = await this.findOne({ email })
@@ -150,7 +150,7 @@ studentSchema.statics.login = async function (reg_no, role, password) {
     // check if student exists or not
     // if not, throw error
     if (!student) {
-        throw Error('Incorrect email')
+        throw Error('Incorrect reg no')
     }
 
     // match passwords with the hashed version, to compare

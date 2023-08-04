@@ -15,6 +15,7 @@ import Notice from "./pages/component/Notice";
 import Chat from "./pages/component/Chat";
 import { useAuthContext } from "./hooks/useAuthContext";
 import StudentDetails from "./Components/StudentDetails";
+import StudentPersonalResults from "./pages/component/StudentPersonalResults";
 // import ViewTimeTable from "./pages/component/ViewTimeTable";
 
 export default function App() {
@@ -50,15 +51,15 @@ export default function App() {
                         <div className="w-5/6 sm:4/5 z-30 sm:mr-4 relative min-h-screen overflow-y-visible overscroll-contain bg-white shadow-md shadow-slate-800 mt-4 rounded-3xl mb-8">
                             <div className="rounded-lg h-full overflow-visible overscroll-y-auto mt-4 pt-2 mb-3 mx-2 px-2 sm:p-2 sm:mx-4">
                                 <Routes>
-                                    <Route path="/" element={user ? <Navigate to={'/dashboard'}  /> : <Navigate to={'/login'} />} />
+                                    <Route path="/" element={user ? <Navigate to={'/dashboard'} /> : <Navigate to={'/login'} />} />
                                     <Route path="/dashboard" element={<DashBoard />} />
                                     <Route path="/courses" element={user ? <CourseList /> : <Navigate to={'/login'} />} />
                                     <Route path="/student/:id/results" element={user ? <Student /> : <Navigate to={'/login'} />} />
-                                    <Route path="/student/:id/results" element={user ? <StudentDetails /> : <Navigate to={'/login'} />} />
+                                    <Route path="/student/results" element={user.role === 'Student' ? <StudentPersonalResults /> : <Navigate to={'/login'} />} />
                                     <Route path="/students" element={user ? <StudentList /> : <Navigate to={'/login'} />} />
                                     <Route path="/sign_up" element={user ? <SignUpModal /> : <Navigate to={'/login'} />} />
                                     <Route path="/notice" element={user.role === 'Lecturer' ? <Notice /> : <Navigate to={'/'} />} />
-                                    <Route path="/chat" element={user ? <Chat /> : <Navigate to={'/'} />} />
+                                    <Route path="/chat" element={user.role === 'Lecturer' || user.role === 'Student' ? <Chat /> : <Navigate to={'/'} />} />
 
                                     <Route path="/lecturers" element={user ? <LecturerList /> : <Navigate to={'/login'} />} />
 
@@ -71,14 +72,14 @@ export default function App() {
                 }
                 {!user &&
                     <Routes>
-                        <Route path="/" element={ !user ? <Navigate to={'/login'} /> : <Navigate to={'/dashboard'} />}  />
+                        <Route path="/" element={!user ? <Navigate to={'/login'} /> : <Navigate to={'/dashboard'} />} />
                         <Route path="/login" element={!user ? <LoginModal /> : <Navigate to={'/'} />} />
                         <Route path="/sign_up" element={!user ? <SignUpModal /> : <Navigate to={'/'} />} />
                     </Routes>
                 }
 
             </BrowserRouter >
-        </div >
+        </div>
     )
 }
 

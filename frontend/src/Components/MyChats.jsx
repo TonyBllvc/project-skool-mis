@@ -51,6 +51,7 @@ const MyChats = ({ fetchAgain }) => {
                 setChats(json)
                 // dispatchChats({ type: 'GET_DATA', payload: json })
             }
+            return
         } catch (error) {
             toast({
                 title: 'Error Occurred!',
@@ -60,6 +61,7 @@ const MyChats = ({ fetchAgain }) => {
                 isClosable: true,
                 position: "top",
             })
+            return
         }
     }
 
@@ -79,7 +81,7 @@ const MyChats = ({ fetchAgain }) => {
                 <MenuButton display='flex' w={{ base: '10%', md: '10%', lg: '10%' }} fontSize={{ base: '13px', md: '13px', lg: '15px' }} px={{ base: '10px', md: '10px', lg: '10px' }}  >
                     <HiOutlineDotsVertical className='text-2xl font-semibold ' />
                 </MenuButton> 
-                <MenuList as={Button}onClick={onOpen}>
+                <MenuList as={Button} onClick={onOpen}>
                     Create Group Chat
                 </MenuList>
                 

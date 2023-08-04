@@ -14,8 +14,8 @@ const TimeTable = () => {
     const [toggle, setToggle] = useState(false);
     // const [timetable, setSchool ] = useState('')
     const { timetable, dispatch } = useTimetableContext()
-// const [ timetable, setTimetable] = useState([])
-const { user } = useAuthContext()
+    // const [ timetable, setTimetable] = useState([])
+    const { user } = useAuthContext()
 
     useEffect(() => {
         const fetchTimeTable = async () => {
@@ -58,25 +58,30 @@ const { user } = useAuthContext()
 
                 </div>
 
+                {user.role === 'Admin' ? (
+                    <div>
+                        <Button type='button' value='List' fontSize={['11', '13', '15', '18']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
+                            Fill Form
+                            {!toggle &&
+                                <FaChevronDown className='ml-2 font-normal text-sm' />
+                            }
+                            {toggle &&
+                                <FaChevronUp className='ml-2 font-normal text-sm' />
+                            }
+                        </Button>
 
-                <Button type='button' value='List' fontSize={['11', '13', '15', '18']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
-                    Fill Form
-                    {!toggle &&
-                        <FaChevronDown className='ml-2 font-normal text-sm' />
-                    }
-                    {toggle &&
-                        <FaChevronUp className='ml-2 font-normal text-sm' />
-                    }
-                </Button>
-
-                {/* The table for filling */}
-                {toggle &&
-                    <div className='mt-7'>
-                        <TimeTableForm />
+                        {/* The table for filling */}
+                        {toggle &&
+                            <div className='mt-7'>
+                                <TimeTableForm />
+                            </div>
+                        }
                     </div>
-                }
+                ) : (
+                    <>
 
-
+                    </>
+                )}
 
                 <div className="mt-2 px-2 sm:px-3 mb-14">
 
@@ -123,7 +128,7 @@ const { user } = useAuthContext()
                                                     </Tr>
                                                 </Thead>
 
-                                                { timetable && timetable.map(timetable => (
+                                                {timetable && timetable.map(timetable => (
                                                     <TimeTableDetails timetable={timetable} key={timetable._id} />
                                                 ))}
                                             </Table>

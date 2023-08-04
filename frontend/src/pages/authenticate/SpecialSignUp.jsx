@@ -1,10 +1,8 @@
 import {
   Box,
-  Button, FormControl, FormLabel, Input, InputGroup, InputLeftElement, InputRightElement, VStack, useToast
+  Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast
 } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useFormik } from 'formik';
 import { useSignUp } from '../../hooks/auth/useSignup';
 
 
@@ -30,8 +28,8 @@ const SpecialSignUp = () => {
   const [email, setEmail] = useState('mankin@gmail.com')
   const [faculty, setFaculty] = useState('SICT')
   const [role, setRole] = useState('Admin')
-  const [password, setPassword] = useState('Jankinman10.')
-  const [confirm_password, setConfirmPassword] = useState('jankinman10')
+  const [password, setPassword] = useState('Jankinman10')
+  const [confirm_password, setConfirmPassword] = useState('Jankinman10')
   
   const {signup, pending, error, } = useSignUp('/api/admin/signup')
 
@@ -74,63 +72,63 @@ const SpecialSignUp = () => {
     <form onSubmit={handleSubmit} >
       <VStack spacing='5px' color='black' >
 
-        <FormControl id='' isRequired>
+        <FormControl id='admin-title' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Title:
           </FormLabel>
           <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='i.e. Engr.' value={title} onChange={(e) => setTitle(e.target.value)} />
         </FormControl>
 
-        <FormControl id='' isRequired>
+        <FormControl id='admin-surname' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Surname:
           </FormLabel>
           <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='Enter your surname' value={surname} onChange={(e) => setSurname(e.target.value)} />
         </FormControl>
 
-        <FormControl id='' isRequired>
+        <FormControl id='admin-first_name' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             First Name:
           </FormLabel>
           <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='Enter your first name' value={first_name} onChange={(e) => setFirstName(e.target.value)} />
         </FormControl>
 
-        <FormControl id='' isRequired>
+        <FormControl id='admin-middle_name' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Middle Name:
           </FormLabel>
           <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='Enter your middle name' value={middle_name} onChange={(e) => setMiddleName(e.target.value)} />
         </FormControl>
 
-        <FormControl id='' isRequired>
+        <FormControl id='admin-faculty' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Faculty:
           </FormLabel>
           <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='i.e. SICT' maxLength='4' value={faculty} onChange={(e) => setFaculty(e.target.value)} isDisabled />
         </FormControl>
 
-        <FormControl id='' isRequired>
+        <FormControl id='admin-department' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Department:
           </FormLabel>
           <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='i.e. Computer Science' value={department} onChange={(e) => setDepartment(e.target.value)} isDisabled/>
         </FormControl>
 
-        <FormControl id='' isRequired>
+        <FormControl id='admin-role' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Role:
           </FormLabel>
           <Input height={['35px', '35px', '40px', '40px']} type='text' bg='green.100' placeholder='Enter your role id' value={role} onChange={(e) => setRole(e.target.value)} isDisabled/>
         </FormControl>
 
-        <FormControl id='' isRequired>
+        <FormControl id='admin-email' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Email:
           </FormLabel>
           <Input height={['35px', '35px', '40px', '40px']} type='email' bg='green.100' placeholder='Enter your e-mail' value={email} onChange={(e) => setEmail(e.target.value)} />
         </FormControl>
 
-        <FormControl id="phone" 
+        <FormControl id="admin-phone" 
               isRequired>
           <FormLabel fontSize={['12.5', '13', '15', '16']}>Phone Number</FormLabel>
           <InputGroup  width='100%'>
@@ -154,7 +152,7 @@ const SpecialSignUp = () => {
             Should contain 11 digits only
           </Box>
         )}
-        <FormControl id='signup-password' isRequired>
+        <FormControl id='admin-password' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Password:
           </FormLabel>
@@ -169,7 +167,7 @@ const SpecialSignUp = () => {
           </InputGroup>
         </FormControl>
 
-        <FormControl id='confirm-password' isRequired>
+        <FormControl id='admin-confirm-password' isRequired>
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Confirm Password:
           </FormLabel>

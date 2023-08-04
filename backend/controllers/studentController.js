@@ -50,6 +50,7 @@ const signupStudent = async (req, res) => {
         return res.status(204).json({ error: 'Please fill in all the fields', emptyFields })
     }
 
+    // var reg_no = reg_no
 
     const regExists = await Student.findOne({ reg_no })
     if (regExists) {

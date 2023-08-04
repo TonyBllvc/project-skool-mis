@@ -62,6 +62,22 @@ const NavBar = () => {
                                 Time-Table
                             </p>
                         </NavLink>
+
+                        { user.role === 'Student' ? (
+                        <NavLink to="/student/results" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                            <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
+
+                            <p className='hidden sm:flex'>
+                                Results
+                            </p>
+                        </NavLink>
+                        ) : (
+                            <>
+
+                            </>
+                        )}
+
+                        { user.role === 'Lecturer' || user.role === 'Student' ? (
                         <NavLink to="/chat" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <BsChatDots className=' text-2xl text-white font-semibold pr-2' />
 
@@ -69,6 +85,11 @@ const NavBar = () => {
                                 Chat
                             </p>
                         </NavLink>
+                        ) : (
+                            <>
+
+                            </>
+                        )}
                         { user.role === 'Lecturer' ? (
                         <NavLink to="/notice" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineInfoCircle className=' text-2xl text-white font-semibold pr-2' />

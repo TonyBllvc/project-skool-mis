@@ -31,7 +31,7 @@ const usingSchema = new Schema({
         require: true
     },
     reg_no: {
-        type: Number,
+        type: String,
         require: true,
         unique: true
     },

@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Menu, MenuButton, MenuDivider, MenuItem, MenuList, Text, Tooltip, useDisclosure, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { FaBell, FaChevronDown, FaSearch } from 'react-icons/fa'
+import { FaAddressBook, FaBell, FaChevronDown, FaSearch } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { getSender } from '../config/chatLogic'
 import ProfileModel from '../model/ProfileModel'
@@ -8,6 +8,7 @@ import SearchBar from './SearchBar'
 import { useAuthContext } from '../hooks/useAuthContext'
 import { useNotificationContext } from '../hooks/useNotifiContext'
 import { useSelectChatContext } from '../hooks/useSelectChatContext'
+import UserModel from '../model/UserModel'
 
 const ChatNav = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -22,8 +23,8 @@ const ChatNav = () => {
     const { user, dispatch } = useAuthContext()
     // const { notification, dispatch: dispatchNotification } = useNotificationContext()
     // const { dispatch: dispatchSelectedChat } = useSelectedChatContext()
-    const {setSelectedChat} = useSelectChatContext()
-    const {  notification, setNotification } = useNotificationContext()
+    const { setSelectedChat } = useSelectChatContext()
+    const { notification, setNotification } = useNotificationContext()
 
     const logoutHandler = () => {
         localStorage.removeItem('user')
@@ -89,8 +90,8 @@ const ChatNav = () => {
             <Box display='flex' justifyContent='space-between' alignItems='center' bg='white' w='100%' p='5px 10px 5px 10px' borderWidth='5px' >
                 <Tooltip label="Search Users to chat" hasArrow placement='bottom-end'>
                     <Button variant='ghost' onClick={() => setToggle(!toggle)}  >
-                        <FaSearch type='button' className=' text-red-600 text-lg font-thin' />
-                        <Text display={{ base: "none", md: "flex" }} px='4' > Search User </Text>
+                        <FaAddressBook type='button' className=' text-red-600 text-xl font-thin' />
+                        <Text display={{ base: "none", md: "flex" }} px='1.5' > Start Chats </Text>
                     </Button>
                 </Tooltip>
 
@@ -155,9 +156,11 @@ const ChatNav = () => {
             </Box>
 
             {/* A component the handles the search bar side widgets */}
-            {toggle &&
+            {/* {toggle &&
                 <SearchBar toggle={toggle} set={setToggle} setSearch={setSearch} search={search} handleSearch={handleSearch} loading={loading} searchResult={searchResult} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat} />
-            }
+            } */}
+            {toggle &&
+                <UserModel  toggle={toggle} set={setToggle} setSearch={setSearch} search={search} handleSearch={handleSearch} loading={loading} searchResult={searchResult} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat}/>}
         </div>
     )
 }
