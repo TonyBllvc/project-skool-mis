@@ -83,21 +83,21 @@ const Student = () => {
         {/* the top section */}
         <div className='w-full mb-8 flex flex-row justify-start align-middle text-center items-center'>
 
-          <h1 onClick={() => { navigate('/') }} className="text-gray-500 cursor-pointer text-sm sm:text-lg font-mono font-semibold">
+          <h1 onClick={() => { navigate('/') }} className="text-gray-500 cursor-pointer text-xs base:text-lg font-mono font-semibold">
             Computer Science
           </h1>
           <div className="flex items-end mx-2 justify-end">
-            <BiRightArrowAlt className="text-gray-500  text-sm sm:text-lg font-mono font-semibold" />
+            <BiRightArrowAlt className="text-gray-500  text-xs base:text-lg font-mono font-semibold" />
           </div>
           {/* This would have model schema created */}
-          <h2 onClick={() => { navigate(-1) }} className="text-gray-500 cursor-pointer text-sm sm:text-lg font-mono font-semibold">
+          <h2 onClick={() => { navigate(-1) }} className="text-gray-500 cursor-pointer text-xs base:text-lg font-mono font-semibold">
             Students
           </h2>
           <div className="flex items-end mx-2 justify-end">
-            <BiRightArrowAlt className="text-gray-500  text-sm sm:text-lg font-mono font-semibold" />
+            <BiRightArrowAlt className="text-gray-500  text-xs base:text-lg font-mono font-semibold" />
           </div>
           {/* This would have model schema created */}
-          <h2 className="text-green-600 cursor-pointer text-sm sm:text-lg font-mono font-semibold">
+          <h2 className="text-green-600 cursor-pointer text-xs base:text-lg font-mono font-semibold">
             Student Details
           </h2>
 
@@ -136,22 +136,22 @@ const Student = () => {
               <Table width='100%' display='flex' flexDirection='row'>
                 <Thead width={['35%', '25%', '25%']}>
                   <Tr display='flex' width='100%' flexDirection='column' backgroundColor='yellow.200'>
-                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                       <Box width='100%'>
                         Name:
                       </Box>
                     </Th>
-                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                       <Box width='100%' >
                         Faculty:
                       </Box>
                     </Th>
-                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                       <Box width='100%' >
                         Department:
                       </Box>
                     </Th>
-                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                       <Box width='100%' >
                         Reg Number:
                       </Box>

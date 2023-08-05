@@ -21,7 +21,7 @@ const UserModel = ({ toggle, set, setLoadingChat, loadingChat, setSelectedChat }
         const fetchUsers = async () => {
 
             try {
-                const data = await fetch('/api/user/', {
+                const data = await fetch('/api/user/' + user._id, {
                     headers: {
                         'Authorization': `Bearer ${user.token}`,
                     }

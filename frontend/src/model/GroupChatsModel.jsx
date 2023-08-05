@@ -167,13 +167,6 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
             <FormControl>
               <Input placeholder='Add Users eg: John, Mag' mb={1} onChange={(e) => handleSearch(e.target.value)} />
             </FormControl>
-            <Box overflow='scroll' height='100px' px={4} position='relative' >
-              <Box w='100%' display='flex' flexWrap='wrap' >
-                {selectedUsers.map((u) => (
-                  <Selected key={u._id} user={u} handleFunction={() => handleDelete(u)} />
-                ))}
-              </Box>
-            </Box>
 
             {loading ? (
               <Spinner ml='auto' display='flex' />
@@ -184,6 +177,13 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
             )
             }
 
+            <Box overflow='scroll' height='100px' px={4} position='relative' >
+              <Box w='100%' display='flex' flexWrap='wrap' >
+                {selectedUsers.map((u) => (
+                  <Selected key={u._id} user={u} handleFunction={() => handleDelete(u)} />
+                ))}
+              </Box>
+            </Box>
           </ModalBody>
 
           <ModalFooter>

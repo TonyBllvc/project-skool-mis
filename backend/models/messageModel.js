@@ -23,6 +23,6 @@ const messageSchema = mongoose.Schema({
         // reference to our user model
         ref: "chatting" 
     }
-}, { timestamps: true})
+}, { timestamps: true} )
 
 module.exports = mongoose.model('messaging', messageSchema);

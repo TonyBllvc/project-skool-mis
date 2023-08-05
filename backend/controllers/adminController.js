@@ -80,6 +80,7 @@ const loginAdmin = async (req, res) => {
             surname: admin.surname,
             first_name: admin.first_name,
             middle_name: admin.middle_name,
+            phone: admin.phone
         }
         res.status(200).json(userData)
     } catch (error) {

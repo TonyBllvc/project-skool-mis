@@ -90,12 +90,12 @@ const ChatNav = () => {
             <Box display='flex' justifyContent='space-between' alignItems='center' bg='white' w='100%' p='5px 10px 5px 10px' borderWidth='5px' >
                 <Tooltip label="Search Users to chat" hasArrow placement='bottom-end'>
                     <Button variant='ghost' onClick={() => setToggle(!toggle)}  >
-                        <FaAddressBook type='button' className=' text-red-600 text-xl font-thin' />
+                        <FaAddressBook type='button' className=' text-red-600 text-xl base:text-xl font-thin' />
                         <Text display={{ base: "none", md: "flex" }} px='1.5' > Start Chats </Text>
                     </Button>
                 </Tooltip>
 
-                <Text fontSize='2xl' fontFamily='work sans'>
+                <Text fontSize={['md', 'lg', 'lg','2xl']} fontFamily='work sans'>
                     Chat
                 </Text>
 
@@ -141,7 +141,7 @@ const ChatNav = () => {
 
                     <Menu>
                         <MenuButton as={Button} rightIcon={<FaChevronDown className='text-sm ' />}>
-                            <Avatar size='sm' cursor='pointer' name={user.surname} />
+                            <Avatar size={['xs', 'sm', 'sm']} cursor='pointer' name={user.surname} />
                         </MenuButton>
                         <MenuList>
                             <MenuItem onClick={onOpen} > My Profile </MenuItem>
@@ -160,7 +160,7 @@ const ChatNav = () => {
                 <SearchBar toggle={toggle} set={setToggle} setSearch={setSearch} search={search} handleSearch={handleSearch} loading={loading} searchResult={searchResult} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat} />
             } */}
             {toggle &&
-                <UserModel  toggle={toggle} set={setToggle} setSearch={setSearch} search={search} handleSearch={handleSearch} loading={loading} searchResult={searchResult} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat}/>}
+                <UserModel  toggle={toggle} set={setToggle} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat}/>}
         </div>
     )
 }

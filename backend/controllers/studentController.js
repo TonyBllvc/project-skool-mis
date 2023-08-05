@@ -125,6 +125,7 @@ const loginStudent = async (req, res) => {
             surname: student.surname,
             first_name: student.first_name,
             middle_name: student.middle_name,
+            phone: student.phone
         }
         res.status(200).json(userData)
     } catch (error) {

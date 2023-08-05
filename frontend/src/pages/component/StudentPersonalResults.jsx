@@ -108,26 +108,31 @@ const StudentPersonalResults = () => {
                     </button>
                 </div>
 
+                {user.role === 'Admin' ? (
+                    <Box mt={8}>
 
-                <Box mt={8}>
+                        <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
+                            Fill Form
+                            {!toggle &&
+                                <FaChevronDown className='ml-2 font-normal text-sm' />
+                            }
+                            {toggle &&
+                                <FaChevronUp className='ml-2 font-normal text-sm' />
+                            }
+                        </Button>
 
-                    <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
-                        Fill Form
-                        {!toggle &&
-                            <FaChevronDown className='ml-2 font-normal text-sm' />
-                        }
+                        {/* The table for filling */}
                         {toggle &&
-                            <FaChevronUp className='ml-2 font-normal text-sm' />
+                            <div className='mt-7'>
+                                <UploadStudentResult />
+                            </div>
                         }
-                    </Button>
+                    </Box>
+                ) : (
+                    <>
 
-                    {/* The table for filling */}
-                    {toggle &&
-                        <div className='mt-7'>
-                            <UploadStudentResult />
-                        </div>
-                    }
-                </Box>
+                    </>
+                )}
 
                 <Box mt={8} ml={2} display='flex' width='100%'>
                     {/* {result ? ( */}

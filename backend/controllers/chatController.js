@@ -1,5 +1,7 @@
 const Chat = require('../models/chatModel')
 const User = require('../models/userModel')
+const Message = require("../models/messageModel")
+const mongoose = require('mongoose');
 
 const accessChat = async (req, res) => {
     // chat if chat with user id(from the user) does exists
@@ -46,7 +48,7 @@ const accessChat = async (req, res) => {
             const createdChat = await Chat.create(chatData)
 
             const fullChat = await Chat.findOne({
-                _id: createdChat.id
+                _id: createdChat._id
             }).populate(
                 "users",
                 "-password"
@@ -122,6 +124,26 @@ const createGroupChat = async (req, res) => {
         // check if error
         res.status(400).json(error.message)
     }
+}
+
+const deleteChat = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such document' })
+    }
+
+    const chat = await Chat.findByIdAndDelete({ _id: id })
+
+    if (!chat) {
+        return res.status(400).json({ error: 'No such chat' })
+    }
+
+    await Message.deleteMany({ chat_owner: id })
+
+    res.status(200).json(chat)
+
+
 }
 
 const renameGroupChat = async (req, res) => {
@@ -205,6 +227,7 @@ const removeUserFromGroup = async (req, res) => {
 module.exports = {
     accessChat,
     fetchChats,
+    deleteChat,
     createGroupChat,
     renameGroupChat,
     addUserToGroup,

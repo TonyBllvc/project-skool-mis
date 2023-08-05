@@ -121,15 +121,15 @@ const StudentList = () => {
                 </div>
                 <div className='mb-5'>
                     <button onClick={() => { navigate(-1) }} className=' flex flex-row justify-start text-black hover:text-red-700 text-center items-center align-bottom '>
-                        <BiArrowBack className=" mr-1 font-mono text-center text-lg font-semibold" /> Back
+                        <BiArrowBack className=" mr-1 font-mono text-center text-sm sm:text-lg font-semibold" /> Back
                     </button>
                 </div>
 
                 {/* fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' */}
 
                 <Box mt={8} display='flex'>
-                    <FormControl w='40%' display='flex' alignItems='center' alignContent='center' >
-                        <FormLabel color='black' fontSize={['10', '16', '17']}>
+                    <FormControl w={[ '70%', '60%', '40%']} display='flex' alignItems='center' alignContent='center' >
+                        <FormLabel color='black' fontSize={['13', '16', '18']}>
                             Session:
                         </FormLabel>
                         <Select variant='filled' color='gray.700'

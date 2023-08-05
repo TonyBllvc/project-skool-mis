@@ -113,6 +113,7 @@ const loginLecturer = async (req, res) => {
             surname: lecturer.surname,
             first_name: lecturer.first_name,
             middle_name: lecturer.middle_name,
+            phone: lecturer.phone
         }
 
         res.status(200).json(userData)

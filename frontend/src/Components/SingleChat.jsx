@@ -230,6 +230,42 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
         }, timeLength);
     }
 
+    const typingMobileHandler = (e) => {
+
+        const keyCode = e.keyCode || e.which
+        if(( keyCode >= 65 && keyCode <= 90) || (keyCode >= 48 && keyCode <= 57)){
+            setNewMessage(e.target.value)
+    
+            //Typing Indicator Logic
+            if (!socketConnected) {
+                return
+            }
+    
+            // if user is typing, pass true
+            if (!typing) {
+                setTyping(true)
+                // for the particular chat
+                socket.emit("typing", selectedChat._id);
+            }
+    
+            // parse the last time as a var
+            let lastTypingTime = new Date().getTime()
+            var timeLength = 2300
+    
+            // run immediately after 3000 seconds
+            setTimeout(() => {
+                var timeNow = new Date().getTime()
+                var timeDiff = timeNow - lastTypingTime
+    
+                if (timeDiff >= timeLength && typing) {
+                    socket.emit("stop_typing", selectedChat._id)
+                    setTyping(false)
+                }
+            }, timeLength);
+        }
+    }
+
+    
     // *********************************************************
 
     return (
@@ -237,7 +273,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
             {
                 selectedChat ? (
                     <>
-                        <Text fontSize={{ base: '22px', md: '24px' }} pb={3} px={2} w='100%' fontFamily='Work sans' display='flex' justifyContent={{ base: 'space-between' }} alignItems='center' >
+                        <Text fontSize={{ base: '14px', md: '21px', lg: '25px' }} pb={3} px={2} w='100%' fontFamily='Work sans' display='flex' justifyContent={{ base: 'space-between' }} alignItems='center' >
                             <FaArrowLeft size='24px' className='text-lg text-black'
                             onClick={() => setSelectedChat('')}
                             //  onClick={() => dispatchSelectedChat({ type: 'EMPTY_DATA'}) }
@@ -289,7 +325,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
                                     ) : (
                                         <> </>
                                     )}
-                                    <Input variant='filled' bg='gray.300' placeholder='Enter a message' onChange={typingHandler} value={newMessage} />
+                                    <Input variant='filled' bg='gray.300' placeholder='Enter a message' onChange={typingHandler} onKeyDown={typingMobileHandler} value={newMessage} />
                                 </FormControl>
                                 <Button onClick={clickMessage} colorScheme='green' p={2} mt={3} ml={2} >
                                     <FaEnvelope className='test-sm text-white ' />

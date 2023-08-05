@@ -1,8 +1,7 @@
 const Message = require("../models/messageModel")
 const User = require("../models/lecturerModel")
-const Student = require('../models/studentModel')
-const Lecturer = require('../models/lecturerModel')
 const Chat = require("../models/chatModel")
+const mongoose = require('mongoose');
 
 const sendMessage = async (req, res) => {
     const { content, chatId, userId } = req.body
@@ -87,8 +86,66 @@ const allMessages = async (req, res) => {
     }
 }
 
+
+const deleteMessage = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such document' })
+    }
+
+    const message = await Message.findByIdAndDelete({ _id: id })
+
+    if (!message) {
+        return res.status(400).json({ error: 'No such chat' })
+    }
+
+    res.status(200).json(message)
+}
+
+const updateMessage = async (req, res) => {
+    // const { id } = req.params
+    const { id } = req.params
+    const { newContent } = req.body
+    // const updatesNew = {  }
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such document' })
+    }
+
+    try {
+        var message = await Message.findByIdAndUpdate(
+            id,
+            {
+                content: newContent
+            },
+            {
+                new: true
+            }).populate("chat_owner")
+
+        message = await User.populate(message, {
+            path: "chat_owner.users",
+
+            // add "picture" after directly name
+            // i.e. ("name picture email")
+            select: "surname first_name middle_name reg_no role email",
+        })
+        
+        if (!message) {
+            return res.status(404).json({ error: 'No such result' })
+        }
+
+        res.status(200).json(message)
+    } catch (error) {
+        return res.status.json({ error: "An error occurred, sorry!" })
+    }
+}
+
+
 module.exports = {
     sendMessage,
-    allMessages
+    allMessages,
+    deleteMessage,
+    updateMessage
 
 }
