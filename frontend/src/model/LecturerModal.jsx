@@ -5,7 +5,7 @@ const LecturerModal = ({ name,handleId, handleName }) => {
     return (
         // <Box>
             <CardBody display='flex' direction='row' justifyContent='center' onClick={(e) => handleId(name._id)} >
-                <Text fontSize='md' _hover={{ cursor:'pointer'}} onClick={(e) => handleName(name.surname)}>
+                <Text fontSize={['11', '14', '16']} _hover={{ cursor:'pointer'}} onClick={(e) => handleName(name.surname)}>
                     {name.surname} {name.first_name} {name.middle_name}
                 </Text>
             </CardBody>

@@ -53,14 +53,14 @@ const CourseForm = ({ setToggling, toggling }) => {
         e.preventDefault()
         const value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')
         setCourseCode(value)
-        
-    if (value.length !== 6) {
-        setError('6 characters only')
-    }else if(/\s/.test(value)){
-        setError('No spacing allowed')
-    }else{
-        setError('')
-    }
+
+        if (value.length !== 6) {
+            setError('6 characters only')
+        } else if (/\s/.test(value)) {
+            setError('No spacing allowed')
+        } else {
+            setError('')
+        }
     }
 
     // submit filled form
@@ -213,9 +213,9 @@ const CourseForm = ({ setToggling, toggling }) => {
                 setLoading(true)
 
                 const data = await fetch(`/api/lecturer/?search=${search}`, {
-                      headers: {
+                    headers: {
                         Authorization: `Bearer ${user.token}`,
-                      }
+                    }
                 }
                 )
                 const json = await data.json()
@@ -261,28 +261,29 @@ const CourseForm = ({ setToggling, toggling }) => {
     }
     return (
         <form onSubmit={handleSubmit} className='w-full flex justify-center'>
-            <VStack w='70%' spacing='5px' color='black' >
+            <VStack w={['90%', '85%', '70%']} spacing='5px' color='black' >
 
 
                 <Box w='100%' display='flex' flexDirection='row' justifyContent='space-between' >
 
-                    <FormControl w='45%' id='first-course_code' isRequired>
-                        <FormLabel color='black'>
+                    <FormControl w='53.5%' id='first-course_code' isRequired>
+                        <FormLabel width='100%' color='black' fontSize={['12.5', '13', '15', '16']}>
                             Course Code:
                         </FormLabel>
-                        <Input type='text' bg='green.100' pattern='[A-Z0-9]*' maxLength={6} placeholder='Enter course code' value={course_code} onChange={handleChanges} />
-                        {error ? <Text fontSize={['xs', 'sm', 'md','lg']} color='red.700'>
+                        <Input fontSize={['9.5', '10', '13', '15']} type='text' bg='green.100' pattern='[A-Z0-9]*' maxLength={6} placeholder='Enter course code' value={course_code} onChange={handleChanges} />
+                        {error ? <Text fontSize={['xs', 'sm', 'md', 'lg']} color='red.700'>
                             {error}
                         </Text> : <> </>}
                     </FormControl>
 
                     <FormControl w='45%' isRequired>
-                        <FormLabel color='black'>
+                        <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             Level:
                         </FormLabel>
 
                         <Select variant='filled'
                             value={level}
+                            fontSize={['9.5', '16', '17']}
                             onChange={(e) => setLevel(e.target.value)}
                             placeholder='Select Day'>
                             {optionOne.map((options) => (
@@ -297,24 +298,24 @@ const CourseForm = ({ setToggling, toggling }) => {
                 </Box>
 
                 <FormControl id='course_name' isRequired>
-                    <FormLabel color='black'>
+                    <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                         Course name:
                     </FormLabel>
-                    <Input type='text' bg='green.100' placeholder='Enter course name id' value={course_name} onChange={(e) => setCourseName(e.target.value)} />
+                    <Input fontSize={['9.5', '10', '13', '15']} type='text' bg='green.100' placeholder='Enter course name id' value={course_name} onChange={(e) => setCourseName(e.target.value)} />
                 </FormControl>
 
 
                 <FormControl isRequired>
-                    <FormLabel color='black'>
+                    <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                         Course Coordinator:
                     </FormLabel>
 
                     <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between'>
 
-                        <Input w='76%' type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px' fontSize={15} fontFamily='cursive' mb={1} value={passInfo} isDisabled />
+                        <Input fontSize={['8.5', '10', '13', '15']} w={['67%', '70%', '76%']} type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px' fontFamily='sans-serif' mb={1} value={passInfo} isDisabled />
 
-                        <Box w='20%' border={4} borderColor='green.600' color='green.600' onClick={() => setToggle(!toggle)}>
-                            <Input w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleLecturers} />
+                        <Box w={['31%', '28%', '20%']} border={4} borderColor='green.600' color='green.600' onClick={() => setToggle(!toggle)}>
+                            <Input fontSize={['14', '16', '17']} w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleLecturers} />
                         </Box>
                     </FormControl>
 
@@ -337,16 +338,16 @@ const CourseForm = ({ setToggling, toggling }) => {
                 </FormControl>
 
                 <FormControl isRequired>
-                    <FormLabel color='black'>
+                    <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                         School Semester:
                     </FormLabel>
 
                     <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between'>
 
-                        <Input w='76%' type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px' fontSize={15} fontFamily='cursive' mb={1} value={schoolInfo} isDisabled />
+                        <Input w={['67%', '70%', '76%']} fontSize={['9.5', '10', '13', '15']} type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px' fontFamily='sans-serif' mb={1} value={schoolInfo} isDisabled />
 
-                        <Box w='20%' border={4} borderColor='green.600' color='green.600' onClick={() => setSecondToggle(!secondToggle)}>
-                            <Input w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleSchool} />
+                        <Box w={['31%', '28%', '20%']} border={4} borderColor='green.600' color='green.600' onClick={() => setSecondToggle(!secondToggle)}>
+                            <Input fontSize={['14', '16', '17']} w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleSchool} />
                         </Box>
                     </FormControl>
 
@@ -370,12 +371,12 @@ const CourseForm = ({ setToggling, toggling }) => {
 
 
                 <FormControl isRequired>
-                    <FormLabel color='black'>
+                    <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                         Course Lecturers:
                     </FormLabel>
 
                     <FormControl>
-                        <Input placeholder='Add Users eg: John, Mag' mb={1} onChange={(e) => handleSearch(e.target.value)} />
+                        <Input fontSize={['9.5', '10', '13', '15']} placeholder='Add Users eg: John, Mag' mb={1} onChange={(e) => handleSearch(e.target.value)} />
                     </FormControl>
 
                     <Box w='100%' display='flex' flexWrap='wrap' >

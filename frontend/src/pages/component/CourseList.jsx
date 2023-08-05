@@ -69,7 +69,7 @@ const CourseList = () => {
                     </button></div>
 
                 {user.role === 'Admin' ? (
-                    <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
+                    <Button type='button' value='List' fontSize={['11', '13', '15', '18']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
                         Fill Form
                         {!toggle &&
                             <FaChevronDown className='ml-2 font-normal text-xs' />

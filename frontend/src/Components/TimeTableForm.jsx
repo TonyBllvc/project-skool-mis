@@ -24,7 +24,7 @@ const optionTwo = [
 const TimeTableForm = () => {
     const { course, dispatch } = useCourseContext()
     const { dispatch: dispatchTime } = useTimeContext()
-    const {user } = useAuthContext()
+    const { user } = useAuthContext()
 
     const [day, setDay] = useState('')
     const [start, setStart] = useState('')
@@ -41,74 +41,74 @@ const TimeTableForm = () => {
     const toast = useToast()
     const navigate = useNavigate()
 
-        // submit filled form
-        const handleSubmit = async (e) => {
-            e.preventDefault()
-            setLoading(true)
+    // submit filled form
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        setLoading(true)
 
-            // check if every field has been filled
-            if (!day || !start || !am_one || !am_two || !end || !courseId || !passInfo) {
-                toast({
-                    title: 'Please fill all the Fields!',
-                    status: 'warning',
-                    duration: 4000,
-                    isClosable: true,
-                    position: "bottom",
-                })
-                return
-            }
+        // check if every field has been filled
+        if (!day || !start || !am_one || !am_two || !end || !courseId || !passInfo) {
+            toast({
+                title: 'Please fill all the Fields!',
+                status: 'warning',
+                duration: 4000,
+                isClosable: true,
+                position: "bottom",
+            })
+            return
+        }
 
-            // parse every value into  details        
-            const details = { day, start, am_one, am_two, end, courseId }
+        // parse every value into  details        
+        const details = { day, start, am_one, am_two, end, courseId }
 
-            try {
-                const res = await fetch("/api/time/set_time_table", {
-                    method: "POST",
-                    body: JSON.stringify(details),
-                    headers: {
-                        "Content-Type": "application/json",
-                        'Authorization': `Bearer ${user.token}`
-                    }
-
-                })
-
-                const json = await res.json()
-
-                if (!res.ok) {
-                    toast({
-                        title: 'Response not okay!',
-                        status: 'error',
-                        duration: 5000,
-                        isClosable: true,
-                        position: "top",
-                    })
-                    return console.log(json.error)
+        try {
+            const res = await fetch("/api/time/set_time_table", {
+                method: "POST",
+                body: JSON.stringify(details),
+                headers: {
+                    "Content-Type": "application/json",
+                    'Authorization': `Bearer ${user.token}`
                 }
 
-                if (res.ok) {
-                    toast({
-                        title: 'Submitted Successfully!',
-                        status: 'success',
-                        duration: 3000,
-                        isClosable: true,
-                        position: "top",
-                    })
-                    dispatchTime({ type: 'CREATE_DATA', payload: json })
-                    setLoading(false)
-                    console.log('new data added', json)
-                }
-            } catch (error) {
+            })
+
+            const json = await res.json()
+
+            if (!res.ok) {
                 toast({
-                    title: 'Error occurred, can not login now!',
-                    status: 'error' + error.message,
+                    title: 'Response not okay!',
+                    status: 'error',
                     duration: 5000,
                     isClosable: true,
                     position: "top",
                 })
-                setLoading(false)
+                return console.log(json.error)
             }
 
+            if (res.ok) {
+                toast({
+                    title: 'Submitted Successfully!',
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                    position: "top",
+                })
+                dispatchTime({ type: 'CREATE_DATA', payload: json })
+                setLoading(false)
+                console.log('new data added', json)
+            }
+        } catch (error) {
+            toast({
+                title: 'Error occurred, can not login now!',
+                status: 'error' + error.message,
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            })
+            setLoading(false)
         }
+
+    }
 
     // fetch courses so as to pick the id
     const handleCourses = async (e) => {
@@ -139,15 +139,17 @@ const TimeTableForm = () => {
 
     return (
         <form onSubmit={handleSubmit} className='w-full flex justify-center'>
-            <VStack w='70%' spacing='5px' color='black' >
+            <VStack w={['90%', '85%', '70%']} spacing='5px' color='black' >
 
                 <FormControl isRequired>
-                    <FormLabel color='black'>
+                    <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                         Day:
                     </FormLabel>
 
                     <Select variant='filled'
                         value={day}
+                        h={['29', '30', '37']}
+                        fontSize={['10', '16', '17']}
                         onChange={(e) => setDay(e.target.value)}
                         placeholder='Select Day'>
                         {optionOne.map((options) => (
@@ -160,19 +162,20 @@ const TimeTableForm = () => {
                 </FormControl>
 
                 <Box w='100%' display='flex' flexDirection='row' justifyContent='space-between' >
-                    <FormControl w='50%' isRequired>
-                        <FormLabel color='black'>
+                    <FormControl w='48%' isRequired>
+                        <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             Starts:
                         </FormLabel>
-                        <Input type='text' bg='green.100' placeholder='i.e. 3:00 ' value={start} onChange={(e) => setStart(e.target.value)} />
+                        <Input fontSize={['9.5', '10', '13', '15']} type='text' bg='green.100' placeholder='i.e. 3:00 ' value={start} onChange={(e) => setStart(e.target.value)} />
                     </FormControl>
 
-                    <FormControl w='40%' isRequired>
-                        <FormLabel color='black'>
+                    <FormControl w='50%' isRequired>
+                        <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             AM/PM:
                         </FormLabel>
                         <Select variant='filled' color='gray.700'
                             value={am_one}
+                            fontSize={['8.5', '16', '17']}
                             onChange={(e) => setAmOne(e.target.value)}
                             placeholder='Select'>
                             {optionTwo.map((options) => (
@@ -186,19 +189,21 @@ const TimeTableForm = () => {
                 </Box>
 
                 <Box w='100%' display='flex' flexDirection='row' justifyContent='space-between' >
-                    <FormControl w='50%' isRequired>
-                        <FormLabel color='black'>
+                    <FormControl w='48%' isRequired>
+                        <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             Ends:
                         </FormLabel>
-                        <Input type='text' bg='green.100' placeholder='i.e. 3:00' value={end} onChange={(e) => setEnd(e.target.value)} />
+                        <Input type='text' fontSize={['9.5', '10', '13', '15']} bg='green.100' placeholder='i.e. 3:00' value={end} onChange={(e) => setEnd(e.target.value)} />
                     </FormControl>
 
-                    <FormControl id='login-start' w='40%' isRequired>
-                        <FormLabel color='black'>
+                    <FormControl id='login-start' w='50%' isRequired>
+                        <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             AM/PM:
                         </FormLabel>
                         <Select variant='filled' color='gray.800'
                             value={am_two}
+                            // h={['39', '30', '37']}
+                            fontSize={['8.5', '16', '17']}
                             onChange={(e) => setAmTwo(e.target.value)}
                             placeholder='Select'>
                             {optionTwo.map((options) => (
@@ -212,16 +217,16 @@ const TimeTableForm = () => {
                 </Box>
 
                 <FormControl isRequired>
-                    <FormLabel color='black'>
+                    <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                         Course Code:
                     </FormLabel>
 
                     <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between'>
 
-                        <Input w='76%' type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px' fontSize={15} fontFamily='cursive' mb={1} value={passInfo} isDisabled />
+                        <Input w={['67%', '70%', '76%']} type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' fontSize={['8.5', '11', '15']} color='blackAlpha.900' border='2px' fontFamily='sans-serif' mb={1} value={passInfo} isDisabled />
 
-                        <Box w='20%' border={4} borderColor='green.600' color='green.600' onClick={() => setToggle(!toggle)}>
-                            <Input w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleCourses} />
+                        <Box w={['31%', '28%', '20%']} border={4} borderColor='green.600' color='green.600' onClick={() => setToggle(!toggle)}>
+                            <Input w='100%' fontSize={['14', '16', '17']} type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleCourses} />
                         </Box>
                     </FormControl>
 
@@ -232,7 +237,7 @@ const TimeTableForm = () => {
                             {course && course.map((dataPick) => (
 
                                 <Card key={dataPick._id} onClick={() => setToggle(!toggle)}>
-                                
+
                                     <CourseModal name={dataPick} handleName={setInfo} handleId={setCourseId} />
 
                                 </Card>
