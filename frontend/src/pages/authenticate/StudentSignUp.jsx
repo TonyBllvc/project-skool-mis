@@ -11,15 +11,15 @@ const StudentSignUp = () => {
   const [first_name, setFirstName] = useState('Jude')
   const [middle_name, setMiddleName] = useState('Justin')
   const [department, setDepartment] = useState('Computer Science')
-  const [email, setEmail] = useState('mankin@gmail.com')
+  const [email, setEmail] = useState('blackxtony@gmail.com')
   const [faculty, setFaculty] = useState('SICT')
   const [reg_no, setRegNo] = useState('20161029332')
   const [session, setSession] = useState('')
   const [role, setRole] = useState('Student')
-  const [password, setPassword] = useState('Jankinman10')
-  const [confirm_password, setConfirmPassword] = useState('Jankinman10')
+  const [password, setPassword] = useState('Jankinman10.')
+  const [confirm_password, setConfirmPassword] = useState('Jankinman10.')
 
-  const { signup, pending, error, } = useSignUpStudent('/api/student/signup')
+  const { signup, pending, error, } = useSignUpStudent('/api/student/sign_up')
 
   const toast = useToast()
   const [phone, setPhoneNumber] = useState('09050150933');
@@ -33,7 +33,7 @@ const StudentSignUp = () => {
 
     const nextYear = (parseInt(sessionCount) + 1).toString()
 
-    setSession(`${sessionCount}/${nextYear}`)
+    setSession(`${sessionCount}-${nextYear}`)
 
   }
 
@@ -66,7 +66,7 @@ const StudentSignUp = () => {
       })
       return
     }
-    await signup(reg_no, surname, first_name, middle_name, role, reg_no, session, department, faculty, phone, email, password)
+    await signup(surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, password)
   }
   return (
     <form onSubmit={handleSubmit} >

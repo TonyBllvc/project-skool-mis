@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const User = require('../models/userModel')
 
 const Schema = mongoose.Schema;
 
@@ -105,10 +106,24 @@ lecturerSchema.statics.signup = async function (title, surname, first_name, midd
         throw Error('Emails already in use')
     }
 
+    // to check for replicated emails
+    const existEmail = await User.findOne({ email })
+
+    if (existEmail) {
+        throw Error('Emails already in use')
+    }
+
     // to check for replicated phone number
     const exist = await this.findOne({ phone })
 
     if (exist) {
+        throw Error('Phone number already in use')
+    }
+
+    // to check for replicated phone number
+    const existPhone = await User.findOne({ phone })
+
+    if (existPhone) {
         throw Error('Phone number already in use')
     }
 
@@ -119,6 +134,15 @@ lecturerSchema.statics.signup = async function (title, surname, first_name, midd
     const hash = await bcrypt.hash(password, salt)
 
     const lecturer = await this.create({ title, surname, first_name, middle_name, role, faculty, department, phone, email, password: hash })
+
+    try {
+        await User.create({ _id: lecturer._id, title, surname, first_name, middle_name, role, faculty, department, phone, email })
+
+    } catch (error) {
+        throw Error(error.message)
+    }
+
+
 
     return lecturer
 }

@@ -1,6 +1,5 @@
 const Lecturer = require('../models/lecturerModel')
 const School = require('../models/schoolModel')
-const User = require('../models/userModel')
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken')
 
@@ -72,22 +71,9 @@ const signupLecturer = async (req, res) => {
         const token = createToken(lecturer._id, lecturer.role)
 
         res.status(200).json({ title, surname, first_name, middle_name, role, faculty, department, phone, email, token })
+        
     } catch (error) {
         res.status(400).json({ error: error.message })
-    }
-
-    const emailExists = await User.findOne({ email })
-
-    if (emailExists) {
-        return
-    }
-
-    try {
-        await User.create({ _id: lecturer._id, title, surname, first_name, middle_name, role, department, faculty, phone, email })
-
-
-    } catch (error) {
-        return res.status(404).json({ error: error.message })
     }
 
 }

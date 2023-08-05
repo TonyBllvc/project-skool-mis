@@ -11,6 +11,7 @@ const usingSchema = new Schema({
     },
     title: {
         type: String,
+        require: false
     },
     surname: {
         type: String,
@@ -30,15 +31,14 @@ const usingSchema = new Schema({
         type: String,
         require: true
     },
-    reg_no: {
-        type: String,
-        require: true,
-        unique: true
-    },
     faculty: {
         type: String,
         // no trailing spaces before or after
         trim: true
+    },
+    reg_no: {
+        type: String,
+        required: false
     },
     department: {
         type: String,
@@ -54,9 +54,6 @@ const usingSchema = new Schema({
         type: String,
         required: true,
         unique: true,
-    },
-    password: {
-        type: String,
     }
     // lecturer_field: {
     //     type: Schema.Types.ObjectId,

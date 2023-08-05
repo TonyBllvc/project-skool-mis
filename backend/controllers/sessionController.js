@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 // to get the session
 const getSession = async (req, res) => {
-    const session = await Session.find({})
+    const session = await Session.find({}).sort({ session: 1 })
 
     res.status(200).json(session)
 }

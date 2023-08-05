@@ -12,16 +12,16 @@ const LectureSignUp = () => {
   const [first_name, setFirstName] = useState('Jude')
   const [middle_name, setMiddleName] = useState('Justin')
   const [department, setDepartment] = useState('Computer Science')
-  const [email, setEmail] = useState('mankin@gmail.com')
+  const [email, setEmail] = useState('tonyxblack@gmail.com')
   const [faculty, setFaculty] = useState('SICT')
   const [role, setRole] = useState('Lecturer')
-  const [password, setPassword] = useState('Jankinman10')
-  const [confirm_password, setConfirmPassword] = useState('Jankinman10')
+  const [password, setPassword] = useState('Jankinman10.')
+  const [confirm_password, setConfirmPassword] = useState('Jankinman10.')
   
-  const {signup, pending, error, } = useSignUp('/api/lecturer/signup')
+  const {signup, pending, error, } = useSignUp('/api/lecturer/sign_up')
 
   const toast = useToast()
-  const [phone, setPhoneNumber] = useState('09050150933');
+  const [phone, setPhoneNumber] = useState('09050150930');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
 
   const handleChange = (event) => {

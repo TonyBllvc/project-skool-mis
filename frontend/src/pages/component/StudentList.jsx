@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { BiArrowBack, BiArrowToRight, BiRightArrowAlt } from "react-icons/bi";
 import { useStudentContext } from '../../hooks/useStudentContext';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
-import { Box, Button, FormControl, FormLabel, Select, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Select, Table, TableContainer, Th, Thead, Tr, useToast } from '@chakra-ui/react';
 import Loading from '../assets/Loading';
 import StudentListDetails from '../../Components/StudentListDetails';
 import StudentsDetailListSession from '../../Components/StudentsDetailListSession';
@@ -17,30 +17,38 @@ const StudentList = () => {
     const [session, setSession] = useState([])
     const [passSession, setPassSession] = useState('')
     const [passStudents, setPassStudents] = useState([])
+
+    const [haveSearched, setHaveSearched] = useState(false)
+
+    const [search, setSearch] = useState('')
+    const [searchResult, setSearchResult] = useState([])
+    const [loading, setLoading] = useState('')
     const { user } = useAuthContext()
 
+    const toast = useToast()
+
     // useEffect(() => {
-        const fetchSession = async () => {
-            const res = await fetch('/api/session/', {
-                // we need to send authorization headers(required for authorization)
-                headers: {
-                    // to output the bearer token 
-                    // by user the ${user.token}
-                    // this is then picked by the middleware in the backend that protects our routes
-                    'Authorization': `Bearer ${user.token}`
-                }
-            })
-            const json = await res.json()
-
-            if (!res.ok) {
-                return console.log(json.error)
+    const fetchSession = async () => {
+        const res = await fetch('/api/session/', {
+            // we need to send authorization headers(required for authorization)
+            headers: {
+                // to output the bearer token 
+                // by user the ${user.token}
+                // this is then picked by the middleware in the backend that protects our routes
+                'Authorization': `Bearer ${user.token}`
             }
+        })
+        const json = await res.json()
 
-            if (res.ok) {
-                return setSession(json)
-            }
+        if (!res.ok) {
+            return console.log(json.error)
         }
-        // fetchSession()
+
+        if (res.ok) {
+            return setSession(json)
+        }
+    }
+    // fetchSession()
 
     // }, [])
 
@@ -66,6 +74,7 @@ const StudentList = () => {
         }
 
         if (res.ok) {
+            setHaveSearched(!haveSearched)
             return setPassStudents(json)
         }
     }
@@ -93,12 +102,65 @@ const StudentList = () => {
             }
 
             if (res.ok) {
-               return dispatch({ type: 'GET_DATA', payload: json })
+                setHaveSearched(!haveSearched)
+                return dispatch({ type: 'GET_DATA', payload: json })
             }
         }
         fetchStudents()
 
     }, [])
+
+
+    const handleSearch = async () => {
+        if (!search) {
+            toast({
+                title: 'Please, enter something first!',
+                status: 'warning',
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            })
+            return
+        }
+
+        try {
+            setLoading(true)
+
+            // const config = {
+            //   headers: {
+            //     Authorization: `Bearer ${user.token}`,
+            //   }
+            // }
+
+            // const data = await fetch(`/api/user?search=${search}`, config ) 
+
+            const data = await fetch(`/api/student/?search=${search}`, {
+                headers: {
+                    Authorization: `Bearer ${user.token}`,
+                }
+            }
+            )
+            const json = await data.json()
+
+            if (data.ok) {
+                // setPassStudents([])
+                setHaveSearched(haveSearched)
+                setLoading(false)
+                setSearchResult(json)
+            }
+        } catch (error) {
+            toast({
+                title: 'Error Occurred!',
+                description: 'Failed to load the User Search Results for users',
+                status: 'error',
+                duration: 5000,
+                isClosable: true,
+                position: "top",
+            })
+            console.log(error.message)
+            setLoading(false)
+        }
+    }
 
 
     return (
@@ -127,8 +189,8 @@ const StudentList = () => {
 
                 {/* fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' */}
 
-                <Box mt={8} display='flex'>
-                    <FormControl w={[ '70%', '60%', '40%']} display='flex' alignItems='center' alignContent='center' >
+                <Box width='100%' mt={8} pl='15px' display='flex' justifyContent='space-between' alignItems='center'>
+                    <FormControl w={['68%', '58%', '40%']} display='flex' justifyContent='center' textAlign='center' alignItems='center' alignContent='center' >
                         <FormLabel color='black' fontSize={['13', '16', '18']}>
                             Session:
                         </FormLabel>
@@ -139,9 +201,9 @@ const StudentList = () => {
                             placeholder='Select'
                             multiple={false}
                             h={['29', '30', '37']}
-                            width={[ '44', '36', '17']}
+                            width={['44', '36', '17']}
                             fontSize={['10', '16', '17']}
-                            >
+                        >
                             {session.map((sessions) => (
                                 <option className=' sm:w-1/2 w-36 flex flex-col text-center' key={sessions._id} value={sessions.session} >
                                     {sessions.session}
@@ -149,9 +211,14 @@ const StudentList = () => {
                             ))}
                         </Select>
                     </FormControl>
+
+                    {/* <Box width='45%' display='flex' pb={2} >
+                        <Input width='60%' type='text' placeholder='Search' mr={2} value={search} onChange={(e) => setSearch(e.target.value)} />
+                        <Button bg='green.500' colorScheme='green' onClick={handleSearch} > Go </Button>
+                    </Box> */}
                 </Box>
 
-                <div className="mt-1 px-2 sm:px-14 mb-14">
+                <div className="mt-1 px-2 sm:px-5 mb-14">
 
                     <div className="mt-12 ">
                         {/* This would have model schema created */}
@@ -161,7 +228,6 @@ const StudentList = () => {
                     </div>
 
                     <div className="w-full">
-
                         <div className="mt-2">
                             {passSession ? (
                                 <div className="w-full">
@@ -172,23 +238,23 @@ const StudentList = () => {
                                                 <Table whiteSpace='break-spaces'>
                                                     <Thead w='100%' >
                                                         <Tr display='flex' width='100%' justifyContent='space-around' px={6} backgroundColor='yellow.200'>
-                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%'  >
+                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Name
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%'  >
+                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Reg Number
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%'  >
+                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Session
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%'  >
+                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Profile
                                                                 </Box>
                                                             </Th>
@@ -217,23 +283,23 @@ const StudentList = () => {
                                                 <Table whiteSpace='break-spaces'>
                                                     <Thead w='100%' backgroundColor='blue.400' >
                                                         <Tr display='flex' width='100%' justifyContent='space-around' px={6} backgroundColor='yellow.200'>
-                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%'  >
+                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Name
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%'  >
+                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Reg Number
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%'  >
+                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Session
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%'  >
+                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Profile
                                                                 </Box>
                                                             </Th>
@@ -253,7 +319,6 @@ const StudentList = () => {
                                 </div>
                             )}
                         </div>
-
                     </div>
 
                     {/* <StudentList /> */}

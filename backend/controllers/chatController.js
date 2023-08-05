@@ -90,7 +90,7 @@ const fetchChats = async (req, res) => {
 
 const createGroupChat = async (req, res) => {
     // pass in name of group chat(name) and members(users)
-    if (!req.body.users || !req.body.name || !req.body.admin) {
+    if (!req.body.users || !req.body.name || !req.body.admin || !req.body.adminId) {
         return res.status(400).send({ message: "Please fill all the fields" })
     }
 
@@ -103,8 +103,8 @@ const createGroupChat = async (req, res) => {
         return res.status(400).send("More than 2 users are required to form a group chat")
     }
 
-    // now parse this curent user's details after check
-    req.body.users.push(req.body.admin)
+    // now parse this current user's details after check
+    req.body.users.push(req.body.adminId)
 
     try {
         // create a group, by parse these details into the schema

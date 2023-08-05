@@ -60,7 +60,7 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
   }
 
   const handleSubmit = async () => {
-    if (!groupChatName || !selectedUsers || !user._id) {
+    if (!groupChatName || !selectedUsers || !user._id || !user) {
       Toast({
         title: 'Please fill all the fields',
         status: 'warning',
@@ -97,7 +97,11 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
       }
 
       const { data } = await axios.post('/api/chat/group', {
-        name: groupChatName, users: JSON.stringify(selectedUsers.map((u) => u._id)), admin: user._id
+        name: groupChatName,
+        users: selectedUsers,
+        //  users: JSON.stringify(selectedUsers.map((u) => u._id)),
+         admin: user._id,
+         adminId: user
       }, config
       )
 

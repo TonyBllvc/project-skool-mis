@@ -17,6 +17,7 @@ const ChatNav = () => {
     const [search, setSearch] = useState('')
     const [searchResult, setSearchResult] = useState([])
     const [loading, setLoading] = useState(false)
+    
     const [loadingChat, setLoadingChat] = useState('')
     const [toggle, setToggle] = useState(false)
     const toast = useToast()

@@ -8,7 +8,7 @@ export const useSignUpStudent = (url) => {
     const navigate = useNavigate()
     const toast = useToast()
 
-    const signup = async ( surname, first_name, middle_name, session, reg_no, role, department, faculty, phone, email, password) => {
+    const signup = async (surname, first_name, middle_name, role, session, reg_no,  faculty, department, phone, email, password) => {
 
         setPending(true)
         setError(null)
@@ -28,7 +28,7 @@ export const useSignUpStudent = (url) => {
 
         // const regNo = reg_no
 
-        const details = { surname, first_name, middle_name, session, reg_no, role, department, faculty, phone, email, password }
+        const details = { surname, first_name, middle_name, session, reg_no, role, faculty, department, phone, email, password }
         try {
 
             const res = await fetch(url, {
@@ -46,7 +46,7 @@ export const useSignUpStudent = (url) => {
                 setError(json.error)
                 toast({
                     title: json.error,
-                    message: "message" + json.message + " error "+ json.error,
+                    message: "message" + json.message + " error " + json.error,
                     status: 'warning',
                     duration: 4000,
                     isClosable: true,
@@ -68,7 +68,7 @@ export const useSignUpStudent = (url) => {
             }
 
             setPending(false)
-
+            return
         } catch (error) {
             toast({
                 title: error.message,

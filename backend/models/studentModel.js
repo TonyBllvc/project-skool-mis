@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const validator = require('validator')
+const User = require('../models/userModel')
 
 const Schema = mongoose.Schema;
 
@@ -85,26 +86,26 @@ const studentSchema = new Schema({
 
 // static signup method
 // ( while using the 'this' keyword, we can't use  the arrow function)
-studentSchema.statics.signup = async function (surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, password) {
+studentSchema.statics.signup = async function (surname, first_name, middle_name, role, session, reg_no, faculty, department, phone, email, password) {
 
     // validation
     // check if the mail and password both have values
-    // if (!surname || !first_name || !role || !session || !reg_no || !faculty || !department || !phone || !email || !password) {
-    //     throw Error('All fields must be filled')
-    // }
+    if (!surname || !first_name || !role || !session || !reg_no || !faculty || !department || !phone || !email || !password) {
+        throw Error('All fields must be filled')
+    }
     // check if email is valid(if the email put in is an actual email)
-    // if (!validator.isEmail(email)) {
-    //     throw Error('Email is not valid')
-    // }
+    if (!validator.isEmail(email)) {
+        throw Error('Email is not valid')
+    }
     // check for if strong password
-    // if (!validator.isStrongPassword(password)) {
-    //     throw Error('Password not strong enough')
-    // }
+    if (!validator.isStrongPassword(password)) {
+        throw Error('Password not strong enough')
+    }
 
-    // if (phone.length > 11 || phone.length < 11) {
-    //     throw Error('Digits is incorrect')
+    if (phone.length > 11 || phone.length < 11) {
+        throw Error('Digits is incorrect')
 
-    // }
+    }
 
     // to check for replicated emails
     const exists = await this.findOne({ email })
@@ -112,25 +113,52 @@ studentSchema.statics.signup = async function (surname, first_name, middle_name,
     if (exists) {
         throw Error('Emails already in use')
     }
+
+    // to check for replicated emails
+    const existEmail = await User.findOne({ email })
+
+    if (existEmail) {
+        throw Error('Emails already in use')
+    }
+
     // to check for replicated phone number
     const exist = await this.findOne({ phone })
 
     if (exist) {
         throw Error('Phone number already in use')
     }
-    
+
+    // to check for replicated phone number
+    const existPhone = await User.findOne({ phone })
+
+    if (existPhone) {
+        throw Error('Phone number already in use')
+    }
     const regExist = await this.findOne({ reg_no })
 
     if (regExist) {
         throw Error('Reg number already in use')
     }
 
+    const regEx = await User.findOne({ reg_no })
+
+    if (regEx) {
+        throw Error('Reg number already in use')
+    }
     // for two different users use the same password
     // the salt creates a different hash
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
 
-    const student = await this.create({ surname, first_name, middle_name, role, session, reg_no, department, faculty, phone, email, password: hash })
+    const student = await this.create({ surname, first_name, middle_name, role, session, reg_no, faculty, department, phone, email, password: hash })
+
+    try {
+        await User.create({ _id: student._id, surname, first_name, middle_name, role, department, reg_no, faculty, session, phone, email })
+
+    } catch (error) {
+        throw Error(error.message)
+    }
+
 
     return student
 }

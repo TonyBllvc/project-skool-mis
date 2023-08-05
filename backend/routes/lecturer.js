@@ -4,7 +4,7 @@ const requireAuth = require('../middleware/authentication')
 
 const router = express.Router()
 
-router.post('/signup', signupLecturer)
+router.post('/sign_up', signupLecturer)
 router.post('/login', loginLecturer)
 
 router.use(requireAuth)

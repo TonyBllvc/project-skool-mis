@@ -43,8 +43,8 @@ const requireAuth = async (req, res, next) => {
                 req.user = await Student.findOne({ _id }).select('_id')
                 break;
             default:
-                return res.status(403).status({message: 'Invalid user role.'})
-                // break;
+                return res.status(403).status({ message: 'Invalid user role.' })
+            // break;
         }
 
         next()
