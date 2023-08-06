@@ -1,11 +1,11 @@
-import React,{ } from 'react'
+import React, { } from 'react'
 
 export const getSender = (loggedUser, users) => {
   // for private chats ( single user chats)
   // for every users' array, if the first user in the array is ...
   // .. the logged in user id, parse the name o the second user...
   // .. else, return first user
-  return users[0]._id === loggedUser._id ? (users[1].surname + " " + users[1].first_name)  : (users[0].surname + " " + users[0].first_name)
+  return users[0]._id === loggedUser._id ? (users[1].surname + " " + users[1].first_name) : (users[0].surname + " " + users[0].first_name)
 }
 
 export const getSenderFull = (loggedUser, users) => {
@@ -42,9 +42,14 @@ export const isLastMessage = (messages, i, userId) => {
   )
 }
 
-export const lastMesage = (messages, m, i, userId  ) => {
-  
-} 
+// export const isUserMessage = (m, i, userId) => {
+//   if (m.sender._id === userId && i && m._id) {
+//     return m._id
+//   } else {
+//     return ''
+//   }
+//   // m._id : null
+// }
 
 export const isSameSenderMargin = (messages, m, i, userId) => {
   if (
@@ -54,7 +59,7 @@ export const isSameSenderMargin = (messages, m, i, userId) => {
   } else if (
     // else return 0
     (i < messages.length - 1 && messages[i + 1].sender._id !== m.sender._id && messages[i].sender._id !== userId) || (i === messages.length - 1 && messages[i].sender._id !== userId)) {
-    return 0 
+    return 0
   } else {
     return 'auto'
   }

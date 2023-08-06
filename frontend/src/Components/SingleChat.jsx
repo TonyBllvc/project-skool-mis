@@ -16,7 +16,7 @@ const ENDPOINT = 'http://localhost:5000';
 var socket, selectedChatCompare;
 // ****************************************************
 
-const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetchAgain, notification, setNotification }) => {
+const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     // const { user, selectedChat, setSelectedChat } = ChatState()
     // ****************************Single message ***************
@@ -26,6 +26,9 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
     const [socketConnected, setSocketConnected] = useState(false)
     const [typing, setTyping] = useState(false)
     const [isTyping, setIsTyping] = useState(false)
+    const [typingTimeout, setTypingTimeout] = useState(null);
+
+    const [toggle, setToggle] = useState(false)
 
     // const defaultOptions = {
     //     loop: true,
@@ -50,6 +53,10 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
         socket.on("stop_typing", () => {
             setIsTyping(false)
         })
+
+        return () => {
+            socket.disconnected()
+        }
     }, [])
     // ****************************************************************
 
@@ -214,58 +221,85 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
             socket.emit("typing", selectedChat._id);
         }
 
+        // Clear the previous typing timeout to prevent multiple triggers
+        clearTimeout(typingTimeout);
+
+        // Create a new timeout to emit 'typing' event after a short delay
+        const timeout = setTimeout(() => {
+            socket.emit("stop_typing", selectedChat._id);
+            setTyping(null);
+        }, 1500);
+
+        setTyping(timeout);
+
+        // Emit 'typing' event to the socket server for the particular chat
+        socket.emit("typing", selectedChat._id);
+
         // parse the last time as a var
-        let lastTypingTime = new Date().getTime()
-        var timeLength = 2300
+        // let lastTypingTime = new Date().getTime()
+        // var timeLength = 2300
 
-        // run immediately after 3000 seconds
-        setTimeout(() => {
-            var timeNow = new Date().getTime()
-            var timeDiff = timeNow - lastTypingTime
+        // // run immediately after 3000 seconds
+        // setTimeout(() => {
+        //     var timeNow = new Date().getTime()
+        //     var timeDiff = timeNow - lastTypingTime
 
-            if (timeDiff >= timeLength && typing) {
-                socket.emit("stop_typing", selectedChat._id)
-                setTyping(false)
-            }
-        }, timeLength);
+        //     if (timeDiff >= timeLength && typing) {
+        //         socket.emit("stop_typing", selectedChat._id)
+        //         setTyping(false)
+        //     }
+        // }, timeLength);
     }
 
     const typingMobileHandler = (e) => {
 
         const keyCode = e.keyCode || e.which
-        if(( keyCode >= 65 && keyCode <= 90) || (keyCode >= 48 && keyCode <= 57)){
-            setNewMessage(e.target.value)
-    
-            //Typing Indicator Logic
-            if (!socketConnected) {
-                return
-            }
-    
-            // if user is typing, pass true
-            if (!typing) {
-                setTyping(true)
-                // for the particular chat
-                socket.emit("typing", selectedChat._id);
-            }
-    
-            // parse the last time as a var
-            let lastTypingTime = new Date().getTime()
-            var timeLength = 2300
-    
-            // run immediately after 3000 seconds
-            setTimeout(() => {
-                var timeNow = new Date().getTime()
-                var timeDiff = timeNow - lastTypingTime
-    
-                if (timeDiff >= timeLength && typing) {
-                    socket.emit("stop_typing", selectedChat._id)
-                    setTyping(false)
-                }
-            }, timeLength);
+        if ((keyCode >= 65 && keyCode <= 90) || (keyCode >= 48 && keyCode <= 57)) {
+        setNewMessage(e.target.value)
+
+        //Typing Indicator Logic
+        if (!socketConnected) {
+            return
+        }
+
+        // if user is typing, pass true
+        if (!typing) {
+            setTyping(true)
+            // for the particular chat
+            socket.emit("typing", selectedChat._id);
+        }
+
+        // Clear the previous typing timeout to prevent multiple triggers
+        clearTimeout(typingTimeout);
+
+        // Create a new timeout to emit 'typing' event after a short delay
+        const timeout = setTimeout(() => {
+            socket.emit("stop_typing", selectedChat._id);
+            setTyping(null);
+        }, 1500);
+
+        setTyping(timeout);
+
+        // Emit 'typing' event to the socket server for the particular chat
+        socket.emit("typing", selectedChat._id);
+
+        // parse the last time as a var
+        // let lastTypingTime = new Date().getTime()
+        // var timeLength = 2300
+
+        // // run immediately after 3000 seconds
+        // setTimeout(() => {
+        //     var timeNow = new Date().getTime()
+        //     var timeDiff = timeNow - lastTypingTime
+
+        //     if (timeDiff >= timeLength && typing) {
+        //         socket.emit("stop_typing", selectedChat._id)
+        //         setTyping(false)
+        //     }
+        // }, timeLength);
         }
     }
 
-    
     // *********************************************************
 
     return (
@@ -275,9 +309,9 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
                     <>
                         <Text fontSize={{ base: '14px', md: '21px', lg: '25px' }} pb={3} px={2} w='100%' fontFamily='Work sans' display='flex' justifyContent={{ base: 'space-between' }} alignItems='center' >
                             <FaArrowLeft size='24px' className='text-lg text-black'
-                            onClick={() => setSelectedChat('')}
+                                onClick={() => setSelectedChat('')}
                             //  onClick={() => dispatchSelectedChat({ type: 'EMPTY_DATA'}) }
-                              />
+                            />
 
                             {!selectedChat.isGroupChat ? (
                                 <>
@@ -295,13 +329,13 @@ const SingleChat = ({ user, selectedChat, setSelectedChat,  fetchAgain, setFetch
                                 </>
                             )}
                         </Text>
-                        <Box display='flex' width='100%' height='100%' flexDirection='column' justifyContent='flex-end' p={3} bg='#e8e8e8'>
+                        <Box display='flex' width='100%' height='100vh' flexDirection='column' justifyContent='flex-end' p={3} bg='#e8e8e8'>
                             {loading ? (
                                 <Spinner size='xl' w={20} h={20} alignSelf='center' margin='auto' />
                             ) : (
-                                <div className='flex flex-col overflow-y-scroll  ' >
+                                <div className='flex flex-col overflow-y-scroll' >
 
-                                    <ScrollableChat user={user} messages={messages} />
+                                    <ScrollableChat setMessages={setMessages} toggle={toggle} setToggle={setToggle} user={user} messages={messages} />
                                 </div>
                             )
                             }

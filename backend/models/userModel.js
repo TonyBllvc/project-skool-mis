@@ -9,6 +9,7 @@ const usingSchema = new Schema({
     _id: {
         type: Schema.Types.ObjectId
     },
+    // only for lecturers 
     title: {
         type: String,
         require: false
@@ -36,6 +37,7 @@ const usingSchema = new Schema({
         // no trailing spaces before or after
         trim: true
     },
+    // only for students
     reg_no: {
         type: String,
         required: false

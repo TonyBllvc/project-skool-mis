@@ -1,8 +1,8 @@
 import { Image, } from '@chakra-ui/react'
 import React, { } from 'react'
-import { AiOutlineWeChat, AiOutlineHome, AiOutlineInfoCircle, AiOutlineLock, AiOutlineUser } from 'react-icons/ai'
+import { AiOutlineHome, AiOutlineInfoCircle, AiOutlineLock, AiOutlineUser } from 'react-icons/ai'
 import { BsChatDots } from 'react-icons/bs'
-import { BiBookOpen } from 'react-icons/bi'
+import {  BiBookContent,  BiTimeFive } from 'react-icons/bi'
 import { ImSwitch } from 'react-icons/im'
 import { NavLink, useNavigate } from 'react-router-dom'
 import logo from '../images/images_logo.png'
@@ -56,7 +56,7 @@ const NavBar = () => {
                             </p>
                         </NavLink> */}
                         <NavLink to="/timetable" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
+                            <BiTimeFive className=' text-2xl text-white font-semibold pr-2' />
 
                             <p className='hidden sm:flex'>
                                 Time-Table
@@ -65,7 +65,7 @@ const NavBar = () => {
 
                         { user.role === 'Student' ? (
                         <NavLink to="/student/results" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <BiBookOpen className=' text-2xl text-white font-semibold pr-2' />
+                            <BiBookContent className=' text-2xl text-white font-semibold pr-2' />
 
                             <p className='hidden sm:flex'>
                                 Results

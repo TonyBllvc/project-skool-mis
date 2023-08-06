@@ -186,74 +186,74 @@ const UploadStudentResult = () => {
 
     return (
         <form onSubmit={handleSubmit} className='w-full flex justify-center'>
-            <VStack w='80%' spacing='5px' color='black' >
+            <VStack w={['94%', '88%', '70%']}  spacing='5px' color='black' >
 
                 <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between' textAlign='center' alignItems='center' isRequired>
-                    <FormLabel width='30%' color='black'>
+                    <FormLabel fontSize={['11', '13', '15', '16']} width='37%' color='black'>
                         Student Id:
                     </FormLabel>
-                    <Input width='70%' type='text' bg='green.100' value={student_id} onChange={(e) => setStudent_id(e.target.value)} isDisabled />
+                    <Input width='62%' fontSize={['9.5', '10', '13', '15']} type='text' bg='green.100' value={student_id} onChange={(e) => setStudent_id(e.target.value)} isDisabled />
                 </FormControl>
 
                 <Box w='100%' display='flex' flexDirection='row' justifyContent='space-evenly' >
-                    <FormControl w='32%' isRequired>
-                        <FormLabel color='black'>
+                    <FormControl w={['30%', '30%', '32%']} isRequired>
+                        <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                             Exam Score:
                         </FormLabel>
-                        <Input type='number' value={exam} onChange={(e) => setExam(e.target.value)} bg='green.100' fontSize={14} placeholder='i.e. 30' />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' value={exam} onChange={(e) => setExam(e.target.value)} bg='green.100' placeholder='i.e. 30' />
                     </FormControl>
 
-                    <FormControl w='33%' isRequired>
-                        <FormLabel color='black'>
+                    <FormControl w={['30%', '30%', '32%']} isRequired>
+                        <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                             Test Score:
                         </FormLabel>
-                        <Input type='number' bg='green.100' value={test} onChange={(e) => setTest(e.target.value)} fontSize={14} placeholder='i.e. 30' />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' bg='green.100' value={test} onChange={(e) => setTest(e.target.value)} placeholder='i.e. 30' />
                     </FormControl>
 
-                    <FormControl w='33%' isRequired>
-                        <FormLabel color='black'>
+                    <FormControl w={['30%', '30%', '32%']} isRequired>
+                        <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                             Practical Score:
                         </FormLabel>
-                        <Input type='number' bg='green.100' value={practical} onChange={(e) => setPractical(e.target.value)} fontSize={14} placeholder='i.e. 30' />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' bg='green.100' value={practical} onChange={(e) => setPractical(e.target.value)} placeholder='i.e. 30' />
                     </FormControl>
                 </Box>
 
                 <Box w='100%' display='flex' flexDirection='row' justifyContent='space-around' >
 
                     <FormControl w='30%' isRequired>
-                        <FormLabel color='black'>
+                        <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                             Grade:
                         </FormLabel>
-                        <Input type='text' bg='green.100' value={grade} variant='outline' onChange={(e) => setGrade(e.target.value)} color='blackAlpha.900' fontSize={14} placeholder='i.e. 30' isDisabled />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='text' bg='green.100' value={grade} variant='outline' onChange={(e) => setGrade(e.target.value)} color='blackAlpha.900' placeholder='i.e. 30' isDisabled />
                     </FormControl>
 
                     <FormControl w='30%' isRequired>
-                        <FormLabel color='black'>
+                        <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                             Score:
                         </FormLabel>
-                        <Input type='number' bg='green.100' value={score} variant='outline' onChange={(e) => setScore(e.target.value)} color='blackAlpha.900' fontSize={14} placeholder='i.e. 30' isDisabled />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' bg='green.100' value={score} variant='outline' onChange={(e) => setScore(e.target.value)} color='blackAlpha.900' placeholder='i.e. 30' isDisabled />
                     </FormControl>
 
                     <FormControl w='30%' isRequired>
-                        <FormLabel color='black'>
+                        <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                             Remark:
                         </FormLabel>
-                        <Input type='text' bg='green.100' value={remark} variant='outline' onChange={(e) => setRemark(e.target.value)} color='blackAlpha.900' fontSize={14} placeholder='i.e. 30' isDisabled />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='text' bg='green.100' value={remark} variant='outline' onChange={(e) => setRemark(e.target.value)} color='blackAlpha.900' placeholder='i.e. 30' isDisabled />
                     </FormControl>
 
                 </Box>
 
                 <FormControl isRequired>
-                    <FormLabel color='black'>
+                    <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                         Course Code:
                     </FormLabel>
 
                     <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between'>
 
-                        <Input w='76%' type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px' fontSize={15} fontFamily='cursive' mb={1} value={passInfo} isDisabled />
+                        <Input  fontSize={['8.5', '10', '13', '15']} w={['67%', '70%', '76%']}  type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' color='blackAlpha.900' border='2px'  fontFamily='sans-serif' mb={1} value={passInfo} isDisabled />
 
-                        <Box w='20%' border={4} borderColor='green.600' color='green.600' onClick={() => setToggle(!toggle)}>
-                            <Input w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleCourses} />
+                        <Box w={['31%', '28%', '20%']} border={4} borderColor='green.600' color='green.600' onClick={() => setToggle(!toggle)}>
+                            <Input fontSize={['14', '16', '17']} w='100%' type='button' value='List' variant='outline' colorScheme='whatsapp' color='green.600' mb={1} onClick={handleCourses} />
                         </Box>
                     </FormControl>
 

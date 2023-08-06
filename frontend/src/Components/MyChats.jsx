@@ -140,7 +140,7 @@ const MyChats = ({ fetchAgain }) => {
                     <Stack overflowY='hidden'>
                         {chats.map((chat) => (
                             <Box display='flex' flexDirection='row' justifyContent='space-between' alignItems='flex-start' width='100%'
-                                cursor='pointer' bg={selectedChat === chat ? '#38b2ac' : '#e8e8e8'} color={selectedChat === chat ? 'white' : 'black '} px={2.5} py={1.5} borderRadius='lg' key={chat._id} >
+                                cursor='pointer' bg={selectedChat === chat ? '#38b2ac' : '#e8e8e8'} color={selectedChat === chat ? 'white' : 'black '} px={2.5} py={1.5} borderRadius='lg' key={chat._id}  >
                                 <Box width='93%'
                                     onClick={() => setSelectedChat(chat)}
                                 // onClick={() => dispatchSelectedChat({ type: 'GET_DATA', payload: chat}) } 
