@@ -76,7 +76,7 @@ const StudentSignUp = () => {
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Registration Number:
           </FormLabel>
-          <Input height={['35px', '35px', '40px', '40px']} type='number' bg='green.100' placeholder='i.e. Engr.' value={reg_no} onChange={handleSession} />
+          <Input height={['35px', '35px', '40px', '40px']} type='number' bg='green.100' placeholder='i.e. 20171019333' value={reg_no} onChange={handleSession} />
         </FormControl>
 
         <FormControl id='student-surname' isRequired>

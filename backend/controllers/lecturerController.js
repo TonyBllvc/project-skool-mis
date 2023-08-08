@@ -1,6 +1,8 @@
 const Lecturer = require('../models/lecturerModel')
 const School = require('../models/schoolModel')
+const User = require('../models/userModel')
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
 // to crease a web token 
@@ -109,6 +111,90 @@ const loginLecturer = async (req, res) => {
 
 }
 
+const updateProfile = async (req, res) => {
+    const { id, title, surname, first_name, middle_name, department, faculty, phone, email, password } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such document' });
+    }
+
+    try {
+        const lecturer = await Lecturer.findById(id);
+        const lecturerUser = await User.findById(id);
+
+        if (!lecturer) {
+            return res.status(404).json({ error: 'Lecturer not found' });
+        }
+
+        if (!lecturerUser) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        if (password) {
+            const match = await bcrypt.compare(password, lecturer.password);
+            if (!match) {
+                return res.status(400).json({ error: 'Incorrect password' });
+            }
+        } else {
+            return res.status(400).json({ error: 'Please provide your password' });
+        }
+
+        // Update the profile details
+        const updatedLecturer = await Lecturer.findByIdAndUpdate(
+            id,
+            { title, surname, first_name, middle_name, department, faculty, phone, email },
+            { new: true }
+        );
+
+        await User.findByIdAndUpdate(
+            id,
+            { title, surname, first_name, middle_name, department, faculty, phone, email },
+            { new: true }
+        );
+
+        res.status(200).json({ updatedLecturer });
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+const changePassword = async (req, res) => {
+    const { id, password, newPassword } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such document' });
+    }
+
+    try {
+        const lecturer = await Lecturer.findById(id);
+
+        if (!lecturer) {
+            return res.status(404).json({ error: 'Lecturer not found' });
+        }
+
+        // Compare current password
+        const passwordsMatch = await bcrypt.compare(password, lecturer.password);
+        if (!passwordsMatch) {
+            return res.status(400).json({ error: 'Current password is incorrect' });
+        }
+
+        // Hash new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+        // Update password in the database
+        await Lecturer.findByIdAndUpdate(id, { password: hashedNewPassword });
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+
+
 
 // get all lecturers 
 const getLecturers = async (req, res) => {
@@ -195,6 +281,6 @@ const searchLecturer = async (req, res) => {
 
 // }
 module.exports = {
-    signupLecturer, loginLecturer, getLecturers, getLecturerProfile, searchLecturer
+    signupLecturer, loginLecturer, getLecturers, getLecturerProfile, searchLecturer, updateProfile, changePassword
     //  getDefinedLecturers
 }

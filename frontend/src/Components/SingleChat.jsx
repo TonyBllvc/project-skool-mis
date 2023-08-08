@@ -54,9 +54,9 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
             setIsTyping(false)
         })
 
-        return () => {
-            socket.disconnected()
-        }
+        // return () => {
+        //     socket.disconnected()
+        // }
     }, [])
     // ****************************************************************
 

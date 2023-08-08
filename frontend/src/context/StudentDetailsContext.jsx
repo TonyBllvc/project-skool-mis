@@ -6,12 +6,17 @@ export const StudentDetailsContext = createContext();
 export const studentDetailsReducer = (state, action) => {
   switch (action.type) {
     case 'GET_DATA':
+      const updatedData = action.payload
+      const sortedData = updatedData.sort((a, b) => a.result_details.course_code.localeCompare(b.result_details.course_code, 'en', { sensitivity: 'base' }))
       return {
-        studentDetails: action.payload
+        studentDetails: sortedData
       }
     case 'CREATE_DATA':
+      const updated = [...state.studentDetails, action.payload]
+      const sorted = updated.sort((a, b) => a.result_details.course_code.localeCompare(b.result_details.course_code, 'en', { sensitivity: 'base' }))
       return {
-        studentDetails: [...state.studentDetails, action.payload, ]
+        ...state,
+        studentDetails: sorted
       }
     case 'UPDATE_DATA':
       return {

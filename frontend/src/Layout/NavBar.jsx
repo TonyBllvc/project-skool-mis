@@ -1,5 +1,5 @@
 import { Image, } from '@chakra-ui/react'
-import React, { } from 'react'
+import React, { useState } from 'react'
 import { AiOutlineHome, AiOutlineInfoCircle, AiOutlineLock, AiOutlineUser } from 'react-icons/ai'
 import { BsChatDots } from 'react-icons/bs'
 import {  BiBookContent,  BiTimeFive } from 'react-icons/bi'
@@ -13,6 +13,7 @@ const NavBar = () => {
     const { logout } = useLogout()
     const navigate = useNavigate()
     const { user } = useAuthContext()
+    const [ toggle, setToggle ] = useState(false)
 
     const handleLogout = () => {
         logout()
@@ -107,7 +108,7 @@ const NavBar = () => {
                         <hr className='w-11/12 my-4
                     border-white'/>
 
-                        <NavLink to="/my_profile" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                        <NavLink to="/profile" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineUser className=' text-2xl text-white font-semibold pr-2' />
 
                             <p className='hidden sm:flex'>

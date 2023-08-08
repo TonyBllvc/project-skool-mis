@@ -109,16 +109,16 @@ const Notice = () => {
     }
 
     return (
-        <Box width='100%' display='flex' flexDirection='column' justifyContent='space-between' overflowY='hidden' h='100%'  >
+        <Box width='100%' display='flex' flexDirection='column' justifyContent='space-between' overflowY='hidden' h='100vh'  >
             <Box ml='5px' height='7%' >
                 <Text fontFamily='heading' height='100%' color='blackAlpha.700' fontSize={['22px', '25px', '30px']} fontWeight='bold'>
                     Notice Board
                 </Text>
             </Box>
             <hr />
-            <Box mt='10px' mb={['24px', '17px', '10px']} height='93%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center' >
-                <Box width='100%' display='flex' alignItems='center' flexDirection='column' justifyContent='space-around' height={['550px', '630px', '710px']}  >
-                    <Box display='flex' flexDirection='column' width='100%' height='80%' borderRadius='lg' overflowY='scroll' position='relative'>
+            <Box mt='10px' mb={['24px', '17px', '10px']} height='100%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center' >
+                <Box width='100%' display='flex' alignItems='center' flexDirection='column' justifyContent='space-around' height='90%'  >
+                    <Box display='flex' flexDirection='column' width='100%' height='100vh' borderRadius='lg' overflowY='scroll' position='relative'>
                     { user && 
                         <Box>
                             {notice && notice.map((notice, index) => (

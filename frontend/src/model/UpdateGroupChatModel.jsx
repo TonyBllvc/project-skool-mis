@@ -240,7 +240,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                         <Box overflow='scroll' height='100px' px={4} position='relative' >
                             <Box w='100%' display='flex' flexWrap='wrap' pb={3} >
                                 {selectedChat.users.map(u => (
-                                    <Selected key={u._id} user={u} handleFunction={() => handleRemove(u)} />
+                                    <Selected key={u._id} user={u} selectedChat={selectedChat} handleFunction={() => handleRemove(u)} />
 
                                 ))}
                             </Box>

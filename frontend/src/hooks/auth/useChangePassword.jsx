@@ -4,45 +4,47 @@ import { useNavigate } from 'react-router-dom'
 import { useToast } from '@chakra-ui/react';
 import { useAuthContext } from '../useAuthContext';
 
-export const useLogin = (url) => {
+export const useChangePassword = (url) => {
     const navigate = useNavigate();
+    const {user, dispatch } = useAuthContext()
 
     const [error, setError] = useState(null)
     const [pending, setPending] = useState(false)
 
-    const { dispatch } = useAuthContext()
     const toast = useToast()
 
-    const login = async (email, role, password) => {
-        setPending(true)
-        setError(null)
 
+    const change = async (password, newPassword, confirmNewPassword) => {
 
-        // add picture later 
-        if (!email || !role || !password) {
+        if (newPassword !== confirmNewPassword) {
             toast({
-                title: 'Please fill all the Fields!',
+                title: 'Passwords do not match',
                 status: 'warning',
                 duration: 5000,
                 isClosable: true,
                 position: "top",
             })
             setPending(false)
-            return
+            return;
         }
 
-        const details = { email, role, password }
+        const details = {
+            id: user._id,
+            password,
+            newPassword,
+        };
 
         try {
             const res = await fetch(url, {
-                method: 'POST',
-                body: JSON.stringify(details),
+                method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
+                    'Authorization': `Bearer ${user.token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(details),
+            });
 
-            const json = await res.json()
+            const json = await res.json();
 
             if (!res.ok) {
                 setPending(false)
@@ -57,23 +59,17 @@ export const useLogin = (url) => {
                 return
             }
             if (res.ok) {
+                setPending(false)
                 toast({
-                    title: 'Login Successful!',
-                    description: json.surname + " " + json.first_name + ' logged in successfully',
+                    title: 'Change of password Successful!',
+                    description: 'Kindly login again',
                     status: 'success',
                     duration: 3000,
                     isClosable: true,
                     position: "top",
                 })
-                localStorage.setItem('user', JSON.stringify(json))
             }
-
-            // update auth Context
-            dispatch({ type: 'LOGIN', payload: json })
-
-            setPending(false)
-
-            navigate('/')
+            
         } catch (error) {
             toast({
                 title: error.message,
@@ -82,11 +78,16 @@ export const useLogin = (url) => {
                 isClosable: true,
                 position: "top",
             })
-            setPending(false)
+            setError(error.message)
+            return
         }
-    }
+        dispatch({ type: 'LOGOUT', payload: null})
+        
+        setPending(false)
 
-    return { login, pending, error, setPending }
+        navigate('/')
+    };
+
+    return { change, pending, error, setPending }
+
 }
-
-// export default useSignup;

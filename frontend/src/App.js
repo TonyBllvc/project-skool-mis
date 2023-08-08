@@ -16,6 +16,8 @@ import Chat from "./pages/component/Chat";
 import { useAuthContext } from "./hooks/useAuthContext";
 import StudentDetails from "./Components/StudentDetails";
 import StudentPersonalResults from "./pages/component/StudentPersonalResults";
+import MyProfile from "./pages/component/MyProfile";
+import ChangePassword from "./pages/component/ChangePassword";
 // import ViewTimeTable from "./pages/component/ViewTimeTable";
 
 export default function App() {
@@ -61,14 +63,17 @@ export default function App() {
                                     <Route path="/notice" element={user.role === 'Lecturer' ? <Notice /> : <Navigate to={'/'} />} />
                                     <Route path="/chat" element={user.role === 'Lecturer' || user.role === 'Student' ? <Chat /> : <Navigate to={'/'} />} />
 
+                                    <Route path="/profile" element={user.role === 'Admin' ? <MyProfile /> : <Navigate to={'/login'} />} />
+                                    <Route path="/settings" element={user ? <ChangePassword /> : <Navigate to={'/login'} />} />
+
                                     <Route path="/lecturers" element={user ? <LecturerList /> : <Navigate to={'/login'} />} />
 
                                     <Route path="/timetable" element={user ? <TimeTable /> : <Navigate to={'/login'} />} />
                                     <Route path="*" element={<NotFound />} />
                                 </Routes>
                             </div>
-                        </div >
-                    </div >
+                        </div>
+                    </div>
                 }
                 {!user &&
                     <Routes>
@@ -78,7 +83,7 @@ export default function App() {
                     </Routes>
                 }
 
-            </BrowserRouter >
+            </BrowserRouter>
         </div>
     )
 }
@@ -86,50 +91,3 @@ export default function App() {
 
 
 
-
-
-
-
-// import React, { useState, useEffect } from "react";
-// import { socket } from "./socket";
-// import  ConnectionState  from "./components/ConnectionState";
-// import  ConnectionManager  from "./components/ConnectionManager";
-// import  MyForm  from "./components/MyForm";
-
-// export default function App() {
-//   const [isConnected, setIsConnected] = useState(socket.connected);
-//   const [fooEvents, setFooEvents] = useState([]);
-
-//   useEffect(() => {
-//     function onConnect() {
-//       setIsConnected(true);
-//     }
-
-//     function onDisconnect() {
-//       setIsConnected(false);
-//     }
-
-//     function onFooEvent(value) {
-//       setFooEvents(previous => [...previous, value]);
-//     }
-
-//     socket.on("connect", onConnect);
-//     socket.on("disconnect", onDisconnect);
-//     socket.on("foo", onFooEvent);
-
-//     return () => {
-//       socket.off("connect", onConnect);
-//       socket.off("disconnect", onDisconnect);
-//       socket.off("foo", onFooEvent);
-//     };
-//   }, []);
-
-//   return (
-//     <div className="App">
-//       <ConnectionState isConnected={ isConnected } />
-//       {/* <Events events={ fooEvents } /> */}
-//       <ConnectionManager />
-//       <MyForm />
-//     </div>
-//   );
-// }

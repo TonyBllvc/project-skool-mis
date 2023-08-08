@@ -124,10 +124,10 @@ mongoose.connect(process.env.MONGO_URI,
 
       })
 
-      socket.off("setup", (userData) => {
-        console.log(" USER DISCONNECTED")
-        socket.leave(userData._id)
-      })
+      // socket.off("setup", (userData) => {
+      //   console.log(" USER DISCONNECTED")
+      //   socket.leave(userData._id)
+      // })
 
     })
 

@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCourseContext } from '../hooks/useCourseContext'
 import CourseModal from '../model/CourseModal'
-import { useSchoolContext } from '../hooks/useTimetableContext'
-import { useTimeContext } from '../hooks/useTimeContext'
+import { useSchoolContext, useTimetableContext } from '../hooks/useTimetableContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 const optionOne = [
@@ -21,17 +20,19 @@ const optionTwo = [
     { value: 'PM', label: 'PM', key: '2' },
 ]
 
-const TimeTableForm = () => {
+const TimeTableForm = ({ setToggling, toggling }) => {
     const { course, dispatch } = useCourseContext()
-    const { dispatch: dispatchTime } = useTimeContext()
+    const { dispatch: dispatchTime } = useTimetableContext()
     const { user } = useAuthContext()
 
     const [day, setDay] = useState('')
+    const [starts, setStarts] = useState('')
     const [start, setStart] = useState('')
     const [am_one, setAmOne] = useState('')
     const [end, setEnd] = useState('')
+    const [ends, setEnds] = useState('')
     const [am_two, setAmTwo] = useState('')
-    // const [ selectedOne, setSelectedOne] = useState('')
+    const [selectedOne, setSelectedOne] = useState('')
 
     const [toggle, setToggle] = useState(false)
     const [passInfo, setInfo] = useState('')
@@ -41,25 +42,77 @@ const TimeTableForm = () => {
     const toast = useToast()
     const navigate = useNavigate()
 
+    const handleStartTime = (event) => {
+        const inputValue = event.target.value;
+        setStarts(inputValue);
+
+        if (inputValue) {
+            // Split the input time by ":"
+            const [hours, minutes] = inputValue.split(':');
+
+            // Create a Date object to format the time
+            const date = new Date();
+            date.setHours(hours);
+            date.setMinutes(minutes);
+
+            // Format the time as 12-hour format with AM/PM
+            const formattedTime = date.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true,
+            });
+            setStart(formattedTime)
+            // console.log(formattedTime); // Output: "11:00 PM"
+        }
+
+    }
+
+    const handleEndTime = (event) => {
+        const inputValue = event.target.value;
+        setEnds(inputValue);
+
+        if (inputValue) {
+            // Split the input time by ":"
+            const [hours, minutes] = inputValue.split(':');
+
+            // Create a Date object to format the time
+            const date = new Date();
+            date.setHours(hours);
+            date.setMinutes(minutes);
+
+            // Format the time as 12-hour format with AM/PM
+            const formattedTime = date.toLocaleTimeString('en-US', {
+                hour: 'numeric',
+                minute: '2-digit',
+                hour12: true,
+            });
+            setEnd(formattedTime)
+            // console.log(formattedTime); // Output: "11:00 PM"
+        }
+
+
+    }
+
     // submit filled form
     const handleSubmit = async (e) => {
         e.preventDefault()
         setLoading(true)
 
         // check if every field has been filled
-        if (!day || !start || !am_one || !am_two || !end || !courseId || !passInfo) {
+        if (!day || !start || !end || !courseId || !passInfo) {
             toast({
                 title: 'Please fill all the Fields!',
                 status: 'warning',
                 duration: 4000,
                 isClosable: true,
-                position: "bottom",
+                position: "top",
             })
+            setLoading(false)
             return
         }
 
         // parse every value into  details        
-        const details = { day, start, am_one, am_two, end, courseId }
+        const details = { day, start, end, courseId }
 
         try {
             const res = await fetch("/api/time/set_time_table", {
@@ -76,18 +129,19 @@ const TimeTableForm = () => {
 
             if (!res.ok) {
                 toast({
-                    title: 'Response not okay!',
-                    status: 'error',
+                    title: json.error,
+                    // status: 'error',
                     duration: 5000,
                     isClosable: true,
                     position: "top",
                 })
+                setLoading(false)
                 return console.log(json.error)
             }
 
             if (res.ok) {
                 toast({
-                    title: 'Submitted Successfully!',
+                    title: 'Upload Successful!',
                     status: 'success',
                     duration: 3000,
                     isClosable: true,
@@ -95,12 +149,20 @@ const TimeTableForm = () => {
                 })
                 dispatchTime({ type: 'CREATE_DATA', payload: json })
                 setLoading(false)
+                setDay('')
+                setStart('')
+                setAmOne('')
+                setEnd('')
+                setAmTwo('')
+                setCourseId('')
+                setInfo('')
+                setToggling(!toggling)
                 console.log('new data added', json)
             }
         } catch (error) {
             toast({
-                title: 'Error occurred, can not login now!',
-                status: 'error' + error.message,
+                title: error.message,
+                // status: 'error' + error.message,
                 duration: 5000,
                 isClosable: true,
                 position: "top",
@@ -166,10 +228,19 @@ const TimeTableForm = () => {
                         <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             Starts:
                         </FormLabel>
-                        <Input fontSize={['9.5', '10', '13', '15']} type='text' bg='green.100' placeholder='i.e. 3:00 ' value={start} onChange={(e) => setStart(e.target.value)} />
+                        <Input fontSize={['9.5', '10', '13', '15']} type='time' bg='green.100' placeholder='i.e. 3:00 ' value={starts} onChange={handleStartTime} />
+
+                        {/* <Input fontSize={['9.5', '10', '13', '15']} type='time' bg='green.100' placeholder='i.e. 3:00 ' value={selectedOne} onChange={(e) => setSelectedOne(start)} /> */}
                     </FormControl>
 
-                    <FormControl w='50%' isRequired>
+                    <FormControl w='48%' isRequired>
+                        <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
+                            Ends:
+                        </FormLabel>
+                        <Input type='time' fontSize={['9.5', '10', '13', '15']} bg='green.100' placeholder='i.e. 3:00' value={ends} onChange={handleEndTime} />
+                    </FormControl>
+
+                    {/* <FormControl w='50%' isRequired>
                         <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             AM/PM:
                         </FormLabel>
@@ -184,19 +255,19 @@ const TimeTableForm = () => {
                                 </option>
                             ))}
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
 
                 </Box>
 
                 <Box w='100%' display='flex' flexDirection='row' justifyContent='space-between' >
-                    <FormControl w='48%' isRequired>
+                    {/* <FormControl w='48%' isRequired>
                         <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             Ends:
                         </FormLabel>
-                        <Input type='text' fontSize={['9.5', '10', '13', '15']} bg='green.100' placeholder='i.e. 3:00' value={end} onChange={(e) => setEnd(e.target.value)} />
-                    </FormControl>
+                        <Input type='time' fontSize={['9.5', '10', '13', '15']} bg='green.100' placeholder='i.e. 3:00' value={ends} onChange={handleEndTime} />
+                    </FormControl> */}
 
-                    <FormControl id='login-start' w='50%' isRequired>
+                    {/* <FormControl id='login-start' w='50%' isRequired>
                         <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
                             AM/PM:
                         </FormLabel>
@@ -212,7 +283,7 @@ const TimeTableForm = () => {
                                 </option>
                             ))}
                         </Select>
-                    </FormControl>
+                    </FormControl> */}
 
                 </Box>
 
@@ -221,7 +292,7 @@ const TimeTableForm = () => {
                         Course Code:
                     </FormLabel>
 
-                    <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between'>
+                    <FormControl w='100%' display='flex' flexDirection='row' justifyContent='space-between' isRequired>
 
                         <Input w={['67%', '70%', '76%']} type='text' variant='outline' placeholder='Please click on the "list" button ' colorScheme='blue' fontSize={['8.5', '11', '15']} color='blackAlpha.900' border='2px' fontFamily='sans-serif' mb={1} value={passInfo} isDisabled />
 

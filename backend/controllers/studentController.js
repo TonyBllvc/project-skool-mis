@@ -1,6 +1,7 @@
 const Student = require('../models/studentModel')
 const Session = require('../models/sessionModel')
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 
 
@@ -117,7 +118,8 @@ const loginStudent = async (req, res) => {
             surname: student.surname,
             first_name: student.first_name,
             middle_name: student.middle_name,
-            phone: student.phone
+            phone: student.phone,
+            email: student.email
         }
         res.status(200).json(userData)
     } catch (error) {
@@ -125,6 +127,42 @@ const loginStudent = async (req, res) => {
     }
 
 }
+
+
+const changePassword = async (req, res) => {
+    const { id, password, newPassword } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such document' });
+    }
+
+    try {
+        const student = await Student.findById(id);
+
+        if (!student) {
+            return res.status(404).json({ error: 'Student not found' });
+        }
+
+        // Compare current password
+        const passwordsMatch = await bcrypt.compare(password, student.password);
+        if (!passwordsMatch) {
+            return res.status(400).json({ error: 'Current password is incorrect' });
+        }
+
+        // Hash new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+        // Update password in the database
+        await Student.findByIdAndUpdate(id, { password: hashedNewPassword });
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 
 const getStudents = async (req, res) => {
     const students = await Student.find({}).sort({ session: 1 }).sort({ surname: 1 }).sort({ first_name: 1 })
@@ -204,4 +242,4 @@ const getStudentBySession = async (req, res) => {
     }
 }
 
-module.exports = { signupStudent, loginStudent, getStudents, getStudent, searchStudent, getStudentBySession }
+module.exports = { signupStudent, loginStudent, getStudents, getStudent, searchStudent, getStudentBySession, changePassword }

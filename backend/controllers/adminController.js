@@ -1,6 +1,7 @@
 const Admin = require('../models/adminModel')
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-
+const mongoose = require('mongoose');
 
 // to crease a web token 
 const createToken = (_id, role) => {
@@ -77,10 +78,14 @@ const loginAdmin = async (req, res) => {
             role,
             token,
             _id: admin._id,
+            title: admin.title,
             surname: admin.surname,
             first_name: admin.first_name,
             middle_name: admin.middle_name,
-            phone: admin.phone
+            faculty: admin.faculty,
+            department: admin.department,
+            phone: admin.phone,
+            email: admin.email
         }
         res.status(200).json(userData)
     } catch (error) {
@@ -88,6 +93,102 @@ const loginAdmin = async (req, res) => {
     }
 
 }
+
+// Update user profile details
+const updateProfile = async (req, res) => {
+    // const { id } = req.params
+    const { id, title, surname, first_name, middle_name, department, faculty, phone, email, password } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such document' })
+    }
+
+    try {
+        
+        const admin = await Admin.findById(id);
+        
+        if (!admin) {
+            return res.status(404).json({ error: 'Admin not found' });
+        }
+
+        if (password) {
+            const match = await bcrypt.compare(password, admin.password);
+            if (!match) {
+                return res.status(400).json({ error: "Incorrect password" });
+            }
+        } else {
+            return res.status(400).json({ error: "Please provide your password" });
+        }
+        
+        // Update the profile details
+        const updatedAdmin = await Admin.findByIdAndUpdate(
+            id,
+            { title, surname, first_name, middle_name, department, faculty, phone, email },
+            { new: true }
+        );
+
+        res.status(200).json(updatedAdmin);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+const changePassword = async (req, res) => {
+    const { id, password, newPassword } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such document' });
+    }
+
+    try {
+        const admin = await Admin.findById(id);
+
+        if (!admin) {
+            return res.status(404).json({ error: 'Admin not found' });
+        }
+
+        // Compare current password
+        const passwordsMatch = await bcrypt.compare(password, admin.password);
+        if (!passwordsMatch) {
+            return res.status(400).json({ error: 'Current password is incorrect' });
+        }
+
+        // Hash new password
+        const salt = await bcrypt.genSalt(10);
+        const hashedNewPassword = await bcrypt.hash(newPassword, salt);
+
+        // Update password in the database
+        await Admin.findByIdAndUpdate(id, { password: hashedNewPassword });
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
+// const updateProfile = async (req, res) => {
+//     // const { id } = req.params
+//     const { id, title, surname, first_name, middle_name, role, department, faculty, phone, email, password } = req.body;
+
+//     try {
+
+//         const admin = await Admin.changeLog(id, title, surname, first_name, middle_name, role, department, faculty, phone, email, password)
+
+//         const userData = {
+//             email,
+//             role,
+//             _id: admin._id,
+//             surname: admin.surname,
+//             first_name: admin.first_name,
+//             middle_name: admin.middle_name,
+//             phone: admin.phone
+//         }
+//         res.status(200).json(userData)
+//     } catch (error) {
+//         res.status(400).json({ error: error.message })
+//     }
+
+// }
 
 const getAdminProfile = async (req, res) => {
     const { email } = req.params
@@ -103,4 +204,4 @@ const getAdminProfile = async (req, res) => {
 
 }
 
-module.exports = { signupAdmin, loginAdmin, getAdminProfile }
+module.exports = { signupAdmin, loginAdmin, getAdminProfile, updateProfile, updateProfile, changePassword }

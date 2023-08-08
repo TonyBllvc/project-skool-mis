@@ -7,7 +7,7 @@ const sets = async (req, res) => {
     // remember to add the coordinator's user id and lecturer's id ..
     // ... which, in the frontend pass in a drop down through mapping
     // then pick id
-    const { day, start, am_one, am_two, end, courseId } = req.body
+    const { day, start, end, courseId } = req.body
 
     let emptyFields = []
 
@@ -17,15 +17,15 @@ const sets = async (req, res) => {
     if (!start) {
         emptyFields.push('No start time passed')
     }
-    if (!am_one) {
-        emptyFields.push('No stoppage time passed passed')
-    }
+    // if (!am_one) {
+    //     emptyFields.push('No stoppage time passed passed')
+    // }
     if (!end) {
         emptyFields.push('No stoppage time passed passed')
     }
-    if (!am_two) {
-        emptyFields.push('No stoppage time passed passed')
-    }
+    // if (!am_two) {
+    //     emptyFields.push('No stoppage time passed passed')
+    // }
     if (!courseId) {
         emptyFields.push('No course passed')
     }
@@ -37,8 +37,8 @@ const sets = async (req, res) => {
         day,
         start,
         end,
-        am_one,
-        am_two,
+        // am_one,
+        // am_two,
         time_details: courseId
     }
 
@@ -122,7 +122,7 @@ const get = async (req, res) => {
 
 const updates = async (req, res) => {
     // const { id } = req.params
-    const { id, day, start, am_one, am_two, end, courseId } = req.body
+    const { id, day, start, end, courseId } = req.body
     // const updatesNew = {  }
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -133,7 +133,7 @@ const updates = async (req, res) => {
         const result = await Time.findByIdAndUpdate(
             id,
             {
-                day, start, am_one, am_two, end, time_details: courseId
+                day, start, end, time_details: courseId
             },
             {
                 new: true

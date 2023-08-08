@@ -73,7 +73,7 @@ const adminSchema = new Schema({
             message: 'Password must be at least 6 characters long'
         }
     },
-}, { timestamps: true}) 
+}, { timestamps: true })
 
 
 // static signup method
@@ -82,7 +82,7 @@ adminSchema.statics.signup = async function (title, surname, first_name, middle_
 
     // validation
     // check if the mail and password both have values
-    if ( !surname || !first_name || !role || !department || !faculty || !phone || !email || !password) {
+    if (!surname || !first_name || !role || !department || !faculty || !phone || !email || !password) {
         throw Error('All fields must be filled')
     }
     // check if email is valid(if the email put in is an actual email)
@@ -94,7 +94,7 @@ adminSchema.statics.signup = async function (title, surname, first_name, middle_
         throw Error('Password not strong enough')
     }
 
-    if(phone.length > 11 || phone.length < 11){
+    if (phone.length > 11 || phone.length < 11) {
         throw Error('Digits is incomplete')
 
     }
@@ -153,5 +153,56 @@ adminSchema.statics.login = async function (email, role, password) {
 
     return admin
 }
+
+// adminSchema.statics.changeLog = async function (id, title, surname, first_name, middle_name, role, department, faculty, phone, email, password) {
+//     // 
+//     const admin = await this.findById({ _id: id })
+
+//     // check if students actually exists
+//     if (!admin) {
+//         throw Error('No such admin')
+//     }
+
+//     try {
+
+//         if (password) {
+//             const match = await bcrypt.compare(password, admin.password);
+//             if (match) {
+//                 // const salt = await bcrypt.genSalt(10)
+//                 // const hashedNewPassword = await bcrypt.hash(password, salt);
+//                 //    admin.title = title, 
+//                 //    admin.surname = surname, 
+//                 //    admin.first_name = first_name, 
+//                 //    admin.middle_name = middle_name, 
+//                 //    admin.role = role, 
+//                 //    admin.department = department,
+//                 //    admin.faculty = faculty, 
+//                 //    admin.phone = phone,
+//                 //    admin.email = email
+
+//                 const newData = await this.findByIdAndUpdate(
+//                     id,
+//                     {
+//                         title, surname, first_name, middle_name, role, department, faculty, phone, email,
+//                     },
+//                     {
+//                         new: true
+//                     }
+//                 )
+
+//                 return newData
+//             } else {
+//                 throw Error('Current password is incorrect')
+//             }
+//         }
+
+
+//         return newData
+//         // res.json({ message: 'Profile updated successfully' });
+//     } catch (error) {
+//         throw Error('Wrong')
+//     }
+
+// }
 
 module.exports = mongoose.model('administration', adminSchema);

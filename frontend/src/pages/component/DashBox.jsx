@@ -190,7 +190,7 @@ const DashBox = () => {
                 </Box>
                 <hr />
                 <Box mt='1px' mb={['5px', '5px', '5px']} height='90%' display='flex' flexDirection='column' justifyContent='space-between' alignItems='center' >
-                    <Box width='100%' display='flex' alignItems='center' flexDirection='column' justifyContent='space-around' height={['350px', '40px', '450px', '500px']}  >
+                    <Box width='100%' display='flex' alignItems='center' flexDirection='column' justifyContent='space-around' height={['350px', '400px', '450px', '500px']}  >
                         <Box display='flex' flexDirection='column' width='100%' height='80%' borderRadius='lg' overflowY='scroll' position='relative'>
                             <Box>
                                 {notice && notice.map((notice, index) => (

@@ -141,22 +141,22 @@ const StudentPersonalResults = () => {
                             <Thead width={['35%', '25%', '25%']}>
                                 <Tr display='flex' width='100%' flexDirection='column' backgroundColor='yellow.200'>
                                     <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                        <Box width='100%'>
+                                        <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                             Name:
                                         </Box>
                                     </Th>
                                     <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                        <Box width='100%' >
+                                        <Box width='100%'  fontSize={['10', '11', '13', '16']} >
                                             Faculty:
                                         </Box>
                                     </Th>
                                     <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                        <Box width='100%' >
+                                        <Box width='100%'  fontSize={['10', '11', '13', '16']} >
                                             Department:
                                         </Box>
                                     </Th>
                                     <Th width='100%' px={2.5} justifyContent='start' fontSize={['9', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                        <Box width='100%' >
+                                        <Box width='100%'  fontSize={['10', '11', '13', '16']} >
                                             Reg Number:
                                         </Box>
                                     </Th>
@@ -186,22 +186,22 @@ const StudentPersonalResults = () => {
                                 <Thead width='100%'>
                                     <Tr display='flex' width='100%' justifyContent='space-around' backgroundColor='yellow.200'>
                                         <Th width={['150px', '30%', '30%']} px={4} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                            <Box width='100%'>
+                                            <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                 Course Code
                                             </Box>
                                         </Th>
                                         <Th width={['150px', '30%', '25%']} px={4} display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                            <Box width='100%' >
+                                            <Box width='100%'  fontSize={['10', '11', '13', '16']} >
                                                 Grade
                                             </Box>
                                         </Th>
                                         <Th width={['150px', '30%', '25%']} px={4} display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                            <Box width='100%'>
+                                            <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                 Remark
                                             </Box>
                                         </Th>
                                         <Th width={['150px', '30%', '30%']} px={4} display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                            <Box width='100%'>
+                                            <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                 Information
                                             </Box>
                                         </Th>

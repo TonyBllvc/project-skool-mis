@@ -1,11 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useToast } from '@chakra-ui/react';
 import { useAuthContext } from '../useAuthContext';
+import { useNoticeContext } from '../useNoticeContext';
+import { useCourseContext } from '../useCourseContext';
+import { useLecturerContext } from '../useLecturerContext';
+import { useStudentContext } from '../useStudentContext';
 
 export const useLoginStudent = (url) => {
     const navigate = useNavigate();
+
+    const { dispatch: dispatchStudents } = useStudentContext()
+    const { dispatch: dispatchLecturers } = useLecturerContext()
+    const { dispatch: dispatchCourses } = useCourseContext()
+    const { dispatch: dispatchNotice } = useNoticeContext()
 
     const [error, setError] = useState(null)
     const [pending, setPending] = useState(false)
@@ -69,7 +78,11 @@ export const useLoginStudent = (url) => {
 
             // update auth Context
             dispatch({ type: 'LOGIN', payload: json })
+            const expire = 3600000
 
+            setTimeout(() => {
+
+            }, expire);
             setPending(false)
 
             navigate('/')
@@ -85,6 +98,28 @@ export const useLoginStudent = (url) => {
         }
     }
 
+    // useEffect(() => {
+    //     const expire = 10000
+
+    //     setTimeout(() => {
+    //         localStorage.removeItem('user')
+    //         toast({
+    //             title: 'Please login again!',
+    //             status: 'warning',
+    //             duration: 3000,
+    //             isClosable: true,
+    //             position: "top",
+    //         })
+
+    //         dispatch({ type: 'LOGOUT', payload: null })
+    //         // so as to clear previous data after logout
+    //         dispatchStudents({ type: 'GET_DATA', payload: null })
+    //         dispatchLecturers({ type: 'SET_DATA', payload: null })
+    //         dispatchCourses({ type: 'GET_COURSE', payload: null })
+    //         dispatchNotice({ type: 'GET_DATA', payload: null })
+    //         navigate('/login')
+    //     }, expire);
+    // }, [login ])
     return { login, pending, error, setPending }
 }
 

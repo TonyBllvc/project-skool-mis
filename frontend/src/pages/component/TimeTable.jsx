@@ -73,7 +73,7 @@ const TimeTable = () => {
                         {/* The table for filling */}
                         {toggle &&
                             <div className='mt-7'>
-                                <TimeTableForm />
+                                <TimeTableForm toggling={toggle} setToggling={setToggle} />
                             </div>
                         }
                     </div>

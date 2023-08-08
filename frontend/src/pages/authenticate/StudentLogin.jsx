@@ -34,7 +34,7 @@ const StudentLogin = () => {
           <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>
             Student ID:
           </FormLabel>
-          <Input height={['35px', '35px', '40px', '40px']} type='number' bg='green.100' placeholder='Enter your Email' value={reg_no} onChange={(e) => setRegNo(e.target.value)} />
+          <Input height={['35px', '35px', '40px', '40px']} type='number' bg='green.100' placeholder='Enter your Reg Number' value={reg_no} onChange={(e) => setRegNo(e.target.value)} />
         </FormControl>
 
         <FormControl id='student-login-role' isRequired>

@@ -16,19 +16,19 @@ const timetableSchema = new Schema({
         // no trailing spaces before or after
         trim: true
     },
-    am_one: {
-        type: String,
-        trim: true
-    },
+    // am_one: {
+    //     type: String,
+    //     trim: true
+    // },
     end: {
         type: String,
         // no trailing spaces before or after
         trim: true
     },
-    am_two: {
-        type: String,
-        trim: true
-    },
+    // am_two: {
+    //     type: String,
+    //     trim: true
+    // },
 
     // reference to course
     time_details: {

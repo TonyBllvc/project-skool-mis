@@ -57,11 +57,11 @@ const sets = async (req, res) => {
 
     try {
         // const resultStudent = await Result.find({ student_id: student_id })
-        // const resultDetails = await Result.find({ result_details: courseId })
+        const alreadyExists = await Result.findOne({ result_details: courseId, student_id })
 
-        // if( resultDetails && resultStudent){
-        //     return res.status(400).json({ error: 'Data already exists!'})
-        // }
+        if( alreadyExists){
+            return res.status(400).json({ error: 'Data already exists!'})
+        }
 
         var result = await Result.create(resultTotal)
 
@@ -86,7 +86,7 @@ const sets = async (req, res) => {
 // fetch all results
 const gets = async (req, res) => {
 
-    const courseData = await Result.find({}).populate({
+    const resultData = await Result.find({}).populate({
         path: 'student_id',
         select: 'surname first_name middle_name role session reg_no faculty department phone email',
         // option: { sort: { surname: 1 } }
@@ -98,11 +98,11 @@ const gets = async (req, res) => {
             model: 'school',
             // select: 'faculty department level semester'
         }
-    }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).exec()
+    }).collation({ locale: 'en', strength: 1 }).sort({'result_details.course_code': 1}).exec()
     // .populate("course_details", "faculty department level semester")
 
 
-    res.status(200).json(courseData)
+    res.status(200).json(resultData)
 
 }
 
@@ -129,14 +129,17 @@ const get = async (req, res) => {
             // select: 'faculty department level semester'
 
         }
-    }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).exec()
-    // .populate("course_details", "faculty department level semester")
+    }).exec()
 
     if (!result) {
         return res.status(404).json({ error: 'No such result' })
     }
+    
+    const sortResults = result.sort((a, b) => a.result_details.course_code.localeCompare(b.result_details.course_code, 'en', {
+        sensitivity: 'base'
+    }))
 
-    res.status(200).json(result)
+    res.status(200).json(sortResults)
 
 }
 
@@ -163,7 +166,7 @@ const getStudent = async (req, res) => {
             // select: 'faculty department level semester'
 
         }
-    }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({ "result_details.level": 1 }).exec()
+    }).collation({ locale: 'en', strength: 1 }).sort({'result_details.course_code': 1}).sort({ "result_details.level": 1 }).exec()
     // .populate("course_details", "faculty department level semester")
 
     if (!result) {
@@ -192,7 +195,7 @@ const getResultsForSession = async (req, res) => {
                 // select: 'faculty department level semester'
 
             }
-        }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({ first_name: 1 }).exec()
+        }).collation({ locale: 'en', strength: 1 }).sort({'result_details.course_code': 1}).sort({ 'student_id.surname': 1 }).sort({ first_name: 1 }).exec()
         // check if students actually exists
         if (!results) {
             return res.status(404).json({ error: 'No such students' })
@@ -230,7 +233,7 @@ const getResultsForUserForSession = async (req, res) => {
                 // select: 'faculty department level semester'
 
             }
-        }).collation({ locale: 'en', strength: 1 }).sort({ 'student_id.surname': 1 }).sort({ first_name: 1 }).exec()
+        }).collation({ locale: 'en', strength: 1 }).sort({'result_details.course_code': 1}).exec()
         // check if students actually exists
         if (!results) {
             return res.status(404).json({ error: 'No such students' })

@@ -5,11 +5,12 @@ import { useLecturerContext } from '../useLecturerContext'
 import { useStudentContext } from '../useStudentContext'
 import { useAuthContext } from '../useAuthContext'
 import { useToast } from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 const useLogout = () => {
 
     const { dispatch } = useAuthContext()
-
+const navigate = useNavigate()
     const toast = useToast()
 
     const { dispatch: dispatchStudents } = useStudentContext()
@@ -34,7 +35,9 @@ const useLogout = () => {
         dispatchLecturers({ type: 'SET_DATA', payload: null })
         dispatchCourses({ type: 'GET_COURSE', payload: null })
         dispatchNotice({ type: 'GET_DATA', payload: null })
+        navigate('/')
     }
+
 
     return { logout }
 }

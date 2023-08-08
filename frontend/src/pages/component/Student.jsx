@@ -27,12 +27,12 @@ const Student = () => {
       const res = await fetch('/api/result/student/' + id, {
         // we need to send authorization headers(required for authorization)
         headers: {
-            // to output the bearer token 
-            // by user the ${user.token}
-            // this is then picked by the middleware in the backend that protects our routes
-            'Authorization': `Bearer ${user.token}`
+          // to output the bearer token 
+          // by user the ${user.token}
+          // this is then picked by the middleware in the backend that protects our routes
+          'Authorization': `Bearer ${user.token}`
         }
-    })
+      })
       const json = await res.json()
 
       if (!res.ok) {
@@ -53,12 +53,12 @@ const Student = () => {
       const res = await fetch('/api/student/' + id, {
         // we need to send authorization headers(required for authorization)
         headers: {
-            // to output the bearer token 
-            // by user the ${user.token}
-            // this is then picked by the middleware in the backend that protects our routes
-            'Authorization': `Bearer ${user.token}`
+          // to output the bearer token 
+          // by user the ${user.token}
+          // this is then picked by the middleware in the backend that protects our routes
+          'Authorization': `Bearer ${user.token}`
         }
-    })
+      })
       const json = await res.json()
 
       if (!res.ok) {
@@ -83,21 +83,21 @@ const Student = () => {
         {/* the top section */}
         <div className='w-full mb-8 flex flex-row justify-start align-middle text-center items-center'>
 
-          <h1 onClick={() => { navigate('/') }} className="text-gray-500 cursor-pointer text-xs base:text-lg font-mono font-semibold">
+          <h1 onClick={() => { navigate('/') }} className="text-gray-500 cursor-pointer text-xs sm:text-lg font-mono font-semibold">
             Computer Science
           </h1>
           <div className="flex items-end mx-2 justify-end">
-            <BiRightArrowAlt className="text-gray-500  text-xs base:text-lg font-mono font-semibold" />
+            <BiRightArrowAlt className="text-gray-500  text-xs sm:text-lg font-mono font-semibold" />
           </div>
           {/* This would have model schema created */}
-          <h2 onClick={() => { navigate(-1) }} className="text-gray-500 cursor-pointer text-xs base:text-lg font-mono font-semibold">
+          <h2 onClick={() => { navigate(-1) }} className="text-gray-500 cursor-pointer text-xs sm:text-lg font-mono font-semibold">
             Students
           </h2>
           <div className="flex items-end mx-2 justify-end">
-            <BiRightArrowAlt className="text-gray-500  text-xs base:text-lg font-mono font-semibold" />
+            <BiRightArrowAlt className="text-gray-500  text-xs sm:text-lg font-mono font-semibold" />
           </div>
           {/* This would have model schema created */}
-          <h2 className="text-green-600 cursor-pointer text-xs base:text-lg font-mono font-semibold">
+          <h2 className="text-green-600 cursor-pointer text-xs sm:text-lg font-mono font-semibold">
             Student Details
           </h2>
 
@@ -109,63 +109,68 @@ const Student = () => {
           </button>
         </div>
 
+        {user.role === "Admin" ? (
+          <Box mt={8}>
 
-        <Box mt={8}>
+            <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
+              Fill Form
+              {!toggle &&
+                <FaChevronDown className='ml-2 font-normal text-sm' />
+              }
+              {toggle &&
+                <FaChevronUp className='ml-2 font-normal text-sm' />
+              }
+            </Button>
 
-          <Button type='button' value='List' fontSize={['14px', '16px', '18px']} variant='outline' color='green.400' onClick={() => setToggle(!toggle)} >
-            Fill Form
-            {!toggle &&
-              <FaChevronDown className='ml-2 font-normal text-sm' />
-            }
+            {/* The table for filling */}
             {toggle &&
-              <FaChevronUp className='ml-2 font-normal text-sm' />
+              <div className='mt-7'>
+                <UploadStudentResult toggling={toggle} setToggling={setToggle} />
+              </div>
             }
-          </Button>
+          </Box>
+        ) : (
+          <>
 
-          {/* The table for filling */}
-          {toggle &&
-            <div className='mt-7'>
-              <UploadStudentResult />
-            </div>
-          }
-        </Box>
+          </>
+        )}
 
         <Box mt={8} ml={2} display='flex' width='100%'>
           {/* {result ? ( */}
-            <TableContainer width="100%" whiteSpace='break-spaces'>
-              <Table width='100%' display='flex' flexDirection='row'>
-                <Thead width={['35%', '25%', '25%']}>
-                  <Tr display='flex' width='100%' flexDirection='column' backgroundColor='yellow.200'>
-                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                      <Box width='100%'>
-                        Name:
-                      </Box>
-                    </Th>
-                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                      <Box width='100%' >
-                        Faculty:
-                      </Box>
-                    </Th>
-                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                      <Box width='100%' >
-                        Department:
-                      </Box>
-                    </Th>
-                    <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                      <Box width='100%' >
-                        Reg Number:
-                      </Box>
-                    </Th>
-                  </Tr>
-                </Thead>
-                {/* <StudentDetails/> */}
-                {result &&
-                  <StudentDetails studentInfo={result} />
-                }
-                {/* ) */}
-                {/* )} */}
-              </Table>
-            </TableContainer>
+          <TableContainer width="100%" whiteSpace='break-spaces'>
+            <Table width='100%' display='flex' flexDirection='row'>
+              <Thead width={['35%', '25%', '25%']}>
+                <Tr display='flex' width='100%' flexDirection='column' backgroundColor='yellow.200'>
+                  <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                    <Box width='100%' fontSize={['9', '9.5', '15', '17']}>
+                      Name:
+                    </Box>
+                  </Th>
+                  <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                    <Box width='100%' fontSize={['9', '9.5', '15', '17']} >
+                      Faculty:
+                    </Box>
+                  </Th>
+                  <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                    <Box width='100%' fontSize={['9', '9.5', '15', '17']} >
+                      Department:
+                    </Box>
+                  </Th>
+                  <Th width='100%' px={2.5} justifyContent='start' fontSize={['8', '12', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                    <Box width='100%' fontSize={['9', '9.5', '15', '17']} >
+                      Reg Number:
+                    </Box>
+                  </Th>
+                </Tr>
+              </Thead>
+              {/* <StudentDetails/> */}
+              {result &&
+                <StudentDetails studentInfo={result} />
+              }
+              {/* ) */}
+              {/* )} */}
+            </Table>
+          </TableContainer>
           {/* ) : (
             <div className='mt-10 bg-white'>
               Nothing to display
@@ -175,29 +180,29 @@ const Student = () => {
         </Box>
 
         {/* Drop Results */}
-        <Box mt={8} ml={2} display='flex' width='100%'>
+        <Box mt={8} mb={8} ml={2} display='flex' width='100%'>
           {studentDetails ? (
             <TableContainer width='100%' >
               <Table width='100%' whiteSpace='break-spaces'>
                 <Thead width='100%'>
                   <Tr display='flex' width='100%' justifyContent='space-around' backgroundColor='yellow.200'>
                     <Th width={['150px', '30%', '30%']} px={4} display='flex' justifyContent='start' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                      <Box width='100%'>
+                      <Box width='100%' fontSize={['9', '9.5', '15', '17']}>
                         Course Code
                       </Box>
                     </Th>
                     <Th width={['150px', '30%', '25%']} px={4} display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                      <Box width='100%' >
+                      <Box width='100%' fontSize={['9', '9.5', '15', '17']} >
                         Grade
                       </Box>
                     </Th>
                     <Th width={['150px', '30%', '25%']} px={4} display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                      <Box width='100%'>
+                      <Box width='100%' fontSize={['9', '9.5', '15', '17']}>
                         Remark
                       </Box>
                     </Th>
                     <Th width={['150px', '30%', '30%']} px={4} display='flex' justifyContent='center' fontSize={['9', '12', '14']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                      <Box width='100%'>
+                      <Box width='100%' fontSize={['9', '9.5', '15', '17']}>
                         Information
                       </Box>
                     </Th>

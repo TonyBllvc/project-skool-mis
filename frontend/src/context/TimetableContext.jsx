@@ -14,12 +14,15 @@ export const TimetableReducer = (state, action) => {
         timetable: action.payload
       }
     case 'CREATE_DATA':
+      const updated = [...state.timetable, action.payload]
+      const sorted = updated.sort((a, b) => a.day.localeCompare(b.day, 'en', { sensitivity: 'base' }))
       return {
-        timetable: [...state.timetable, action.payload, ]
+        ...state,
+        timetable: sorted
       }
     case 'UPDATE_DATA':
       return {
-        timetable: [ action.payload, ...state.timetable ]
+        timetable: [action.payload, ...state.timetable]
       }
     case 'DELETE_DATA':
       return {

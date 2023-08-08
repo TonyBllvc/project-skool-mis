@@ -113,7 +113,7 @@ const CourseForm = ({ setToggling, toggling }) => {
 
             if (res.ok) {
                 toast({
-                    title: 'Submitted Successfully!',
+                    title: 'Upload Successful!',
                     status: 'success',
                     duration: 3000,
                     isClosable: true,
@@ -133,8 +133,8 @@ const CourseForm = ({ setToggling, toggling }) => {
             }
         } catch (error) {
             toast({
-                title: 'Error occurred, can not login now!',
-                status: 'error' + error.message,
+                title: error.message,
+                // status: 'error' + error.message,
                 duration: 5000,
                 isClosable: true,
                 position: "top",

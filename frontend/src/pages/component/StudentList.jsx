@@ -218,7 +218,7 @@ const StudentList = () => {
                     </Box> */}
                 </Box>
 
-                <div className="mt-1 px-2 sm:px-5 mb-14">
+                <div className="mt-1 px-2 sm:px-3 mb-14">
 
                     <div className="mt-12 ">
                         {/* This would have model schema created */}
@@ -238,23 +238,23 @@ const StudentList = () => {
                                                 <Table whiteSpace='break-spaces'>
                                                     <Thead w='100%' >
                                                         <Tr display='flex' width='100%' justifyContent='space-around' px={6} backgroundColor='yellow.200'>
-                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
+                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start'  fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                                     Name
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start'  fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                                                                 <Box width='100%' fontSize={['10', '11', '13', '16']}>
                                                                     Reg Number
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
+                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start'  fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                                     Session
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
+                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start'  fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                                     Profile
                                                                 </Box>
                                                             </Th>
@@ -283,23 +283,23 @@ const StudentList = () => {
                                                 <Table whiteSpace='break-spaces'>
                                                     <Thead w='100%' backgroundColor='blue.400' >
                                                         <Tr display='flex' width='100%' justifyContent='space-around' px={6} backgroundColor='yellow.200'>
-                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
+                                                            <Th width={['150px', '100%', '26%']} display='flex' justifyContent='start'  fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                                     Name
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
+                                                            <Th width={['150px', '100%', '27%']} display='flex' justifyContent='start'  fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                                     Reg Number
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
+                                                            <Th width={['150px', '100%', '25%']} display='flex' justifyContent='start'  fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                                     Session
                                                                 </Box>
                                                             </Th>
-                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                                <Box width='100%' fontSize={['10', '11', '13', '16']}>
+                                                            <Th width={['120px', '100%', '20%']} display='flex' justifyContent='start'  fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%'  fontSize={['10', '11', '13', '16']}>
                                                                     Profile
                                                                 </Box>
                                                             </Th>

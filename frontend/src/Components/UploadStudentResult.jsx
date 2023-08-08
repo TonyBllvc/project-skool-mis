@@ -6,7 +6,7 @@ import CourseModel from '../model/CourseModal'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const UploadStudentResult = () => {
+const UploadStudentResult = ({ toggling, setToggling}) => {
     const { course, dispatch } = useCourseContext()
     const { dispatch: dispatchResults } = useStudentDetailsContext()
     const { user } = useAuthContext()
@@ -73,6 +73,31 @@ const UploadStudentResult = () => {
 
     }, [test, practical, exam])
 
+    const handleExam = (event) => {
+        const inputValue = event.target.value
+
+        if(/^\d{0,2}$/.test(inputValue)){
+            setExam(inputValue)
+        }
+    }
+
+    const handleTest = (event) => {
+        const inputValue = event.target.value
+
+        if(/^\d{0,2}$/.test(inputValue)){
+            setTest(inputValue)
+        }
+        
+    }
+
+    const handlePractical = (event) => {
+        const inputValue = event.target.value
+
+        if(/^\d{0,2}$/.test(inputValue)){
+            setPractical(inputValue)
+        }
+        
+    }
     // submit filled form
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -85,8 +110,9 @@ const UploadStudentResult = () => {
                 status: 'warning',
                 duration: 4000,
                 isClosable: true,
-                position: "bottom",
+                position: "top",
             })
+            setLoading(false)
             return
         }
 
@@ -108,19 +134,20 @@ const UploadStudentResult = () => {
 
             if (!res.ok) {
                 toast({
-                    title: 'Response not okay!',
-                    description: json.error,
-                    status: 'error',
+                    title: json.error,
+                    // description: json.error,
+                    status: 'warning',
                     duration: 5000,
                     isClosable: true,
                     position: "top",
                 })
+                setLoading(false)
                 return console.log(json.error)
             }
 
             if (res.ok) {
                 toast({
-                    title: 'Submitted Successfully!',
+                    title: 'Results uploaded Successfully!',
                     status: 'success',
                     duration: 3000,
                     isClosable: true,
@@ -133,13 +160,13 @@ const UploadStudentResult = () => {
                 setPractical(null)
                 setTest(null)
                 setGrade(null)
-                // toggleForm()
+                setToggling(!toggling)
                 console.log('new data added', json)
             }
         } catch (error) {
             toast({
-                title: 'Error occurred, can not login now!',
-                // status: 'error' + error.message,
+                title: error.message,
+                status: 'error',
                 duration: 5000,
                 isClosable: true,
                 position: "top",
@@ -200,21 +227,21 @@ const UploadStudentResult = () => {
                         <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                             Exam Score:
                         </FormLabel>
-                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' value={exam} onChange={(e) => setExam(e.target.value)} bg='green.100' placeholder='i.e. 30' />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' value={exam} onChange={handleExam} bg='green.100' placeholder='i.e. 30' />
                     </FormControl>
 
                     <FormControl w={['30%', '30%', '32%']} isRequired>
                         <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
                             Test Score:
                         </FormLabel>
-                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' bg='green.100' value={test} onChange={(e) => setTest(e.target.value)} placeholder='i.e. 30' />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' bg='green.100' value={test} onChange={handleTest} placeholder='i.e. 30' />
                     </FormControl>
 
                     <FormControl w={['30%', '30%', '32%']} isRequired>
                         <FormLabel fontSize={['11', '13', '15', '16']} color='black'>
-                            Practical Score:
+                            Prat Score:
                         </FormLabel>
-                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' bg='green.100' value={practical} onChange={(e) => setPractical(e.target.value)} placeholder='i.e. 30' />
+                        <Input fontSize={['9.5', '10', '13', '15']}  type='number' bg='green.100' value={practical} onChange={handlePractical} placeholder='i.e. 30'  />
                     </FormControl>
                 </Box>
 

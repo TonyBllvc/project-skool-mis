@@ -62,25 +62,25 @@ const TimeTableDetails = ({ timetable }) => {
             <Tr display='flex' w='100%' px={-3} justifyContent='space-around' onClick={() => setToggle(!toggle)} backgroundColor='whiteAlpha.900'>
                 <Td width={['150px', '100%', '24%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
 
-                    <Box width='100%'  >
+                    <Box width='100%'  fontSize={['10', '11', '13', '16']} >
                         {timetable.day}
                     </Box>
                 </Td>
                 <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
 
-                    <Box width='100%'  >
+                    <Box width='100%'  fontSize={['10', '11', '13', '16']} >
                         {timetable.time_details.course_code}
                     </Box>
                     {/* </Link> */}
                 </Td>
                 <Td width={['150px', '100%', '21%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                    <Box width='100%'  >
-                        {timetable.start} {timetable.am_one}
+                    <Box width='100%'  fontSize={['10', '11', '13', '16']} >
+                        {timetable.start} 
                     </Box>
                 </Td>
                 <Td width={['150px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']}>
-                    <Box width='100%'  >
-                        {timetable.end} {timetable.am_two}
+                    <Box width='100%'  fontSize={['10', '11', '13', '16']} >
+                        {timetable.end}
                     </Box>
                 </Td>
             </Tr>
