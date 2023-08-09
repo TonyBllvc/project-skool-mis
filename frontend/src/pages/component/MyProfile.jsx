@@ -49,102 +49,140 @@ const MyProfile = () => {
   };
 
   return (
-    <Box>
-    {/* the top section */}
-    <div className='w-full'>
-      <h1 className='text-lg sm:text-2xl cursor-pointer font-serif font-semibold text-green-600'>
-        Welcome, {user.surname} {user.first_name}
-      </h1>
-    </div>
-    
-    <div className="mt-7  mb-10">
+    <Box mb='40px'>
+      {/* the top section */}
+      <div className='w-full'>
+        <h1 className='text-lg sm:text-2xl cursor-pointer font-serif font-semibold text-green-600'>
+          Welcome, {user.surname} {user.first_name}
+        </h1>
+      </div>
+
+      <div className="mt-7  mb-10">
         {/* This would have model schema created */}
         <h2 className="text-green-500 text-base sm:text-2xl font-mono font-bold">
-          Change Password
+          Your Profile
         </h2>
       </div>
 
       <form onSubmit={handleSubmit} className='w-full flex justify-center'>
 
-        <VStack w={['90%', '85%', '70%']} spacing='5px' color='black' >
-          <FormControl>
-            <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>Title</FormLabel>
-            <Input
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleInputChange}
-            />
-          </FormControl>
+        <VStack w={['95%', '90%', '90%']} spacing='5px' color='black' >
+          <Box width='100%' display='flex' flexDirection='row' justifyContent='space-around'>
+            <Box width='46%'>
+              <FormControl mb='25px'>
+                <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>Title</FormLabel>
+                <Input
+                  type="text" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                  name="title"
+                  value={formData.title}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
 
-          <FormControl>
-            <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>Surname</FormLabel>
-            <Input
-              type="text"
-              name="surname"
-              value={formData.surname}
-              onChange={handleInputChange}
-            />
-          </FormControl>
-          
-          <FormControl>
-            <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}> First Name</FormLabel>
-            <Input
-              type="text"
-              name="first_name"
-              value={formData.first_name}
-              onChange={handleInputChange}
-            />
-          </FormControl>
-          
-          <FormControl>
-            <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>Middle Name</FormLabel>
-            <Input
-              type="text"
-              name="middle_name"
-              value={formData.middle_name}
-              onChange={handleInputChange}
-            />
-          </FormControl>
-          
-          <FormControl>
-            <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>Faculty</FormLabel>
-            <Input
-              type="text"
-              name="surname"
-              value={formData.faculty}
-              onChange={handleInputChange}
-              isDisabled
-            />
-          </FormControl>
+              <FormControl mb='25px'>
+                <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>
+                  Surname
+                </FormLabel>
+                <Input
+                  type="text" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                  name="surname"
+                  value={formData.surname}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
 
-          
-          <FormControl>
-            <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>Department</FormLabel>
-            <Input
-              type="text"
-              name="surname"
-              value={formData.department}
-              onChange={handleInputChange}
-              isDisabled
-            />
-          </FormControl>
+              <FormControl mb='25px'>
+                <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}> First Name</FormLabel>
+                <Input
+                  type="text" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                  name="first_name"
+                  value={formData.first_name}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
 
+              <FormControl mb='25px'>
+                <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>Middle Name</FormLabel>
+                <Input
+                  type="text" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                  name="middle_name"
+                  value={formData.middle_name}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+            </Box>
+
+            <Box width='46%'>
+              <FormControl mb='25px'>
+                <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>Faculty</FormLabel>
+                <Input
+                  type="text"
+                  name="faculty" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                  value={formData.faculty}
+                  onChange={handleInputChange}
+                  isDisabled
+                />
+              </FormControl>
+
+
+              <FormControl mb='25px'>
+                <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>
+                  Department
+                </FormLabel>
+                <Input
+                  type="text"
+                  name="department" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                  value={formData.department}
+                  onChange={handleInputChange}
+                  isDisabled
+                />
+              </FormControl>
+
+
+              <FormControl mb='25px'>
+                <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>
+                  Phone Number
+                </FormLabel>
+                <Input
+                  type="tel"
+                  name="phone" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+
+              <FormControl mb='25px'>
+                <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>
+                  Email
+                </FormLabel>
+                <Input
+                  type="email"
+                  name="email" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+            </Box>
+          </Box>
           {/* Add other form controls for first_name, middle_name, role, department, faculty, phone, email */}
 
-          <FormControl>
-            <FormLabel color='black' fontSize={['12.5', '13', '15', '16']}>Password</FormLabel>
+          <Box width='100%' display='flex' justifyContent='center'>
+          <FormControl mb='25px'  width={['100%', '97%', '90%', '90%']}>
+            <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>Password</FormLabel>
             <Input
               type="password"
-              name="password"
+              name="password" fontSize={['9.5', '12', '14', '15']} bg='green.100'
               value={formData.password}
               onChange={handleInputChange}
             />
           </FormControl>
+          </Box>
 
-          <Button color='green.100' colorScheme='whatsapp' width='100%' style={{ marginTop: 15 }} type='submit' isLoading={loading}>
-            Update Profile
-          </Button>
+          <Box width='100%' display='flex' justifyContent='center'>
+            <Button color='white' colorScheme='whatsapp'  width={['100%', '97%', '90%', '90%']} style={{ marginTop: 15 }} type='submit' isLoading={loading}>
+              Update Profile
+            </Button>
+          </Box>
         </VStack>
       </form>
     </Box>
