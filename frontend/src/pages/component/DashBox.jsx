@@ -11,6 +11,7 @@ import { useNoticeContext } from '../../hooks/useNoticeContext'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import NoticeBoard from '../../Components/NoticeBoard'
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const DashBox = () => {
     const { time } = useTimeContext()
     // get list of students
@@ -22,7 +23,7 @@ const DashBox = () => {
 
     useEffect(() => {
         const fetchNotice = async () => {
-            const res = await fetch('api/notice/get_notice', {
+            const res = await fetch(`${baseURL}/api/notice/get_notice`, {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 
