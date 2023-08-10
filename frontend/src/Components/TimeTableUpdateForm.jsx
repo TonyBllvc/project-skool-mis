@@ -64,7 +64,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
         const details = { id, day, start, am_one, am_two, end, courseId }
 
         try {
-            const res = await fetch(`${baseURL}api/time/update`, {
+            const res = await fetch(`${baseURL}/api/time/update`, {
                 method: "PUT",
                 body: JSON.stringify(details),
                 headers: {
