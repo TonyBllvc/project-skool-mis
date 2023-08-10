@@ -5,9 +5,9 @@ import { useLoginStudent } from '../../hooks/auth/useLoginStudent'
 const StudentLogin = () => {
   const [show, setShow] = useState(false)
   // to disable input / and
-  const [reg_no, setRegNo] = useState('20161037275')
+  const [reg_no, setRegNo] = useState('')
   const [role, setRole] = useState('Student')
-  const [password, setPassword] = useState('PanyaWan.121')
+  const [password, setPassword] = useState('')
 
   // const { user } = ChatState()
 

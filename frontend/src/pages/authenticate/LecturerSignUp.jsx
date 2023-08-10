@@ -7,21 +7,21 @@ import { useSignUp } from '../../hooks/auth/useSignup'
 
 const LectureSignUp = () => {
   const [show, setShow] = useState(false)
-  const [title, setTitle] = useState('Engr')
-  const [surname, setSurname] = useState('Chikeluba')
-  const [first_name, setFirstName] = useState('Jude')
-  const [middle_name, setMiddleName] = useState('Justin')
+  const [title, setTitle] = useState('')
+  const [surname, setSurname] = useState('')
+  const [first_name, setFirstName] = useState('')
+  const [middle_name, setMiddleName] = useState('')
   const [department, setDepartment] = useState('Computer Science')
-  const [email, setEmail] = useState('tonyxblack@gmail.com')
+  const [email, setEmail] = useState('')
   const [faculty, setFaculty] = useState('SICT')
   const [role, setRole] = useState('Lecturer')
-  const [password, setPassword] = useState('Jankinman10.')
-  const [confirm_password, setConfirmPassword] = useState('Jankinman10.')
+  const [password, setPassword] = useState('')
+  const [confirm_password, setConfirmPassword] = useState('')
   
   const {signup, pending, error, } = useSignUp('/api/lecturer/sign_up')
 
   const toast = useToast()
-  const [phone, setPhoneNumber] = useState('09050150930');
+  const [phone, setPhoneNumber] = useState('');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
 
   const handleChange = (event) => {

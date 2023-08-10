@@ -7,22 +7,22 @@ import { useSignUpStudent } from '../../hooks/auth/useSignUpStudent';
 
 const StudentSignUp = () => {
   const [show, setShow] = useState(false)
-  const [surname, setSurname] = useState('Chikeluba')
-  const [first_name, setFirstName] = useState('Jude')
-  const [middle_name, setMiddleName] = useState('Justin')
+  const [surname, setSurname] = useState('')
+  const [first_name, setFirstName] = useState('')
+  const [middle_name, setMiddleName] = useState('')
   const [department, setDepartment] = useState('Computer Science')
-  const [email, setEmail] = useState('blackxtony@gmail.com')
+  const [email, setEmail] = useState('')
   const [faculty, setFaculty] = useState('SICT')
-  const [reg_no, setRegNo] = useState('20161029332')
+  const [reg_no, setRegNo] = useState('')
   const [session, setSession] = useState('')
   const [role, setRole] = useState('Student')
-  const [password, setPassword] = useState('Jankinman10.')
-  const [confirm_password, setConfirmPassword] = useState('Jankinman10.')
+  const [password, setPassword] = useState('')
+  const [confirm_password, setConfirmPassword] = useState('')
 
   const { signup, pending, error, } = useSignUpStudent('/api/student/sign_up')
 
   const toast = useToast()
-  const [phone, setPhoneNumber] = useState('09050150933');
+  const [phone, setPhoneNumber] = useState('');
   const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
 
   const handleSession = (e) => {
