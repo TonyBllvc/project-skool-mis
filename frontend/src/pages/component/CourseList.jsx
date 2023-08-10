@@ -11,6 +11,7 @@ import CourseListDetails from '../../Components/CourseListDetails';
 import CourseForm from '../../Components/CourseForm';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const CourseList = () => {
     const [toggle, setToggle] = useState(false);
     // const [school, setSchool ] = useState('')
@@ -21,7 +22,7 @@ const CourseList = () => {
 
     useEffect(() => {
         const fetchCourse = async () => {
-            const res = await fetch('/api/course/get_courses', {
+            const res = await fetch(`${baseURL}/api/course/get_courses`, {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 
