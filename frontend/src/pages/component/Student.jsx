@@ -12,6 +12,7 @@ import { useStudentInfoContext } from '../../hooks/useStudentInfoContext';
 import UploadStudentResult from '../../Components/UploadStudentResult';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 // this for the admin 
 const Student = () => {
   const { id } = useParams()
@@ -24,7 +25,7 @@ const Student = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('/api/result/student/' + id, {
+      const res = await fetch(`${baseURL}/api/result/student/` + id, {
         // we need to send authorization headers(required for authorization)
         headers: {
           // to output the bearer token 
@@ -50,7 +51,7 @@ const Student = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('/api/student/' + id, {
+      const res = await fetch(`${baseURL}/api/student/` + id, {
         // we need to send authorization headers(required for authorization)
         headers: {
           // to output the bearer token 
