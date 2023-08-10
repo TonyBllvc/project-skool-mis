@@ -20,6 +20,7 @@ const optionTwo = [
     { value: 'PM', label: 'PM', key: '2' },
 ]
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const TimeTableForm = ({ setToggling, toggling }) => {
     const { course, dispatch } = useCourseContext()
     const { dispatch: dispatchTime } = useTimetableContext()
@@ -115,7 +116,7 @@ const TimeTableForm = ({ setToggling, toggling }) => {
         const details = { day, start, end, courseId }
 
         try {
-            const res = await fetch("/api/time/set_time_table", {
+            const res = await fetch(`${baseURL}/api/time/set_time_table`, {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {
@@ -176,7 +177,7 @@ const TimeTableForm = ({ setToggling, toggling }) => {
     const handleCourses = async (e) => {
         // e.preventDefault()
 
-        const res = await fetch('/api/course/get_courses', {
+        const res = await fetch(`${baseURL}/api/course/get_courses`, {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
