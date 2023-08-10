@@ -19,7 +19,7 @@ const userRoutes = require('./routes/user')
 const app = express()
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://tony-george-project-skool-mis.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: [
     'Content-Type', 'Authorization'
@@ -69,7 +69,7 @@ mongoose.connect(process.env.MONGO_URI,
       // to save bandwidth
       pingTimeout: 60000,
       cors: {
-        origin: 'http://localhost:3000',
+        origin: 'https://tony-george-project-skool-mis.vercel.app/',
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
       }
     })
