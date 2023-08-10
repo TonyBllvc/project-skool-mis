@@ -89,9 +89,7 @@ const CourseForm = ({ setToggling, toggling }) => {
         }
 
         try {
-            const res = await fetch("
-                                    1
-                                    `${baseURL}/api/course/set_course`, {
+            const res = await fetch(`${baseURL}/api/course/set_course`, {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {
