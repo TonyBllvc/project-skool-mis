@@ -6,6 +6,7 @@ import { useTimetableContext } from '../hooks/useTimetableContext'
 import TimeUpdateModal from '../model/TimeUpdateModal'
 import { useAuthContext } from '../hooks/useAuthContext'
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const TimeTableDetails = ({ timetable }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { dispatch } = useTimetableContext()
@@ -16,7 +17,7 @@ const TimeTableDetails = ({ timetable }) => {
 
     const handleDelete = async () => {
 
-        const response = await fetch('/api/time/' + timetable._id, {
+        const response = await fetch(`${baseURL/api/time/` + timetable._id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
@@ -35,7 +36,7 @@ const TimeTableDetails = ({ timetable }) => {
         const handleUpdate = async () => {
             // onOpen()
             // incomplete  ( updating document possessing errors)
-            const response = await fetch("api/time/" + timetable._id, {
+            const response = await fetch(`${baseURL}api/time/` + timetable._id, {
                 headers: {
                     "Content-Type": "application/json",
                     'Authorization': `Bearer ${user.token}`
