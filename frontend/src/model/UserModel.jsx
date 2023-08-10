@@ -7,7 +7,7 @@ import { useChatState } from '../hooks/useChatState'
 import UserListWithDetails from '../assets/UserListWithDetails'
 // import axios from 'axios'
 
-const UserModel = ({ toggle, set, setLoadingChat, loadingChat, setSelectedChat }) => {
+const UserModel = ({ isActive, toggle, set, setLoadingChat, loadingChat, setSelectedChat }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { user } = useAuthContext()
     const { chats, setChats } = useChatState()
@@ -119,7 +119,8 @@ const UserModel = ({ toggle, set, setLoadingChat, loadingChat, setSelectedChat }
                             searchResult?.map(user => (
                                 <UserListWithDetails
                                     key={user._id}
-                                    user={user}
+                                    users={user}
+                                    isActive={isActive}
                                     handleFunction={() => accessChat(user._id)}
                                 />
                             ))

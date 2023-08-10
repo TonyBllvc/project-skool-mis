@@ -24,6 +24,8 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
     const [loading, setLoading] = useState(false)
     const [newMessage, setNewMessage] = useState('')
     const [socketConnected, setSocketConnected] = useState(false)
+    const [ otherUsers, setOtherUsers ] = useState('')
+    const { isActive, setIsActive } = useState(false)
     const [typing, setTyping] = useState(false)
     const [isTyping, setIsTyping] = useState(false)
     const [typingTimeout, setTypingTimeout] = useState(null);
@@ -44,9 +46,12 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
     useEffect(() => {
         socket = io(ENDPOINT)
         socket.emit("setup", user)
-        socket.on("connected", () => {
+        socket.on("connected", (details) => {
+            setOtherUsers(JSON.stringify(details))
+            // console.log(JSON.stringify(details) + 'logged in')
             setSocketConnected(true)
         })
+
         socket.on("typing", () => {
             setIsTyping(true)
         })
@@ -359,7 +364,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
                                     ) : (
                                         <> </>
                                     )}
-                                    <Input variant='filled' bg='gray.300' placeholder='Enter a message' onChange={typingHandler} onKeyDown={typingMobileHandler} value={newMessage} />
+                                    <Input variant='filled' bg='gray.300' placeholder='Enter a message' onChange={typingHandler} onInput={typingHandler} value={newMessage} />
                                 </FormControl>
                                 <Button onClick={clickMessage} colorScheme='green' p={2} mt={3} ml={2} >
                                     <FaEnvelope className='test-sm text-white ' />

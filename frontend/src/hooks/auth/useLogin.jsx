@@ -50,7 +50,7 @@ export const useLogin = (url) => {
                 toast({
                     title: json.error,
                     status: 'warning',
-                    duration: 4000,
+                    duration: 5000,
                     isClosable: true,
                     position: "top",
                 })
@@ -65,7 +65,7 @@ export const useLogin = (url) => {
                     isClosable: true,
                     position: "top",
                 })
-                localStorage.setItem('user', JSON.stringify(json))
+                sessionStorage.setItem('user', JSON.stringify(json))
             }
 
             // update auth Context

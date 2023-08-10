@@ -123,11 +123,19 @@ const updateProfile = async (req, res) => {
         // Update the profile details
         const updatedAdmin = await Admin.findByIdAndUpdate(
             id,
-            { title, surname, first_name, middle_name, department, faculty, phone, email },
+            { 
+                title, surname, first_name, middle_name, department, faculty, phone, email 
+            },
             { new: true }
         );
 
-        res.status(200).json(updatedAdmin);
+        const token = createToken(admin._id, admin.role)
+
+        const newProfile = {
+            title, surname, first_name, middle_name, department, faculty, phone, email, token 
+        }
+
+        res.status(200).json(newProfile);
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }

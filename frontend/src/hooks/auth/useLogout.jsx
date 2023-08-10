@@ -20,7 +20,7 @@ const navigate = useNavigate()
 
     const logout = () => {
         // remove user from storage
-        localStorage.removeItem('user')
+        sessionStorage.removeItem('user')
                 toast({
                     title: 'Logout Successful!',
                     status: 'success',

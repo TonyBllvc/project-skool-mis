@@ -104,12 +104,12 @@ const TimeTable = () => {
                                             <Table whiteSpace='break-spaces'>
                                                 <Thead w='100%' backgroundColor='blue.400'>
                                                     <Tr display='flex' w='100%' justifyContent='space-around' backgroundColor='yellow.200'>
-                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']}>
+                                                        <Th width={['150px', '100%', '17%']} display='flex' justifyContent='space-around ' alignContent='center' fontSize={['9', '12', '14']}>
                                                             <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 Day
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '29%']} display='flex' justifyContent='center' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                        <Th width={['150px', '100%', '26%']} display='flex' justifyContent='center' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                                                             <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 Course Code
                                                             </Box>
@@ -123,6 +123,11 @@ const TimeTable = () => {
                                                         <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                                                             <Box width='100%' fontSize={['10', '11', '13', '16']} >
                                                                 End
+                                                            </Box>
+                                                        </Th>
+                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                            <Box width='100%' fontSize={['10', '11', '13', '16']} >
+                                                             
                                                             </Box>
                                                         </Th>
                                                     </Tr>

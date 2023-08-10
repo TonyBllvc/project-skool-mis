@@ -60,27 +60,32 @@ const TimeTableDetails = ({ timetable }) => {
     return (
         <Tbody  >
             <Tr display='flex' w='100%' px={-3} justifyContent='space-around' onClick={() => setToggle(!toggle)} backgroundColor='whiteAlpha.900'>
-                <Td width={['150px', '100%', '24%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                <Td width={['150px', '100%', '22%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
 
-                    <Box width='100%'  fontSize={['10', '11', '13', '16']} >
+                    <Box width='100%' fontSize={['10', '11', '13', '16']} >
                         {timetable.day}
                     </Box>
                 </Td>
-                <Td width={['150px', '100%', '30%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                <Td width={['150px', '100%', '26%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
 
-                    <Box width='100%'  fontSize={['10', '11', '13', '16']} >
+                    <Box width='100%' fontSize={['10', '11', '13', '16']} >
                         {timetable.time_details.course_code}
                     </Box>
                     {/* </Link> */}
                 </Td>
                 <Td width={['150px', '100%', '21%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']} overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                    <Box width='100%'  fontSize={['10', '11', '13', '16']} >
-                        {timetable.start} 
+                    <Box width='100%' fontSize={['10', '11', '13', '16']} >
+                        {timetable.start}
                     </Box>
                 </Td>
                 <Td width={['150px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']}>
-                    <Box width='100%'  fontSize={['10', '11', '13', '16']} >
+                    <Box width='100%' fontSize={['10', '11', '13', '16']} >
                         {timetable.end}
+                    </Box>
+                </Td>
+                <Td width={['150px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']}>
+                    <Box width='100%' fontSize={['10', '11', '13', '16']} >
+                        <FaTrashAlt className='text-red-700 font-medium text-xs sm:text-base' onClick={handleDelete} />
                     </Box>
                 </Td>
             </Tr>
@@ -89,23 +94,23 @@ const TimeTableDetails = ({ timetable }) => {
                 <div>
                     {toggle &&
                         <Box mt={-2} display='flex' flexDirection='row' w='100%' justifyContent='center' alignItems='center' >
-                            <Box mr={20} onClick={onOpen} >
+                            {/* <Box mr={20} onClick={onOpen} >
                                 <Box>
                                     <Button colorScheme='blue' py={2} px={3} color='white' size={9} fontSize={['10', '11', '13', '16']}>
                                         <BiPencil className='text-white mr-2 font-medium text-sm sm:text-base' />
                                         Update
                                     </Button>
                                 </Box>
-                            </Box>
-                            <Box ml={20} >
+                            </Box> */}
+                            {/* <Box >
                                 <Box onClick={handleDelete}>
                                     <Button colorScheme='red' py={2} px={3} color='white' size={9} onClick={() => setToggle(!toggle)} fontSize={['10', '11', '13', '16']} >
                                         <FaTrashAlt className='text-white mr-2 font-medium text-xs sm:text-base' />
                                         Delete
                                     </Button>
                                 </Box>
-                            </Box>
-                            <TimeUpdateModal documentData={documentData} setToggle={setToggle} toggle={toggle} open={isOpen} close={onClose} />
+                            </Box> */}
+                            {/* <TimeUpdateModal documentData={documentData} setToggle={setToggle} toggle={toggle} open={isOpen} close={onClose} /> */}
                         </Box>
                     }
                 </div>

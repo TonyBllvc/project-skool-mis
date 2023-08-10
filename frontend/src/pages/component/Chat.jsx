@@ -6,7 +6,7 @@ import ChatBox from "../../Components/ChatBox";
 import { useNavigate } from "react-router-dom";
 import ChatNav from '../../miniComponents/ChatNav'
 
-const Chat = () => {
+const Chat = ({ isActive }) => {
   const { user } = useAuthContext()
   // const { user } = ChatState()
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ const Chat = () => {
   return (
     <div style={{ width: "100%", height: "100vh" }}>
       {user &&
-        <ChatNav />
+        <ChatNav isActive={isActive} />
       }
       <Box w='100%' display='flex' justifyContent='space-between' h='91.5vh' bg='blue.200' >
       

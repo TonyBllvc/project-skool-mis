@@ -79,7 +79,6 @@ const MoreCourseInfo = ({ course }) => {
                     <Th py={1} px={4} width='100%' display='flex' justifyContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
                         <Box width='100%' display='flex' justifyContent='center' fontSize={['10', '11', '13', '16']}>
                             Course Lecturers
-                        { user.role }
                         </Box>
                     </Th>
 

@@ -10,7 +10,7 @@ import { useNotificationContext } from '../hooks/useNotifiContext'
 import { useSelectChatContext } from '../hooks/useSelectChatContext'
 import UserModel from '../model/UserModel'
 
-const ChatNav = () => {
+const ChatNav = ({isActive }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const navigate = useNavigate()
 
@@ -27,68 +27,69 @@ const ChatNav = () => {
     const { setSelectedChat } = useSelectChatContext()
     const { notification, setNotification } = useNotificationContext()
 
-    const logoutHandler = () => {
-        localStorage.removeItem('user')
-        navigate('/')
-        toast({
-            title: 'Logout Successful!',
-            status: 'success',
-            duration: 5000,
-            isClosable: true,
-            position: "top",
-        })
-    }
+    // const logoutHandler = () => {
+    //     localStorage.removeItem('user')
+    //     navigate('/')
+    //     toast({
+    //         title: 'Logout Successful!',
+    //         status: 'success',
+    //         duration: 5000,
+    //         isClosable: true,
+    //         position: "top",
+    //     })
+    // }
 
-    const handleSearch = async () => {
-        if (!search) {
-            toast({
-                title: 'Please, enter something first!',
-                status: 'warning',
-                duration: 5000,
-                isClosable: true,
-                position: "top",
-            })
-            return
-        }
+    // const handleSearch = async () => {
+    //     if (!search) {
+    //         toast({
+    //             title: 'Please, enter something first!',
+    //             status: 'warning',
+    //             duration: 5000,
+    //             isClosable: true,
+    //             position: "top",
+    //         })
+    //         return
+    //     }
 
-        try {
-            setLoading(true)
+    //     try {
+    //         setLoading(true)
 
-            // const config = {
-            //   headers: {
-            //     Authorization: `Bearer ${user.token}`,
-            //   }
-            // }
+    //         // const config = {
+    //         //   headers: {
+    //         //     Authorization: `Bearer ${user.token}`,
+    //         //   }
+    //         // }
 
-            // const data = await fetch(`/api/user?search=${search}`, config ) 
+    //         // const data = await fetch(`/api/user?search=${search}`, config ) 
 
-            const data = await fetch(`/api/user/${user._id}/?search=${search}`, {
-                headers: {
-                    Authorization: `Bearer ${user.token}`,
-                }
-            }
-            )
-            const json = await data.json()
+    //         const data = await fetch(`/api/user/${user._id}/?search=${search}`, {
+    //             headers: {
+    //                 Authorization: `Bearer ${user.token}`,
+    //             }
+    //         }
+    //         )
+    //         const json = await data.json()
 
-            setLoading(false)
-            setSearchResult(json)
-        } catch (error) {
-            toast({
-                title: 'Error Occurred!',
-                description: 'Failed to load the User Search Results for users',
-                status: 'error',
-                duration: 5000,
-                isClosable: true,
-                position: "top",
-            })
-            console.log(error.message)
-            setLoading(false)
-        }
-    }
+    //         setLoading(false)
+    //         setSearchResult(json)
+    //     } catch (error) {
+    //         toast({
+    //             title: 'Error Occurred!',
+    //             description: 'Failed to load the User Search Results for users',
+    //             status: 'error',
+    //             duration: 5000,
+    //             isClosable: true,
+    //             position: "top",
+    //         })
+    //         console.log(error.message)
+    //         setLoading(false)
+    //     }
+    // }
 
     return (
         <div>
             <Box display='flex' justifyContent='space-between' alignItems='center' bg='white' w='100%' p='5px 10px 5px 10px' borderWidth='5px' >
+            
                 <Tooltip label="Search Users to chat" hasArrow placement='bottom-end'>
                     <Button variant='ghost' onClick={() => setToggle(!toggle)}  >
                         <FaAddressBook type='button' className=' text-red-600 text-xl base:text-xl font-thin' />
@@ -161,7 +162,7 @@ const ChatNav = () => {
                 <SearchBar toggle={toggle} set={setToggle} setSearch={setSearch} search={search} handleSearch={handleSearch} loading={loading} searchResult={searchResult} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat} />
             } */}
             {toggle &&
-                <UserModel  toggle={toggle} set={setToggle} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat}/>}
+                <UserModel isActive={isActive} toggle={toggle} set={setToggle} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat}/>}
         </div>
     )
 }

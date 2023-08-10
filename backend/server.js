@@ -78,12 +78,22 @@ mongoose.connect(process.env.MONGO_URI,
       console.log("Connection made")
 
       // User should be connected to personal socket
+      socket.on("active", (userData) => {
+        // creates new room for client with use id
+        socket.join(userData._id)
+        // console.log(userData._id)
+        // to pass connection updates
+        socket.emit("active_user", userData._id)
+        console.log(userData.surname + ' Just logged in')
+      })
+      // User should be connected to personal socket
       socket.on("setup", (userData) => {
         // creates new room for client with use id
         socket.join(userData._id)
         // console.log(userData._id)
         // to pass connection updates
-        socket.emit("connected")
+        socket.emit("connected", userData._id )
+        console.log(userData.surname + ' Just joined in')
       })
       // for joining chats 
       socket.on("join_chat", (room) => {

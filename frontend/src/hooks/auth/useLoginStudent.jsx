@@ -73,7 +73,7 @@ export const useLoginStudent = (url) => {
                     isClosable: true,
                     position: "top",
                 })
-                localStorage.setItem('user', JSON.stringify(json))
+                sessionStorage.setItem('user', JSON.stringify(json))
             }
 
             // update auth Context

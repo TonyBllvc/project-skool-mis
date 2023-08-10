@@ -2,7 +2,7 @@ import { Image, } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { AiOutlineHome, AiOutlineInfoCircle, AiOutlineLock, AiOutlineUser } from 'react-icons/ai'
 import { BsChatDots } from 'react-icons/bs'
-import {  BiBookContent,  BiTimeFive } from 'react-icons/bi'
+import { BiBookContent, BiTimeFive } from 'react-icons/bi'
 import { ImSwitch } from 'react-icons/im'
 import { NavLink, useNavigate } from 'react-router-dom'
 import logo from '../images/images_logo.png'
@@ -13,7 +13,7 @@ const NavBar = () => {
     const { logout } = useLogout()
     const navigate = useNavigate()
     const { user } = useAuthContext()
-    const [ toggle, setToggle ] = useState(false)
+    const [toggle, setToggle] = useState(false)
 
     const handleLogout = () => {
         logout()
@@ -64,57 +64,63 @@ const NavBar = () => {
                             </p>
                         </NavLink>
 
-                        { user.role === 'Student' ? (
-                        <NavLink to="/student/results" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <BiBookContent className=' text-2xl text-white font-semibold pr-2' />
+                        {user.role === 'Student' ? (
+                            <NavLink to="/student/results" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                                <BiBookContent className=' text-2xl text-white font-semibold pr-2' />
 
-                            <p className='hidden sm:flex'>
-                                Results
-                            </p>
-                        </NavLink>
+                                <p className='hidden sm:flex'>
+                                    Results
+                                </p>
+                            </NavLink>
                         ) : (
                             <>
 
                             </>
                         )}
 
-                        { user.role === 'Lecturer' || user.role === 'Student' ? (
-                        <NavLink to="/chat" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <BsChatDots className=' text-2xl text-white font-semibold pr-2' />
+                        {user.role === 'Lecturer' || user.role === 'Student' ? (
+                            <NavLink to="/chat" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                                <BsChatDots className=' text-2xl text-white font-semibold pr-2' />
 
-                            <p className='hidden sm:flex'>
-                                Chat
-                            </p>
-                        </NavLink>
+                                <p className='hidden sm:flex'>
+                                    Chat
+                                </p>
+                            </NavLink>
                         ) : (
                             <>
 
                             </>
                         )}
-                        { user.role === 'Lecturer' ? (
-                        <NavLink to="/notice" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
-                            <AiOutlineInfoCircle className=' text-2xl text-white font-semibold pr-2' />
+                        {user.role === 'Lecturer' ? (
+                            <NavLink to="/notice" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                                <AiOutlineInfoCircle className=' text-2xl text-white font-semibold pr-2' />
 
-                            <p className='hidden sm:flex'>
-                                Notice
-                            </p>
-                        </NavLink>
+                                <p className='hidden sm:flex'>
+                                    Notice
+                                </p>
+                            </NavLink>
                         ) : (
                             <>
-                                
+
                             </>
                         )}
+                        {/* <br /> */}
+                        
                         {/* a hr across */}
-                        <hr className='w-11/12 my-4
-                    border-white'/>
+                        <hr className='w-11/12 my-4border-white'/>
 
-                        <NavLink to="/profile" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
+                        { user.role === 'Admin' ? (<NavLink to="/profile" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineUser className=' text-2xl text-white font-semibold pr-2' />
 
                             <p className='hidden sm:flex'>
                                 My Profile
                             </p>
                         </NavLink>
+                        ) : (
+                            <>
+
+                            </>
+                        )}
                         <NavLink to="/settings" className={({ isActive }) => isActive ? 'flex items-center justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 sm:rounded-l-3xl text-green-100 bg-zinc-800 bg-opacity-50 shadow-sm shadow-slate-700' : 'flex items-center  justify-center sm:justify-start  font-bold text-sm w-full pl-4 py-3 my-3 rounded-l-3xl text-green-100'}>
                             <AiOutlineLock className=' text-2xl text-white font-semibold pr-2' />
 

@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import { Box, Button, FormControl, FormLabel, Input, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Text, VStack, useToast } from '@chakra-ui/react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 const MyProfile = () => {
-  const { user } = useAuthContext();
+  const { user, dispatch } = useAuthContext();
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+
+  const toast = useToast()
+
   const [formData, setFormData] = useState({
+    id : user._id,
     title: user.title,
     surname: user.surname,
     first_name: user.first_name,
@@ -29,22 +34,66 @@ const MyProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!formData.password) {
+      toast({
+        title: 'Passwords incorrect',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      })
+      setLoading(false)
+      return;
+
+    }
+
     try {
-      const response = await fetch('/api/admin/update', {
+      const res = await fetch('/api/admin/update', {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.token}`,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        // Handle success or navigate to another page
+      const json = await res.json();
+
+      if (res.ok) {
+        setLoading(false)
+        toast({
+          title: 'Settings change is Successful!',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        })
+        localStorage.setItem('user', JSON.stringify(json))
       } else {
-        // Handle error response
+        setLoading(false)
+        setError(json.error)
+        toast({
+          title: json.error,
+          status: 'warning',
+          duration: 5000,
+          isClosable: true,
+          position: "top",
+        })
+        return
       }
+
+      
+      // dispatch({ type: 'LOGIN', payload: json })
     } catch (error) {
-      // Handle fetch error
+      toast({
+        title: error.message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      })
+      setError(error.message)
+      return
     }
   };
 
@@ -167,19 +216,19 @@ const MyProfile = () => {
           {/* Add other form controls for first_name, middle_name, role, department, faculty, phone, email */}
 
           <Box width='100%' display='flex' justifyContent='center'>
-          <FormControl mb='25px'  width={['100%', '97%', '90%', '90%']}>
-            <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>Password</FormLabel>
-            <Input
-              type="password"
-              name="password" fontSize={['9.5', '12', '14', '15']} bg='green.100'
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-          </FormControl>
+            <FormControl mb='25px' width={['100%', '97%', '90%', '90%']}>
+              <FormLabel color='black' fontWeight='semibold' fontSize={['12.5', '13', '16', '16.5']}>Password</FormLabel>
+              <Input
+                type="password"
+                name="password" fontSize={['9.5', '12', '14', '15']} bg='green.100'
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+            </FormControl>
           </Box>
 
           <Box width='100%' display='flex' justifyContent='center'>
-            <Button color='white' colorScheme='whatsapp'  width={['100%', '97%', '90%', '90%']} style={{ marginTop: 15 }} type='submit' isLoading={loading}>
+            <Button color='white' colorScheme='whatsapp' width={['100%', '97%', '90%', '90%']} style={{ marginTop: 15 }} type='submit' isLoading={loading}>
               Update Profile
             </Button>
           </Box>

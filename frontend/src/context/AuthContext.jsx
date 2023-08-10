@@ -23,11 +23,11 @@ export const AuthContextProvider = ({ children }) => {
     })
 
     // in other to keep the user logged in
-    // we have to pickup user login details from the localStorage
+    // we have to pickup user login details from the sessionStorage
     // then run an if check, validate the user is still logged
     // (by picking up the strings from browser storage)
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'))
+        const user = JSON.parse(sessionStorage.getItem('user'))
 
         if (user) {
             dispatch({ type: 'LOGIN', payload: user })

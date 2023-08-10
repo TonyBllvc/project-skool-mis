@@ -285,7 +285,7 @@ const CourseForm = ({ setToggling, toggling }) => {
                             value={level}
                             fontSize={['9.5', '16', '17']}
                             onChange={(e) => setLevel(e.target.value)}
-                            placeholder='Select Day'>
+                            placeholder='Select Level'>
                             {optionOne.map((options) => (
                                 <option className='w-1/2' key={options.key} value={options.value} >
                                     {options.label}
