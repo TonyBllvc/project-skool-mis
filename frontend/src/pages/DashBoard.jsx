@@ -10,6 +10,7 @@ import { useNoticeContext } from '../hooks/useNoticeContext'
 import Home from './Home'
 import { useAuthContext } from '../hooks/useAuthContext'
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const DashBoard = () => {
 
     useEffect(() => {
@@ -43,7 +44,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('/api/student/student_list', {
+      const res = await fetch(`${baseURL}/api/student/student_list`, {
         // we need to send authorization headers(required for authorization)
         headers: {
             // to output the bearer token 
@@ -68,7 +69,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchLecturer = async () => {
-      const res = await fetch('/api/lecturer/lecturer_list', {
+      const res = await fetch(`${baseURL}/api/lecturer/lecturer_list`, {
         // we need to send authorization headers(required for authorization)
         headers: {
             // to output the bearer token 
@@ -93,7 +94,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchCourse = async () => {
-      const res = await fetch('/api/course/get_courses', {
+      const res = await fetch(`${baseURL}/api/course/get_courses`, {
         // we need to send authorization headers(required for authorization)
         headers: {
             // to output the bearer token 
@@ -118,7 +119,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchNotice = async () => {
-        const res = await fetch('api/notice/get_notice', {
+        const res = await fetch(`${baseURL}/api/notice/get_notice`, {
           // we need to send authorization headers(required for authorization)
           headers: {
               // to output the bearer token 
