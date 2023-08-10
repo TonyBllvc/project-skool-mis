@@ -15,7 +15,7 @@ import UpdateGroupChatModel from '../model/UpdateGroupChatModel'
 const ENDPOINT = 'http://localhost:5000';
 var socket, selectedChatCompare;
 // ****************************************************
-
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     // const { user, selectedChat, setSelectedChat } = ChatState()
@@ -80,7 +80,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setLoading(true)
             const { data } = await axios.get(
-                `/api/message/${selectedChat._id}`,
+                `${baseURL}/api/message/${selectedChat._id}`,
                 config
             )
 
@@ -146,7 +146,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
                 setNewMessage('')
                 const { data } = await axios.post(
-                    "/api/message",
+                    `${baseURL}/api/message`,
                     {
                         userId: user._id,
                         content: newMessage,
@@ -187,7 +187,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setNewMessage('')
             const { data } = await axios.post(
-                "/api/message",
+                `${baseURL}/api/message`,
                 {
                     userId: user._id,
                     content: newMessage,
