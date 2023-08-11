@@ -10,7 +10,8 @@ import { useNoticeContext } from '../hooks/useNoticeContext'
 import Home from './Home'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+const baseURL = process.env.REACT_APP_URL
 const DashBoard = () => {
 
     useEffect(() => {

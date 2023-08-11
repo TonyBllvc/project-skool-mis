@@ -2,7 +2,7 @@ import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, V
 import React, { useState } from 'react'
 import { useLogin } from '../../hooks/auth/useLogin'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const LecturerLogin = () => {
   const [show, setShow] = useState(false)
   // to disable input / and
@@ -12,7 +12,7 @@ const LecturerLogin = () => {
 
   // const { user } = ChatState()
 
-  const { login, pending, error } = useLogin(`${baseURL}/api/lecturer/login`)
+  const { login, pending, error } = useLogin('https://my-project-mis-api.onrender.com/api/lecturer/login')
 
 
   const handleSubmit = async (e) => {

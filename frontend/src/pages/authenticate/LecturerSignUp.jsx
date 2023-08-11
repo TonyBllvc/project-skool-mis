@@ -5,7 +5,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useSignUp } from '../../hooks/auth/useSignup'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const LectureSignUp = () => {
   const [show, setShow] = useState(false)
   const [title, setTitle] = useState('')
@@ -19,7 +19,7 @@ const LectureSignUp = () => {
   const [password, setPassword] = useState('')
   const [confirm_password, setConfirmPassword] = useState('')
   
-  const {signup, pending, error, } = useSignUp(`${baseURL}/api/lecturer/sign_up`)
+  const {signup, pending, error, } = useSignUp('https://my-project-mis-api.onrender.com/api/lecturer/sign_up')
 
   const toast = useToast()
   const [phone, setPhoneNumber] = useState('');
