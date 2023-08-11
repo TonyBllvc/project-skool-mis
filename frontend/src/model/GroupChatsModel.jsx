@@ -4,7 +4,7 @@ import axios from 'axios'
 import UserList from '../assets/UserList'
 import Selected from '../assets/Selected'
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
   const [groupChatName, setGroupChatName] = useState('')
   const [selectedUsers, setSelectedUsers] = useState([])

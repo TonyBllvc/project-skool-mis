@@ -7,7 +7,7 @@ import { useChatState } from '../hooks/useChatState'
 import UserListWithDetails from '../assets/UserListWithDetails'
 // import axios from 'axios'
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const UserModel = ({ isActive, toggle, set, setLoadingChat, loadingChat, setSelectedChat }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { user } = useAuthContext()
