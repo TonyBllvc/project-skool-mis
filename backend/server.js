@@ -19,7 +19,7 @@ const userRoutes = require('./routes/user')
 const app = express()
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://my-project-mis-front.onrender.com','https://tony-george-project-skool-mis.vercel.app/'],
+  origin: 'https://project-skool-mis-tonybllvc.vercel.app/',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: [
     'Content-Type', 'Authorization'
@@ -34,9 +34,9 @@ app.use((req, res, next) => {
   console.log(req.path, req.method)
   next()
 })
-app.get('/health', (req, res) => {
-  res.status(200).send('OK');
-});
+// app.get('/health', (req, res) => {
+//   res.status(200).send('OK');
+// });
 
 // routes
 app.use('/api/school', schoolRoutes)
@@ -73,7 +73,7 @@ mongoose.connect(process.env.MONGO_URI_API,
       // to save bandwidth
       pingTimeout: 60000,
       cors: {
-        origin: ['http://localhost:3000', 'https://my-project-mis-front.onrender.com', 'https://tony-george-project-skool-mis.vercel.app/'],
+        origin: 'https://project-skool-mis-tonybllvc.vercel.app/',
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
         credentials: true
       }
