@@ -22,7 +22,8 @@ const corsOptions = {
   origin: [
     'https://project-skool-mis-tonybllvc.vercel.app',
     'https://project-skool-mis-git-main-tonybllvc.vercel.app',
-    'https://project-skool-j6xgpsktf-tonybllvc.vercel.app'
+    'https://project-skool-mis.vercel.app',
+    'https://project-skool-mis-git-main-tonybllvc.vercel.app'
   ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: [
@@ -86,7 +87,8 @@ mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.n
         origin: [
     'https://project-skool-mis-tonybllvc.vercel.app',
     'https://project-skool-mis-git-main-tonybllvc.vercel.app',
-    'https://project-skool-j6xgpsktf-tonybllvc.vercel.app'
+    'https://project-skool-mis-git-main-tonybllvc.vercel.app',
+    'https://project-skool-mis.vercel.app'
   ],
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
       }
