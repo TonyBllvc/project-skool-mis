@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "start": "node server.js",
-    "backend": "nodemon backend/server.js",
+    "backend": "nodemon server.js",
     "frontend": "npm start --prefix frontend",
     "both": "concurrently \"npm run backend\" \"npm run frontend\"",
     "dev": "nodemon server.js"
