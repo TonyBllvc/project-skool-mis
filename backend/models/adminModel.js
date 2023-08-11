@@ -137,7 +137,7 @@ adminSchema.statics.login = async function (email, role, password) {
     // check if admin exists or not
     // if not, throw error
     if (!admin) {
-        throw Error('Incorrect email')
+        throw Error('Incorrect email and password')
     }
 
     // match passwords with the hashed version, to compare
@@ -148,7 +148,7 @@ adminSchema.statics.login = async function (email, role, password) {
     const match = await bcrypt.compare(password, admin.password)
 
     if (!match) {
-        throw Error(' Incorrect password')
+        throw Error(' Incorrect emain and password')
     }
 
     return admin

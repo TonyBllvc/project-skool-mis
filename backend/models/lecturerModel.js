@@ -162,7 +162,7 @@ lecturerSchema.statics.login = async function (email, role, password) {
     // check if lecturer exists or not
     // if not, throw error
     if (!lecturer) {
-        throw Error('Incorrect email')
+        throw Error('Incorrect email and password')
     }
 
     // match passwords with the hashed version, to compare
@@ -173,7 +173,7 @@ lecturerSchema.statics.login = async function (email, role, password) {
     const match = await bcrypt.compare(password, lecturer.password)
 
     if (!match) {
-        throw Error(' Incorrect password')
+        throw Error(' Incorrect email and password')
     }
 
     return lecturer

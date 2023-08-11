@@ -178,7 +178,7 @@ studentSchema.statics.login = async function (reg_no, role, password) {
     // check if student exists or not
     // if not, throw error
     if (!student) {
-        throw Error('Incorrect reg no')
+        throw Error('Incorrect reg and password')
     }
 
     // match passwords with the hashed version, to compare
@@ -189,7 +189,7 @@ studentSchema.statics.login = async function (reg_no, role, password) {
     const match = await bcrypt.compare(password, student.password)
 
     if (!match) {
-        throw Error(' Incorrect password')
+        throw Error(' Incorrect reg and password')
     }
 
     return student
