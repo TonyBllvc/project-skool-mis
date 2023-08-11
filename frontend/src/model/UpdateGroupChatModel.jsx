@@ -5,7 +5,7 @@ import axios from 'axios'
 import Selected from '../assets/Selected'
 import UserList from '../assets/UserList'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 //**************************** fetchMessages was picked up from drill ********************* */
 const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, fetchMessages }) => {
     // *******************************************************

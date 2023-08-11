@@ -6,7 +6,7 @@ import CourseModel from '../model/CourseModal'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 
 const UploadStudentResult = ({ toggling, setToggling}) => {
     const { course, dispatch } = useCourseContext()

@@ -10,7 +10,7 @@ import { useChatState } from '../hooks/useChatState'
 import { useSelectChatContext } from '../hooks/useSelectChatContext'
 import { useNotificationContext } from '../hooks/useNotifiContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 // ********************* Chat interface *******************  
 const MyChats = ({ fetchAgain }) => {
 

@@ -6,7 +6,7 @@ import { useTimetableContext } from '../hooks/useTimetableContext'
 import TimeUpdateModal from '../model/TimeUpdateModal'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const TimeTableDetails = ({ timetable }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { dispatch } = useTimetableContext()

@@ -4,7 +4,7 @@ import { FaTrashAlt } from 'react-icons/fa'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 export const MoreStudentResult = ({ studentItem }) => {
 
     const { dispatch } = useStudentDetailsContext()

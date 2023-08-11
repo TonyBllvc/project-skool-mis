@@ -13,8 +13,8 @@ import ScrollableChat from '../assets/ScrollableChat'
 import UpdateGroupChatModel from '../model/UpdateGroupChatModel'
 
 // const ENDPOINT = 'http://localhost:5000';
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
-const ENDPOINT = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+const ENDPOINT = 'https://faithful-teal-bathing-suit.cyclic.app';
 var socket, selectedChatCompare;
 const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()

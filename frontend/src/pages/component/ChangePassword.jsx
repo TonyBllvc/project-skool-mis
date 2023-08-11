@@ -15,7 +15,7 @@ import { useTimeContext } from '../../hooks/useTimeContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useChangePassword } from '../../hooks/auth/useChangePassword';
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const ChangePassword = () => {
   const { time } = useTimeContext()
   const { user } = useAuthContext()

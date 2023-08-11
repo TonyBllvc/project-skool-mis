@@ -5,7 +5,7 @@ import React from 'react'
 import { useNoticeContext } from '../hooks/useNoticeContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const NoticeDetails = ({ notice }) => {
     const { dispatch } = useNoticeContext()
     const { user } = useAuthContext()
