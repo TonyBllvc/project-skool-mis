@@ -18,6 +18,7 @@ import { useSignUp } from '../../hooks/auth/useSignup';
 //   { value: 'Computer Engineering', label: 'Computer Engineering', key: '2' },
 // ]
 
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const SpecialSignUp = () => {
   const [show, setShow] = useState(false)
   const [title, setTitle] = useState('')
@@ -31,7 +32,7 @@ const SpecialSignUp = () => {
   const [password, setPassword] = useState('')
   const [confirm_password, setConfirmPassword] = useState('')
   
-  const {signup, pending, error, } = useSignUp('/api/admin/signup')
+  const {signup, pending, error, } = useSignUp(`${baseURL}/api/admin/signup`)
 
   const toast = useToast()
   const [phone, setPhoneNumber] = useState('');

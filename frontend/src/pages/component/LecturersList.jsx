@@ -8,7 +8,7 @@ import Loading from '../assets/Loading';
 import LecturersListDetails from '../../Components/LecturersListDetails';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const LecturerList = () => {
     const [toggle, setToggle] = useState(false);
     // const [school, setSchool ] = useState('')

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Text, VStack, useToast } from '@chakra-ui/react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const MyProfile = () => {
   const { user, dispatch } = useAuthContext();
   const [loading, setLoading] = useState(false)

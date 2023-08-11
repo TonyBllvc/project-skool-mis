@@ -9,7 +9,7 @@ import StudentListDetails from '../../Components/StudentListDetails';
 import StudentsDetailListSession from '../../Components/StudentsDetailListSession';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const StudentList = () => {
     const [toggle, setToggle] = useState(false);
     // const [school, setSchool ] = useState('')

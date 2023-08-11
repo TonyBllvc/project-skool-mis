@@ -5,6 +5,7 @@ import {
 import React, { useEffect, useState } from 'react'
 import { useSignUpStudent } from '../../hooks/auth/useSignUpStudent';
 
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const StudentSignUp = () => {
   const [show, setShow] = useState(false)
   const [surname, setSurname] = useState('')
@@ -19,7 +20,7 @@ const StudentSignUp = () => {
   const [password, setPassword] = useState('')
   const [confirm_password, setConfirmPassword] = useState('')
 
-  const { signup, pending, error, } = useSignUpStudent('/api/student/sign_up')
+  const { signup, pending, error, } = useSignUpStudent(`${baseURL}/api/student/sign_up`)
 
   const toast = useToast()
   const [phone, setPhoneNumber] = useState('');

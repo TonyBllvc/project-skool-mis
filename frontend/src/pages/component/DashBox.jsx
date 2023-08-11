@@ -11,7 +11,7 @@ import { useNoticeContext } from '../../hooks/useNoticeContext'
 import { useAuthContext } from '../../hooks/useAuthContext'
 import NoticeBoard from '../../Components/NoticeBoard'
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const DashBox = () => {
     const { time } = useTimeContext()
     // get list of students

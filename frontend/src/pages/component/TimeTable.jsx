@@ -9,7 +9,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const TimeTable = () => {
 
     const [toggle, setToggle] = useState(false);

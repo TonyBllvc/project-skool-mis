@@ -11,11 +11,7 @@ import CourseListDetails from '../../Components/CourseListDetails';
 import CourseForm from '../../Components/CourseForm';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-<<<<<<< HEAD
 const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
-=======
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
->>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
 const CourseList = () => {
     const [toggle, setToggle] = useState(false);
     // const [school, setSchool ] = useState('')

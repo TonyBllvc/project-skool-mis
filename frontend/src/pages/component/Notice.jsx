@@ -13,7 +13,7 @@ const optionOne = [
     { value: 'Project', label: 'Project', key: '4' }
 ]
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 // incomplete 
 const Notice = () => {
     const { notice, dispatch } = useNoticeContext()

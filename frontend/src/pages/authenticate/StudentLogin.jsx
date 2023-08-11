@@ -2,6 +2,7 @@ import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, V
 import React, { useState } from 'react'
 import { useLoginStudent } from '../../hooks/auth/useLoginStudent'
 
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const StudentLogin = () => {
   const [show, setShow] = useState(false)
   // to disable input / and
@@ -11,7 +12,7 @@ const StudentLogin = () => {
 
   // const { user } = ChatState()
 
-  const { login, pending, error } = useLoginStudent('/api/student/login')
+  const { login, pending, error } = useLoginStudent(`${baseURL}/api/student/login`)
 
 
   const handleSubmit = async (e) => {

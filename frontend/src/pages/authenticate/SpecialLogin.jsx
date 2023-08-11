@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useLogin } from '../../hooks/auth/useLogin'
 // import { ChatState } from '../../contexts/ChatProvider'
 
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const SpecialLogin = () => {
   const [show, setShow] = useState(false)
   // to disable input / and
@@ -12,7 +13,7 @@ const SpecialLogin = () => {
 
   // const { user } = ChatState()
 
-  const { login, pending, error } = useLogin('/api/admin/login')
+  const { login, pending, error } = useLogin(`${baseURL}/api/admin/login`)
 
 
   const handleSubmit = async (e) => {

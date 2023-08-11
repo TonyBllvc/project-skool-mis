@@ -15,7 +15,7 @@ import { useTimeContext } from '../../hooks/useTimeContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useChangePassword } from '../../hooks/auth/useChangePassword';
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const ChangePassword = () => {
   const { time } = useTimeContext()
   const { user } = useAuthContext()
@@ -45,7 +45,7 @@ const ChangePassword = () => {
       setUrl(`${baseURL}/api/student/update_password`)
       await change(user._id, password, newPassword, confirmNewPassword)
     } else if (user.role === 'Lecturer') {
-      setUrl(${baseURL}/api/lecturer/update_password`)
+      setUrl(`${baseURL}/api/lecturer/update_password`)
       await change(user._id, password, newPassword, confirmNewPassword)
     }
 

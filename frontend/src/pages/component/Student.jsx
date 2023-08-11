@@ -12,7 +12,7 @@ import { useStudentInfoContext } from '../../hooks/useStudentInfoContext';
 import UploadStudentResult from '../../Components/UploadStudentResult';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 // this for the admin 
 const Student = () => {
   const { id } = useParams()
