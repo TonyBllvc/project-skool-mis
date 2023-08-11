@@ -20,7 +20,11 @@ const optionTwo = [
     { value: 'PM', label: 'PM', key: '2' },
 ]
 
+<<<<<<< HEAD
 const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+=======
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+>>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
 const TimeTableUpdateForm = ({ documentData, close }) => {
     const { course, dispatch } = useCourseContext()
     const { timetable, dispatch: dispatchTime } = useTimetableContext()

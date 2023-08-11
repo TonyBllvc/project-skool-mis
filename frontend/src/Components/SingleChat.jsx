@@ -17,7 +17,7 @@ const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const ENDPOINT = 'https://faithful-teal-bathing-suit.cyclic.app'
 var socket, selectedChatCompare;
 // ****************************************************
-
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     // const { user, selectedChat, setSelectedChat } = ChatState()
@@ -189,7 +189,11 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setNewMessage('')
             const { data } = await axios.post(
+<<<<<<< HEAD
                 `$[baseURL}/api/message`,
+=======
+                `${baseURL}/api/message`,
+>>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
                 {
                     userId: user._id,
                     content: newMessage,

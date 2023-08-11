@@ -10,8 +10,12 @@ import { useChatState } from '../hooks/useChatState'
 import { useSelectChatContext } from '../hooks/useSelectChatContext'
 import { useNotificationContext } from '../hooks/useNotifiContext'
 
+<<<<<<< HEAD
 
 const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+=======
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+>>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
 // ********************* Chat interface *******************  
 const MyChats = ({ fetchAgain }) => {
 
@@ -34,7 +38,11 @@ const MyChats = ({ fetchAgain }) => {
 
         try {
 
+<<<<<<< HEAD
             const data = await fetch(`$baseURL}/api/chat/` + user._id, {
+=======
+            const data = await fetch(`${baseURL}/api/chat/` + user._id, {
+>>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
                 headers: {
                     'Authorization': `Bearer ${user.token}`,
                 }
@@ -68,7 +76,11 @@ const MyChats = ({ fetchAgain }) => {
     const deleteChat = async (chatId) => {
         try {
 
+<<<<<<< HEAD
             const response = await fetch(`${baseURL}/api/chat/` + chatId, {
+=======
+            const response = await fetch(`$baseURL}/api/chat/` + chatId, {
+>>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",

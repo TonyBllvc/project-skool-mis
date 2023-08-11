@@ -6,7 +6,11 @@ import CourseModel from '../model/CourseModal'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
+<<<<<<< HEAD
 const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+=======
+const baseUL = https://faithful-teal-bathing-suit.cyclic.app
+>>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
 const UploadStudentResult = ({ toggling, setToggling}) => {
     const { course, dispatch } = useCourseContext()
     const { dispatch: dispatchResults } = useStudentDetailsContext()

@@ -4,6 +4,7 @@ import axios from 'axios'
 import UserList from '../assets/UserList'
 import Selected from '../assets/Selected'
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
   const [groupChatName, setGroupChatName] = useState('')
   const [selectedUsers, setSelectedUsers] = useState([])
@@ -33,7 +34,7 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
       try {
         setLoading(true)
 
-        const data = await fetch(`/api/user/${user._id}/?search=${search}`, {
+        const data = await fetch(`${baseURL}/api/user/${user._id}/?search=${search}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           }
@@ -76,7 +77,7 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
 
       // const details = { name: groupChatName, users: selected }
 
-      // const data = await fetch('/api/chat/group', {
+      // const data = await fetch(`${baseURL}/api/chat/group`, {
       //     method: 'POST',
       //     body: JSON.stringify(details),
       //     headers: {
@@ -96,7 +97,7 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
         }
       }
 
-      const { data } = await axios.post('/api/chat/group', {
+      const { data } = await axios.post(`${baseURL}/api/chat/group`, {
         name: groupChatName,
         users: selectedUsers,
         //  users: JSON.stringify(selectedUsers.map((u) => u._id)),

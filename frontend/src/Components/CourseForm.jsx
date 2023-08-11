@@ -20,6 +20,8 @@ const optionOne = [
     { value: '800', label: '800', key: '8' }
 ]
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
+
 const CourseForm = ({ setToggling, toggling }) => {
     const { lecturer, dispatch: dispatchLecturers } = useLecturerContext()
     const { dispatch } = useCourseContext()
@@ -151,7 +153,11 @@ const CourseForm = ({ setToggling, toggling }) => {
         // e.preventDefault()
 
         // console.log(lecturer)
+<<<<<<< HEAD
         const res = await fetch(`${baseURL}/api/lecturer/lecturer_list`, {
+=======
+        const res = await fetch(`${baseURL/api/lecturer/lecturer_list`, {
+>>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
@@ -173,7 +179,11 @@ const CourseForm = ({ setToggling, toggling }) => {
     }
 
     const handleSchool = async () => {
+<<<<<<< HEAD
         const res = await fetch(`$baseURL}/api/school/fetch`, {
+=======
+        const res = await fetch(`${baseURL}/api/school/fetch`, {
+>>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 

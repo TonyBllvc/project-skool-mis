@@ -9,6 +9,7 @@ import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
+const baseURL = https://faithful-teal-bathing-suit.cyclic.app
 const TimeTable = () => {
 
     const [toggle, setToggle] = useState(false);
@@ -19,7 +20,7 @@ const TimeTable = () => {
 
     useEffect(() => {
         const fetchTimeTable = async () => {
-            const res = await fetch('/api/time/get_time_table', {
+            const res = await fetch(`${baseURL}/api/time/get_time_table`, {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 
