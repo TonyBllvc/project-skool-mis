@@ -19,7 +19,11 @@ const userRoutes = require('./routes/user')
 const app = express()
 
 const corsOptions = {
-  origin: 'https://project-skool-mis-tonybllvc.vercel.app/',
+  origin: [
+    'https://project-skool-mis-tonybllvc.vercel.app',
+    'https://project-skool-mis-git-main-tonybllvc.vercel.app',
+    'https://project-skool-j6xgpsktf-tonybllvc.vercel.app'
+  ],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: [
     'Content-Type', 'Authorization'
@@ -63,7 +67,7 @@ mongoose.connect(process.env.MONGO_URI_API,
   .then(() => {
     console.log('connected to database')
     // listen to port
-    const server = app.listen(process.env.PORT, "0.0.0.0/0", () => {
+    const server = app.listen(process.env.PORT, "", () => {
       console.log('listening for requests on port', process.env.PORT)
     })
 
@@ -73,7 +77,11 @@ mongoose.connect(process.env.MONGO_URI_API,
       // to save bandwidth
       pingTimeout: 60000,
       cors: {
-        origin: 'https://project-skool-mis-tonybllvc.vercel.app/',
+        origin: [
+    'https://project-skool-mis-tonybllvc.vercel.app',
+    'https://project-skool-mis-git-main-tonybllvc.vercel.app',
+    'https://project-skool-j6xgpsktf-tonybllvc.vercel.app'
+  ],
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
         credentials: true
       }
