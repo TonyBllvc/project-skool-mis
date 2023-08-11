@@ -17,7 +17,7 @@ const Chat = ({ isActive }) => {
 
     if (!userInfo) {
       navigate("/")
-      console.log('incorrect')
+      console.log('No user')
     }
   }, [navigate])
 
