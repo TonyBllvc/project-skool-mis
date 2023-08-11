@@ -18,7 +18,7 @@ import { useSignUp } from '../../hooks/auth/useSignup';
 //   { value: 'Computer Engineering', label: 'Computer Engineering', key: '2' },
 // ]
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const baseURL = 'https://my-project-mis-api.onrender.com'
 const SpecialSignUp = () => {
   const [show, setShow] = useState(false)
   const [title, setTitle] = useState('')
