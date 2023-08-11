@@ -19,7 +19,7 @@ const userRoutes = require('./routes/user')
 const app = express()
 
 const corsOptions = {
-  origin: 'https://tony-george-project-skool-mis.vercel.app/',
+  origin: ['http://localhost:3000', 'https://my-project-mis-front.onrender.com','https://tony-george-project-skool-mis.vercel.app/'],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   allowedHeaders: [
     'Content-Type', 'Authorization'
@@ -54,7 +54,8 @@ app.use('/api/user', userRoutes)
 
 
 // connect to db
-mongoose.connect(process.env.MONGO_URI,
+mongoose.connect(process.env.MONGO_URI_API,
+// mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -72,8 +73,9 @@ mongoose.connect(process.env.MONGO_URI,
       // to save bandwidth
       pingTimeout: 60000,
       cors: {
-        origin: 'https://tony-george-project-skool-mis.vercel.app/',
-        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+        origin: ['http://localhost:3000', 'https://my-project-mis-front.onrender.com', 'https://tony-george-project-skool-mis.vercel.app/'],
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+        credentials: true
       }
     })
 
