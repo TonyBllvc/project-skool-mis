@@ -4,7 +4,7 @@ import { useLogin } from '../../hooks/auth/useLogin'
 // import { ChatState } from '../../contexts/ChatProvider'
 
 // const baseURL = 'https://my-project-mis-api.onrender.com'
-const baseURL = process.env.REACT_APP_URL
+// const baseURL = process.env.REACT_APP_URL
 const SpecialLogin = () => {
   const [show, setShow] = useState(false)
   // to disable input / and
@@ -14,7 +14,7 @@ const SpecialLogin = () => {
 
   // const { user } = ChatState()
 
-  const { login, pending, error } = useLogin(`${baseURL}/api/admin/login`)
+  const { login, pending, error } = useLogin('https://my-project-mis-api.onrender.com/api/admin/login')
 
 
   const handleSubmit = async (e) => {
