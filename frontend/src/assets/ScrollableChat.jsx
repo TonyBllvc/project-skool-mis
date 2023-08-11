@@ -4,6 +4,8 @@ import { Avatar, Tooltip, useToast } from '@chakra-ui/react'
 import { HiTrash } from 'react-icons/hi'
 import { isLastMessage, isSameSender, isSameSenderMargin, isSameUser, isUserMessage } from '../config/chatLogic'
 
+
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const ScrollableChat = ({ setMessages, messages, user, toggle, setToggle }) => {
   const toast = useToast()
 
@@ -11,7 +13,7 @@ const ScrollableChat = ({ setMessages, messages, user, toggle, setToggle }) => {
 
     try {
 
-      const response = await fetch('/api/message/' + MessageId, {
+      const response = await fetch(`${baseURL}/api/message/` + MessageId, {
         method: 'DELETE',
         headers: {
           "Content-Type": "application/json",

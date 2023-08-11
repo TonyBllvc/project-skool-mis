@@ -4,6 +4,7 @@ import { FaTrashAlt } from 'react-icons/fa'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 export const MoreStudentResult = ({ studentItem }) => {
 
     const { dispatch } = useStudentDetailsContext()
@@ -11,7 +12,7 @@ export const MoreStudentResult = ({ studentItem }) => {
 
     const handleDelete = async () => {
 
-        const response = await fetch('/api/result/' + studentItem._id, {
+        const response = await fetch(`${baseURL}/api/result/` + studentItem._id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",

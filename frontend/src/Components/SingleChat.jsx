@@ -12,7 +12,9 @@ import ProfileModel from '../model/ProfileModel'
 import ScrollableChat from '../assets/ScrollableChat'
 import UpdateGroupChatModel from '../model/UpdateGroupChatModel'
 
-const ENDPOINT = 'http://localhost:5000';
+// const ENDPOINT = 'http://localhost:5000';
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
+const ENDPOINT = 'https://faithful-teal-bathing-suit.cyclic.app'
 var socket, selectedChatCompare;
 // ****************************************************
 
@@ -80,7 +82,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setLoading(true)
             const { data } = await axios.get(
-                `/api/message/${selectedChat._id}`,
+                `${baseURL}/api/message/${selectedChat._id}`,
                 config
             )
 
@@ -146,7 +148,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
                 setNewMessage('')
                 const { data } = await axios.post(
-                    "/api/message",
+                    `${baseURL}/api/message`,
                     {
                         userId: user._id,
                         content: newMessage,
@@ -187,7 +189,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setNewMessage('')
             const { data } = await axios.post(
-                "/api/message",
+                `$[baseURL}/api/message`,
                 {
                     userId: user._id,
                     content: newMessage,

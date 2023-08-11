@@ -11,6 +11,7 @@ import { useSelectChatContext } from '../hooks/useSelectChatContext'
 import { useNotificationContext } from '../hooks/useNotifiContext'
 
 
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 // ********************* Chat interface *******************  
 const MyChats = ({ fetchAgain }) => {
 
@@ -33,7 +34,7 @@ const MyChats = ({ fetchAgain }) => {
 
         try {
 
-            const data = await fetch('/api/chat/' + user._id, {
+            const data = await fetch(`$baseURL}/api/chat/` + user._id, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`,
                 }
@@ -67,7 +68,7 @@ const MyChats = ({ fetchAgain }) => {
     const deleteChat = async (chatId) => {
         try {
 
-            const response = await fetch('/api/chat/' + chatId, {
+            const response = await fetch(`${baseURL}/api/chat/` + chatId, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",

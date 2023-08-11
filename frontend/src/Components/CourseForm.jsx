@@ -8,6 +8,7 @@ import UserLecturer from '../assets/UserLecturer'
 import SchoolModal from '../model/SchoolModal'
 import { useAuthContext } from '../hooks/useAuthContext'
 
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const optionOne = [
     { value: '100', label: '100', key: '1' },
     { value: '200', label: '200', key: '2' },
@@ -87,7 +88,7 @@ const CourseForm = ({ setToggling, toggling }) => {
         }
 
         try {
-            const res = await fetch("/api/course/set_course", {
+            const res = await fetch(`${baseURL}/api/course/set_course`, {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {
@@ -150,7 +151,7 @@ const CourseForm = ({ setToggling, toggling }) => {
         // e.preventDefault()
 
         // console.log(lecturer)
-        const res = await fetch('/api/lecturer/lecturer_list', {
+        const res = await fetch(`${baseURL}/api/lecturer/lecturer_list`, {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
@@ -172,7 +173,7 @@ const CourseForm = ({ setToggling, toggling }) => {
     }
 
     const handleSchool = async () => {
-        const res = await fetch('/api/school/fetch', {
+        const res = await fetch(`$baseURL}/api/school/fetch`, {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
@@ -212,7 +213,7 @@ const CourseForm = ({ setToggling, toggling }) => {
             try {
                 setLoading(true)
 
-                const data = await fetch(`/api/lecturer/?search=${search}`, {
+                const data = await fetch(`${baseURL}/api/lecturer/?search=${search}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                     }

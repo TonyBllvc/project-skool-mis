@@ -7,6 +7,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { useChatState } from '../hooks/useChatState'
 // import axios from 'axios'
 
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const SearchBar = ({ toggle, set, search, setSearch, handleSearch, loading, searchResult, setLoadingChat, loadingChat, setSelectedChat, dispatchSelectedChat}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { user } = useAuthContext()
@@ -27,7 +28,7 @@ const SearchBar = ({ toggle, set, search, setSearch, handleSearch, loading, sear
             // const { data } = await axios.post('/api/chat', { userId }, config)
 
 
-            const data = await fetch('/api/chat/', {
+            const data = await fetch(`${baseURL}/api/chat/`, {
                 method: 'POST',
                 body: JSON.stringify({userId, userID: user._id}),
                 headers: {
