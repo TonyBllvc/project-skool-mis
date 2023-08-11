@@ -5,6 +5,7 @@ import LecturerLogin from '../pages/authenticate/LecturerLogin'
 import StudentLogin from '../pages/authenticate/StudentLogin'
 import SpecialLogin from '../pages/authenticate/SpecialLogin'
 import { NavLink, useNavigate } from 'react-router-dom'
+import logoFav from "../images/images_logo.jpg"
 import { useAuthContext } from '../hooks/useAuthContext'
 
 // A sign up and login page
@@ -12,6 +13,16 @@ const LoginModal = () => {
 
   useEffect(() => {
     document.title = 'Login'
+
+    const faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.href = logoFav; // Replace with your favicon path
+    document.head.appendChild(faviconLink);
+
+    // Clean up when component unmounts
+    return () => {
+      document.head.removeChild(faviconLink);
+    }
   }, [])
   
   // const { user, dispatch } = useAuthContext()

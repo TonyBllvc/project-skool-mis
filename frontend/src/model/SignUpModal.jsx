@@ -5,11 +5,22 @@ import SpecialSignUp from '../pages/authenticate/SpecialSignUp'
 import LectureSignUp from '../pages/authenticate/LecturerSignUp'
 import StudentSignUp from '../pages/authenticate/StudentSignUp'
 import { NavLink } from 'react-router-dom'
+import logoFav from "../images/images_logo.jpg"
 // A sign up and login page
 const SignUpModal = () => {
 
   useEffect(() => {
     document.title = 'SignUp'
+    
+    const faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.href = logoFav; // Replace with your favicon path
+    document.head.appendChild(faviconLink);
+
+    // Clean up when component unmounts
+    return () => {
+      document.head.removeChild(faviconLink);
+    }
   }, [])
 
   return (

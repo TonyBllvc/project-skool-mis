@@ -1,6 +1,7 @@
 import { Button, FormControl, FormLabel, Input, InputGroup, InputRightElement, VStack, useToast } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLogin } from '../../hooks/auth/useLogin'
+import logoFav from '../../images/images_logo.jpg'
 
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const LecturerLogin = () => {
@@ -11,6 +12,19 @@ const LecturerLogin = () => {
   const [password, setPassword] = useState('')
 
   // const { user } = ChatState()
+  useEffect(() => {
+    document.title = 'Login || Lecturer'
+
+    const faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.href = logoFav; // Replace with your favicon path
+    document.head.appendChild(faviconLink);
+
+    // Clean up when component unmounts
+    return () => {
+      document.head.removeChild(faviconLink);
+    }
+  }, [])
 
   const { login, pending, error } = useLogin('https://my-project-mis-api.onrender.com/api/lecturer/login')
 

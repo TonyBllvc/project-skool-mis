@@ -19,6 +19,7 @@ import StudentPersonalResults from "./pages/component/StudentPersonalResults";
 import MyProfile from "./pages/component/MyProfile";
 import ChangePassword from "./pages/component/ChangePassword";
 import Layout from "./Layout";
+import logoFav from './images/images_logo.jpg'
 
 import io from 'socket.io-client'
 const ENDPOINT = 'http://localhost:5000';
@@ -43,6 +44,17 @@ export default function App() {
 
     }, [])
 
+    // Add favicon link
+    useEffect(() => {    
+    const faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.href = logoFav; // Replace with your favicon path
+    document.head.appendChild(faviconLink);
+
+    // Clean up when component unmounts
+    return () => {
+      document.head.removeChild(faviconLink);
+    };})
     // useEffect(() => {
     // const runTime = () => {
     //     setInterval(() => {
