@@ -83,7 +83,6 @@ mongoose.connect(process.env.MONGO_URI_API,
     'https://project-skool-j6xgpsktf-tonybllvc.vercel.app'
   ],
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-        credentials: true
       }
     })
 
