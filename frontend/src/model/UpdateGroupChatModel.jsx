@@ -5,7 +5,7 @@ import axios from 'axios'
 import Selected from '../assets/Selected'
 import UserList from '../assets/UserList'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 //**************************** fetchMessages was picked up from drill ********************* */
 const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, fetchMessages }) => {
     // *******************************************************
@@ -41,7 +41,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                 }
             }
 
-            const { data } = await axios.put(`${baseURL}/api/chat/remove_user`, {
+            const { data } = await axios.put('https://my-project-mis-api.onrender.com/api/chat/remove_user', {
                 chatId: selectedChat._id,
                 userId: user1._id,
             }, config
@@ -88,7 +88,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                 }
             }
 
-            const { data } = await axios.put(`${baseURL}/api/chat/rename`, {
+            const { data } = await axios.put('https://my-project-mis-api.onrender.com/api/chat/rename', {
                 chat_name: groupChatName,
                 chatId: selectedChat._id,
             }, config
@@ -139,7 +139,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
 
             // const data = await fetch(`${baseURL}/api/user?search=${search}`, config ) 
 
-            const data = await fetch(`${baseURL}/api/user/${user._id}/?search=${search}`, {
+            const data = await fetch(`https://my-project-mis-api.onrender.com/api/user/${user._id}/?search=${search}`, {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
                 }
@@ -198,7 +198,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                 }
             }
 
-            const { data } = await axios.put(`${baseURL}/api/chat/add_user`, {
+            const { data } = await axios.put(`https://my-project-mis-api.onrender.com/api/chat/add_user`, {
                 chatId: selectedChat._id,
                 userId: user1._id,
             }, config

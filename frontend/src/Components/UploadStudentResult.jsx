@@ -6,7 +6,7 @@ import CourseModel from '../model/CourseModal'
 import { useStudentDetailsContext } from '../hooks/useStudentDetailsContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 
 const UploadStudentResult = ({ toggling, setToggling}) => {
     const { course, dispatch } = useCourseContext()
@@ -122,7 +122,7 @@ const UploadStudentResult = ({ toggling, setToggling}) => {
         const details = { test, practical, exam, grade, remark, courseId, student_id }
 
         try {
-            const res = await fetch(`${baseURL}/api/result/set_result`, {
+            const res = await fetch('https://my-project-mis-api.onrender.com/api/result/set_result', {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {
@@ -182,7 +182,7 @@ const UploadStudentResult = ({ toggling, setToggling}) => {
     const handleCourses = async (e) => {
         e.preventDefault()
 
-        const res = await fetch(`${baseURL}/api/course/get_courses`, {
+        const res = await fetch('https://my-project-mis-api.onrender.com/api/course/get_courses', {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 

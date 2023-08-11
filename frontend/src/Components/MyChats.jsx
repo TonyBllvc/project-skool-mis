@@ -33,7 +33,7 @@ const MyChats = ({ fetchAgain }) => {
 
         try {
 
-          const data = await fetch(`${baseURL}/api/chat/` + user._id, {
+          const data = await fetch('https://my-project-mis-api.onrender.com//api/chat/' + user._id, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`,
                 }

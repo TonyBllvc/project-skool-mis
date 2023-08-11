@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Text, VStack, useToast } from '@chakra-ui/react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const MyProfile = () => {
   const { user, dispatch } = useAuthContext();
   const [loading, setLoading] = useState(false)
@@ -49,7 +49,7 @@ const MyProfile = () => {
     }
 
     try {
-      const res = await fetch(`${baseURL}/api/admin/update`, {
+      const res = await fetch('https://my-project-mis-api.onrender.com/api/admin/update', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${user.token}`,

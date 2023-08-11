@@ -13,8 +13,8 @@ import ScrollableChat from '../assets/ScrollableChat'
 import UpdateGroupChatModel from '../model/UpdateGroupChatModel'
 
 // const ENDPOINT = 'http://localhost:5000';
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
-const ENDPOINT = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+const ENDPOINT = 'https://my-project-mis-api.onrender.com';
 var socket, selectedChatCompare;
 const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -80,7 +80,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setLoading(true)
             const { data } = await axios.get(
-                `${baseURL}/api/message/${selectedChat._id}`,
+                `https://my-project-mis-api.onrender.com/api/message/${selectedChat._id}`,
                 config
             )
 
@@ -146,7 +146,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
                 setNewMessage('')
                 const { data } = await axios.post(
-                    `${baseURL}/api/message`,
+                    'https://my-project-mis-api.onrender.com/api/message',
                     {
                         userId: user._id,
                         content: newMessage,
@@ -187,7 +187,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setNewMessage('')
             const { data } = await axios.post(
-                `$[baseURL}/api/message`,
+                'https://my-project-mis-api.onrender.com/api/message',
                 {
                     userId: user._id,
                     content: newMessage,

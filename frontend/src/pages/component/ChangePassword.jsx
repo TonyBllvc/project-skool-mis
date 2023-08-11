@@ -15,7 +15,7 @@ import { useTimeContext } from '../../hooks/useTimeContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useChangePassword } from '../../hooks/auth/useChangePassword';
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const ChangePassword = () => {
   const { time } = useTimeContext()
   const { user } = useAuthContext()
@@ -39,13 +39,13 @@ const ChangePassword = () => {
     e.preventDefault();
 
     if (user.role === 'Admin') {
-      setUrl(`${baseURL}/api/admin/update_password`)
+      setUrl('https://my-project-mis-api.onrender.com/api/admin/update_password')
       await change(password, newPassword, confirmNewPassword)
     } else if (user.role === 'Student') {
-      setUrl(`${baseURL}/api/student/update_password`)
+      setUrl('https://my-project-mis-api.onrender.com/api/student/update_password')
       await change(user._id, password, newPassword, confirmNewPassword)
     } else if (user.role === 'Lecturer') {
-      setUrl(`${baseURL}/api/lecturer/update_password`)
+      setUrl('https://my-project-mis-api.onrender.com/api/lecturer/update_password')
       await change(user._id, password, newPassword, confirmNewPassword)
     }
 

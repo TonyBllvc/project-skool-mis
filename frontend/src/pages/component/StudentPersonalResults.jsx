@@ -12,7 +12,7 @@ import { useStudentInfoContext } from '../../hooks/useStudentInfoContext';
 import UploadStudentResult from '../../Components/UploadStudentResult';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 // this for the admin 
 const StudentPersonalResults = () => {
     const navigate = useNavigate()
@@ -24,7 +24,7 @@ const StudentPersonalResults = () => {
 
     useEffect(() => {
         const fetchStudents = async () => {
-            const res = await fetch(`${baseURL}/api/result/student/` + user._id, {
+            const res = await fetch('https://my-project-mis-api.onrender.com/api/result/student/' + user._id, {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 
@@ -50,7 +50,7 @@ const StudentPersonalResults = () => {
 
     useEffect(() => {
         const fetchStudents = async () => {
-            const res = await fetch(`${baseURL}/api/student/` + user._id, {
+            const res = await fetch('https://my-project-mis-api.onrender.com/api/student/' + user._id, {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 

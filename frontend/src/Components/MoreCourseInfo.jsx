@@ -4,14 +4,14 @@ import { FaTrashAlt } from 'react-icons/fa'
 import { useCourseContext } from '../hooks/useCourseContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const MoreCourseInfo = ({ course }) => {
     const { dispatch } = useCourseContext()
     const { user } = useAuthContext()
 
     const handleDelete = async () => {
 
-        const response = await fetch(`${baseURL}/api/course/` + course._id, {
+        const response = await fetch('https://my-project-mis-api.onrender.com/api/course/' + course._id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",

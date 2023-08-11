@@ -20,7 +20,7 @@ const optionTwo = [
     { value: 'PM', label: 'PM', key: '2' },
 ]
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const TimeTableUpdateForm = ({ documentData, close }) => {
     const { course, dispatch } = useCourseContext()
     const { timetable, dispatch: dispatchTime } = useTimetableContext()
@@ -64,7 +64,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
         const details = { id, day, start, am_one, am_two, end, courseId }
 
         try {
-            const res = await fetch(`${baseURL}/api/time/update`, {
+            const res = await fetch('https://my-project-mis-api.onrender.com/api/time/update', {
                 method: "PUT",
                 body: JSON.stringify(details),
                 headers: {
@@ -117,7 +117,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
     const handleCourses = async (e) => {
         // e.preventDefault()
 
-        const res = await fetch(`${baseURL}/api/course/get_courses`, {
+        const res = await fetch('https://my-project-mis-api.onrender.com/api/course/get_courses', {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 

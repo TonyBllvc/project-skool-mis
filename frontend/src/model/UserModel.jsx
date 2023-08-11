@@ -7,7 +7,7 @@ import { useChatState } from '../hooks/useChatState'
 import UserListWithDetails from '../assets/UserListWithDetails'
 // import axios from 'axios'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
+// const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const UserModel = ({ isActive, toggle, set, setLoadingChat, loadingChat, setSelectedChat }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { user } = useAuthContext()
@@ -22,7 +22,7 @@ const UserModel = ({ isActive, toggle, set, setLoadingChat, loadingChat, setSele
         const fetchUsers = async () => {
 
             try {
-                const data = await fetch(`${baseURL}/api/user/` + user._id, {
+                const data = await fetch('https://my-project-mis-api.onrender.com//api/user/' + user._id, {
                     headers: {
                         'Authorization': `Bearer ${user.token}`,
                     }
@@ -64,7 +64,7 @@ const UserModel = ({ isActive, toggle, set, setLoadingChat, loadingChat, setSele
             setLoadingChat(true)
 
 
-            const data = await fetch(`${baseURL}/api/chat/`, {
+            const data = await fetch('https://my-project-mis-api.onrender.com/api/chat/', {
                 method: 'POST',
                 body: JSON.stringify({ userId, userID: user._id }),
                 headers: {
