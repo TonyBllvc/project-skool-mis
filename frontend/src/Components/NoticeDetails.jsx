@@ -5,22 +5,14 @@ import React from 'react'
 import { useNoticeContext } from '../hooks/useNoticeContext'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-<<<<<<< HEAD
 const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
-=======
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
->>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
 const NoticeDetails = ({ notice }) => {
     const { dispatch } = useNoticeContext()
     const { user } = useAuthContext()
     
     const handleDelete = async () => {
 
-<<<<<<< HEAD
         const response = await fetch(`${baseURL}/api/notice/` + notice._id, {
-=======
-        const response = await fetch(`$baseURL}/api/notice/` + notice._id, {
->>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",

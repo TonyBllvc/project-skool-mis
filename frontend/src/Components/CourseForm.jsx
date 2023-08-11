@@ -8,7 +8,6 @@ import UserLecturer from '../assets/UserLecturer'
 import SchoolModal from '../model/SchoolModal'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
 const optionOne = [
     { value: '100', label: '100', key: '1' },
     { value: '200', label: '200', key: '2' },
@@ -20,8 +19,7 @@ const optionOne = [
     { value: '800', label: '800', key: '8' }
 ]
 
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
-
+const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const CourseForm = ({ setToggling, toggling }) => {
     const { lecturer, dispatch: dispatchLecturers } = useLecturerContext()
     const { dispatch } = useCourseContext()
@@ -153,11 +151,7 @@ const CourseForm = ({ setToggling, toggling }) => {
         // e.preventDefault()
 
         // console.log(lecturer)
-<<<<<<< HEAD
         const res = await fetch(`${baseURL}/api/lecturer/lecturer_list`, {
-=======
-        const res = await fetch(`${baseURL/api/lecturer/lecturer_list`, {
->>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
@@ -179,11 +173,7 @@ const CourseForm = ({ setToggling, toggling }) => {
     }
 
     const handleSchool = async () => {
-<<<<<<< HEAD
-        const res = await fetch(`$baseURL}/api/school/fetch`, {
-=======
         const res = await fetch(`${baseURL}/api/school/fetch`, {
->>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 

@@ -7,11 +7,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 import { useChatState } from '../hooks/useChatState'
 // import axios from 'axios'
 
-<<<<<<< HEAD
 const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app'
-=======
-const baseURL = https://faithful-teal-bathing-suit.cyclic.app
->>>>>>> ec438f0a77c2f0581a9cff55d471f3f8ac0aa3f2
 const SearchBar = ({ toggle, set, search, setSearch, handleSearch, loading, searchResult, setLoadingChat, loadingChat, setSelectedChat, dispatchSelectedChat}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { user } = useAuthContext()
