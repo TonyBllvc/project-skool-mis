@@ -42,6 +42,11 @@ app.use((req, res, next) => {
 //   res.status(200).send('OK');
 // });
 
+// Route
+app.get("/", (req, res) => {
+  res.send("Home Page");
+});
+
 // routes
 app.use('/api/school', schoolRoutes)
 app.use('/api/course', courseRoutes) // come back to this after creating lecturer and school field
@@ -57,6 +62,7 @@ app.use('/api/admin', adminRoutes)
 app.use('/api/user', userRoutes)
 
 
+const PORT = process.env.PORT || 5000;
 // connect to db
 mongoose.connect(process.env.MONGO_URI_API,
 // mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority',
@@ -67,7 +73,7 @@ mongoose.connect(process.env.MONGO_URI_API,
   .then(() => {
     console.log('connected to database')
     // listen to port
-    const server = app.listen(process.env.PORT, "", () => {
+    const server = app.listen(PORT, () => {
       console.log('listening for requests on port', process.env.PORT)
     })
 
