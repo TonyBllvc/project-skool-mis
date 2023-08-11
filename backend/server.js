@@ -34,6 +34,9 @@ app.use((req, res, next) => {
   console.log(req.path, req.method)
   next()
 })
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
 
 // routes
 app.use('/api/school', schoolRoutes)
