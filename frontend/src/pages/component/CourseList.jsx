@@ -10,6 +10,7 @@ import { useCourseContext } from '../../hooks/useCourseContext';
 import CourseListDetails from '../../Components/CourseListDetails';
 import CourseForm from '../../Components/CourseForm';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import logoFav from '../../images/images_logo_fav.jpg'
 
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const CourseList = () => {
@@ -20,6 +21,21 @@ const CourseList = () => {
     const { user } = useAuthContext()
     // const { school, dispatch } = useSchoolContext()
 
+    useEffect(() => {
+        document.title = 'Course list'
+    
+        const faviconLink = document.createElement('link');
+        faviconLink.rel = 'icon';
+        faviconLink.href = logoFav; // Replace with your favicon path
+        document.head.appendChild(faviconLink);
+    
+        // Clean up when component unmounts
+        return () => {
+          document.head.removeChild(faviconLink);
+        }
+      }, [])
+
+      
     useEffect(() => {
         const fetchCourse = async () => {
             const res = await fetch('https://my-project-mis-api.onrender.com/api/course/get_courses', {

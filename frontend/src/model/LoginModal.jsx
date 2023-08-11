@@ -5,7 +5,7 @@ import LecturerLogin from '../pages/authenticate/LecturerLogin'
 import StudentLogin from '../pages/authenticate/StudentLogin'
 import SpecialLogin from '../pages/authenticate/SpecialLogin'
 import { NavLink, useNavigate } from 'react-router-dom'
-import logoFav from "../images/images_logo.jpg"
+import logoFav from "../images/images_logo_fav.jpg"
 import { useAuthContext } from '../hooks/useAuthContext'
 
 // A sign up and login page

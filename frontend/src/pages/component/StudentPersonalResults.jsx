@@ -11,6 +11,7 @@ import StudentResults from '../../Components/StudentResults';
 import { useStudentInfoContext } from '../../hooks/useStudentInfoContext';
 import UploadStudentResult from '../../Components/UploadStudentResult';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import logoFav from '../../images/images_logo_fav.jpg'
 
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 // this for the admin 
@@ -22,6 +23,20 @@ const StudentPersonalResults = () => {
     // const { dispatch: dispatchInfo  } = useStudentInfoContext()
     const { user } = useAuthContext()
 
+    useEffect(() => {
+        document.title = 'Your Results'
+    
+        const faviconLink = document.createElement('link');
+        faviconLink.rel = 'icon';
+        faviconLink.href = logoFav; // Replace with your favicon path
+        document.head.appendChild(faviconLink);
+    
+        // Clean up when component unmounts
+        return () => {
+          document.head.removeChild(faviconLink);
+        }
+      }, [])
+    
     useEffect(() => {
         const fetchStudents = async () => {
             const res = await fetch('https://my-project-mis-api.onrender.com/api/result/student/' + user._id, {

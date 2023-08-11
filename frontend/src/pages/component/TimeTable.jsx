@@ -8,6 +8,7 @@ import TimeTableForm from '../../Components/TimeTableForm';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/react';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import logoFav from '../../images/images_logo_fav.jpg'
 
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const TimeTable = () => {
@@ -18,6 +19,20 @@ const TimeTable = () => {
     // const [ timetable, setTimetable] = useState([])
     const { user } = useAuthContext()
 
+    useEffect(() => {
+        document.title = 'Time-table'
+    
+        const faviconLink = document.createElement('link');
+        faviconLink.rel = 'icon';
+        faviconLink.href = logoFav; // Replace with your favicon path
+        document.head.appendChild(faviconLink);
+    
+        // Clean up when component unmounts
+        return () => {
+          document.head.removeChild(faviconLink);
+        }
+      }, [])
+    
     useEffect(() => {
         const fetchTimeTable = async () => {
             const res = await fetch('https://my-project-mis-api.onrender.com/api/time/get_time_table', {

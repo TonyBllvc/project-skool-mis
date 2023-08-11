@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -14,6 +14,7 @@ import {
 import { useTimeContext } from '../../hooks/useTimeContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import { useChangePassword } from '../../hooks/auth/useChangePassword';
+import logoFav from '../../images/images_logo_fav.jpg'
 
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const ChangePassword = () => {
@@ -28,6 +29,21 @@ const ChangePassword = () => {
 
   const { change, pending, error } = useChangePassword(url)
   const toast = useToast()
+  
+  useEffect(() => {
+    document.title = 'Change Password'
+
+    const faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.href = logoFav; // Replace with your favicon path
+    document.head.appendChild(faviconLink);
+
+    // Clean up when component unmounts
+    return () => {
+      document.head.removeChild(faviconLink);
+    }
+  }, [])
+
 
   const handleShowHide = () => {
     setShow(!show)

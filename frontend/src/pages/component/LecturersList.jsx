@@ -7,6 +7,7 @@ import { Box, Button, Table, TableContainer, Th, Thead, Tr } from '@chakra-ui/re
 import Loading from '../assets/Loading';
 import LecturersListDetails from '../../Components/LecturersListDetails';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import logoFav from '../../images/images_logo_fav.jpg'
 
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const LecturerList = () => {
@@ -16,6 +17,20 @@ const LecturerList = () => {
     const navigate = useNavigate()
     const { user } = useAuthContext()
 
+    useEffect(() => {
+        document.title = 'Chat'
+    
+        const faviconLink = document.createElement('link');
+        faviconLink.rel = 'icon';
+        faviconLink.href = logoFav; // Replace with your favicon path
+        document.head.appendChild(faviconLink);
+    
+        // Clean up when component unmounts
+        return () => {
+          document.head.removeChild(faviconLink);
+        }
+      }, [])
+    
     useEffect(() => {
         const fetchLecturer = async () => {
             const res = await fetch('https://my-project-mis-api.onrender.com/api/lecturer/lecturer_list', {

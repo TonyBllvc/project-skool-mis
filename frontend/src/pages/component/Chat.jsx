@@ -5,12 +5,27 @@ import MyChats from "../../Components/MyChats";
 import ChatBox from "../../Components/ChatBox";
 import { useNavigate } from "react-router-dom";
 import ChatNav from '../../miniComponents/ChatNav'
+import logoFav from '../../images/images_logo_fav.jpg'
 
 const Chat = ({ isActive }) => {
   const { user } = useAuthContext()
   // const { user } = ChatState()
   const navigate = useNavigate()
-  const [ fetchAgain, setFetchAgain ] = useState('')
+  const [ fetchAgain, setFetchAgain ] = useState('') 
+  
+  useEffect(() => {
+    document.title = 'Chat'
+
+    const faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.href = logoFav; // Replace with your favicon path
+    document.head.appendChild(faviconLink);
+
+    // Clean up when component unmounts
+    return () => {
+      document.head.removeChild(faviconLink);
+    }
+  }, [])
 
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem("user"))

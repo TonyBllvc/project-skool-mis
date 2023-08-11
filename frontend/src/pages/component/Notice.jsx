@@ -5,6 +5,7 @@ import { FaEnvelope } from 'react-icons/fa'
 import NoticeDetails from '../../Components/NoticeDetails'
 import { useNoticeContext } from "../../hooks/useNoticeContext.jsx"
 import { useAuthContext } from '../../hooks/useAuthContext'
+import logoFav from '../../images/images_logo_fav.jpg'
 
 const optionOne = [
     { value: 'Assignment', label: 'Assignment', key: '1' },
@@ -27,6 +28,20 @@ const Notice = () => {
     const [lecturerId, setLecturerId] = useState(user._id)
     // setLecturerId(user._id)
 
+    useEffect(() => {
+        document.title = 'Notice'
+    
+        const faviconLink = document.createElement('link');
+        faviconLink.rel = 'icon';
+        faviconLink.href = logoFav; // Replace with your favicon path
+        document.head.appendChild(faviconLink);
+    
+        // Clean up when component unmounts
+        return () => {
+          document.head.removeChild(faviconLink);
+        }
+      }, [])
+    
     useEffect(() => {
         const fetchNotice = async () => {
 

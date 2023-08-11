@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Text, VStack, useToast } from '@chakra-ui/react';
 import { useAuthContext } from '../../hooks/useAuthContext';
+import logoFav from '../../images/images_logo_fav.jpg'
 
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 const MyProfile = () => {
@@ -9,6 +10,21 @@ const MyProfile = () => {
   const [error, setError] = useState(null)
 
   const toast = useToast()
+  
+  useEffect(() => {
+    document.title = 'Chat'
+
+    const faviconLink = document.createElement('link');
+    faviconLink.rel = 'icon';
+    faviconLink.href = logoFav; // Replace with your favicon path
+    document.head.appendChild(faviconLink);
+
+    // Clean up when component unmounts
+    return () => {
+      document.head.removeChild(faviconLink);
+    }
+  }, [])
+
 
   const [formData, setFormData] = useState({
     id : user._id,
