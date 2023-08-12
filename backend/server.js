@@ -100,11 +100,11 @@ mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.n
       pingTimeout: 60000,
       cors: {
         origin: [
-    'https://project-skool-mis-tonybllvc.vercel.app',
-    'https://project-skool-mis-git-main-tonybllvc.vercel.app',
-    'https://project-skool-mis-git-main-tonybllvc.vercel.app',
-    'https://project-skool-mis.vercel.app'
-  ],
+          'https://project-skool-mis-tonybllvc.vercel.app',
+          'https://project-skool-mis-git-main-tonybllvc.vercel.app',
+          'https://project-skool-mis-git-main-tonybllvc.vercel.app',
+          'https://project-skool-mis.vercel.app'
+        ],
         methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
       }
     })
@@ -127,7 +127,7 @@ mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.n
         socket.join(userData._id)
         // console.log(userData._id)
         // to pass connection updates
-        socket.emit("connected", userData._id )
+        socket.emit("connected", userData._id)
         console.log(userData.surname + ' Just joined in')
       })
       // for joining chats 
@@ -143,6 +143,31 @@ mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.n
       socket.on("stop_typing", (room) =>
         socket.in(room).emit("stop_typing")
       )
+
+      socket.on("new_chat", (newChatReceived) => {
+
+        // which chat it belongs to, parse in a var
+        var chat = newChatReceived.users
+
+        // if no user exists
+        if (!chat) {
+          return console.log('Chat user not defined')
+        }
+
+        console.log('success pass')
+
+        // // pass to all other users but me
+        // chat.forEach((user) => {
+        //   // if chat of owner is the same as that  of sender, return 
+        //   if ((user._id === newChatReceived.users[0]._id)) {
+        //     return console.log('not success')
+        //   }
+
+          socket.emit("chat_received", newChatReceived)
+          console.log('success')
+        // })
+
+      })
 
       socket.on("new_message", (newMessageReceived) => {
 

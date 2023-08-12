@@ -11,6 +11,7 @@ import { getSender, getSenderFull } from '../config/chatLogic'
 import ProfileModel from '../model/ProfileModel'
 import ScrollableChat from '../assets/ScrollableChat'
 import UpdateGroupChatModel from '../model/UpdateGroupChatModel'
+import { useChatState } from '../hooks/useChatState'
 
 // const ENDPOINT = 'http://localhost:5000';
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
@@ -19,12 +20,13 @@ var socket, selectedChatCompare;
 const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     // const { user, selectedChat, setSelectedChat } = ChatState()
+    const { chats, setChats, } = useChatState()
     // ****************************Single message ***************
     const [messages, setMessages] = useState([])
     const [loading, setLoading] = useState(false)
     const [newMessage, setNewMessage] = useState('')
     const [socketConnected, setSocketConnected] = useState(false)
-    const [ otherUsers, setOtherUsers ] = useState('')
+    const [otherUsers, setOtherUsers] = useState('')
     const { isActive, setIsActive } = useState(false)
     const [typing, setTyping] = useState(false)
     const [isTyping, setIsTyping] = useState(false)
@@ -59,6 +61,20 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
             setIsTyping(false)
         })
 
+        socket.emit('new_chat', chats)
+
+
+        socket.on('chat_received', (newChatReceived) => {
+            var chat = newChatReceived.users
+
+            chat.forEach(element => {
+                if (user._id === element._id) {
+                    return
+                }
+
+                setChats([newChatReceived, ...chats])
+            });
+        })
         // return () => {
         //     socket.disconnected()
         // }
@@ -260,48 +276,48 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
         const keyCode = e.keyCode || e.which
         if ((keyCode >= 65 && keyCode <= 90) || (keyCode >= 48 && keyCode <= 57)) {
-        setNewMessage(e.target.value)
+            setNewMessage(e.target.value)
 
-        //Typing Indicator Logic
-        if (!socketConnected) {
-            return
-        }
+            //Typing Indicator Logic
+            if (!socketConnected) {
+                return
+            }
 
-        // if user is typing, pass true
-        if (!typing) {
-            setTyping(true)
-            // for the particular chat
+            // if user is typing, pass true
+            if (!typing) {
+                setTyping(true)
+                // for the particular chat
+                socket.emit("typing", selectedChat._id);
+            }
+
+            // Clear the previous typing timeout to prevent multiple triggers
+            clearTimeout(typingTimeout);
+
+            // Create a new timeout to emit 'typing' event after a short delay
+            const timeout = setTimeout(() => {
+                socket.emit("stop_typing", selectedChat._id);
+                setTyping(null);
+            }, 1500);
+
+            setTyping(timeout);
+
+            // Emit 'typing' event to the socket server for the particular chat
             socket.emit("typing", selectedChat._id);
-        }
 
-        // Clear the previous typing timeout to prevent multiple triggers
-        clearTimeout(typingTimeout);
+            // parse the last time as a var
+            // let lastTypingTime = new Date().getTime()
+            // var timeLength = 2300
 
-        // Create a new timeout to emit 'typing' event after a short delay
-        const timeout = setTimeout(() => {
-            socket.emit("stop_typing", selectedChat._id);
-            setTyping(null);
-        }, 1500);
+            // // run immediately after 3000 seconds
+            // setTimeout(() => {
+            //     var timeNow = new Date().getTime()
+            //     var timeDiff = timeNow - lastTypingTime
 
-        setTyping(timeout);
-
-        // Emit 'typing' event to the socket server for the particular chat
-        socket.emit("typing", selectedChat._id);
-
-        // parse the last time as a var
-        // let lastTypingTime = new Date().getTime()
-        // var timeLength = 2300
-
-        // // run immediately after 3000 seconds
-        // setTimeout(() => {
-        //     var timeNow = new Date().getTime()
-        //     var timeDiff = timeNow - lastTypingTime
-
-        //     if (timeDiff >= timeLength && typing) {
-        //         socket.emit("stop_typing", selectedChat._id)
-        //         setTyping(false)
-        //     }
-        // }, timeLength);
+            //     if (timeDiff >= timeLength && typing) {
+            //         socket.emit("stop_typing", selectedChat._id)
+            //         setTyping(false)
+            //     }
+            // }, timeLength);
         }
     }
 
