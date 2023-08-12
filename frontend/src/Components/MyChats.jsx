@@ -58,6 +58,9 @@ const MyChats = ({ fetchAgain }) => {
         }
     }
 
+    setTimeout(() => {
+       fetchChats() 
+    }, 10000);
     // useEffect(() => {
     //     console.log(selectedChat)
     //     console.log(chats)
