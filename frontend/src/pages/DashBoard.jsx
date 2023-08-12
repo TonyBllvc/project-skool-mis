@@ -14,33 +14,35 @@ import { useAuthContext } from '../hooks/useAuthContext'
 // const baseURL = process.env.REACT_APP_URL;
 const DashBoard = () => {
 
-    useEffect(() => {
-        document.title = 'Dashboard'
-    }, [])
+  const navigate = useNavigate()
+  
+  useEffect(() => {
+    document.title = 'Dashboard'
+  }, [])
 
-    const { user, dispatch } = useAuthContext()
+  const { user, dispatch } = useAuthContext()
   //   const navigate = useNavigate()
 
-  //   useEffect(() => {
-  //     const user = JSON.parse(localStorage.getItem('user'))
+  useEffect(() => {
+    const user = JSON.parse(sessionStorage.getItem('user'))
 
-  //     if (user) {
-  //         dispatch({ type: 'LOGIN', payload: user })
-  //         navigate('/dashboard')
-  //     } else {
-  //         dispatch({ type: 'LOGOUT' })
-  //         navigate('/login')
-  //     }
-  // }, [navigate])
+    if (!user) {
+      dispatch({ type: 'LOGOUT' })
+      navigate('/login')
+      return
+    }
 
 
-  const {  dispatch: dispatchStudents } = useStudentContext()
+  }, [])
+
+
+  const { dispatch: dispatchStudents } = useStudentContext()
   const { dispatch: dispatchLecturers } = useLecturerContext()
   const { dispatch: dispatchCourses } = useCourseContext()
   const { dispatch: dispatchNotice } = useNoticeContext()
 
   setTimeout(() => {
-    
+
   }, 10000);
 
   useEffect(() => {
@@ -48,12 +50,12 @@ const DashBoard = () => {
       const res = await fetch('https://my-project-mis-api.onrender.com/api/student/student_list', {
         // we need to send authorization headers(required for authorization)
         headers: {
-            // to output the bearer token 
-            // by user the ${user.token}
-            // this is then picked by the middleware in the backend that protects our routes
-            'Authorization': `Bearer ${user.token}`
+          // to output the bearer token 
+          // by user the ${user.token}
+          // this is then picked by the middleware in the backend that protects our routes
+          'Authorization': `Bearer ${user.token}`
         }
-    })
+      })
       const json = await res.json()
 
       if (!res.ok) {
@@ -73,12 +75,12 @@ const DashBoard = () => {
       const res = await fetch('https://my-project-mis-api.onrender.com/api/lecturer/lecturer_list', {
         // we need to send authorization headers(required for authorization)
         headers: {
-            // to output the bearer token 
-            // by user the ${user.token}
-            // this is then picked by the middleware in the backend that protects our routes
-            'Authorization': `Bearer ${user.token}`
+          // to output the bearer token 
+          // by user the ${user.token}
+          // this is then picked by the middleware in the backend that protects our routes
+          'Authorization': `Bearer ${user.token}`
         }
-    })
+      })
       const json = await res.json()
 
       if (!res.ok) {
@@ -98,12 +100,12 @@ const DashBoard = () => {
       const res = await fetch('https://my-project-mis-api.onrender.com/api/course/get_courses', {
         // we need to send authorization headers(required for authorization)
         headers: {
-            // to output the bearer token 
-            // by user the ${user.token}
-            // this is then picked by the middleware in the backend that protects our routes
-            'Authorization': `Bearer ${user.token}`
+          // to output the bearer token 
+          // by user the ${user.token}
+          // this is then picked by the middleware in the backend that protects our routes
+          'Authorization': `Bearer ${user.token}`
         }
-    })
+      })
       const json = await res.json()
 
       if (!res.ok) {
@@ -120,41 +122,41 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchNotice = async () => {
-        const res = await fetch('https://my-project-mis-api.onrender.com/api/notice/get_notice', {
-          // we need to send authorization headers(required for authorization)
-          headers: {
-              // to output the bearer token 
-              // by user the ${user.token}
-              // this is then picked by the middleware in the backend that protects our routes
-              'Authorization': `Bearer ${user.token}`
-          }
+      const res = await fetch('https://my-project-mis-api.onrender.com/api/notice/get_notice', {
+        // we need to send authorization headers(required for authorization)
+        headers: {
+          // to output the bearer token 
+          // by user the ${user.token}
+          // this is then picked by the middleware in the backend that protects our routes
+          'Authorization': `Bearer ${user.token}`
+        }
       })
-        const json = await res.json()
+      const json = await res.json()
 
-        if (!res.ok) {
-            return console.log(json.error)
-        }
+      if (!res.ok) {
+        return console.log(json.error)
+      }
 
-        if (res.ok) {
-            dispatchNotice({ type: 'GET_DATA', payload: json })
-        }
+      if (res.ok) {
+        dispatchNotice({ type: 'GET_DATA', payload: json })
+      }
     }
     fetchNotice()
 
-}, [])
+  }, [])
 
 
-    return (
-        <div className='overscroll-contain overflow-visible'>
-            <div className='w-full font-mono font-bold text-lg mb-14 '>
-                <DashBox />
-                {/* <Home /> */}
-                {/* Pass a logic here for both students and lecturers */}
-            </div>
-        </div>
+  return (
+    <div className='overscroll-contain overflow-visible'>
+      <div className='w-full font-mono font-bold text-lg mb-14 '>
+        <DashBox />
+        {/* <Home /> */}
+        {/* Pass a logic here for both students and lecturers */}
+      </div>
+    </div>
 
 
-    )
+  )
 }
 
 export default DashBoard
