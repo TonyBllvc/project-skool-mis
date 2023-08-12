@@ -28,7 +28,7 @@ const Chat = () => {
   }, [])
 
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("user"))
+    const userInfo = JSON.parse(sessionStorage.getItem("user"))
 
     if (!userInfo) {
       navigate("/")
