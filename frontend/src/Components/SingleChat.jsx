@@ -14,7 +14,7 @@ import UpdateGroupChatModel from '../model/UpdateGroupChatModel'
 
 // const ENDPOINT = 'http://localhost:5000';
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
-const ENDPOINT = 'https://my-project-mis-api.onrender.com';
+// const ENDPOINT = 'https://my-project-mis-api.onrender.com';
 var socket, selectedChatCompare;
 const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchAgain, notification, setNotification }) => {
     const { isOpen, onOpen, onClose } = useDisclosure()

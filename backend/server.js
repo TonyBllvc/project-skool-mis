@@ -15,7 +15,7 @@ const chatRoutes = require('./routes/chats')
 const messageRoutes = require('./routes/messages')
 const adminRoutes = require('./routes/admin')
 const userRoutes = require('./routes/user')
-const path = require('path')
+// const path = require('path')
 // express app
 const app = express()
 
@@ -64,19 +64,19 @@ app.use('/api/admin', adminRoutes)
 app.use('/api/user', userRoutes)
 
 
-const __dirname1 = path.resolve()
+// const __dirname1 = path.resolve()
 
-if('production'){
-  app.use(express.static(path.join(__dirname1, '/frontend/build')))
+// if('production'){
+//   app.use(express.static(path.join(__dirname1, '/frontend/build')))
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
-  })
-}else{
-  app.get("/", (req, res) => {
-    res.send('API is running Successfully')
-  })
-}
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+//   })
+// }else{
+//   app.get("/", (req, res) => {
+//     res.send('API is running Successfully')
+//   })
+// }
 
 const PORT = process.env.PORT || 5000;
 // connect to db
