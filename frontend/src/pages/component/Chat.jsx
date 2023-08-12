@@ -27,14 +27,15 @@ const Chat = () => {
     }
   }, [])
 
-  useEffect(() => {
-    const userInfo = JSON.parse(sessionStorage.getItem("user"))
+  // useEffect(() => {
+  //   const userInfo = JSON.parse(sessionStorage.getItem("user"))
 
-    if (!userInfo) {
-      navigate("/")
-      console.log('No user')
-    }
-  }, [navigate])
+  //   if (!userInfo) {
+  //     navigate("/")
+  //     console.log('No user')
+  //   }
+
+  // }, [navigate])
 
   return (
     <div style={{ width: "100%", height: "100vh" }}>
