@@ -44,7 +44,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
     // ******************************Socket IO ****************
     useEffect(() => {
-        socket = io(ENDPOINT)
+        socket = io('https://my-project-mis-api.onrender.com')
         socket.emit("setup", user)
         socket.on("connected", (details) => {
             setOtherUsers(JSON.stringify(details))
