@@ -108,7 +108,7 @@ const MyChats = ({ fetchAgain }) => {
 
 
     useEffect(() => {
-        setLoggedUser(JSON.parse(localStorage.getItem('user')))
+        setLoggedUser(JSON.parse(sessionStorage.getItem('user')))
         fetchChats()
     }, [fetchAgain])
 
