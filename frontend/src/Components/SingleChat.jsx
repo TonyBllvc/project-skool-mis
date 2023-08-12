@@ -68,7 +68,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
             var chat = newChatReceived.users
 
             chat.forEach(element => {
-                if (user._id === element._id) {
+                if (element._id === user._id) {
                     return
                 }
 

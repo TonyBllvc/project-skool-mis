@@ -138,14 +138,14 @@ const MyChats = ({ fetchAgain }) => {
                 {chats ? (
                     <Stack overflowY='hidden'>
                         {chats.map((chat) => (
-                            <Box width='100%'
+                            <Box display='flex' flexDirection='row' justifyContent='space-between' alignItems='flex-start' width='100%'
                                 cursor='pointer' bg={selectedChat === chat ? '#38b2ac' : '#e8e8e8'} color={selectedChat === chat ? 'white' : 'black '} px={2.5} py={1.5} borderRadius='lg' key={chat._id}  >
-                                <Box width='100%'
+                                <Box width='93%'
                                     onClick={() => setSelectedChat(chat)}
                                 // onClick={() => dispatchSelectedChat({ type: 'GET_DATA', payload: chat}) } 
                                 >
 
-                                    <Box fontSize={{ base: '11.5px', md: '12px', lg: '16px' }} fontWeight='semibold'>
+                                    <Text fontSize={{ base: '11.5px', md: '12px', lg: '16px' }} fontWeight='semibold'>
 
                                         {/* If chat is not a group chat */}
                                         {!chat.isGroupChat ? (
@@ -155,22 +155,10 @@ const MyChats = ({ fetchAgain }) => {
                                             //     // setNotification(notification.filter((n) => n !== notification._id))
                                             // }
                                             >
-                                                <Box display='flex' flexDirection='row' justifyContent='space-between' alignItems='flex-start' width='93%'>
-                                                    <Text fontSize={{ base: '11.5px', md: '12px', lg: '16px' }} fontWeight='semibold'  color={selectedChat === chat ? 'white' : 'black '}>
-                                                        {getSender(loggedUser, chat.users)}
-                                                    </Text>
-                                                    <Text fontSize='12px' color={selectedChat === chat ? 'teal.800' : 'blue.500'} fontWeight='normal' >
-                                                        Private Chat
-                                                    </Text>
-                                                </Box>
-                                                <Box width='7%' display='flex' flexDirection='column' justifyContent='center' alignItems='stretch' >
-                                                    <HiOutlineDotsVertical className='text-base font-semibold' onClick={() => setToggle(!toggle)} />
-                                                    <Box onClick={() => setToggle(!toggle)}>
-                                                        {toggle &&
-                                                            <HiTrash className='text-base text-red-500 font-semibold mt-1' onClick={() => deleteChat(chat._id)} />
-                                                        }
-                                                    </Box>
-                                                </Box>
+                                                {getSender(loggedUser, chat.users)}
+                                                <Text fontSize='12px' color={selectedChat === chat ? 'teal.800' : 'blue.500'} fontWeight='normal' >
+                                                    Private Chat
+                                                </Text>
                                             </div>
                                         ) : (
                                             <div
@@ -178,37 +166,25 @@ const MyChats = ({ fetchAgain }) => {
                                                 //     dispatchNotification({ type: "PASS_DATA", payload: notification})
                                                 //     // setNotification(notification.filter((n) => n !== notification._id))
                                                 // }
-                                                className=' flex flex-row p-0 '
+                                                className=' flex flex-col p-0 '
                                             >
-                                                <Box display='flex' flexDirection='row' justifyContent='space-between' alignItems='flex-start' width='93%'>
-                                                    <Text fontSize={{ base: '11.5px', md: '12px', lg: '16px' }} fontWeight='semibold' color={selectedChat === chat ? 'white' : 'black '}>
-                                                        {chat.chat_name}
-                                                    </Text>
-                                                    <Text fontSize='12px' color={selectedChat === chat ? 'seagreen' : 'green.400'} fontWeight='normal'>
-                                                        Group Chat
-                                                    </Text>
-                                                </Box>
-                                                <Box width='7%' display='flex' flexDirection='column' justifyContent='center' alignItems='stretch' >
-                                                    <HiOutlineDotsVertical className='text-base font-semibold' onClick={() => setToggle(!toggle)} />
-                                                    <Box onClick={() => setToggle(!toggle)}>
-                                                        {toggle &&
-                                                            <HiTrash className='text-base text-red-500 font-semibold mt-1' onClick={() => deleteChat(chat._id)} />
-                                                        }
-                                                    </Box>
-                                                </Box>
+                                                {chat.chat_name}
+                                                <Text fontSize='12px' color={selectedChat === chat ? 'seagreen' : 'green.400'} fontWeight='normal'>
+                                                    Group Chat
+                                                </Text>
                                             </div>
                                         )
                                         }
-                                    </Box>
+                                    </Text>
                                 </Box>
-                                {/* <Box width='7%' display='flex' flexDirection='column' justifyContent='center' alignItems='stretch' >
+                                <Box width='7%' display='flex' flexDirection='column' justifyContent='center' alignItems='stretch' >
                                     <HiOutlineDotsVertical className='text-base font-semibold' onClick={() => setToggle(!toggle)} />
                                     <Box onClick={() => setToggle(!toggle)}>
                                         {toggle &&
                                             <HiTrash className='text-base text-red-500 font-semibold mt-1' onClick={() => deleteChat(chat._id)} />
                                         }
                                     </Box>
-                                </Box> */}
+                                </Box>
                             </Box>
                         ))}
                     </Stack>

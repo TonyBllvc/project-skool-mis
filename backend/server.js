@@ -157,15 +157,15 @@ mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.n
         console.log('success pass')
 
         // // pass to all other users but me
-        // chat.forEach((user) => {
-        //   // if chat of owner is the same as that  of sender, return 
-        //   if ((user._id === newChatReceived.users[0]._id)) {
-        //     return console.log('not success')
-        //   }
+        chat.forEach((user) => {
+          // if chat of owner is the same as that  of sender, return 
+          // if ((user._id === newChatReceived.users[0]._id)) {
+          //   return console.log('not success')
+          // }
 
-          socket.emit("chat_received", newChatReceived)
+          socket.in(user._id).emit("chat_received", newChatReceived)
           console.log('success')
-        // })
+        })
 
       })
 
