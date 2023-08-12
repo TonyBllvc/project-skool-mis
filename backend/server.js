@@ -66,7 +66,7 @@ app.use('/api/user', userRoutes)
 
 const __dirname1 = path.resolve()
 
-if(production === 'production'){
+if('production'){
   app.use(express.static(path.join(__dirname1, '/frontend/build')))
 
   app.get('*', (req, res) => {
