@@ -2,8 +2,8 @@ import { Box, Button, FormControl, Input, Modal, ModalBody, ModalCloseButton, Mo
 import React, { useState } from 'react'
 import { FaEye } from 'react-icons/fa'
 import axios from 'axios'
-import Selected from '../assets/Selected'
 import UserList from '../assets/UserList'
+import UpdateSelected from '../assets/UpdateSelected'
 
 // const baseURL = 'https://faithful-teal-bathing-suit.cyclic.app';
 //**************************** fetchMessages was picked up from drill ********************* */
@@ -241,7 +241,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                         <Box overflow='scroll' height='100px' px={4} position='relative' >
                             <Box w='100%' display='flex' flexWrap='wrap' pb={3} >
                                 {selectedChat.users.map(u => (
-                                    <Selected key={u._id} user={u} selectedChat={selectedChat} handleFunction={() => handleRemove(u)} />
+                                    <UpdateSelected key={u._id} user={u} selectedChat={selectedChat} handleFunction={() => handleRemove(u)} />
 
                                 ))}
                             </Box>
