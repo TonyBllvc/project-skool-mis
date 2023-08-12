@@ -22,7 +22,7 @@ const UserModel = ({  toggle, set, setLoadingChat, loadingChat, setSelectedChat 
         const fetchUsers = async () => {
 
             try {
-                const data = await fetch('https://my-project-mis-api.onrender.com//api/user/' + user._id, {
+                const data = await fetch('https://my-project-mis-api.onrender.com/api/user/' + user._id, {
                     headers: {
                         'Authorization': `Bearer ${user.token}`,
                     }
