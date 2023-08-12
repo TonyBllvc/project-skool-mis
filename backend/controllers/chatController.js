@@ -104,7 +104,7 @@ const createGroupChat = async (req, res) => {
     }
 
     // now parse this current user's details after check
-    req.body.users.push(req.body.adminId)
+    req.body.users.push(req.body.admin)
 
     try {
         // create a group, by parse these details into the schema

@@ -37,7 +37,7 @@ const TimeTableDetails = ({ timetable }) => {
             // onOpen()
             // incomplete  ( updating document possessing errors)
             const response = await fetch('https://my-project-mis-api.onrender.com/api/time/' + timetable._id, {
-         headers: {
+                headers: {
                     "Content-Type": "application/json",
                     'Authorization': `Bearer ${user.token}`
                 }
@@ -84,11 +84,17 @@ const TimeTableDetails = ({ timetable }) => {
                         {timetable.end}
                     </Box>
                 </Td>
-                <Td width={['150px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']}>
-                    <Box width='100%' fontSize={['10', '11', '13', '16']} >
-                        <FaTrashAlt className='text-red-700 font-medium text-xs sm:text-base' onClick={handleDelete} />
-                    </Box>
-                </Td>
+                {user.role === 'Admin' ? (
+                    <Td width={['150px', '100%', '20%']} display='flex' justifyContent='start' fontSize={['10', '11', '13', '16']}>
+                        <Box width='100%' fontSize={['10', '11', '13', '16']} >
+                            <FaTrashAlt className='text-red-700 font-medium text-xs sm:text-base' onClick={handleDelete} />
+                        </Box>
+                    </Td>
+                ) : (
+                    <>
+
+                    </>
+                )}
             </Tr>
 
             {user.role === 'Admin' ? (

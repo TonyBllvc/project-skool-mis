@@ -21,18 +21,18 @@ const TimeTable = () => {
 
     useEffect(() => {
         document.title = 'Time-table'
-    
+
         const faviconLink = document.createElement('link');
         faviconLink.rel = 'icon';
         faviconLink.href = logoFav; // Replace with your favicon path
         document.head.appendChild(faviconLink);
-    
+
         // Clean up when component unmounts
         return () => {
-          document.head.removeChild(faviconLink);
+            document.head.removeChild(faviconLink);
         }
-      }, [])
-    
+    }, [])
+
     useEffect(() => {
         const fetchTimeTable = async () => {
             const res = await fetch('https://my-project-mis-api.onrender.com/api/time/get_time_table', {
@@ -141,11 +141,17 @@ const TimeTable = () => {
                                                                 End
                                                             </Box>
                                                         </Th>
-                                                        <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
-                                                            <Box width='100%' fontSize={['10', '11', '13', '16']} >
-                                                             
-                                                            </Box>
-                                                        </Th>
+                                                        {user.role === 'Admin' ? (
+                                                            <Th width={['150px', '100%', '18%']} display='flex' justifyContent='space-around ' alignContent='center' overflow='hidden' textOverflow='ellipsis' wordBreak='break-all'>
+                                                                <Box width='100%' fontSize={['10', '11', '13', '16']} >
+
+                                                                </Box>
+                                                            </Th>
+                                                        ) : (
+                                                            <>
+
+                                                            </>
+                                                        )}
                                                     </Tr>
                                                 </Thead>
 

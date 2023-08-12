@@ -354,7 +354,7 @@ const CourseForm = ({ setToggling, toggling }) => {
 
                     {/* Drop down of all the course*/}
                     {secondToggle &&
-                        <Box overflow='scroll' height={230} px={4} position='relative' zIndex='overlay'>
+                        <Box overflow='scroll' height={160} px={4} position='relative' zIndex='overlay'>
 
                             {school && school.map((dataPick) => (
 

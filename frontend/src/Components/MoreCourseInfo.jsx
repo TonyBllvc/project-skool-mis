@@ -92,7 +92,7 @@ const MoreCourseInfo = ({ course }) => {
                         <ul>
                             {course.course_lecturers.map((lecturers, index) => (
                                 <li key={index}>
-                                {index + 1}. {lecturers.title}{ lecturers.surname } { lecturers.first_name }
+                                {index + 1}. {lecturers.title} { lecturers.surname } { lecturers.first_name }
                                 
                                 </li>
                             ))}
