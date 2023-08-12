@@ -30,7 +30,7 @@ var socket;
 export default function App() {
     const [toggle, setToggle] = useState(false)
     const { user, dispatch } = useAuthContext()
-    const [isActive, setIsActive] = useState("")
+    // const [isActive, setIsActive] = useState("")
     // const []
     useEffect(() => {
         const user = JSON.parse(sessionStorage.getItem('user'))
@@ -39,7 +39,7 @@ export default function App() {
             dispatch({ type: 'LOGIN', payload: user })
         } else {
             dispatch({ type: 'LOGOUT' })
-            setIsActive(false)
+            // setIsActive(false)
         }
 
     }, [])
@@ -92,7 +92,7 @@ export default function App() {
                             <Route path="/students" element={user ? <StudentList /> : <Navigate to={'/'} />} />
                             {/* <Route path="/sign_up" element={user ? <SignUpModal /> : <Navigate to={'/'} />} /> */}
                             <Route path="/notice" element={user.role === 'Lecturer' ? <Notice /> : <Navigate to={'/'} />} />
-                            <Route path="/chat" element={user.role === 'Lecturer' || user.role === 'Student' ? <Chat isActive={isActive} /> : <Navigate to={'/'} />} />
+                            <Route path="/chat" element={user.role === 'Lecturer' || user.role === 'Student' ? <Chat /> : <Navigate to={'/'} />} />
 
                             <Route path="/profile" element={user.role === 'Admin' ? <MyProfile /> : <Navigate to={'/'} />} />
                             <Route path="/settings" element={user ? <ChangePassword /> : <Navigate to={'/'} />} />

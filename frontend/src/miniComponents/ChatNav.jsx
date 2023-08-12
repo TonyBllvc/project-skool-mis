@@ -10,7 +10,7 @@ import { useNotificationContext } from '../hooks/useNotifiContext'
 import { useSelectChatContext } from '../hooks/useSelectChatContext'
 import UserModel from '../model/UserModel'
 
-const ChatNav = ({isActive }) => {
+const ChatNav = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const navigate = useNavigate()
 
@@ -162,7 +162,7 @@ const ChatNav = ({isActive }) => {
                 <SearchBar toggle={toggle} set={setToggle} setSearch={setSearch} search={search} handleSearch={handleSearch} loading={loading} searchResult={searchResult} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat} />
             } */}
             {toggle &&
-                <UserModel isActive={isActive} toggle={toggle} set={setToggle} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat}/>}
+                <UserModel toggle={toggle} set={setToggle} setLoadingChat={setLoadingChat} loadingChat={loadingChat} setSelectedChat={setSelectedChat}/>}
         </div>
     )
 }

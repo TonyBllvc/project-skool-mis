@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import ChatNav from '../../miniComponents/ChatNav'
 import logoFav from '../../images/images_logo_fav.jpg'
 
-const Chat = ({ isActive }) => {
+const Chat = () => {
   const { user } = useAuthContext()
   // const { user } = ChatState()
   const navigate = useNavigate()
@@ -39,7 +39,7 @@ const Chat = ({ isActive }) => {
   return (
     <div style={{ width: "100%", height: "100vh" }}>
       {user &&
-        <ChatNav isActive={isActive} />
+        <ChatNav />
       }
       <Box w='100%' display='flex' justifyContent='space-between' h='91.5vh' bg='blue.200' >
       

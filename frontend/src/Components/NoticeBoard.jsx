@@ -20,7 +20,7 @@ const NoticeBoard = ({notice}) => {
                     ) : (
                         <div>
                         
-                        <b> {notice.from.surname } { notice.from.first_name } said, </b> "{notice.message}"
+                        <b> {notice.from.title} {notice.from.surname } { notice.from.first_name } said, </b> "{notice.message}"
                         </div>
                     )}
                     </Text>

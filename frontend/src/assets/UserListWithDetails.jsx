@@ -4,7 +4,7 @@ import { Avatar, Box, Text } from '@chakra-ui/react'
 import { BsDot } from 'react-icons/bs'
 import { useAuthContext } from '../hooks/useAuthContext'
 
-const UserListWithDetails = ({ isActive, users, handleFunction }) => {
+const UserListWithDetails = ({ users, handleFunction }) => {
     const { user } = useAuthContext()
 
     return (
