@@ -167,7 +167,7 @@ const StudentSignUp = () => {
 
             <Input height={['35px', '35px', '40px', '40px']} type={show ? 'text' : 'password'} bg='green.100' placeholder='Enter your password' value={password} onChange={(e) => setPassword(e.target.value)} />
             <InputRightElement width='4.5rem'>
-              <Button h='1.75rem' size='sm' onClick={handleShowHide}>
+              <Button h='1.75rem' size='sm' fontSize={['12.5', '13', '15', '16']} onClick={handleShowHide}>
                 {show ? 'Hide' : 'Show'}
               </Button>
             </InputRightElement>

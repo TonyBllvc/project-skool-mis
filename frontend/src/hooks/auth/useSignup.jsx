@@ -53,7 +53,7 @@ export const useSignUp = (url) => {
             if (res.ok) {
                 toast({
                     title: 'Login Successful!',
-                    description: title + email + 'Has signed up successfully',
+                    description:  email + " Has signed up successfully",
                     status: 'success',
                     duration: 3000,
                     isClosable: true,

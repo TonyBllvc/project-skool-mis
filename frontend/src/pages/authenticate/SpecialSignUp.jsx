@@ -176,7 +176,7 @@ const SpecialSignUp = () => {
 
             <Input height={['35px', '35px', '40px', '40px']} type={show ? 'text' : 'password'} bg='green.100' placeholder='Confirm your password' value={confirm_password} onChange={(e) => setConfirmPassword(e.target.value)} />
             <InputRightElement width='4.5rem'>
-              <Button h='1.75rem' size='sm' fontSize={['12.5', '13', '15', '16']}  onClick={handleShowHide}>
+              <Button h='1.75rem' size='sm'  onClick={handleShowHide}>
                 {show ? 'Hide' : 'Show'}
               </Button>
             </InputRightElement>

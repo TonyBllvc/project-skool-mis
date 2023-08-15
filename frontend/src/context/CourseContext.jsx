@@ -5,8 +5,15 @@ export const CourseContext = createContext();
 export const courseReducer = (state, action) => {
   switch (action.type) {
     case 'CREATE_DATA':
-        const updated =  [...state.course, action.payload]
-        const sorted = updated.sort((a, b) => a.course_code.localeCompare(b.course_code, 'en', { sensitivity: 'base' }))
+      const updated = [...state.course, action.payload];
+      const sorted = updated.sort((a, b) => {
+        // First, sort by level
+        if (a.level !== b.level) {
+          return a.level.localeCompare(b.level, 'en', { sensitivity: 'base' });
+        }
+        // If levels are the same, then sort by course_code
+        return a.course_code.localeCompare(b.course_code, 'en', { sensitivity: 'base' });
+      });
       return {
           ...state, 
         course: sorted 
