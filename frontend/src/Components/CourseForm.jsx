@@ -380,7 +380,7 @@ const CourseForm = ({ setToggling, toggling }) => {
                         <Input fontSize={['9.5', '10', '13', '15']} placeholder='Add Users eg: John, Mag' mb={1} onChange={(e) => handleSearch(e.target.value)} />
                     </FormControl>
 
-                    <Box w='100%' display='flex' flexWrap='wrap' >
+                    <Box w='100%' display='flex' flexWrap='wrap' overflow='scroll' height={160} px={4} position='relative' zIndex='overlay'>
                         {selectedUsers.map((u) => (
                             <SelectedLecturer key={u._id} user={u} handleFunction={() => handleDelete(u)} />
                         ))}
