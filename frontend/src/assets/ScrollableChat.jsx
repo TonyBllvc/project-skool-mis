@@ -75,7 +75,7 @@ const ScrollableChat = ({ setMessages, messages, user, toggle, setToggle }) => {
           {
             (isSameSender(messages, m, i, user._id) || isLastMessage(messages, m, user._id)) && (
               <Tooltip label={m.sender.surname} placement='bottom-start' hasArrow >
-                <Avatar mt='7px' mr={1} size='sm' cursor='pointer' name={m.sender.surname} src={m.sender.pic} />
+                <Avatar mt='7px' mr={1} size='sm' cursor='pointer' name={{m.sender.surname} {m.sender.first_name}} src={m.sender.pic} />
               </Tooltip>
             )}
 
