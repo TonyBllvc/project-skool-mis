@@ -83,7 +83,7 @@ const sets = async (req, res) => {
 // fetch all schools
 const gets = async (req, res) => {
 
-    const courseData = await Course.find({}).populate("course_details", "faculty department level semester").sort({ level: -1}).sort({ course_code: 1 }).populate("course_coordinator", "title surname first_name middle_name faculty department phone email").sort({ title: 1 }).sort({ surname: 1 }).populate("course_lecturers", "title surname first_name middle_name faculty department phone email").sort({ title: 1 }).sort({ surname: 1 })
+    const courseData = await Course.find({}).populate("course_details", "faculty department level semester").sort({ level: 1}).sort({ course_code: 1 }).populate("course_coordinator", "title surname first_name middle_name faculty department phone email").sort({ title: 1 }).sort({ surname: 1 }).populate("course_lecturers", "title surname first_name middle_name faculty department phone email").sort({ title: 1 }).sort({ surname: 1 })
 
 
     res.status(200).json(courseData)
