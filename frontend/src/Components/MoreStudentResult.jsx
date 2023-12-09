@@ -12,7 +12,7 @@ export const MoreStudentResult = ({ studentItem }) => {
 
     const handleDelete = async () => {
 
-        const response = await fetch('https://my-project-mis-api.onrender.com/api/result/' + studentItem._id, {
+        const response = await fetch('https://project-skool-mis-api.vercel.app/result/' + studentItem._id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",

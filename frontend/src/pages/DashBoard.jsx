@@ -47,7 +47,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('https://my-project-mis-api.onrender.com/api/student/student_list', {
+      const res = await fetch('https://project-skool-mis-api.vercel.app/student/student_list', {
         // we need to send authorization headers(required for authorization)
         headers: {
           // to output the bearer token 
@@ -72,7 +72,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchLecturer = async () => {
-      const res = await fetch('https://my-project-mis-api.onrender.com/api/lecturer/lecturer_list', {
+      const res = await fetch('https://project-skool-mis-api.vercel.app/lecturer/lecturer_list', {
         // we need to send authorization headers(required for authorization)
         headers: {
           // to output the bearer token 
@@ -97,7 +97,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchCourse = async () => {
-      const res = await fetch('https://my-project-mis-api.onrender.com/api/course/get_courses', {
+      const res = await fetch('https://project-skool-mis-api.vercel.app/course/get_courses', {
         // we need to send authorization headers(required for authorization)
         headers: {
           // to output the bearer token 
@@ -122,7 +122,7 @@ const DashBoard = () => {
 
   useEffect(() => {
     const fetchNotice = async () => {
-      const res = await fetch('https://my-project-mis-api.onrender.com/api/notice/get_notice', {
+      const res = await fetch('https://project-skool-mis-api.vercel.app/notice/get_notice', {
         // we need to send authorization headers(required for authorization)
         headers: {
           // to output the bearer token 

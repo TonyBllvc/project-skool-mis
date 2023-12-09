@@ -11,7 +11,7 @@ const MoreCourseInfo = ({ course }) => {
 
     const handleDelete = async () => {
 
-        const response = await fetch('https://my-project-mis-api.onrender.com/api/course/' + course._id, {
+        const response = await fetch('https://project-skool-mis-api.vercel.app/course/' + course._id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
