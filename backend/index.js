@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 // });
 
 // Route
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
   res.send("Home Page");
 });
 
