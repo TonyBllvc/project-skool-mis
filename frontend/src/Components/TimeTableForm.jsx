@@ -116,7 +116,7 @@ const TimeTableForm = ({ setToggling, toggling }) => {
         const details = { day, start, end, courseId }
 
         try {
-            const res = await fetch('https://my-project-mis-api.onrender.com/api/time/set_time_table', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/api/time/set_time_table', {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {
@@ -177,7 +177,7 @@ const TimeTableForm = ({ setToggling, toggling }) => {
     const handleCourses = async (e) => {
         // e.preventDefault()
 
-        const res = await fetch('https://my-project-mis-api.onrender.com/api/course/get_courses', {
+        const res = await fetch('https://project-skool-mis-api.vercel.app/api/course/get_courses', {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 

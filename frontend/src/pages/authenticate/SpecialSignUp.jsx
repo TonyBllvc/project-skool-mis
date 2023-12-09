@@ -32,7 +32,7 @@ const SpecialSignUp = () => {
   const [password, setPassword] = useState('')
   const [confirm_password, setConfirmPassword] = useState('')
   
-  const {signup, pending, error, } = useSignUp('https://my-project-mis-api.onrender.com/api/admin/signup')
+  const {signup, pending, error, } = useSignUp('https://project-skool-mis-api.vercel.app/admin/signup')
 
   const toast = useToast()
   const [phone, setPhoneNumber] = useState('');

@@ -48,7 +48,7 @@ const Notice = () => {
             // if(!user._id){
             //     return
             // }
-            const res = await fetch('https://my-project-mis-api.onrender.com/api/notice/from/' + user._id, {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/notice/from/' + user._id, {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 
@@ -92,7 +92,7 @@ const Notice = () => {
         // If Enter is clicked, and there is a message in the box
         // if (event.key === "Enter") {
         try {
-            const res = await fetch('https://my-project-mis-api.onrender.com/api/notice/convey_notice', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/notice/convey_notice', {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {

@@ -33,7 +33,7 @@ const LecturerList = () => {
     
     useEffect(() => {
         const fetchLecturer = async () => {
-            const res = await fetch('https://my-project-mis-api.onrender.com/api/lecturer/lecturer_list', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/lecturer/lecturer_list', {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 

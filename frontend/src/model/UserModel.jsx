@@ -22,7 +22,7 @@ const UserModel = ({  toggle, set, setLoadingChat, loadingChat, setSelectedChat 
         const fetchUsers = async () => {
 
             try {
-                const data = await fetch('https://my-project-mis-api.onrender.com/api/user/' + user._id, {
+                const data = await fetch('https://project-skool-mis-api.vercel.app/user/' + user._id, {
                     headers: {
                         'Authorization': `Bearer ${user.token}`,
                     }
@@ -64,7 +64,7 @@ const UserModel = ({  toggle, set, setLoadingChat, loadingChat, setSelectedChat 
             setLoadingChat(true)
 
 
-            const data = await fetch('https://my-project-mis-api.onrender.com/api/chat/', {
+            const data = await fetch('https://project-skool-mis-api.vercel.app/chat/', {
                 method: 'POST',
                 body: JSON.stringify({ userId, userID: user._id }),
                 headers: {

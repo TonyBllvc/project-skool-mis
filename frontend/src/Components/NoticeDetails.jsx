@@ -12,7 +12,7 @@ const NoticeDetails = ({ notice }) => {
     
     const handleDelete = async () => {
 
-        const response = await fetch('https://my-project-mis-api.onrender.com/api/notice/' + notice._id, {
+        const response = await fetch('https://project-skool-mis-api.vercel.app/api/notice/' + notice._id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",

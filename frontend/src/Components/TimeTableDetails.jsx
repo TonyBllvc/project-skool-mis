@@ -17,7 +17,7 @@ const TimeTableDetails = ({ timetable }) => {
 
     const handleDelete = async () => {
 
-        const response = await fetch('https://my-project-mis-api.onrender.com/api/time/' + timetable._id, {
+        const response = await fetch('https://project-skool-mis-api.vercel.app/api/time/' + timetable._id, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const TimeTableDetails = ({ timetable }) => {
         const handleUpdate = async () => {
             // onOpen()
             // incomplete  ( updating document possessing errors)
-            const response = await fetch('https://my-project-mis-api.onrender.com/api/time/' + timetable._id, {
+            const response = await fetch('https://project-skool-mis-api.vercel.app/api/time/' + timetable._id, {
                 headers: {
                     "Content-Type": "application/json",
                     'Authorization': `Bearer ${user.token}`

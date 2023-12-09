@@ -96,7 +96,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setLoading(true)
             const { data } = await axios.get(
-                `https://my-project-mis-api.onrender.com/api/message/${selectedChat._id}`,
+                `https://project-skool-mis-api.vercel.app/api/message/${selectedChat._id}`,
                 config
             )
 
@@ -162,7 +162,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
                 setNewMessage('')
                 const { data } = await axios.post(
-                    'https://my-project-mis-api.onrender.com/api/message',
+                    'https://project-skool-mis-api.vercel.app/api/message',
                     {
                         userId: user._id,
                         content: newMessage,
@@ -203,7 +203,7 @@ const SingleChat = ({ user, selectedChat, setSelectedChat, fetchAgain, setFetchA
 
             setNewMessage('')
             const { data } = await axios.post(
-                'https://my-project-mis-api.onrender.com/api/message',
+                'https://project-skool-mis-api.vercel.app/api/message',
                 {
                     userId: user._id,
                     content: newMessage,

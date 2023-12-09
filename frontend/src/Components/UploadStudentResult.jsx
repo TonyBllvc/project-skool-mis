@@ -122,7 +122,7 @@ const UploadStudentResult = ({ toggling, setToggling}) => {
         const details = { test, practical, exam, grade, remark, courseId, student_id }
 
         try {
-            const res = await fetch('https://my-project-mis-api.onrender.com/api/result/set_result', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/result/set_result', {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {
@@ -182,7 +182,7 @@ const UploadStudentResult = ({ toggling, setToggling}) => {
     const handleCourses = async (e) => {
         e.preventDefault()
 
-        const res = await fetch('https://my-project-mis-api.onrender.com/api/course/get_courses', {
+        const res = await fetch('https://project-skool-mis-api.vercel.app/course/get_courses', {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 

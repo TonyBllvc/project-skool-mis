@@ -19,7 +19,7 @@ const LectureSignUp = () => {
   const [password, setPassword] = useState('')
   const [confirm_password, setConfirmPassword] = useState('')
   
-  const {signup, pending, error, } = useSignUp('https://my-project-mis-api.onrender.com/api/lecturer/sign_up')
+  const {signup, pending, error, } = useSignUp('https://project-skool-mis-api.vercel.app/lecturer/sign_up')
 
   const toast = useToast()
   const [phone, setPhoneNumber] = useState('');

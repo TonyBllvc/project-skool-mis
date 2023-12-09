@@ -40,7 +40,7 @@ const Student = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('https://my-project-mis-api.onrender.com/api/result/student/' + id, {
+      const res = await fetch('https://project-skool-mis-api.vercel.app/result/student/' + id, {
         // we need to send authorization headers(required for authorization)
         headers: {
           // to output the bearer token 
@@ -66,7 +66,7 @@ const Student = () => {
 
   useEffect(() => {
     const fetchStudents = async () => {
-      const res = await fetch('https://my-project-mis-api.onrender.com/api/student/' + id, {
+      const res = await fetch('https://project-skool-mis-api.vercel.app/student/' + id, {
         // we need to send authorization headers(required for authorization)
         headers: {
           // to output the bearer token 

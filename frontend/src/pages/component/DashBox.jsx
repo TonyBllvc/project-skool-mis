@@ -23,7 +23,7 @@ const DashBox = () => {
 
     useEffect(() => {
         const fetchNotice = async () => {
-            const res = await fetch('https://my-project-mis-api.onrender.com/api/notice/get_notice', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/notice/get_notice', {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 

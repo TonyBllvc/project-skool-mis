@@ -34,7 +34,7 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
       try {
         setLoading(true)
 
-        const data = await fetch(`https://my-project-mis-api.onrender.com/api/user/${user._id}/?search=${search}`, {
+        const data = await fetch(`https://project-skool-mis-api.vercel.app/user/${user._id}/?search=${search}`, {
           headers: {
             Authorization: `Bearer ${user.token}`,
           }
@@ -97,7 +97,7 @@ const GroupChatsModel = ({ user, setChats, chats, open, close }) => {
         }
       }
 
-      const { data } = await axios.post('https://my-project-mis-api.onrender.com/api/chat/group', {
+      const { data } = await axios.post('https://project-skool-mis-api.vercel.app/chat/group', {
         name: groupChatName,
         users: selectedUsers,
         //  users: JSON.stringify(selectedUsers.map((u) => u._id)),
