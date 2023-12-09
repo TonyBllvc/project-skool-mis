@@ -38,7 +38,7 @@ const CourseList = () => {
       
     useEffect(() => {
         const fetchCourse = async () => {
-            const res = await fetch('https://project-skool-mis-api.vercel.app/course/get_courses', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/api/course/get_courses', {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 

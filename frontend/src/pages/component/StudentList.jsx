@@ -30,7 +30,7 @@ const StudentList = () => {
 
     // useEffect(() => {
     const fetchSession = async () => {
-        const res = await fetch('https://project-skool-mis-api.vercel.app/session/', {
+        const res = await fetch('https://project-skool-mis-api.vercel.app/api/session/', {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
@@ -59,7 +59,7 @@ const StudentList = () => {
             return
         }
 
-        const res = await fetch('https://project-skool-mis-api.vercel.app/student/session/' + passSession, {
+        const res = await fetch('https://project-skool-mis-api.vercel.app/api/student/session/' + passSession, {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
@@ -87,7 +87,7 @@ const StudentList = () => {
 
     useEffect(() => {
         const fetchStudents = async () => {
-            const res = await fetch('https://project-skool-mis-api.vercel.app/student/student_list', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/api/student/student_list', {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 
@@ -135,7 +135,7 @@ const StudentList = () => {
 
             // const data = await fetch(`${baseURL}/api/user?search=${search}`, config ) 
 
-            const data = await fetch(`https://project-skool-mis-api.vercel.app/student/?search=${search}`, {
+            const data = await fetch(`https://project-skool-mis-api.vercel.app/api/student/?search=${search}`, {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
                 }

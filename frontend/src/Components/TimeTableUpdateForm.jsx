@@ -64,7 +64,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
         const details = { id, day, start, am_one, am_two, end, courseId }
 
         try {
-            const res = await fetch('https://project-skool-mis-api.vercel.app/time/update', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/api/time/update', {
                 method: "PUT",
                 body: JSON.stringify(details),
                 headers: {
@@ -117,7 +117,7 @@ const TimeTableUpdateForm = ({ documentData, close }) => {
     const handleCourses = async (e) => {
         // e.preventDefault()
 
-        const res = await fetch('https://project-skool-mis-api.vercel.app/course/get_courses', {
+        const res = await fetch('https://project-skool-mis-api.vercel.app/api/course/get_courses', {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 

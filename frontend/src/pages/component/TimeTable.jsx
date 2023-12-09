@@ -35,7 +35,7 @@ const TimeTable = () => {
 
     useEffect(() => {
         const fetchTimeTable = async () => {
-            const res = await fetch('https://project-skool-mis-api.vercel.app/time/get_time_table', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/api/time/get_time_table', {
                 // we need to send authorization headers(required for authorization)
                 headers: {
                     // to output the bearer token 

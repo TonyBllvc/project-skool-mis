@@ -32,7 +32,7 @@ const MyChats = ({ fetchAgain }) => {
 
         try {
 
-            const data = await fetch('https://project-skool-mis-api.vercel.app/chat/' + user._id, {
+            const data = await fetch('https://project-skool-mis-api.vercel.app/api/chat/' + user._id, {
                 headers: {
                     'Authorization': `Bearer ${user.token}`,
                 }
@@ -69,7 +69,7 @@ const MyChats = ({ fetchAgain }) => {
     const deleteChat = async (chatId) => {
         try {
 
-            const response = await fetch('https://project-skool-mis-api.vercel.app/chat/' + chatId, {
+            const response = await fetch('https://project-skool-mis-api.vercel.app/api/chat/' + chatId, {
                 method: 'DELETE',
                 headers: {
                     "Content-Type": "application/json",

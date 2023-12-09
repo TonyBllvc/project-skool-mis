@@ -88,7 +88,7 @@ const CourseForm = ({ setToggling, toggling }) => {
         }
 
         try {
-            const res = await fetch('https://project-skool-mis-api.vercel.app/course/set_course', {
+            const res = await fetch('https://project-skool-mis-api.vercel.app/api/course/set_course', {
                 method: "POST",
                 body: JSON.stringify(details),
                 headers: {
@@ -151,7 +151,7 @@ const CourseForm = ({ setToggling, toggling }) => {
         // e.preventDefault()
 
         // console.log(lecturer)
-        const res = await fetch('https://project-skool-mis-api.vercel.app/lecturer/lecturer_list', {
+        const res = await fetch('https://project-skool-mis-api.vercel.app/api/lecturer/lecturer_list', {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
@@ -173,7 +173,7 @@ const CourseForm = ({ setToggling, toggling }) => {
     }
 
     const handleSchool = async () => {
-        const res = await fetch('https://project-skool-mis-api.vercel.app/school/fetch', {
+        const res = await fetch('https://project-skool-mis-api.vercel.app/api/school/fetch', {
             // we need to send authorization headers(required for authorization)
             headers: {
                 // to output the bearer token 
@@ -213,7 +213,7 @@ const CourseForm = ({ setToggling, toggling }) => {
             try {
                 setLoading(true)
 
-                const data = await fetch(`https://project-skool-mis-api.vercel.app/lecturer/?search=${search}`, {
+                const data = await fetch(`https://project-skool-mis-api.vercel.app/api/lecturer/?search=${search}`, {
                     headers: {
                         Authorization: `Bearer ${user.token}`,
                     }

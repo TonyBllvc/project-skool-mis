@@ -55,13 +55,13 @@ const ChangePassword = () => {
     e.preventDefault();
 
     if (user.role === 'Admin') {
-      setUrl('https://project-skool-mis-api.vercel.app/admin/update_password')
+      setUrl('https://project-skool-mis-api.vercel.app/api/admin/update_password')
       await change(password, newPassword, confirmNewPassword)
     } else if (user.role === 'Student') {
-      setUrl('https://project-skool-mis-api.vercel.app/student/update_password')
+      setUrl('https://project-skool-mis-api.vercel.app/api/student/update_password')
       await change(user._id, password, newPassword, confirmNewPassword)
     } else if (user.role === 'Lecturer') {
-      setUrl('https://project-skool-mis-api.vercel.app/lecturer/update_password')
+      setUrl('https://project-skool-mis-api.vercel.app/api/lecturer/update_password')
       await change(user._id, password, newPassword, confirmNewPassword)
     }
 

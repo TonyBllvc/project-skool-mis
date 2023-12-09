@@ -65,7 +65,7 @@ const MyProfile = () => {
     }
 
     try {
-      const res = await fetch('https://project-skool-mis-api.vercel.app/admin/update', {
+      const res = await fetch('https://project-skool-mis-api.vercel.app/api/admin/update', {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${user.token}`,

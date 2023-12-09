@@ -12,7 +12,7 @@ const LecturerLogin = () => {
 
   // const { user } = ChatState()
 
-  const { login, pending, error } = useLogin('https://project-skool-mis-api.vercel.app/lecturer/login')
+  const { login, pending, error } = useLogin('https://project-skool-mis-api.vercel.app/api/lecturer/login')
 
 
   const handleSubmit = async (e) => {

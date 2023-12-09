@@ -28,7 +28,7 @@ const SearchBar = ({ toggle, set, search, setSearch, handleSearch, loading, sear
             // const { data } = await axios.post('/api/chat', { userId }, config)
 
 
-            const data = await fetch('https://project-skool-mis-api.vercel.app/chat/', {
+            const data = await fetch('https://project-skool-mis-api.vercel.app/api/chat/', {
                 method: 'POST',
                 body: JSON.stringify({userId, userID: user._id}),
                 headers: {

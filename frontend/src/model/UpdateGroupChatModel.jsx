@@ -41,7 +41,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                 }
             }
 
-            const { data } = await axios.put('https://project-skool-mis-api.vercel.app/chat/remove_user', {
+            const { data } = await axios.put('https://project-skool-mis-api.vercel.app/api/chat/remove_user', {
                 chatId: selectedChat._id,
                 userId: user1._id,
             }, config
@@ -88,7 +88,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                 }
             }
 
-            const { data } = await axios.put('https://project-skool-mis-api.vercel.app/chat/rename', {
+            const { data } = await axios.put('https://project-skool-mis-api.vercel.app/api/chat/rename', {
                 chat_name: groupChatName,
                 chatId: selectedChat._id,
             }, config
@@ -139,7 +139,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
 
             // const data = await fetch(`${baseURL}/api/user?search=${search}`, config ) 
 
-            const data = await fetch(`https://project-skool-mis-api.vercel.app/user/${user._id}/?search=${search}`, {
+            const data = await fetch(`https://project-skool-mis-api.vercel.app/api/user/${user._id}/?search=${search}`, {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
                 }
@@ -198,7 +198,7 @@ const UpdateGroupChatModel = ({ user, selectedChat, setSelectedChat, fetchAgain,
                 }
             }
 
-            const { data } = await axios.put(`https://project-skool-mis-api.vercel.app/chat/add_user`, {
+            const { data } = await axios.put(`https://project-skool-mis-api.vercel.app/api/chat/add_user`, {
                 chatId: selectedChat._id,
                 userId: user1._id,
             }, config
