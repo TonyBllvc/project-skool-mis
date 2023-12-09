@@ -80,8 +80,8 @@ app.use('/api/user', userRoutes)
 
 const PORT = process.env.PORT || 5000;
 // connect to db
-// mongoose.connect(process.env.MONGO_URI_API,
-mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority',
+// mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGO_URI_API,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true

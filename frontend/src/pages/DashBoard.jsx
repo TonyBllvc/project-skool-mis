@@ -15,7 +15,7 @@ import { useAuthContext } from '../hooks/useAuthContext'
 const DashBoard = () => {
 
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     document.title = 'Dashboard'
   }, [])

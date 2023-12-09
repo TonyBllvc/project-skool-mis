@@ -1,4 +1,4 @@
-const Student = require('../models/studentModel')
+ const Student = require('../models/studentModel')
 const Session = require('../models/sessionModel')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');

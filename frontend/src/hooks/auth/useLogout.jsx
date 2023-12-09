@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 const useLogout = () => {
 
     const { dispatch } = useAuthContext()
-const navigate = useNavigate()
+    const navigate = useNavigate()
     const toast = useToast()
 
     const { dispatch: dispatchStudents } = useStudentContext()
@@ -21,13 +21,13 @@ const navigate = useNavigate()
     const logout = () => {
         // remove user from storage
         sessionStorage.removeItem('user')
-                toast({
-                    title: 'Logout Successful!',
-                    status: 'success',
-                    duration: 3000,
-                    isClosable: true,
-                    position: "top",
-                })
+        toast({
+            title: 'Logout Successful!',
+            status: 'success',
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+        })
 
         dispatch({ type: 'LOGOUT' })
         // so as to clear previous data after logout
