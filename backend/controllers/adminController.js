@@ -3,7 +3,6 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 
-// var SECRET = 'makealrichtoirhbetherebowsermfjckove9rjftimebowser'
 // to crease a web token 
 const createToken = (_id, role) => {
 
@@ -12,8 +11,7 @@ const createToken = (_id, role) => {
     //  1. the payload which is the {_id})
     // 2. the secret for just the server (stored on the '.env' file)
     // 3. any property -- this case, the expires property
-    return jwt.sign({ _id, role },'makealrichtoirhbetherebowsermfjckove9rjftimebowser', { expiresIn: '1d' })
-    // return jwt.sign({ _id, role }, process.env.SECRET, { expiresIn: '1d' })
+    return jwt.sign({ _id, role }, process.env.SECRET, { expiresIn: '1d' })
 }
 
 // signup admin
