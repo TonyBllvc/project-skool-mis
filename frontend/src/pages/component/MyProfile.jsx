@@ -85,7 +85,10 @@ const MyProfile = () => {
           isClosable: true,
           position: "top",
         })
-        localStorage.setItem('user', JSON.stringify(json))
+        sessionStorage.setItem('user', JSON.stringify(json))
+        
+            // update auth Context
+            dispatch({ type: 'LOGIN', payload: json })
       } else {
         setLoading(false)
         setError(json.error)
