@@ -120,22 +120,22 @@ const updateProfile = async (req, res) => {
             return res.status(400).json({ error: "Please provide your password" });
         }
         
+        const token = createToken(admin._id, admin.role)
+
         // Update the profile details
         const updatedAdmin = await Admin.findByIdAndUpdate(
             id,
             { 
-                title, surname, first_name, middle_name, department, faculty, phone, email 
+                title, surname, first_name, middle_name, department, faculty, phone, email, token 
             },
             { new: true }
         );
 
-        const token = createToken(admin._id, admin.role)
+        // const newProfile = {
+        //     title, surname, first_name, middle_name, department, faculty, phone, email, token 
+        // }
 
-        const newProfile = {
-            title, surname, first_name, middle_name, department, faculty, phone, email, token 
-        }
-
-        res.status(200).json(newProfile);
+        res.status(200).json(updatedAdmin);
     } catch (error) {
         res.status(500).json({ error: 'Internal server error' });
     }

@@ -86,9 +86,9 @@ const MyProfile = () => {
           position: "top",
         })
         sessionStorage.setItem('user', JSON.stringify(json))
-        
+
             // update auth Context
-            dispatch({ type: 'LOGIN', payload: json })
+          dispatch({ type: 'LOGIN', payload: json })
       } else {
         setLoading(false)
         setError(json.error)
