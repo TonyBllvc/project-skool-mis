@@ -92,7 +92,7 @@ const gets = async (req, res) => {
         //     populate: {
         //         path: ' course_details',
         //         model: 'school'
-        //     } 
+        //     }
         // }).sort({ course_name: 1 }).sort({ course_code: 1 })
 
         res.status(200).json(sortData)

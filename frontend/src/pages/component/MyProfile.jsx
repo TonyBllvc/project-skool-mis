@@ -23,7 +23,7 @@ const MyProfile = () => {
     return () => {
       document.head.removeChild(faviconLink);
     }
-  }, [])
+  }, [user])
 
 
   const [formData, setFormData] = useState({
@@ -86,6 +86,7 @@ const MyProfile = () => {
           position: "top",
         })
         sessionStorage.setItem('user', JSON.stringify(json))
+        // localStorage.setItem('user', JSON.stringify(json))
 
             // update auth Context
           dispatch({ type: 'LOGIN', payload: json })
