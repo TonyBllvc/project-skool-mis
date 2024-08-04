@@ -84,7 +84,7 @@ const PORT = process.env.PORT || 5000;
 mongoose.connect('mongodb+srv://bllvcjboi:TinJBllvckq@cluster0.sbsoszl.mongodb.net/?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
-    useUnifiedTopology: true=
+    useUnifiedTopology: true
   })
   .then(() => {
     console.log('connected to database')
